@@ -1,0 +1,99 @@
+<div class="modal fade show d-block" id="userPreferencesModal" tabindex="-1" role="dialog" style="background: rgba(0,0,0,0.5);">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+
+      <!-- HEADER -->
+      <div class="modal-header">
+        <h5 class="modal-title">User Preferences</h5>
+        <button type="button" class="btn-close" aria-label="Close" onclick="closeModal()"></button>
+      </div>
+
+      <!-- BODY -->
+      <div class="modal-body">
+
+        <form method="post"
+              hx-post="{% url 'users:user_preferences' %}"
+              hx-target="#modal-container"
+              hx-swap="outerHTML">
+
+          {% csrf_token %}
+
+          <div class="mb-3">
+            <label for="id_primary_instrument" class="form-label">Primary Instrument:</label>
+            {{ form.primary_instrument }}
+          </div>
+
+          <div class="mb-3">
+            <label for="id_secondary_instrument" class="form-label">Secondary Instrument (Optional):</label>
+            {{ form.secondary_instrument }}
+          </div>
+
+          <div class="mb-3 form-check">
+            {{ form.is_lefty }}
+            <label for="id_is_lefty" class="form-check-label">Are you left-handed?</label>
+          </div>
+
+          <div class="mb-3 form-check">
+            {{ form.is_printing_alternate_chord }}
+            <label for="id_is_printing_alternate_chord" class="form-check-label">Show Alternate Chords?</label>
+          </div>
+
+          <!-- CHORD DISPLAY PREFERENCES -->
+          <hr>
+          <h6 class="mb-3 text-muted">Chord Display</h6>
+
+          <div class="mb-3">
+            <label for="id_chord_bracket_style" class="form-label">Chord Bracket Style:</label>
+            {{ form.chord_bracket_style }}
+          </div>
+
+          <div class="mb-3">
+            <label class="form-label">Chord Color:</label>
+            <div class="d-flex gap-3">
+              {% for value, label in form.chord_color.field.choices %}
+              <div class="form-check">
+                <input
+                  class="form-check-input"
+                  type="radio"
+                  name="chord_color"
+                  id="chord_color_{{ value }}"
+                  value="{{ value }}"
+                  {% if form.chord_color.value == value %}checked{% endif %}
+                >
+                <label class="form-check-label fw-bold" for="chord_color_{{ value }}"
+                       style="color: {{ value }};">
+                  {{ label }}
+                </label>
+              </div>
+              {% endfor %}
+            </div>
+          </div>
+
+          <!-- FOOTER -->
+          <div class="modal-footer d-flex justify-content-between">
+            <button type="button" class="btn btn-secondary" onclick="closeModal()">Close</button>
+
+            <a href="{% url 'songbook:song_list' %}" class="btn btn-outline-secondary">
+              ← Back to Songs
+            </a>
+
+            <button type="submit" class="btn btn-success">
+              Save Preferences
+            </button>
+          </div>
+
+        </form>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+function closeModal() {
+    const modal = document.getElementById("userPreferencesModal");
+    if (modal) {
+        modal.remove();
+    }
+}
+</script>

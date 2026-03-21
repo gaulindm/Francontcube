@@ -1,0 +1,113 @@
+"""
+CFOP method overview page.
+
+CFOP is an advanced speedcubing method consisting of 4 steps:
+- Cross: White cross on bottom
+- F2L: First Two Layers (4 pairs)
+- OLL: Orientation of Last Layer (57 algorithms)
+- PLL: Permutation of Last Layer (21 algorithms)
+"""
+
+from django.shortcuts import render
+from django.urls import reverse
+
+
+def method_cfop(request):
+    """
+    Main overview page for the CFOP method.
+    
+    Shows all steps with descriptions, icons, and availability status.
+    """
+    breadcrumbs = [
+        {'name': 'Accueil', 'url': reverse('main:home')},
+        {'name': 'CFOP', 'url': ''},
+    ]
+    
+    steps = [
+        {
+            "name": "À propos",
+            "desc": "Introduction à la méthode CFOP pour le speedcubing avancé",
+            "icon": "bi-info-circle",
+            "url": reverse('main:cfop_about'),
+            "available": True,
+            "step_number": None,
+        },
+        {
+            "name": "🌉 De Débutant à F2L",
+            "desc": "Découvrez comment l'algo de 2e couche est en fait du F2L!",
+            "icon": "bi-lightbulb-fill",
+            "url": reverse('main:beginner_to_f2l'),
+            "available": True,
+            "step_number": None,
+            "highlight": True,
+        },
+        {
+            "name": "Étape 1 : Cross",
+            "desc": "Résoudre la croix blanche en bas (idéalement en moins de 8 mouvements).",
+            "icon": "bi-plus-circle",
+            "url": reverse('main:cfop_cross'),
+            "available": True,
+            "step_number": 1,
+        },
+        {
+            "name": "Étape 2 : F2L — Introduction",
+            "desc": "Comprendre les concepts de base du F2L avant d'apprendre les algorithmes.",
+            "icon": "bi-book",
+            "url": reverse('main:cfop_f2l_intro'),
+            "available": True,
+            "step_number": 2,
+        },
+        {
+            "name": "Étape 2 : F2L — Cas",
+            "desc": "Résoudre les deux premières couches simultanément (4 paires coin-arête).",
+            "icon": "bi-layers",
+            "url": reverse('main:cfop_f2l_basic'),
+            "available": True,
+            "step_number": 2,
+        },
+        {
+            "name": "Étape 3 : OLL — 2 Looks",
+            "desc": "Orienter la dernière couche en 2 étapes (7 algorithmes seulement).",
+            "icon": "bi-brightness-high",
+            "url": reverse('main:two_look_oll'),
+            "available": True,
+            "step_number": 3,
+        },
+        {
+            "name": "Étape 3 : OLL — Complet",
+            "desc": "Orienter la dernière couche en 1 étape (57 cas). Pour les speedcubers avancés.",
+            "icon": "bi-brightness-high-fill",
+            "url": reverse('main:cfop_oll'),
+            "available": True,
+            "step_number": 3,
+        },
+        {
+            "name": "Étape 4 : PLL — 2 Looks",
+            "desc": "Permuter la dernière couche en 2 étapes (6 algorithmes seulement).",
+            "icon": "bi-shuffle",
+            "url": reverse('main:two_look_pll'),
+            "available": True,
+            "step_number": 4,
+        },
+        {
+            "name": "Étape 4 : PLL — Complet",
+            "desc": "Permuter la dernière couche en 1 étape (21 cas). Pour les speedcubers avancés.",
+            "icon": "bi-shuffle",
+            "url": reverse('main:cfop_pll'),
+            "available": True,
+            "step_number": 4,
+        },
+    ]
+    
+    context = {
+        "steps": steps,
+        "breadcrumbs": breadcrumbs,
+        "method_name": "CFOP",
+        "method_description": "La méthode de speedcubing la plus populaire au monde",
+        "total_steps": 4,
+        "difficulty": "Avancé",
+        "estimated_time": "Plusieurs semaines d'apprentissage",
+        "algorithms_count": "78+ algorithmes (57 OLL + 21 PLL)",
+    }
+
+    return render(request, "main/methods/cfop/index.html", context)

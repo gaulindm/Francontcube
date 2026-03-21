@@ -1,0 +1,135 @@
+{% extends base_template %}
+
+{% block content %}
+<div class="container mt-4">
+
+  <!-- Page Title -->
+  <div class="d-flex align-items-center justify-content-between mb-3">
+      <h2 class="mb-0">User Preferences</h2>
+
+      <a href="{% url 'songbook:song_list' %}" class="btn btn-outline-secondary">
+          ← Back to Songs
+      </a>
+  </div>
+
+  <p class="text-muted mb-4">
+      Update your instrument settings, layout preferences, and known chords.
+      These settings personalize your songbook experience.
+  </p>
+
+  <!-- Preferences Card -->
+  <div class="card shadow-sm">
+    <div class="card-body p-4">
+
+      <form method="post" novalidate>
+        {% csrf_token %}
+
+        <!-- Primary Instrument -->
+        <div class="mb-3">
+          <label for="id_primary_instrument" class="form-label fw-semibold">
+            Primary Instrument
+          </label>
+          {{ form.primary_instrument }}
+        </div>
+
+        <!-- Secondary Instrument -->
+        <div class="mb-3">
+          <label for="id_secondary_instrument" class="form-label fw-semibold">
+            Secondary Instrument (Optional)
+          </label>
+          {{ form.secondary_instrument }}
+        </div>
+
+        <!-- Left-Handed -->
+        <div class="form-check mb-3">
+          {{ form.is_lefty }}
+          <label for="id_is_lefty" class="form-check-label ms-1">
+              Are you left-handed?
+          </label>
+        </div>
+
+        <!-- Show Alternate Chords -->
+        <div class="form-check mb-4">
+          {{ form.is_printing_alternate_chord }}
+          <label for="id_is_printing_alternate_chord" class="form-check-label ms-1">
+              Show alternate chords?
+          </label>
+        </div>
+
+        <!-- Known Chord Filter -->
+        <hr class="my-4">
+
+        <h5 class="fw-semibold">Known Chord Filter</h5>
+
+        <div class="form-check mb-3">
+          {{ form.use_known_chord_filter }}
+          <label for="id_use_known_chord_filter" class="form-check-label ms-1">
+            Hide diagrams for chords I already know
+          </label>
+        </div>
+
+        <!-- Known Chords -->
+        <div class="mb-3">
+          <label for="{{ form.known_chords_text.id_for_label }}" class="form-label fw-semibold">
+            Known Chords
+          </label>
+          {{ form.known_chords_text }}
+          <div class="form-text">
+            Type your known chords separated by commas (e.g., C, F, G, G7)
+          </div>
+        </div>
+
+        <!-- Chord Display -->
+        <hr class="my-4">
+
+        <h5 class="fw-semibold">Chord Display</h5>
+
+        <!-- Bracket Style -->
+        <div class="mb-3">
+          <label for="id_chord_bracket_style" class="form-label fw-semibold">
+            Bracket Style
+          </label>
+          {{ form.chord_bracket_style }}
+        </div>
+
+        <!-- Chord Color -->
+        <div class="mb-3">
+          <label class="form-label fw-semibold">Chord Color</label>
+          <div class="d-flex gap-4">
+            {% for value, label in form.chord_color.field.choices %}
+            <div class="form-check">
+              <input
+                class="form-check-input"
+                type="radio"
+                name="chord_color"
+                id="chord_color_{{ value }}"
+                value="{{ value }}"
+                {% if form.chord_color.value == value %}checked{% endif %}
+              >
+              <label class="form-check-label fw-bold" for="chord_color_{{ value }}"
+                     style="color: {{ value }};">
+                {{ label }}
+              </label>
+            </div>
+            {% endfor %}
+          </div>
+        </div>
+
+        <!-- Buttons -->
+        <div class="d-flex justify-content-between mt-4">
+          <a href="{% url 'songbook:song_list' %}" class="btn btn-outline-secondary">
+            ← Back to Songs
+          </a>
+
+          <button type="submit" class="btn btn-success">
+            Save Preferences ✔️
+          </button>
+        </div>
+
+      </form>
+
+    </div>
+  </div>
+
+</div>
+{% endblock %}
