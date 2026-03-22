@@ -5,7 +5,7 @@ from .models import Cuber, Leader, Group, GroupMembership
 
 @admin.register(Cuber)
 class CuberAdmin(admin.ModelAdmin):
-    list_display = ['get_identity', 'avatar_variant', 'created_date', 'last_active_date']
+    list_display = ['get_identity', 'created_date', 'last_active_date']
     list_filter = ['color', 'created_date', 'last_active_date']
     search_fields = ['color', 'adjective', 'superhero']
     readonly_fields = ['cuber_id', 'color_code_hash', 'created_date', 'last_active_date']
@@ -16,7 +16,7 @@ class CuberAdmin(admin.ModelAdmin):
     
     fieldsets = (
         ('Identité', {
-            'fields': ('cuber_id', 'color', 'adjective', 'superhero', 'avatar_variant')
+            'fields': ('cuber_id', 'color', 'adjective', 'superhero')
         }),
         ('Sécurité', {
             'fields': ('color_code_hash',),

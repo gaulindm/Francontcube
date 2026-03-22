@@ -11,6 +11,7 @@
     <meta name="apple-mobile-web-app-title" content="FrancontCube">
     
     {% include "main/partials/_head.html" %}
+    {% block extra_css %}{% endblock %}
     <style>
         /* Remove default body margin */
         body {
@@ -70,6 +71,8 @@
 
     {# Footer #}
     {% include "main/partials/_footer.html" %}
+
+    {% block extra_js %}{% endblock %}
 </body>
 
 </html>

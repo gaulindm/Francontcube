@@ -8,23 +8,19 @@
         transition: all 0.3s;
         border-left: 4px solid transparent;
     }
-    
     .cuber-card:hover {
         transform: translateX(5px);
         box-shadow: 0 5px 15px rgba(0,0,0,0.1);
     }
-    
-    .cuber-card.color-rouge { border-left-color: #FF0000; }
-    .cuber-card.color-bleu { border-left-color: #0051BA; }
-    .cuber-card.color-vert { border-left-color: #009B48; }
-    .cuber-card.color-jaune { border-left-color: #FFD500; }
+    .cuber-card.color-rouge  { border-left-color: #FF0000; }
+    .cuber-card.color-bleu   { border-left-color: #0051BA; }
+    .cuber-card.color-vert   { border-left-color: #009B48; }
+    .cuber-card.color-jaune  { border-left-color: #FFD500; }
     .cuber-card.color-orange { border-left-color: #FF5800; }
-    .cuber-card.color-blanc { border-left-color: #666; }
-    
-    .color-emoji {
-        font-size: 2rem;
-    }
-    
+    .cuber-card.color-blanc  { border-left-color: #666; }
+
+    .color-emoji { font-size: 2rem; }
+
     .info-badge {
         display: inline-block;
         padding: 4px 12px;
@@ -32,10 +28,29 @@
         font-size: 0.85rem;
         font-weight: 600;
     }
+
+    /* Display name badge — leader-only identifier */
+    .display-name-badge {
+        font-size: 0.8rem;
+        font-weight: 700;
+        letter-spacing: 0.05em;
+        padding: 3px 10px;
+        border-radius: 20px;
+        background: #e8f4fd;
+        color: #0d6efd;
+        border: 1px solid #b6d4fe;
+    }
+    .display-name-badge.is-fallback {
+        background: #f8f9fa;
+        color: #6c757d;
+        border-color: #dee2e6;
+        font-weight: 400;
+    }
 </style>
 {% endblock %}
 
 {% block content %}
+
 <!-- Header du Groupe -->
 <div class="row mb-4">
     <div class="col-lg-12">
@@ -43,9 +58,7 @@
             <div class="card-body">
                 <div class="row align-items-center">
                     <div class="col-md-8">
-                        <h1 class="card-title mb-2">
-                            {{ group.group_name }}
-                        </h1>
+                        <h1 class="card-title mb-2">{{ group.group_name }}</h1>
                         <p class="text-muted mb-0">
                             <span class="badge bg-secondary me-2">{{ group.get_group_type_display }}</span>
                             <span class="me-3">📅 Créé le {{ group.created_date|date:"d/m/Y" }}</span>
@@ -143,132 +156,161 @@
                 </div>
 
                 {% if memberships %}
-                    <!-- Vue Cartes -->
-                    <div id="cardsView" class="row g-3">
-                        {% for membership in memberships %}
-                        <div class="col-md-6 col-lg-4">
-                            <div class="card cuber-card h-100 color-{{ membership.cuber.color|lower }}">
-                                <div class="card-body">
-                                    <div class="d-flex align-items-start">
-                                        <div class="color-emoji me-3">
-                                            {% if membership.cuber.color == "Rouge" %}🟥
-                                            {% elif membership.cuber.color == "Bleu" %}🟦
-                                            {% elif membership.cuber.color == "Vert" %}🟩
-                                            {% elif membership.cuber.color == "Jaune" %}🟨
-                                            {% elif membership.cuber.color == "Orange" %}🟧
-                                            {% elif membership.cuber.color == "Blanc" %}⬜
+
+                <!-- ── Vue Cartes ──────────────────────────────────────────── -->
+                <div id="cardsView" class="row g-3">
+                    {% for membership in memberships %}
+                    <div class="col-md-6 col-lg-4">
+                        <div class="card cuber-card h-100 color-{{ membership.cuber.color|lower }}">
+                            <div class="card-body">
+                                <div class="d-flex align-items-start">
+                                    <div class="color-emoji me-3">
+                                        {% if membership.cuber.color == "Rouge" %}🟥
+                                        {% elif membership.cuber.color == "Bleu" %}🟦
+                                        {% elif membership.cuber.color == "Vert" %}🟩
+                                        {% elif membership.cuber.color == "Jaune" %}🟨
+                                        {% elif membership.cuber.color == "Orange" %}🟧
+                                        {% elif membership.cuber.color == "Blanc" %}⬜
+                                        {% endif %}
+                                    </div>
+                                    <div class="flex-grow-1">
+
+                                        <!-- Leader identifier (display_name) -->
+                                        <div class="mb-2">
+                                            {% if membership.nickname or membership.first_name_prefix %}
+                                                <span class="display-name-badge">
+                                                    👤 {{ membership.display_name }}
+                                                </span>
+                                            {% else %}
+                                                <span class="display-name-badge is-fallback">
+                                                    👤 Non identifié
+                                                </span>
                                             {% endif %}
                                         </div>
-                                        <div class="flex-grow-1">
-                                            <h5 class="card-title mb-2">
-                                                {{ membership.cuber.color }} 
-                                                {{ membership.cuber.adjective }} 
-                                                {{ membership.cuber.superhero }}
-                                            </h5>
-                                            
-                                            <div class="mb-2">
-                                                <span class="info-badge bg-light">
-                                                    {{ membership.cuber.avatar_variant }}
-                                                </span>
-                                            </div>
-                                            
-                                            <small class="text-muted d-block mb-2">
-                                                📅 Rejoint le {{ membership.joined_date|date:"d/m/Y" }}
-                                            </small>
-                                            
-                                            <small class="text-muted d-block mb-3">
-                                                🕐 Dernière activité: 
-                                                {% if membership.cuber.last_active_date %}
-                                                    {{ membership.cuber.last_active_date|timesince }} 
-                                                {% else %}
-                                                    Jamais
-                                                {% endif %}
-                                            </small>
-                                            
-                                            <div class="d-grid gap-2">
-                                                <a href="{% url 'cubing_users:student_progress' group.group_id membership.cuber.cuber_id %}" 
-                                                   class="btn btn-sm btn-primary">
-                                                    Voir le Progrès →
-                                                </a>
-                                            </div>
+
+                                        <h5 class="card-title mb-1">
+                                            {{ membership.cuber.color }}
+                                            {{ membership.cuber.adjective }}
+                                            {{ membership.cuber.superhero }}
+                                        </h5>
+
+                                        <small class="text-muted d-block mb-1">
+                                            📅 Rejoint le {{ membership.joined_date|date:"d/m/Y" }}
+                                        </small>
+                                        <small class="text-muted d-block mb-3">
+                                            🕐 Actif:
+                                            {% if membership.cuber.last_active_date %}
+                                                {{ membership.cuber.last_active_date|timesince }}
+                                            {% else %}
+                                                Jamais
+                                            {% endif %}
+                                        </small>
+
+                                        <!-- Action buttons -->
+                                        <div class="d-grid gap-1">
+                                            <a href="{% url 'cubing_users:student_progress' group.group_id membership.cuber.cuber_id %}"
+                                               class="btn btn-sm btn-primary">
+                                                📈 Voir le Progrès
+                                            </a>
+                                            <a href="{% url 'cubing_users:leader_set_identification' group.group_id membership.cuber.cuber_id %}"
+                                               class="btn btn-sm btn-outline-secondary">
+                                                ✏️ Identifier
+                                            </a>
+                                            <a href="{% url 'cubing_users:leader_reset_color_code' group.group_id membership.cuber.cuber_id %}"
+                                               class="btn btn-sm btn-outline-warning">
+                                                🔑 Réinitialiser code
+                                            </a>
                                         </div>
+
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        {% endfor %}
                     </div>
+                    {% endfor %}
+                </div>
 
-                    <!-- Vue Tableau (cachée par défaut) -->
-                    <div id="tableView" style="display: none;">
-                        <div class="table-responsive">
-                            <table class="table table-hover">
-                                <thead>
-                                    <tr>
-                                        <th>Identité</th>
-                                        <th>Style</th>
-                                        <th>Membre depuis</th>
-                                        <th>Dernière activité</th>
-                                        <th>Progrès F2L</th>
-                                        <th>Actions</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    {% for membership in memberships %}
-                                    <tr>
-                                        <td>
-                                            {% if membership.cuber.color == "Rouge" %}🟥
-                                            {% elif membership.cuber.color == "Bleu" %}🟦
-                                            {% elif membership.cuber.color == "Vert" %}🟩
-                                            {% elif membership.cuber.color == "Jaune" %}🟨
-                                            {% elif membership.cuber.color == "Orange" %}🟧
-                                            {% elif membership.cuber.color == "Blanc" %}⬜
-                                            {% endif %}
-                                            <strong>
-                                                {{ membership.cuber.color }} 
-                                                {{ membership.cuber.adjective }} 
-                                                {{ membership.cuber.superhero }}
-                                            </strong>
-                                        </td>
-                                        <td>{{ membership.cuber.avatar_variant }}</td>
-                                        <td>{{ membership.joined_date|date:"d/m/Y" }}</td>
-                                        <td>
-                                            {% if membership.cuber.last_active_date %}
-                                                {{ membership.cuber.last_active_date|timesince }}
-                                            {% else %}
-                                                <span class="text-muted">Jamais</span>
-                                            {% endif %}
-                                        </td>
-                                        <td>
-                                            <span class="badge bg-secondary">0/41</span>
-                                        </td>
-                                        <td>
-                                            <a href="{% url 'cubing_users:student_progress' group.group_id membership.cuber.cuber_id %}" 
-                                               class="btn btn-sm btn-primary">
-                                                Détails
-                                            </a>
-                                        </td>
-                                    </tr>
-                                    {% endfor %}
-                                </tbody>
-                            </table>
-                        </div>
+                <!-- ── Vue Tableau ─────────────────────────────────────────── -->
+                <div id="tableView" style="display: none;">
+                    <div class="table-responsive">
+                        <table class="table table-hover align-middle">
+                            <thead>
+                                <tr>
+                                    <th>Élève</th>
+                                    <th>Identité Cubeur</th>
+                                    <th>Membre depuis</th>
+                                    <th>Dernière activité</th>
+                                    <th>Progrès F2L</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for membership in memberships %}
+                                <tr>
+                                    <td>
+                                        {% if membership.nickname or membership.first_name_prefix %}
+                                            <span class="display-name-badge">
+                                                👤 {{ membership.display_name }}
+                                            </span>
+                                        {% else %}
+                                            <span class="display-name-badge is-fallback">Non identifié</span>
+                                        {% endif %}
+                                    </td>
+                                    <td>
+                                        {% if membership.cuber.color == "Rouge" %}🟥
+                                        {% elif membership.cuber.color == "Bleu" %}🟦
+                                        {% elif membership.cuber.color == "Vert" %}🟩
+                                        {% elif membership.cuber.color == "Jaune" %}🟨
+                                        {% elif membership.cuber.color == "Orange" %}🟧
+                                        {% elif membership.cuber.color == "Blanc" %}⬜
+                                        {% endif %}
+                                        <strong>
+                                            {{ membership.cuber.color }}
+                                            {{ membership.cuber.adjective }}
+                                            {{ membership.cuber.superhero }}
+                                        </strong>
+                                    </td>
+                                    <td>{{ membership.joined_date|date:"d/m/Y" }}</td>
+                                    <td>
+                                        {% if membership.cuber.last_active_date %}
+                                            {{ membership.cuber.last_active_date|timesince }}
+                                        {% else %}
+                                            <span class="text-muted">Jamais</span>
+                                        {% endif %}
+                                    </td>
+                                    <td><span class="badge bg-secondary">0/41</span></td>
+                                    <td>
+                                        <div class="d-flex gap-1 flex-wrap">
+                                            <a href="{% url 'cubing_users:student_progress' group.group_id membership.cuber.cuber_id %}"
+                                               class="btn btn-sm btn-primary">📈</a>
+                                            <a href="{% url 'cubing_users:leader_set_identification' group.group_id membership.cuber.cuber_id %}"
+                                               class="btn btn-sm btn-outline-secondary" title="Identifier l'élève">✏️</a>
+                                            <a href="{% url 'cubing_users:leader_reset_color_code' group.group_id membership.cuber.cuber_id %}"
+                                               class="btn btn-sm btn-outline-warning" title="Réinitialiser le code couleur">🔑</a>
+                                        </div>
+                                    </td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
                     </div>
+                </div>
 
                 {% else %}
-                    <!-- Aucun Membre -->
-                    <div class="text-center py-5">
-                        <div class="display-1 mb-3">😴</div>
-                        <h4 class="text-muted mb-3">Aucun membre pour le moment</h4>
-                        <p class="text-muted mb-4">
-                            Partage le code <code class="fs-4">{{ group.group_code }}</code> avec tes étudiants
-                        </p>
-                        <div class="alert alert-info d-inline-block">
-                            <strong>💡 Astuce:</strong> Les étudiants peuvent rejoindre en allant sur 
-                            <strong>Rejoindre un Groupe</strong> et en entrant ce code.
-                        </div>
+                <!-- Aucun Membre -->
+                <div class="text-center py-5">
+                    <div class="display-1 mb-3">😴</div>
+                    <h4 class="text-muted mb-3">Aucun membre pour le moment</h4>
+                    <p class="text-muted mb-4">
+                        Partage le code <code class="fs-4">{{ group.group_code }}</code> avec tes étudiants
+                    </p>
+                    <div class="alert alert-info d-inline-block">
+                        <strong>💡 Astuce:</strong> Les étudiants rejoignent en allant sur
+                        <strong>Rejoindre un Groupe</strong> et en entrant ce code.
                     </div>
+                </div>
                 {% endif %}
+
             </div>
         </div>
     </div>
@@ -282,6 +324,7 @@
         </a>
     </div>
 </div>
+
 {% endblock %}
 
 {% block extra_js %}
@@ -289,8 +332,8 @@
     function viewMode(mode) {
         const cardsView = document.getElementById('cardsView');
         const tableView = document.getElementById('tableView');
-        const buttons = document.querySelectorAll('.btn-group button');
-        
+        const buttons   = document.querySelectorAll('.btn-group button');
+
         if (mode === 'cards') {
             cardsView.style.display = 'block';
             tableView.style.display = 'none';
@@ -305,4 +348,3 @@
     }
 </script>
 {% endblock %}
-EOF

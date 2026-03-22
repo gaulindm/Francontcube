@@ -1,5 +1,144 @@
-{% extends "main/partials/base.html" %}
+{% extends 'cubing_users/base.html' %}
+
+{% block title %}Progrès — {{ membership.display_name }}{% endblock %}
+
 {% block content %}
-<h1 class="text-white">Progrès</h1>
-<div class="card"><div class="card-body"><p>Progrès</p></div></div>
+
+<!-- Header: who is this student? -->
+<div class="row mb-4">
+    <div class="col-lg-12">
+        <div class="card">
+            <div class="card-body">
+                <div class="d-flex align-items-center gap-3 flex-wrap">
+
+                    <!-- Colour emoji -->
+                    <div style="font-size: 3rem; line-height: 1;">
+                        {% if cuber.color == "Rouge" %}🟥
+                        {% elif cuber.color == "Bleu" %}🟦
+                        {% elif cuber.color == "Vert" %}🟩
+                        {% elif cuber.color == "Jaune" %}🟨
+                        {% elif cuber.color == "Orange" %}🟧
+                        {% elif cuber.color == "Blanc" %}⬜
+                        {% endif %}
+                    </div>
+
+                    <div>
+                        <!-- Leader-only identifier above the cuber name -->
+                        {% if membership.nickname or membership.first_name_prefix %}
+                            <span class="badge bg-primary-subtle text-primary border border-primary-subtle fs-6 mb-1">
+                                👤 {{ membership.display_name }}
+                            </span>
+                        {% else %}
+                            <span class="badge bg-secondary-subtle text-secondary border border-secondary-subtle fs-6 mb-1">
+                                👤 Non identifié
+                            </span>
+                        {% endif %}
+
+                        <h1 class="mb-0">
+                            {{ cuber.color }} {{ cuber.adjective }} {{ cuber.superhero }}
+                        </h1>
+                        <p class="text-muted mb-0">
+                            <span class="me-3">📅 Membre depuis {{ membership.joined_date|date:"d/m/Y" }}</span>
+                            <span>
+                                🕐 Dernière activité :
+                                {% if cuber.last_active_date %}
+                                    {{ cuber.last_active_date|timesince }}
+                                {% else %}
+                                    Jamais
+                                {% endif %}
+                            </span>
+                        </p>
+                    </div>
+
+                    <!-- Quick actions pushed to the right -->
+                    <div class="ms-auto d-flex gap-2 flex-wrap">
+                        <a href="{% url 'cubing_users:leader_set_identification' group.group_id cuber.cuber_id %}"
+                           class="btn btn-outline-secondary btn-cube btn-sm">
+                            ✏️ Identifier
+                        </a>
+                        <a href="{% url 'cubing_users:leader_reset_color_code' group.group_id cuber.cuber_id %}"
+                           class="btn btn-outline-warning btn-cube btn-sm">
+                            🔑 Réinitialiser code
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Progress summary cards -->
+<div class="row g-3 mb-4">
+    <div class="col-md-3">
+        <div class="card text-center">
+            <div class="card-body">
+                <div class="display-4 fw-bold text-primary">{{ progress_data.cases_completed }}</div>
+                <small class="text-muted">Cas F2L complétés</small>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="card text-center">
+            <div class="card-body">
+                <div class="display-4 fw-bold text-secondary">{{ progress_data.total_cases }}</div>
+                <small class="text-muted">Cas au total</small>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="card text-center">
+            <div class="card-body">
+                <div class="display-4 fw-bold text-success">
+                    {% if progress_data.total_cases > 0 %}
+                        {% widthratio progress_data.cases_completed progress_data.total_cases 100 %}%
+                    {% else %}
+                        0%
+                    {% endif %}
+                </div>
+                <small class="text-muted">Progression</small>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="card text-center">
+            <div class="card-body">
+                <div class="display-4 fw-bold text-info">
+                    {% if progress_data.average_time > 0 %}
+                        {{ progress_data.average_time|floatformat:1 }}s
+                    {% else %}
+                        —
+                    {% endif %}
+                </div>
+                <small class="text-muted">Temps moyen</small>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Placeholder for F2L detail (wired up when cube app is integrated) -->
+<div class="row mb-4">
+    <div class="col-lg-12">
+        <div class="card">
+            <div class="card-body text-center py-5">
+                <div class="display-1 mb-3">🧩</div>
+                <h4 class="text-muted mb-2">Statistiques F2L détaillées à venir</h4>
+                <p class="text-muted">
+                    Les données de progression seront disponibles une fois l'application
+                    cube intégrée.
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Navigation -->
+<div class="d-flex gap-2 flex-wrap">
+    <a href="{% url 'cubing_users:group_roster' group.group_id %}" class="btn btn-outline-secondary btn-cube">
+        ← Liste des membres
+    </a>
+    <a href="{% url 'cubing_users:group_detail' group.group_id %}" class="btn btn-outline-secondary btn-cube">
+        ← Retour au groupe
+    </a>
+</div>
+
 {% endblock %}

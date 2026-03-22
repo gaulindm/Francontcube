@@ -1,8 +1,10 @@
 # cubing_users/models.py
 import uuid
+import hashlib
 from django.db import models
 from django.conf import settings
-from django.utils import timezone  # ← Ajoute cet import
+from django.utils import timezone
+
 
 class Cuber(models.Model):
     """Utilisateur cubeur anonyme (enfants)"""
@@ -11,21 +13,54 @@ class Cuber(models.Model):
     adjective = models.CharField(max_length=50)
     superhero = models.CharField(max_length=50)
     color_code_hash = models.CharField(max_length=128)
-    avatar_variant = models.CharField(max_length=20, blank=True)
     created_date = models.DateTimeField(auto_now_add=True)
     last_active_date = models.DateTimeField(auto_now=True)
-    
+
     # ✅ Lien OPTIONNEL vers compte traditionnel
     linked_user = models.ForeignKey(
-        settings.AUTH_USER_MODEL,  # users.CustomUser
+        settings.AUTH_USER_MODEL,
         on_delete=models.SET_NULL,
         null=True,
         blank=True,
         related_name='cuber_profiles'
     )
-    
+
+    # ── Identification saisie à la création du compte ──────────────────────
+    # L'élève entre les 2 premières lettres de son prénom et de son nom de
+    # famille lors de l'inscription. Ex: Tommy Smith → "TO" + "SM" → "TOSM".
+    # Ces valeurs sont copiées dans GroupMembership à chaque fois que l'élève
+    # rejoint un groupe. Le leader peut les corriger par groupe si nécessaire.
+    # ──────────────────────────────────────────────────────────────────────
+    first_name_prefix = models.CharField(
+        max_length=2,
+        blank=True,
+        help_text="2 premières lettres du prénom (ex: 'TO' pour Tommy)"
+    )
+    last_name_prefix = models.CharField(
+        max_length=2,
+        blank=True,
+        help_text="2 premières lettres du nom de famille (ex: 'SM' pour Smith)"
+    )
+
     def __str__(self):
         return f"{self.color} {self.adjective} {self.superhero}"
+
+    def save(self, *args, **kwargs):
+        # Normalize prefixes: uppercase, strip whitespace, hard-cap at 2 chars
+        self.first_name_prefix = self.first_name_prefix.strip().upper()[:2]
+        self.last_name_prefix = self.last_name_prefix.strip().upper()[:2]
+        super().save(*args, **kwargs)
+
+    def set_color_code(self, plain_color_code: str):
+        """
+        Hash and store a new color code.
+        Call save() after this method to persist the change.
+
+        Usage:
+            cuber.set_color_code("rouge-bleu-vert")
+            cuber.save()
+        """
+        self.color_code_hash = hashlib.sha256(plain_color_code.encode()).hexdigest()
 
 
 class Leader(models.Model):
@@ -45,12 +80,11 @@ class Leader(models.Model):
         ]
     )
     organization = models.CharField(max_length=200, blank=True)
-    
-    # ✅ Juste auto_now_add, pas de default
     created_date = models.DateTimeField(auto_now_add=True)
-    
+
     def __str__(self):
         return f"{self.user.get_full_name()} - {self.get_role_display()}"
+
 
 class Group(models.Model):
     """Classe ou club de cubing"""
@@ -66,10 +100,9 @@ class Group(models.Model):
             ('practice', 'Groupe de Pratique'),
         ]
     )
-    # Leaders peuvent être multiples
     leaders = models.ManyToManyField(Leader, related_name='groups')
     created_date = models.DateTimeField(auto_now_add=True)
-    
+
     def __str__(self):
         return self.group_name
 
@@ -87,9 +120,42 @@ class GroupMembership(models.Model):
         ],
         default='active'
     )
-    
+
+    # ── Leader-only identification ─────────────────────────────────────────
+    # Seeded from Cuber.first_name_prefix / last_name_prefix when the student
+    # joins the group. The leader can correct them per-group if needed.
+    # Displayed as "TOSM" (Tommy Smith) — never shown to the student.
+    # ──────────────────────────────────────────────────────────────────────
+    first_name_prefix = models.CharField(
+        max_length=2,
+        blank=True,
+        help_text="2 premières lettres du prénom (ex: 'TO' pour Tommy)"
+    )
+    last_name_prefix = models.CharField(
+        max_length=2,
+        blank=True,
+        help_text="2 premières lettres du nom de famille (ex: 'SM' pour Smith)"
+    )
+
     class Meta:
         unique_together = ('cuber', 'group')
-    
+
     def __str__(self):
         return f"{self.cuber} → {self.group.group_name}"
+
+    @property
+    def display_name(self):
+        """
+        Returns the best available identifier for this student:
+          - Both prefixes set → "TOSM"
+          - Fallback          → "Rouge Brave Spiderman"
+        """
+        if self.first_name_prefix and self.last_name_prefix:
+            return f"{self.first_name_prefix}{self.last_name_prefix}"
+        return str(self.cuber)
+
+    def save(self, *args, **kwargs):
+        # Normalize prefixes: uppercase, strip whitespace, hard-cap at 2 chars
+        self.first_name_prefix = self.first_name_prefix.strip().upper()[:2]
+        self.last_name_prefix = self.last_name_prefix.strip().upper()[:2]
+        super().save(*args, **kwargs)

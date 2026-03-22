@@ -1,0 +1,184 @@
+{% extends 'cubing_users/base.html' %}
+
+{% block title %}Identifier un Élève — {{ group.group_name }}{% endblock %}
+
+{% block extra_css %}
+<style>
+    .prefix-row {
+        display: flex;
+        align-items: flex-end;
+        gap: 12px;
+        flex-wrap: wrap;
+    }
+    .prefix-row .sep {
+        font-size: 1.6rem;
+        color: #adb5bd;
+        padding-bottom: 6px;
+        line-height: 1;
+    }
+    .prefix-result-box {
+        width: 80px;
+        text-align: center;
+        font-size: 1.3rem;
+        font-weight: 900;
+        letter-spacing: 0.1em;
+        background: #f8f9fa;
+        border: 1px solid #dee2e6;
+        border-radius: 6px;
+        padding: 6px 0;
+        pointer-events: none;
+    }
+    .preview-badge {
+        font-size: 1.1rem;
+        font-weight: 700;
+        padding: 6px 20px;
+        border-radius: 24px;
+        background: #e8f4fd;
+        color: #0d6efd;
+        border: 2px solid #b6d4fe;
+        letter-spacing: 0.05em;
+        display: inline-block;
+        min-width: 80px;
+        text-align: center;
+    }
+    .preview-badge.incomplete {
+        background: #f8f9fa;
+        color: #adb5bd;
+        border-color: #dee2e6;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-lg-6">
+
+        <!-- Student identity header -->
+        <div class="card mb-4">
+            <div class="card-body d-flex align-items-center gap-3">
+                <div style="font-size: 2.5rem;">
+                    {% if membership.cuber.color == "Rouge" %}🟥
+                    {% elif membership.cuber.color == "Bleu" %}🟦
+                    {% elif membership.cuber.color == "Vert" %}🟩
+                    {% elif membership.cuber.color == "Jaune" %}🟨
+                    {% elif membership.cuber.color == "Orange" %}🟧
+                    {% elif membership.cuber.color == "Blanc" %}⬜
+                    {% endif %}
+                </div>
+                <div>
+                    <h2 class="mb-0">
+                        {{ membership.cuber.color }}
+                        {{ membership.cuber.adjective }}
+                        {{ membership.cuber.superhero }}
+                    </h2>
+                    <small class="text-muted">Groupe : {{ group.group_name }}</small>
+                </div>
+            </div>
+        </div>
+
+        <!-- Live preview -->
+        <div class="card mb-4 border-primary">
+            <div class="card-body text-center">
+                <p class="text-muted mb-2" style="font-size: 0.85rem;">
+                    APERÇU — identifiant visible par le leader
+                </p>
+                <span id="previewBadge" class="preview-badge {% if not membership.first_name_prefix or not membership.last_name_prefix %}incomplete{% endif %}">
+                    {% if membership.first_name_prefix and membership.last_name_prefix %}
+                        {{ membership.first_name_prefix }}{{ membership.last_name_prefix }}
+                    {% else %}
+                        ??
+                    {% endif %}
+                </span>
+            </div>
+        </div>
+
+        <!-- Form -->
+        <div class="card mb-4">
+            <div class="card-body">
+                <h5 class="card-title mb-1">✏️ Code d'identification (2 lettres × 2)</h5>
+                <p class="text-muted small mb-4">
+                    Entre les 2 premières lettres du prénom et du nom de famille de l'élève.<br>
+                    Exemple : Tommy Smith → <strong>TO</strong> + <strong>SM</strong> = <strong>TOSM</strong>
+                </p>
+
+                <form method="post">
+                    {% csrf_token %}
+
+                    <div class="prefix-row mb-3">
+                        <div>
+                            <label class="form-label small text-muted">Prénom</label>
+                            <input
+                                type="text"
+                                id="id_first_name_prefix"
+                                name="first_name_prefix"
+                                class="form-control text-center text-uppercase"
+                                maxlength="2"
+                                placeholder="TO"
+                                value="{{ membership.first_name_prefix }}"
+                                autocomplete="off"
+                                style="width: 75px; font-size: 1.3rem; font-weight: 700; letter-spacing: 0.1em;"
+                                oninput="this.value=this.value.toUpperCase().slice(0,2); updatePreview()"
+                            >
+                        </div>
+                        <span class="sep">+</span>
+                        <div>
+                            <label class="form-label small text-muted">Nom de famille</label>
+                            <input
+                                type="text"
+                                id="id_last_name_prefix"
+                                name="last_name_prefix"
+                                class="form-control text-center text-uppercase"
+                                maxlength="2"
+                                placeholder="SM"
+                                value="{{ membership.last_name_prefix }}"
+                                autocomplete="off"
+                                style="width: 75px; font-size: 1.3rem; font-weight: 700; letter-spacing: 0.1em;"
+                                oninput="this.value=this.value.toUpperCase().slice(0,2); updatePreview()"
+                            >
+                        </div>
+                        <span class="sep">=</span>
+                        <div>
+                            <label class="form-label small text-muted">Résultat</label>
+                            <div class="prefix-result-box" id="prefixResult">
+                                {{ membership.first_name_prefix }}{{ membership.last_name_prefix }}
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="d-flex gap-2">
+                        <button type="submit" class="btn btn-primary btn-cube">
+                            💾 Enregistrer
+                        </button>
+                        <a href="{% url 'cubing_users:group_roster' group.group_id %}" class="btn btn-outline-secondary btn-cube">
+                            Annuler
+                        </a>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+    function updatePreview() {
+        const first  = document.getElementById('id_first_name_prefix').value.trim().toUpperCase();
+        const last   = document.getElementById('id_last_name_prefix').value.trim().toUpperCase();
+        const badge  = document.getElementById('previewBadge');
+        const box    = document.getElementById('prefixResult');
+
+        box.textContent = first + last || '??';
+
+        if (first.length >= 1 && last.length >= 1) {
+            badge.textContent = first + last;
+            badge.classList.remove('incomplete');
+        } else {
+            badge.textContent = (first || '?') + (last || '?');
+            badge.classList.add('incomplete');
+        }
+    }
+    updatePreview();
+</script>
+{% endblock %}

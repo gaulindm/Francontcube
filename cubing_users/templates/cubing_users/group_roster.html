@@ -1,5 +1,185 @@
-{% extends "main/partials/base.html" %}
+{% extends 'cubing_users/base.html' %}
+
+{% block title %}Liste des Membres - {{ group.group_name }}{% endblock %}
+
+{% block extra_css %}
+<style>
+    .color-dot {
+        width: 14px;
+        height: 14px;
+        border-radius: 50%;
+        display: inline-block;
+        margin-right: 6px;
+        vertical-align: middle;
+    }
+    .color-dot.rouge  { background: #FF0000; }
+    .color-dot.bleu   { background: #0051BA; }
+    .color-dot.vert   { background: #009B48; }
+    .color-dot.jaune  { background: #FFD500; }
+    .color-dot.orange { background: #FF5800; }
+    .color-dot.blanc  { background: #ccc; border: 1px solid #999; }
+
+    .display-name-badge {
+        font-size: 0.8rem;
+        font-weight: 700;
+        padding: 3px 10px;
+        border-radius: 20px;
+        background: #e8f4fd;
+        color: #0d6efd;
+        border: 1px solid #b6d4fe;
+    }
+    .display-name-badge.is-fallback {
+        background: #f8f9fa;
+        color: #6c757d;
+        border-color: #dee2e6;
+        font-style: italic;
+        font-weight: 400;
+    }
+
+    .roster-row:hover { background: #f8f9fa; }
+</style>
+{% endblock %}
+
 {% block content %}
-<h1 class="text-white">Liste des Membres</h1>
-<div class="card"><div class="card-body"><p>Liste</p></div></div>
+
+<!-- Header -->
+<div class="row mb-4">
+    <div class="col-lg-12">
+        <div class="card">
+            <div class="card-body d-flex justify-content-between align-items-center flex-wrap gap-3">
+                <div>
+                    <h1 class="card-title mb-1">📋 Liste des Membres</h1>
+                    <p class="text-muted mb-0">
+                        <strong>{{ group.group_name }}</strong> —
+                        {{ memberships|length }} membre{% if memberships|length != 1 %}s{% endif %} actif{% if memberships|length != 1 %}s{% endif %}
+                    </p>
+                </div>
+                <div class="d-flex gap-2 flex-wrap">
+                    <a href="{% url 'cubing_users:print_login_cards' group.group_id %}" class="btn btn-outline-secondary btn-cube">
+                        🖨️ Imprimer les Cartes
+                    </a>
+                    <a href="{% url 'cubing_users:group_detail' group.group_id %}" class="btn btn-outline-primary btn-cube">
+                        ← Retour au Groupe
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% if memberships %}
+
+<!-- Roster Table -->
+<div class="row">
+    <div class="col-lg-12">
+        <div class="card">
+            <div class="card-body p-0">
+                <div class="table-responsive">
+                    <table class="table table-hover mb-0 align-middle">
+                        <thead class="table-light">
+                            <tr>
+                                <th class="ps-4">Élève <small class="text-muted fw-normal">(leader seulement)</small></th>
+                                <th>Identité Cubeur</th>
+                                <th>Membre depuis</th>
+                                <th>Dernière activité</th>
+                                <th class="text-end pe-4">Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for membership in memberships %}
+                            <tr class="roster-row">
+
+                                <!-- display_name column -->
+                                <td class="ps-4">
+                                    {% if membership.nickname or membership.first_name_prefix %}
+                                        <span class="display-name-badge">👤 {{ membership.display_name }}</span>
+                                    {% else %}
+                                        <span class="display-name-badge is-fallback">Non identifié</span>
+                                    {% endif %}
+                                </td>
+
+                                <!-- Cuber identity -->
+                                <td>
+                                    <span class="color-dot {{ membership.cuber.color|lower }}"></span>
+                                    {% if membership.cuber.color == "Rouge" %}🟥
+                                    {% elif membership.cuber.color == "Bleu" %}🟦
+                                    {% elif membership.cuber.color == "Vert" %}🟩
+                                    {% elif membership.cuber.color == "Jaune" %}🟨
+                                    {% elif membership.cuber.color == "Orange" %}🟧
+                                    {% elif membership.cuber.color == "Blanc" %}⬜
+                                    {% endif %}
+                                    <strong>
+                                        {{ membership.cuber.color }}
+                                        {{ membership.cuber.adjective }}
+                                        {{ membership.cuber.superhero }}
+                                    </strong>
+                                </td>
+
+                                <!-- Dates -->
+                                <td>{{ membership.joined_date|date:"d/m/Y" }}</td>
+                                <td>
+                                    {% if membership.cuber.last_active_date %}
+                                        <span class="text-muted">{{ membership.cuber.last_active_date|timesince }}</span>
+                                    {% else %}
+                                        <span class="text-muted fst-italic">Jamais</span>
+                                    {% endif %}
+                                </td>
+
+                                <!-- Actions -->
+                                <td class="text-end pe-4">
+                                    <div class="d-inline-flex gap-1">
+                                        <a href="{% url 'cubing_users:student_progress' group.group_id membership.cuber.cuber_id %}"
+                                           class="btn btn-sm btn-primary" title="Voir le progrès">
+                                            📈 Progrès
+                                        </a>
+                                        <a href="{% url 'cubing_users:leader_set_identification' group.group_id membership.cuber.cuber_id %}"
+                                           class="btn btn-sm btn-outline-secondary" title="Identifier l'élève">
+                                            ✏️
+                                        </a>
+                                        <a href="{% url 'cubing_users:leader_reset_color_code' group.group_id membership.cuber.cuber_id %}"
+                                           class="btn btn-sm btn-outline-warning" title="Réinitialiser le code couleur">
+                                            🔑
+                                        </a>
+                                    </div>
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Legend -->
+<div class="row mt-3">
+    <div class="col-lg-12">
+        <small class="text-muted">
+            ✏️ Identifier un élève &nbsp;·&nbsp;
+            🔑 Réinitialiser son code couleur (mot de passe oublié) &nbsp;·&nbsp;
+            📈 Voir sa progression F2L
+        </small>
+    </div>
+</div>
+
+{% else %}
+
+<!-- Empty state -->
+<div class="row">
+    <div class="col-lg-12">
+        <div class="card text-center py-5">
+            <div class="card-body">
+                <div class="display-1 mb-3">😴</div>
+                <h4 class="text-muted mb-3">Aucun membre pour le moment</h4>
+                <p class="text-muted">
+                    Partage le code <code class="fs-4">{{ group.group_code }}</code> avec tes étudiants.
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endif %}
+
 {% endblock %}

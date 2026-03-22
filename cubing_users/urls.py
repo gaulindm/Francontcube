@@ -37,4 +37,6 @@ urlpatterns = [
     
     # Suivi des étudiants
     path('leader/group/<uuid:group_id>/student/<uuid:cuber_id>/', views.student_progress, name='student_progress'),
+    path('leader/group/<uuid:group_id>/student/<uuid:cuber_id>/identify/', views.leader_set_identification, name='leader_set_identification'),
+    path('leader/group/<uuid:group_id>/student/<uuid:cuber_id>/reset-code/', views.leader_reset_color_code, name='leader_reset_color_code'),
 ]

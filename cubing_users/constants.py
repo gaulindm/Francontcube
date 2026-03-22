@@ -18,47 +18,36 @@ COLOR_CHOICES = [color[0] for color in COLORS]
 
 # Adjectifs (mots de pouvoir)
 ADJECTIVES = [
-    ('Rapide', 'Rapide'),
-    ('Éclair', 'Éclair'),
-    ('Turbo', 'Turbo'),
-    ('Puissant', 'Puissant'),
-    ('Génial', 'Génial'),
+    ('Rapide',   'Rapide'),
+    ('Turbo',    'Turbo'),
+    ('Génial',   'Génial'),
     ('Brillant', 'Brillant'),
-    ('Habile', 'Habile'),
-    ('Malin', 'Malin'),
-    ('Vif', 'Vif'),
-    ('Super', 'Super'),
-    ('Méga', 'Méga'),
-    ('Costaud', 'Costaud'),
-    ('Doué', 'Doué'),
-    ('Véloce', 'Véloce'),
-    ('Ultime', 'Ultime'),
-    ('Fulgurant', 'Fulgurant'),
-    ('Rusé', 'Rusé'),
-    ('Adroit', 'Adroit'),
-    ('Solide', 'Solide'),
-    ('Fort', 'Fort'),
+    ('Habile',   'Habile'),
+    ('Malin',    'Malin'),
+    ('Super',    'Super'),
+    ('Doué',     'Doué'),
+    ('Véloce',   'Véloce'),
+    ('Ultime',   'Ultime'),
+    ('Rusé',     'Rusé'),
+    ('Adroit',   'Adroit'),
 ]
 
 ADJECTIVE_CHOICES = [adj[0] for adj in ADJECTIVES]
 
 # Titres de super-héros
 SUPERHEROES = [
-    ('Solveur', 'Solveur'),
-    ('Maître', 'Maître'),
-    ('Champion', 'Champion'),
-    ('Cubeur', 'Cubeur'),
-    ('Ninja', 'Ninja'),
-    ('Pro', 'Pro'),
-    ('As', 'As'),
-    ('Légende', 'Légende'),
-    ('Twisteur', 'Twisteur'),
-    ('Magicien', 'Magicien'),
-    ('Prodige', 'Prodige'),
-    ('Virtuose', 'Virtuose'),
-    ('Tourneur', 'Tourneur'),
+    ('Solveur',   'Solveur'),
+    ('Maître',    'Maître'),
+    ('Champion',  'Champion'),
+    ('Cubeur',    'Cubeur'),
+    ('Ninja',     'Ninja'),
+    ('Pro',       'Pro'),
+    ('Légende',   'Légende'),
+    ('Twisteur',  'Twisteur'),
+    ('Magicien',  'Magicien'),
+    ('Tourneur',  'Tourneur'),
     ('Mélangeur', 'Mélangeur'),
-    ('Démêleur', 'Démêleur'),
+    ('Démêleur',  'Démêleur'),
 ]
 
 SUPERHERO_CHOICES = [hero[0] for hero in SUPERHEROES]
@@ -77,16 +66,6 @@ GROUP_TYPES = [
     ('club', 'Club'),
     ('team', 'Équipe'),
     ('practice', 'Groupe de Pratique'),
-]
-
-# Variantes d'avatars (expressions)
-AVATAR_VARIANTS = [
-    ('cool', '😎 Cool'),
-    ('determined', '😤 Déterminé'),
-    ('happy', '😊 Heureux'),
-    ('focused', '🤓 Concentré'),
-    ('excited', '🤩 Excité'),
-    ('confident', '😏 Confiant'),
 ]
 
 # Emojis pour les couleurs (pour affichage)

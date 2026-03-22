@@ -69,7 +69,7 @@ def method_cubienewbie(request):
             "icon": "bi-plus-circle",
             "url": "/main/methods/cubienewbie/bottom-cross/",
             "available": True,
-            "cube_state": get_cube_state('white-cross-goal')
+            "cube_state": get_cube_state('bottom-cross-goal')
         },
         {
             "name": "6 — Étape 3 : Les coins inférieurs",
@@ -101,7 +101,7 @@ def method_cubienewbie(request):
             "icon": "bi-brightness-high",
             "url": "/main/methods/cubienewbie/top-face/",
             "available": True,
-            "cube_state": get_cube_state('yellow-face-goal')
+            "cube_state": get_cube_state('top-face-goal')
         },
         {
             "name": "10 — Étape 7 : La permutation des coins jaunes",

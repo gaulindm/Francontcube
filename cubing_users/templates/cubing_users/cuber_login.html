@@ -1,62 +1,457 @@
 <!-- cubing_users/templates/cubing_users/cuber_login.html -->
 {% extends "main/partials/base.html" %}
-{% block title %}Connexion Cubeur - CubingHub{% endblock %}
+{% block title %}Connexion - CubingHub{% endblock %}
+
+{% block extra_css %}
+<link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+    body { font-family: 'Nunito', sans-serif; }
+
+    /* ── Login card ──────────────────────────────────────────────────────── */
+    .login-card {
+        background: white;
+        border-radius: 24px;
+        padding: 40px 36px;
+        box-shadow: 0 8px 40px rgba(0,0,0,.10);
+        max-width: 520px;
+        margin: 0 auto;
+    }
+    .login-title {
+        font-family: 'Fredoka One', cursive;
+        font-size: 1.9rem;
+        color: #1e293b;
+        margin: 0 0 4px;
+        text-align: center;
+    }
+    .login-subtitle {
+        color: #64748b;
+        font-size: .95rem;
+        margin: 0 0 28px;
+        text-align: center;
+    }
+
+    /* ── Identity preview ────────────────────────────────────────────────── */
+    .identity-preview {
+        background: linear-gradient(135deg, #f0f4ff, #faf5ff);
+        border-radius: 16px;
+        padding: 16px 20px;
+        text-align: center;
+        margin-bottom: 24px;
+        border: 2px dashed #c7d2fe;
+        min-height: 80px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 14px;
+    }
+    .identity-preview .big-emoji { font-size: 2.6rem; line-height: 1; }
+    .identity-preview .id-text {
+        font-family: 'Fredoka One', cursive;
+        font-size: 1.35rem;
+        color: #4338ca;
+        text-align: left;
+    }
+
+    /* ── Selects ─────────────────────────────────────────────────────────── */
+    .sel-label {
+        display: block;
+        font-size: .78rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: .05em;
+        color: #64748b;
+        margin-bottom: 5px;
+    }
+    .styled-select {
+        width: 100%;
+        padding: 11px 15px;
+        border-radius: 12px;
+        border: 2px solid #e2e8f0;
+        font-family: 'Nunito', sans-serif;
+        font-size: .95rem;
+        font-weight: 600;
+        color: #1e293b;
+        background: #f8fafc;
+        appearance: none;
+        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' fill='%236366f1' viewBox='0 0 16 16'%3E%3Cpath d='M7.247 11.14L2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z'/%3E%3C/svg%3E");
+        background-repeat: no-repeat;
+        background-position: right 13px center;
+        cursor: pointer;
+        margin-bottom: 14px;
+        transition: border-color .2s, box-shadow .2s;
+    }
+    .styled-select:focus {
+        outline: none;
+        border-color: #6366f1;
+        box-shadow: 0 0 0 4px rgba(99,102,241,.15);
+        background-color: white;
+    }
+
+    /* ── Section divider ─────────────────────────────────────────────────── */
+    .section-divider {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        margin: 4px 0 20px;
+    }
+    .section-divider::before,
+    .section-divider::after {
+        content: '';
+        flex: 1;
+        height: 2px;
+        background: #f1f5f9;
+        border-radius: 2px;
+    }
+    .section-divider span {
+        font-family: 'Fredoka One', cursive;
+        font-size: .85rem;
+        color: #94a3b8;
+        white-space: nowrap;
+    }
+
+    /* ── Color code slots ────────────────────────────────────────────────── */
+    .slots-label {
+        text-align: center;
+        font-size: .82rem;
+        color: #94a3b8;
+        font-weight: 600;
+        margin-bottom: 10px;
+    }
+    .color-slots {
+        display: flex;
+        gap: 7px;
+        justify-content: center;
+        margin-bottom: 16px;
+        flex-wrap: wrap;
+    }
+    .color-slot {
+        width: 48px; height: 48px;
+        border-radius: 12px;
+        border: 3px dashed #cbd5e1;
+        background: #f8fafc;
+        display: flex; align-items: center; justify-content: center;
+        font-size: 1.3rem;
+        transition: all .25s cubic-bezier(.34,1.56,.64,1);
+        cursor: default;
+    }
+    .color-slot.filled {
+        border-style: solid;
+        transform: scale(1.08);
+        cursor: pointer;
+    }
+    .color-slot[data-color="Rouge"]  { background: #fef2f2; border-color: #ef4444; }
+    .color-slot[data-color="Bleu"]   { background: #eff6ff; border-color: #3b82f6; }
+    .color-slot[data-color="Vert"]   { background: #f0fdf4; border-color: #22c55e; }
+    .color-slot[data-color="Jaune"]  { background: #fefce8; border-color: #eab308; }
+    .color-slot[data-color="Orange"] { background: #fff7ed; border-color: #f97316; }
+    .color-slot[data-color="Blanc"]  { background: #f8fafc; border-color: #94a3b8; }
+
+    /* ── Color palette ───────────────────────────────────────────────────── */
+    .color-palette {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 9px;
+        margin-bottom: 8px;
+    }
+    .color-btn {
+        height: 56px;
+        border-radius: 14px;
+        border: 3px solid transparent;
+        cursor: pointer;
+        display: flex; align-items: center; justify-content: center; gap: 6px;
+        font-family: 'Fredoka One', cursive;
+        font-size: 1rem;
+        color: white;
+        text-shadow: 0 1px 3px rgba(0,0,0,.25);
+        transition: all .2s cubic-bezier(.34,1.56,.64,1);
+        user-select: none;
+    }
+    .color-btn:hover  { transform: scale(1.05); }
+    .color-btn:active { transform: scale(.94); }
+    .color-btn.rouge  { background: #ef4444; border-color: #b91c1c; }
+    .color-btn.bleu   { background: #3b82f6; border-color: #1d4ed8; }
+    .color-btn.vert   { background: #22c55e; border-color: #15803d; }
+    .color-btn.jaune  { background: #eab308; border-color: #a16207; color: #1e293b; text-shadow: none; }
+    .color-btn.orange { background: #f97316; border-color: #c2410c; }
+    .color-btn.blanc  { background: #f1f5f9; border-color: #94a3b8; color: #475569; text-shadow: none; }
+
+    /* ── Error / alert ───────────────────────────────────────────────────── */
+    .inline-error {
+        display: none;
+        justify-content: center;
+        align-items: center;
+        gap: 5px;
+        color: #ef4444;
+        font-size: .82rem;
+        font-weight: 700;
+        margin-top: 8px;
+    }
+    .inline-error.show { display: flex; }
+
+    .alert-login {
+        background: #fef2f2;
+        border: 1.5px solid #fca5a5;
+        border-radius: 12px;
+        padding: 12px 16px;
+        font-size: .88rem;
+        color: #991b1b;
+        margin-bottom: 18px;
+        display: flex;
+        gap: 8px;
+        align-items: flex-start;
+    }
+
+    /* ── Submit button ───────────────────────────────────────────────────── */
+    .btn-login {
+        width: 100%;
+        padding: 15px;
+        border-radius: 14px;
+        border: none;
+        background: linear-gradient(135deg, #6366f1, #8b5cf6);
+        color: white;
+        font-family: 'Fredoka One', cursive;
+        font-size: 1.2rem;
+        cursor: pointer;
+        margin-top: 20px;
+        box-shadow: 0 4px 15px rgba(99,102,241,.35);
+        transition: all .2s cubic-bezier(.34,1.56,.64,1);
+    }
+    .btn-login:hover { transform: translateY(-2px); box-shadow: 0 8px 25px rgba(99,102,241,.4); }
+    .btn-login:active { transform: translateY(0); }
+
+    /* ── Bottom links ────────────────────────────────────────────────────── */
+    .bottom-links {
+        text-align: center;
+        margin-top: 20px;
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+    }
+    .bottom-links a {
+        color: #94a3b8;
+        font-size: .88rem;
+        text-decoration: none;
+        font-weight: 700;
+        transition: color .2s;
+    }
+    .bottom-links a:hover { color: #6366f1; }
+
+    /* ── Forgot help box ─────────────────────────────────────────────────── */
+    .help-box {
+        background: #fffbeb;
+        border: 1.5px solid #fcd34d;
+        border-radius: 12px;
+        padding: 10px 14px;
+        font-size: .82rem;
+        color: #92400e;
+        margin-top: 12px;
+        display: none;
+    }
+    .help-box.show { display: block; }
+    .help-toggle {
+        background: none;
+        border: none;
+        color: #94a3b8;
+        font-size: .82rem;
+        font-weight: 700;
+        cursor: pointer;
+        font-family: 'Nunito', sans-serif;
+        text-decoration: underline;
+        padding: 0;
+    }
+    .help-toggle:hover { color: #6366f1; }
+
+    @media (max-width: 480px) {
+        .login-card { padding: 28px 18px; }
+        .color-palette { grid-template-columns: repeat(2, 1fr); }
+    }
+</style>
+{% endblock %}
 
 {% block content %}
-<div class="row justify-content-center">
-    <div class="col-lg-6">
-        <div class="card">
-            <div class="card-body p-5">
-                <h1 class="card-title text-center mb-4">🔐 Connexion Cubeur</h1>
-                <p class="text-center text-muted mb-4">
-                    Entre ton identité et ton code secret
-                </p>
+<div style="min-height: 100vh; padding: 30px 15px 60px;">
+    <div class="login-card">
 
-                <form method="post">
-                    {% csrf_token %}
-                    
-                    <!-- Identité -->
-                    <div class="mb-3">
-                        <label class="form-label fw-bold">Je suis</label>
-                        <div class="row g-2">
-                            <div class="col-4">
-                                {{ form.color }}
-                            </div>
-                            <div class="col-4">
-                                {{ form.adjective }}
-                            </div>
-                            <div class="col-4">
-                                {{ form.superhero }}
-                            </div>
-                        </div>
-                    </div>
+        <div class="login-title">👋 Bon retour!</div>
+        <p class="login-subtitle">Connecte-toi avec ton identité de cubeur</p>
 
-                    <!-- Code couleur -->
-                    <div class="mb-4">
-                        <label class="form-label fw-bold">Mon Code Secret</label>
-                        <p class="text-muted small">Clique les 6 couleurs dans l'ordre</p>
-                        <div class="d-flex justify-content-center flex-wrap gap-2">
-                            {{ form.color_code_1 }}
-                            {{ form.color_code_2 }}
-                            {{ form.color_code_3 }}
-                            {{ form.color_code_4 }}
-                            {{ form.color_code_5 }}
-                            {{ form.color_code_6 }}
-                        </div>
-                    </div>
+        {# Django error message (wrong identity or color code) #}
+        {% if messages %}
+            {% for message in messages %}
+                {% if message.tags == 'error' %}
+                <div class="alert-login">
+                    <span style="font-size: 1.1rem;">⚠️</span>
+                    <div>{{ message }}</div>
+                </div>
+                {% endif %}
+            {% endfor %}
+        {% endif %}
 
-                    <!-- Boutons -->
-                    <div class="d-grid gap-2">
-                        <button type="submit" class="btn btn-primary btn-cube btn-lg">
-                            Se Connecter 🚀
-                        </button>
-                        <a href="{% url 'cubing_users:cuber_register' %}" class="btn btn-outline-primary btn-cube">
-                            Créer une Identité
-                        </a>
-                    </div>
-                </form>
+        <form method="post" id="loginForm" onsubmit="return prepareSubmit()">
+            {% csrf_token %}
+
+            {# Hidden inputs — filled by JS #}
+            <input type="hidden" name="color"        id="h_color">
+            <input type="hidden" name="adjective"    id="h_adjective">
+            <input type="hidden" name="superhero"    id="h_superhero">
+            <input type="hidden" name="color_code_1" id="h_cc1">
+            <input type="hidden" name="color_code_2" id="h_cc2">
+            <input type="hidden" name="color_code_3" id="h_cc3">
+            <input type="hidden" name="color_code_4" id="h_cc4">
+            <input type="hidden" name="color_code_5" id="h_cc5">
+            <input type="hidden" name="color_code_6" id="h_cc6">
+
+            <!-- ── Ton identité ─────────────────────────────────────────── -->
+            <div class="identity-preview" id="identityPreview">
+                <div class="big-emoji" id="previewEmoji">🟥</div>
+                <div class="id-text"   id="previewName">Rouge Rapide Solveur</div>
             </div>
+
+            <label class="sel-label">1. Ta couleur</label>
+            <select class="styled-select" id="sel_color" onchange="refreshPreview()">
+                {% for val, label in form.color.field.choices %}
+                    <option value="{{ val }}">{{ label }}</option>
+                {% endfor %}
+            </select>
+
+            <label class="sel-label">2. Ton mot de pouvoir</label>
+            <select class="styled-select" id="sel_adjective" onchange="refreshPreview()">
+                {% for val, label in form.adjective.field.choices %}
+                    <option value="{{ val }}">{{ label }}</option>
+                {% endfor %}
+            </select>
+
+            <label class="sel-label">3. Ton titre</label>
+            <select class="styled-select" id="sel_superhero" onchange="refreshPreview()">
+                {% for val, label in form.superhero.field.choices %}
+                    <option value="{{ val }}">{{ label }}</option>
+                {% endfor %}
+            </select>
+
+            <!-- ── Ton code secret ─────────────────────────────────────── -->
+            <div class="section-divider"><span>🔐 Ton code secret</span></div>
+
+            <div class="slots-label">Clique sur une case pour l'effacer</div>
+            <div class="color-slots" id="colorSlots">
+                <div class="color-slot" id="slot-0"></div>
+                <div class="color-slot" id="slot-1"></div>
+                <div class="color-slot" id="slot-2"></div>
+                <div class="color-slot" id="slot-3"></div>
+                <div class="color-slot" id="slot-4"></div>
+                <div class="color-slot" id="slot-5"></div>
+            </div>
+
+            <div class="color-palette">
+                <button type="button" class="color-btn rouge"  onclick="pickColor('Rouge','🟥')">🟥 Rouge</button>
+                <button type="button" class="color-btn bleu"   onclick="pickColor('Bleu','🟦')">🟦 Bleu</button>
+                <button type="button" class="color-btn vert"   onclick="pickColor('Vert','🟩')">🟩 Vert</button>
+                <button type="button" class="color-btn jaune"  onclick="pickColor('Jaune','🟨')">🟨 Jaune</button>
+                <button type="button" class="color-btn orange" onclick="pickColor('Orange','🟧')">🟧 Orange</button>
+                <button type="button" class="color-btn blanc"  onclick="pickColor('Blanc','⬜')">⬜ Blanc</button>
+            </div>
+
+            <div class="inline-error" id="cc_error">
+                ⚠️ Choisis tes 6 couleurs pour te connecter
+            </div>
+
+            <!-- ── Submit ─────────────────────────────────────────────── -->
+            <button type="submit" class="btn-login">
+                🚀 Me connecter!
+            </button>
+
+        </form>
+
+        <!-- ── Bottom links ──────────────────────────────────────────── -->
+        <div class="bottom-links">
+            <button class="help-toggle" onclick="toggleHelp()">
+                J'ai oublié mon identité ou mon code 🆘
+            </button>
+            <div class="help-box" id="helpBox">
+                Demande à ton prof ou coach de réinitialiser ton code depuis
+                la liste de la classe. Il pourra te donner un nouveau code couleur
+                en quelques secondes.
+            </div>
+            <a href="{% url 'cubing_users:cuber_register' %}">
+                Pas encore de compte? Crée ton identité →
+            </a>
         </div>
+
     </div>
 </div>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+const EMOJIS = {
+    Rouge:'🟥', Bleu:'🟦', Vert:'🟩',
+    Jaune:'🟨', Orange:'🟧', Blanc:'⬜'
+};
+let code = [];  // array of {name, emoji}
+
+// ── Identity preview ─────────────────────────────────────────────────────────
+function refreshPreview() {
+    const color     = document.getElementById('sel_color').value;
+    const adjective = document.getElementById('sel_adjective').value;
+    const superhero = document.getElementById('sel_superhero').value;
+    document.getElementById('previewEmoji').textContent = EMOJIS[color] || '🎲';
+    document.getElementById('previewName').textContent  =
+        color + ' ' + adjective + ' ' + superhero;
+}
+refreshPreview();
+
+// ── Color code slots ──────────────────────────────────────────────────────────
+function pickColor(name, emoji) {
+    if (code.length >= 6) return;
+    code.push({ name, emoji });
+    renderSlots();
+}
+
+function removeColor(i) {
+    code.splice(i, 1);
+    renderSlots();
+}
+
+function renderSlots() {
+    for (let i = 0; i < 6; i++) {
+        const el = document.getElementById('slot-' + i);
+        const c  = code[i];
+        if (c) {
+            el.className = 'color-slot filled';
+            el.setAttribute('data-color', c.name);
+            el.textContent = c.emoji;
+            el.onclick = () => removeColor(i);
+            el.title = 'Clique pour retirer';
+        } else {
+            el.className = 'color-slot';
+            el.removeAttribute('data-color');
+            el.textContent = '';
+            el.onclick = null;
+            el.title = '';
+        }
+    }
+    document.getElementById('cc_error').classList.remove('show');
+}
+
+// ── Submit — onsubmit handler ─────────────────────────────────────────────────
+// Utilise onsubmit sur le <form> pour que le navigateur gère lui-même
+// l'envoi (cookie CSRF intact). On remplit juste les hiddens avant.
+function prepareSubmit() {
+    if (code.length < 6) {
+        document.getElementById('cc_error').classList.add('show');
+        return false;  // bloque le submit
+    }
+    document.getElementById('h_color').value     = document.getElementById('sel_color').value;
+    document.getElementById('h_adjective').value = document.getElementById('sel_adjective').value;
+    document.getElementById('h_superhero').value = document.getElementById('sel_superhero').value;
+    code.forEach((c, i) =>
+        document.getElementById('h_cc' + (i + 1)).value = c.name
+    );
+    return true;  // laisse le navigateur soumettre normalement
+}
+
+// ── Forgot help toggle ────────────────────────────────────────────────────────
+function toggleHelp() {
+    document.getElementById('helpBox').classList.toggle('show');
+}
+</script>
 {% endblock %}
