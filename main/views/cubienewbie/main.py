@@ -35,7 +35,7 @@ def method_cubienewbie(request):
             "name": "1 — A propos",
             "desc": "Au sujet de la méthode présenté pour les nouveaux cubeurs",
             "icon": "bi-cube",
-            "url": "/francontcube/methods/cubienewbie/about/",
+            "url": "/main/methods/cubienewbie/about/",
             "available": True,
             "cube_state": None  # No cube for intro
         },
@@ -43,7 +43,7 @@ def method_cubienewbie(request):
             "name": "2 — Le cube",
             "desc": "Comprendre les pièces, la structure et le fonctionnement.",
             "icon": "bi-cube",
-            "url": "/francontcube/methods/cubienewbie/cube/",
+            "url": "/main/methods/cubienewbie/cube/",
             "available": True,
             "cube_state": None  # No cube for intro
         },
@@ -51,7 +51,7 @@ def method_cubienewbie(request):
             "name": "3 — La notation",
             "desc": "Apprendre comment lire les mouvements (R, L, U, F…).",
             "icon": "bi-pencil",
-            "url": "/francontcube/methods/cubienewbie/notation/",
+            "url": "/main/methods/cubienewbie/notation/",
             "available": True,
             "cube_state": None  # No cube for intro
         },
@@ -59,7 +59,7 @@ def method_cubienewbie(request):
             "name": "4 — Étape 1: La marguerite",
             "desc": "Premier objectif : construire la marguerite autour du centre jaune.",
             "icon": "bi-flower3",
-            "url": "/francontcube/methods/cubienewbie/daisy/",
+            "url": "/main/methods/cubienewbie/daisy/",
             "available": True,
             "cube_state": get_cube_state('marguerite-goal')
         },
@@ -67,7 +67,7 @@ def method_cubienewbie(request):
             "name": "5 — Étape 2 : La croix du bas (jaune)",
             "desc": "Aligner les arêtes blanches avec les centres pour former la croix.",
             "icon": "bi-plus-circle",
-            "url": "/francontcube/methods/cubienewbie/bottom-cross/",
+            "url": "/main/methods/cubienewbie/bottom-cross/",
             "available": True,
             "cube_state": get_cube_state('white-cross-goal')
         },
@@ -75,7 +75,7 @@ def method_cubienewbie(request):
             "name": "6 — Étape 3 : Les coins inférieurs",
             "desc": "Placer les coins inferieurs blancs pour compléter la première couche.",
             "icon": "bi-box",
-            "url": "/francontcube/methods/cubienewbie/bottom-corners/",
+            "url": "/main/methods/cubienewbie/bottom-corners/",
             "available": True,
             "cube_state": get_cube_state('bottom-corners-goal')
         },
@@ -83,7 +83,7 @@ def method_cubienewbie(request):
             "name": "7 — Étape 4 : Les bords du milieu",
             "desc": "Placer les arêtes du milieu pour compléter les deux premières rangées du bas.",
             "icon": "bi-arrows-expand",
-            "url": "/francontcube/methods/cubienewbie/second-layer/",
+            "url": "/main/methods/cubienewbie/second-layer/",
             "available": True,
             "cube_state": get_cube_state('second-layer-goal')
         },
@@ -91,7 +91,7 @@ def method_cubienewbie(request):
             "name": "8 — Étape 5 : La croix du haut (blanc)",
             "desc": "Former la croix blanche sur la face supérieure.",
             "icon": "bi-plus-circle",
-            "url": "/francontcube/methods/cubienewbie/top-cross/",
+            "url": "/main/methods/cubienewbie/top-cross/",
             "available": True,
             "cube_state": get_cube_state('top-cross-goal')
         },
@@ -99,7 +99,7 @@ def method_cubienewbie(request):
             "name": "9 — Étape 6 : La face du haut (blanche)",
             "desc": "La chasse au poisson.",
             "icon": "bi-brightness-high",
-            "url": "/francontcube/methods/cubienewbie/top-face/",
+            "url": "/main/methods/cubienewbie/top-face/",
             "available": True,
             "cube_state": get_cube_state('yellow-face-goal')
         },
@@ -107,7 +107,7 @@ def method_cubienewbie(request):
             "name": "10 — Étape 7 : La permutation des coins jaunes",
             "desc": "Placer les coins à leur bon emplacement.",
             "icon": "bi-arrow-repeat",
-            "url": "/francontcube/methods/cubienewbie/corner-permutation/",
+            "url": "/main/methods/cubienewbie/corner-permutation/",
             "available": True,
             "cube_state": get_cube_state('corner-perm-goal')
         },
@@ -115,7 +115,7 @@ def method_cubienewbie(request):
             "name": "11 — Étape 8 : La permutation des arêtes",    
             "desc": "La permutation des arêtes de la couche superieur pour finir le cube.",
             "icon": "bi-check-circle",
-            "url": "/francontcube/methods/cubienewbie/edge-permutation/",
+            "url": "/main/methods/cubienewbie/edge-permutation/",
             "available": True,
             "cube_state": get_cube_state('edge-perm-goal-needsu')  # Final solved cube
         },
