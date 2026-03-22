@@ -12,6 +12,10 @@ db.sqlite3
 staticfiles/
 media/
 
+francontcube/settings.py
+
+
+
 # Environment
 .env
 *.env
