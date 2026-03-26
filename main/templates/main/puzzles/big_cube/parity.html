@@ -1,0 +1,183 @@
+{% extends "main/partials/base.html" %}
+{% load static %}
+
+{% block extra_head %}
+<script src="https://cdn.cubing.net/v0/js/cubing/twisty" type="module"></script>
+<style>
+  .case-card {
+    border-radius: 16px;
+    border: 2px solid #e9ecef;
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+    overflow: hidden;
+  }
+  .case-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 24px rgba(0,0,0,0.10);
+  }
+  .technique-header {
+    border-left: 5px solid var(--bs-primary);
+    padding-left: 12px;
+    margin: 2rem 0 1rem;
+  }
+  .technique-header:first-of-type { margin-top: 0; }
+  .twisty-wrap {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 12px 0 4px;
+    background: #f8f9fa;
+  }
+  .algo-badge {
+    font-family: monospace;
+    font-size: 1.05rem;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    background: #212529;
+    color: #f8f9fa;
+    border-radius: 8px;
+    padding: 6px 14px;
+    display: inline-block;
+  }
+  .tip-box {
+    background: #fff3cd;
+    border-radius: 0 0 14px 14px;
+    padding: 8px 14px;
+    font-size: 0.85rem;
+    color: #664d03;
+    display: flex;
+    gap: 6px;
+    align-items: flex-start;
+  }
+  .step-nav {
+    margin-top: 2.5rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid #dee2e6;
+  }
+  .parity-alert {
+    background: #fff3cd;
+    border: 1px solid #ffc107;
+    border-radius: 12px;
+    padding: 14px 18px;
+    margin-bottom: 1.5rem;
+    font-size: 0.9rem;
+    color: #664d03;
+  }
+</style>
+{% endblock %}
+
+{% block content %}
+
+{# Fil d'Ariane #}
+<nav aria-label="breadcrumb" class="mb-3">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item"><a href="{% url 'main:puzzles_home' %}">Puzzles</a></li>
+    <li class="breadcrumb-item"><a href="{% url home_url %}">{{ config.name }}</a></li>
+    <li class="breadcrumb-item active">{{ step.name }}</li>
+  </ol>
+</nav>
+
+<h1 class="h3 fw-bold mb-1">{{ step.name }}</h1>
+<p class="text-muted mb-3">{{ step.desc }}</p>
+
+<div class="parity-alert">
+  <i class="bi-exclamation-triangle-fill me-2"></i>
+  <strong>La parité arrive ~50% du temps.</strong> Ce n'est pas une erreur — c'est une caractéristique mathématique du 4×4. Apprends ces 2 algorithmes et tu seras toujours prêt!
+</div>
+
+{% if cases %}
+
+  {# ── OLL Parity (cas 1) ───────────────────────────────────────── #}
+  {% with groupe=cases|slice:":1" %}{% if groupe %}
+  <div class="technique-header">
+    <h2 class="h5 fw-bold mb-0">
+      <i class="bi-arrow-repeat text-warning me-2"></i>OLL Parity
+    </h2>
+    <small class="text-muted">Une arête de la dernière couche est retournée — impossible sur un 3×3</small>
+  </div>
+  <div class="row g-3 mb-4">
+    {% for case in groupe %}
+    <div class="col-12 col-sm-6 col-lg-4">
+      <div class="case-card h-100 bg-white">
+        <div class="twisty-wrap">
+          <twisty-player
+            puzzle="{{ cubing_puzzle }}"
+            alg="{{ case.algorithm }}"
+            experimental-setup-alg="{{ case.get_setup_alg }}"
+            visualization="3D"
+            background="none"
+            control-panel="bottom-row"
+            camera-longitude="{{ case.camera_longitude|default:'-25' }}"
+            camera-latitude="{{ case.camera_latitude|default:'35' }}"
+            style="width:220px;height:220px;">
+          </twisty-player>
+        </div>
+        <div class="px-3 py-2 text-center">
+          <div class="algo-badge mb-2">{{ case.algorithm }}</div>
+          <p class="text-muted small mb-0">{{ case.name }}</p>
+        </div>
+        {% if case.tip %}<div class="tip-box"><i class="bi-lightbulb-fill flex-shrink-0 mt-1"></i><span>{{ case.tip }}</span></div>{% endif %}
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+  {% endif %}{% endwith %}
+
+  {# ── PLL Parity (cas 2+) ──────────────────────────────────────── #}
+  {% with groupe=cases|slice:"1:" %}{% if groupe %}
+  <div class="technique-header">
+    <h2 class="h5 fw-bold mb-0">
+      <i class="bi-arrow-left-right text-danger me-2"></i>PLL Parity
+    </h2>
+    <small class="text-muted">Deux pièces de la dernière couche sont échangées — impossible sur un 3×3</small>
+  </div>
+  <div class="row g-3 mb-4">
+    {% for case in groupe %}
+    <div class="col-12 col-sm-6 col-lg-4">
+      <div class="case-card h-100 bg-white">
+        <div class="twisty-wrap">
+          <twisty-player
+            puzzle="{{ cubing_puzzle }}"
+            alg="{{ case.algorithm }}"
+            experimental-setup-alg="{{ case.get_setup_alg }}"
+            visualization="3D"
+            background="none"
+            control-panel="bottom-row"
+            camera-longitude="{{ case.camera_longitude|default:'-25' }}"
+            camera-latitude="{{ case.camera_latitude|default:'35' }}"
+            style="width:220px;height:220px;">
+          </twisty-player>
+        </div>
+        <div class="px-3 py-2 text-center">
+          <div class="algo-badge mb-2">{{ case.algorithm }}</div>
+          <p class="text-muted small mb-0">{{ case.name }}</p>
+        </div>
+        {% if case.tip %}<div class="tip-box"><i class="bi-lightbulb-fill flex-shrink-0 mt-1"></i><span>{{ case.tip }}</span></div>{% endif %}
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+  {% endif %}{% endwith %}
+
+{% else %}
+<div class="alert alert-secondary text-center py-5">
+  <i class="bi-hourglass-split fs-1 d-block mb-2"></i>
+  <strong>Contenu à venir</strong>
+  <p class="mb-0 text-muted">Les animations pour cette étape seront ajoutées prochainement.</p>
+</div>
+{% endif %}
+
+{# Navigation précédent / suivant #}
+<div class="step-nav d-flex justify-content-between">
+  {% if prev_step %}
+  <a href="{% url step_url prev_step.slug %}" class="btn btn-outline-secondary">
+    <i class="bi-arrow-left"></i> {{ prev_step.name }}
+  </a>
+  {% else %}<div></div>{% endif %}
+  {% if next_step %}
+  <a href="{% url step_url next_step.slug %}" class="btn btn-primary">
+    {{ next_step.name }} <i class="bi-arrow-right"></i>
+  </a>
+  {% endif %}
+</div>
+
+{% endblock %}

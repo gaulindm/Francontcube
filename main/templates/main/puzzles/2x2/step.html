@@ -1,0 +1,128 @@
+{% extends "main/partials/base.html" %}
+{% load static %}
+
+{% block extra_head %}
+
+{% endblock %}
+
+{% block content %}
+
+<nav aria-label="breadcrumb" class="mb-3">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item"><a href="{% url 'main:puzzles_home' %}">Puzzles</a></li>
+    <li class="breadcrumb-item"><a href="{% url 'main:2x2_home' %}">2×2</a></li>
+    <li class="breadcrumb-item"><a href="{% url 'main:2x2_method' method_slug %}">{{ method.name }}</a></li>
+    <li class="breadcrumb-item active">{{ step.name }}</li>
+  </ol>
+</nav>
+
+{# En-tête de l'étape #}
+<div class="d-flex align-items-center gap-3 mb-4">
+  <i class="{{ step.icon }} fs-2 text-primary"></i>
+  <div>
+    <h1 class="h3 mb-0">{{ step.name }}</h1>
+    <p class="text-muted mb-0">{{ step.desc }}</p>
+  </div>
+</div>
+
+{# Cas / Algorithmes #}
+{% if cases %}
+<div class="row g-4">
+  {% for case in cases %}
+  <div class="col-12 col-md-6 col-lg-4">
+    <div class="card h-100 shadow-sm">
+      <div class="card-body text-center">
+
+        {# Cube animé 2x2 #}
+        <twisty-player
+          puzzle="2x2x2"
+          alg="{{ case.algorithm }}"
+          experimental-setup-alg="{{ case.get_setup_alg }}"
+          stickering="{{ case.stickering|default:'full' }}"
+          visualization="3D"
+          background="none"
+          control-panel="bottom-row"
+          camera-longitude="{{ case.camera_longitude|default:'-25' }}"
+          camera-latitude="{{ case.camera_latitude|default:'22' }}"
+          style="width:180px;height:180px;">
+        </twisty-player>
+
+        <h5 class="card-title mt-3 mb-1">{{ case.name }}</h5>
+
+        {% if case.description %}
+        <p class="text-muted small mb-2">{{ case.description }}</p>
+        {% endif %}
+
+        {% if case.algorithm %}
+        <code class="d-block bg-light rounded px-2 py-1 small">
+          {{ case.algorithm }}
+        </code>
+        {% endif %}
+
+        {% if case.tip %}
+        <p class="text-info small mt-2 mb-0">
+          <i class="bi-lightbulb"></i> {{ case.tip }}
+        </p>
+        {% endif %}
+
+      </div>
+
+      {% if case.difficulty %}
+      <div class="card-footer text-end">
+        <span class="badge
+          {% if case.difficulty == 'facile' %}bg-success
+          {% elif case.difficulty == 'moyen' %}bg-warning text-dark
+          {% else %}bg-danger{% endif %}">
+          {{ case.get_difficulty_display }}
+        </span>
+      </div>
+      {% endif %}
+
+    </div>
+  </div>
+  {% endfor %}
+</div>
+
+{% else %}
+<div class="alert alert-secondary text-center py-5">
+  <i class="bi-hourglass-split fs-1 d-block mb-2"></i>
+  <strong>Contenu à venir</strong>
+  <p class="mb-0 text-muted">Les algorithmes pour cette étape seront ajoutés prochainement.</p>
+</div>
+{% endif %}
+
+{# Navigation entre étapes #}
+<div class="d-flex justify-content-between mt-5">
+  {% with steps=method.steps %}
+  {% for s in steps %}
+    {% if s.slug == step.slug %}
+      {% if not forloop.first %}
+        {% with prev=steps|slice:forloop.counter0 %}
+        <a href="{% url 'main:2x2_step' method_slug prev.0.slug %}"
+           class="btn btn-outline-secondary">
+          <i class="bi-arrow-left"></i> Étape précédente
+        </a>
+        {% endwith %}
+      {% else %}
+        <div></div>
+      {% endif %}
+      {% if not forloop.last %}
+        {% with idx=forloop.counter %}
+        {% for next_s in steps %}
+          {% if forloop.counter == idx|add:1 %}
+          <a href="{% url 'main:2x2_step' method_slug next_s.slug %}"
+             class="btn btn-primary">
+            Étape suivante <i class="bi-arrow-right"></i>
+          </a>
+          {% endif %}
+        {% endfor %}
+        {% endwith %}
+      {% else %}
+        <div></div>
+      {% endif %}
+    {% endif %}
+  {% endfor %}
+  {% endwith %}
+</div>
+
+{% endblock %}

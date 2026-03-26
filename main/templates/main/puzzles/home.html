@@ -1,0 +1,32 @@
+{% extends "main/partials/base.html" %}
+{% load static %}
+
+{% block content %}
+<div class="row mb-4">
+  <div class="col">
+    <h1 class="h2 fw-bold">Autres casse-têtes</h1>
+    <p class="text-muted">Explore le 2×2, 4×4 et 5×5 avec des animations interactives.</p>
+  </div>
+</div>
+
+<div class="row g-4">
+  {% for puzzle in puzzles %}
+  <div class="col-12 col-md-4">
+    <div class="card h-100 shadow-sm {% if not puzzle.available %}opacity-50{% endif %}">
+      <div class="card-body text-center py-4">
+        <i class="{{ puzzle.icon }} fs-1 text-primary mb-3 d-block"></i>
+        <h3 class="h5 fw-bold">{{ puzzle.name }}</h3>
+        <p class="text-muted small">{{ puzzle.desc }}</p>
+      </div>
+      <div class="card-footer bg-transparent border-0 text-center pb-3">
+        {% if puzzle.available %}
+        <a href="{{ puzzle.url }}" class="btn btn-primary px-4">Commencer</a>
+        {% else %}
+        <span class="btn btn-secondary px-4 disabled">Bientôt disponible</span>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+  {% endfor %}
+</div>
+{% endblock %}

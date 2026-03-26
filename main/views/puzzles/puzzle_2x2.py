@@ -39,7 +39,7 @@ METHODS_2X2 = {
 
 def puzzle_2x2_home(request):
     """Page d'accueil du 2x2 — liste les méthodes disponibles."""
-    return render(request, 'francontcube/puzzles/2x2/home.html', {
+    return render(request, 'main/puzzles/2x2/home.html', {
         'methods': METHODS_2X2,
         'puzzle_type': '2x2',
     })
@@ -55,7 +55,7 @@ def puzzle_2x2_method(request, method):
         from django.http import Http404
         raise Http404(f"Méthode 2x2 inconnue : {method}")
 
-    return render(request, 'francontcube/puzzles/2x2/method.html', {
+    return render(request, 'main/puzzles/2x2/method.html', {
         'method_slug': method,
         'method':      method_data,
         'puzzle_type': '2x2',
@@ -88,7 +88,7 @@ def puzzle_2x2_step(request, method, step):
         category=step,
     ).order_by('step_number')
 
-    return render(request, 'francontcube/puzzles/2x2/step.html', {
+    return render(request, 'main/puzzles/2x2/step.html', {
         'method_slug': method,
         'method':      method_data,
         'step':        step_info,

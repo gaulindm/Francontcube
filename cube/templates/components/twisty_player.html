@@ -1,0 +1,12 @@
+<div 
+  id="twisty-{{ case.id }}-{{ mode|default:'full' }}"
+  class="twisty-container"
+  data-config='{
+    "puzzle": "{{ cubing_puzzle }}",
+    "alg": "{{ case.algorithm|escapejs }}",
+    "setupAlg": "{{ case.get_setup_alg|escapejs }}",
+    "cameraLongitude": {{ case.camera_longitude|default:"-25" }},
+    "cameraLatitude": {{ case.camera_latitude|default:"35" }},
+    "mode": "{{ mode|default:'full' }}"
+  }'>
+</div>

@@ -1,0 +1,167 @@
+{% extends "main/partials/base.html" %}
+{% load static %}
+
+{% block title %}Notation 4×4 — Francontcube{% endblock %}
+
+{% block content %}
+<style>
+    .section {
+        margin: 40px 0;
+    }
+
+    .section h2 {
+        color: #667eea;
+        margin-bottom: 15px;
+        text-align: center;
+    }
+
+    .card {
+        background: white;
+        border-radius: 15px;
+        padding: 20px;
+        border: 2px solid #e0e0e0;
+        margin-bottom: 20px;
+    }
+
+    .icons {
+        display: flex;
+        gap: 12px;
+        justify-content: center;
+        flex-wrap: wrap;
+        margin-top: 15px;
+    }
+
+    .icon {
+        background: #f8f9ff;
+        padding: 10px;
+        border-radius: 10px;
+    }
+
+    .highlight {
+        background: #eef2ff;
+        border-left: 5px solid #667eea;
+        padding: 15px;
+        border-radius: 10px;
+    }
+</style>
+
+<div class="container">
+    <h1>🎲 Notation du Cube 4×4</h1>
+    <p class="subtitle">Apprendre les mouvements avancés (Wide Moves)</p>
+
+    <!-- INTRO -->
+    <div class="highlight">
+        <h3>Pourquoi une nouvelle notation ?</h3>
+        <p>
+            Sur un cube 4×4, il n'y a pas seulement des faces… il y a aussi des couches internes !
+            Nous utilisons donc de nouveaux mouvements appelés <strong>wide moves</strong>.
+        </p>
+    </div>
+
+    <!-- REVIEW -->
+    <div class="section">
+        <h2>🔁 Rappel des mouvements 3×3</h2>
+
+        <div class="card">
+            <p>Ces mouvements fonctionnent exactement comme sur le 3×3 :</p>
+            <div class="icons">
+                <div class="icon" id="R"></div>
+                <div class="icon" id="Rprime"></div>
+                <div class="icon" id="R2"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- WIDE MOVES -->
+    <div class="section">
+        <h2>🟪 Les Wide Moves (NOUVEAU)</h2>
+
+        <div class="card">
+            <p>
+                Un <strong>wide move</strong> signifie que l'on tourne <strong>2 couches en même temps</strong>.
+            </p>
+
+            <p><strong>Exemple :</strong></p>
+
+            <div class="icons">
+                <div class="icon" id="Rw"></div>
+                <div class="icon" id="Rwprime"></div>
+                <div class="icon" id="Rw2"></div>
+            </div>
+
+            <p style="margin-top: 15px;">
+                👉 <strong>Rw = R + couche intérieure</strong>
+            </p>
+        </div>
+    </div>
+
+    <!-- COMPARISON -->
+    <div class="section">
+        <h2>⚖️ Comparaison</h2>
+
+        <div class="card">
+            <p><strong>R (3×3 style)</strong> → 1 seule couche</p>
+            <div class="icons">
+                <div class="icon" id="R_compare"></div>
+            </div>
+
+            <p style="margin-top: 20px;"><strong>Rw (4×4)</strong> → 2 couches</p>
+            <div class="icons">
+                <div class="icon" id="Rw_compare"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- OTHER MOVES -->
+    <div class="section">
+        <h2>🔄 Autres Wide Moves</h2>
+
+        <div class="card">
+            <div class="icons">
+                <div class="icon" id="Uw"></div>
+                <div class="icon" id="Uwprime"></div>
+                <div class="icon" id="Uw2"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- TIP -->
+    <div class="highlight">
+        <h3>💡 Astuce importante</h3>
+        <p>
+            Si tu sais faire un <strong>R</strong> sur le 3×3, alors tu sais presque faire un <strong>Rw</strong> !
+            Il suffit d'ajouter la couche intérieure.
+        </p>
+    </div>
+
+</div>
+
+<script>
+const cubeSize = 4;
+
+/* ===== SIMPLE HELPER ===== */
+function render(id, move) {
+    document.getElementById(id).innerHTML = generateSVGIcon(move, cubeSize);
+}
+
+/* ===== BASIC ===== */
+render("R", "R");
+render("Rprime", "R'");
+render("R2", "R2");
+
+/* ===== WIDE ===== */
+render("Rw", "Rw");
+render("Rwprime", "Rw'");
+render("Rw2", "Rw2");
+
+/* ===== COMPARISON ===== */
+render("R_compare", "R");
+render("Rw_compare", "Rw");
+
+/* ===== OTHER ===== */
+render("Uw", "Uw");
+render("Uwprime", "Uw'");
+render("Uw2", "Uw2");
+</script>
+
+{% endblock %}

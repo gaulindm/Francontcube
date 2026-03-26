@@ -1,0 +1,382 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8"/>
+  <title>Cube Corner Calibrator</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { 
+      font-family: 'Courier New', monospace; 
+      background: #1a1a2e; 
+      color: #e0e0e0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 20px;
+      gap: 16px;
+    }
+    h1 { color: #a8d8ea; font-size: 18px; letter-spacing: 2px; text-transform: uppercase; }
+    
+    #controls {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      align-items: center;
+      background: #16213e;
+      padding: 12px 16px;
+      border-radius: 8px;
+      border: 1px solid #0f3460;
+      width: 100%;
+      max-width: 900px;
+    }
+    
+    label { font-size: 13px; color: #a8d8ea; }
+    
+    input[type=range] { width: 120px; accent-color: #e94560; }
+    input[type=number] { 
+      width: 60px; padding: 4px 6px; 
+      background: #0f3460; border: 1px solid #e94560; 
+      color: #fff; border-radius: 4px; font-family: monospace;
+    }
+    
+    button {
+      padding: 6px 14px;
+      background: #e94560;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      font-family: monospace;
+      font-size: 13px;
+    }
+    button:hover { background: #c73652; }
+    button.secondary { background: #0f3460; border: 1px solid #e94560; }
+    button.secondary:hover { background: #1a3a6e; }
+
+    #stage {
+      position: relative;
+      width: 900px;
+      max-width: 95vw;
+      border: 2px solid #0f3460;
+      border-radius: 8px;
+      overflow: hidden;
+      cursor: crosshair;
+      background: #888; /* checkerboard-ish */
+    }
+
+    #bg-img {
+      position: absolute;
+      top: 0; left: 0;
+      width: 900px;
+      height: 750px;
+      object-fit: contain;
+      pointer-events: none;
+    }
+
+    #overlay-svg {
+      position: absolute;
+      top: 0; left: 0;
+      width: 900px;
+      height: 750px;
+      pointer-events: none;
+    }
+
+    #click-catcher {
+      position: absolute;
+      top: 0; left: 0;
+      width: 900px;
+      height: 750px;
+      cursor: crosshair;
+    }
+
+    #coord-log {
+      background: #16213e;
+      border: 1px solid #0f3460;
+      border-radius: 8px;
+      padding: 14px 18px;
+      width: 100%;
+      max-width: 900px;
+      font-size: 13px;
+      max-height: 260px;
+      overflow-y: auto;
+    }
+    #coord-log h2 { color: #a8d8ea; font-size: 14px; margin-bottom: 8px; }
+    .log-entry { 
+      display: flex; justify-content: space-between; 
+      padding: 3px 0; border-bottom: 1px solid #0f3460; 
+      gap: 20px;
+    }
+    .log-label { color: #e94560; min-width: 100px; }
+    .log-coords { color: #f0f0f0; font-weight: bold; }
+    .log-delete { color: #888; cursor: pointer; }
+    .log-delete:hover { color: #e94560; }
+
+    #json-out {
+      background: #0d0d1a;
+      border: 1px solid #0f3460;
+      border-radius: 8px;
+      padding: 14px 18px;
+      width: 100%;
+      max-width: 900px;
+      font-size: 12px;
+      white-space: pre;
+      color: #a8ffb0;
+      max-height: 200px;
+      overflow-y: auto;
+    }
+
+    .dot-label { font-size: 11px; font-family: monospace; font-weight: bold; }
+
+    select {
+      padding: 5px 8px;
+      background: #0f3460;
+      color: #fff;
+      border: 1px solid #e94560;
+      border-radius: 4px;
+      font-family: monospace;
+    }
+  </style>
+</head>
+<body>
+  <h1>🎯 Cube Corner Calibrator</h1>
+
+  <div id="controls">
+    <label>Img Opacity:
+      <input type="range" id="opacity-slider" min="0" max="100" value="60" oninput="updateOpacity(this.value)">
+      <span id="opacity-val">60%</span>
+    </label>
+
+    <label>Img Scale:
+      <input type="range" id="scale-slider" min="50" max="200" value="100" oninput="updateScale(this.value)">
+      <span id="scale-val">100%</span>
+    </label>
+
+    <label>Offset X: <input type="number" id="off-x" value="0" oninput="updateOffset()"></label>
+    <label>Offset Y: <input type="number" id="off-y" value="0" oninput="updateOffset()"></label>
+
+    <label>Point Label:
+      <select id="point-label">
+        <option>custom</option>
+        <option>U-TL</option><option>U-TR</option><option>U-BL</option><option>U-BR</option>
+        <option>F-TL</option><option>F-TR</option><option>F-BL</option><option>F-BR</option>
+        <option>R-TL</option><option>R-TR</option><option>R-BL</option><option>R-BR</option>
+        <option>L-TL</option><option>L-TR</option><option>L-BL</option><option>L-BR</option>
+        <option>D-TL</option><option>D-TR</option><option>D-BL</option><option>D-BR</option>
+        <option>B-TL</option><option>B-TR</option><option>B-BL</option><option>B-BR</option>
+      </select>
+    </label>
+
+    <label>Custom name: <input type="text" id="custom-label" value="" style="width:80px;padding:4px 6px;background:#0f3460;border:1px solid #e94560;color:#fff;border-radius:4px;font-family:monospace;"></label>
+
+    <button onclick="clearAll()">🗑 Clear All</button>
+    <button onclick="copyJSON()" class="secondary">📋 Copy JSON</button>
+  </div>
+
+  <div id="stage" style="height:750px;">
+    <img id="bg-img" src="" alt="cube reference"/>
+    <svg id="overlay-svg" viewBox="0 0 900 750" xmlns="http://www.w3.org/2000/svg"></svg>
+    <div id="click-catcher" onclick="handleClick(event)"></div>
+  </div>
+
+  <div id="coord-log">
+    <h2>Clicked Points</h2>
+    <div id="log-entries"></div>
+  </div>
+
+  <div id="json-out">{}</div>
+
+  <script>
+    // Load the uploaded image
+    const img = document.getElementById('bg-img');
+    img.src = '/mnt/user-data/uploads/twisty.png';
+    img.onerror = () => {
+      // Try relative path fallback
+      img.src = 'twisty.png';
+    };
+    img.style.opacity = 0.6;
+
+    let points = [];
+    let pointCounter = 0;
+
+    function updateOpacity(v) {
+      img.style.opacity = v / 100;
+      document.getElementById('opacity-val').textContent = v + '%';
+    }
+
+    function updateScale(v) {
+      const scale = v / 100;
+      img.style.transform = `scale(${scale})`;
+      img.style.transformOrigin = 'top left';
+      document.getElementById('scale-val').textContent = v + '%';
+    }
+
+    function updateOffset() {
+      const ox = parseFloat(document.getElementById('off-x').value) || 0;
+      const oy = parseFloat(document.getElementById('off-y').value) || 0;
+      img.style.marginLeft = ox + 'px';
+      img.style.marginTop = oy + 'px';
+    }
+
+    function getLabel() {
+      const sel = document.getElementById('point-label').value;
+      if (sel === 'custom') {
+        return document.getElementById('custom-label').value || `pt-${pointCounter}`;
+      }
+      return sel;
+    }
+
+    const COLORS = ['#ff4444','#44ff88','#4488ff','#ffcc44','#ff44cc','#44ffff','#ff8844','#88ff44'];
+
+    function handleClick(e) {
+      const rect = document.getElementById('stage').getBoundingClientRect();
+      const x = Math.round(e.clientX - rect.left);
+      const y = Math.round(e.clientY - rect.top);
+      
+      const label = getLabel();
+      const color = COLORS[points.length % COLORS.length];
+      pointCounter++;
+
+      points.push({ label, x, y, color, id: pointCounter });
+      renderDots();
+      renderLog();
+      renderJSON();
+
+      // Auto-advance label selector
+      const sel = document.getElementById('point-label');
+      if (sel.value !== 'custom') {
+        const opts = Array.from(sel.options).map(o => o.value);
+        const idx = opts.indexOf(sel.value);
+        if (idx < opts.length - 1) sel.selectedIndex = idx + 1;
+      }
+    }
+
+    function renderDots() {
+      const svg = document.getElementById('overlay-svg');
+      svg.innerHTML = '';
+      
+      // Draw grid lines for reference
+      for (let x = 0; x <= 900; x += 50) {
+        const line = document.createElementNS('http://www.w3.org/2000/svg','line');
+        line.setAttribute('x1', x); line.setAttribute('y1', 0);
+        line.setAttribute('x2', x); line.setAttribute('y2', 750);
+        line.setAttribute('stroke','rgba(255,255,255,0.07)');
+        line.setAttribute('stroke-width','0.5');
+        svg.appendChild(line);
+      }
+      for (let y = 0; y <= 750; y += 50) {
+        const line = document.createElementNS('http://www.w3.org/2000/svg','line');
+        line.setAttribute('x1', 0); line.setAttribute('y1', y);
+        line.setAttribute('x2', 900); line.setAttribute('y2', y);
+        line.setAttribute('stroke','rgba(255,255,255,0.07)');
+        line.setAttribute('stroke-width','0.5');
+        svg.appendChild(line);
+      }
+
+      points.forEach((p, i) => {
+        // Crosshair
+        const h = document.createElementNS('http://www.w3.org/2000/svg','line');
+        h.setAttribute('x1', p.x - 10); h.setAttribute('y1', p.y);
+        h.setAttribute('x2', p.x + 10); h.setAttribute('y2', p.y);
+        h.setAttribute('stroke', p.color); h.setAttribute('stroke-width','1.5');
+        svg.appendChild(h);
+
+        const v = document.createElementNS('http://www.w3.org/2000/svg','line');
+        v.setAttribute('x1', p.x); v.setAttribute('y1', p.y - 10);
+        v.setAttribute('x2', p.x); v.setAttribute('y2', p.y + 10);
+        v.setAttribute('stroke', p.color); v.setAttribute('stroke-width','1.5');
+        svg.appendChild(v);
+
+        // Circle
+        const circle = document.createElementNS('http://www.w3.org/2000/svg','circle');
+        circle.setAttribute('cx', p.x); circle.setAttribute('cy', p.y); circle.setAttribute('r','5');
+        circle.setAttribute('fill', p.color); circle.setAttribute('fill-opacity','0.7');
+        circle.setAttribute('stroke', 'white'); circle.setAttribute('stroke-width','1');
+        svg.appendChild(circle);
+
+        // Label
+        const text = document.createElementNS('http://www.w3.org/2000/svg','text');
+        text.setAttribute('x', p.x + 8); text.setAttribute('y', p.y - 8);
+        text.setAttribute('fill', p.color);
+        text.setAttribute('font-size','11');
+        text.setAttribute('font-family','Courier New');
+        text.setAttribute('font-weight','bold');
+        text.textContent = p.label;
+        
+        // Background for readability
+        const bg = document.createElementNS('http://www.w3.org/2000/svg','rect');
+        svg.appendChild(bg); // placeholder, sized after text append
+        svg.appendChild(text);
+
+        // Coords below
+        const coords = document.createElementNS('http://www.w3.org/2000/svg','text');
+        coords.setAttribute('x', p.x + 8); coords.setAttribute('y', p.y + 4);
+        coords.setAttribute('fill','rgba(255,255,255,0.75)');
+        coords.setAttribute('font-size','9');
+        coords.setAttribute('font-family','Courier New');
+        coords.textContent = `(${p.x}, ${p.y})`;
+        svg.appendChild(coords);
+      });
+
+      // Draw lines connecting points in order
+      if (points.length >= 2) {
+        for (let i = 0; i < points.length - 1; i++) {
+          const line = document.createElementNS('http://www.w3.org/2000/svg','line');
+          line.setAttribute('x1', points[i].x); line.setAttribute('y1', points[i].y);
+          line.setAttribute('x2', points[i+1].x); line.setAttribute('y2', points[i+1].y);
+          line.setAttribute('stroke','rgba(255,255,255,0.2)');
+          line.setAttribute('stroke-width','1');
+          line.setAttribute('stroke-dasharray','4 4');
+          svg.appendChild(line);
+        }
+      }
+    }
+
+    function renderLog() {
+      const el = document.getElementById('log-entries');
+      el.innerHTML = '';
+      points.forEach((p, i) => {
+        const row = document.createElement('div');
+        row.className = 'log-entry';
+        row.innerHTML = `
+          <span class="log-label" style="color:${p.color}">${p.label}</span>
+          <span class="log-coords">x: ${p.x}, y: ${p.y}</span>
+          <span class="log-delete" onclick="removePoint(${p.id})">✕</span>
+        `;
+        el.appendChild(row);
+      });
+    }
+
+    function renderJSON() {
+      const obj = {};
+      points.forEach(p => {
+        obj[p.label] = { x: p.x, y: p.y };
+      });
+      document.getElementById('json-out').textContent = JSON.stringify(obj, null, 2);
+    }
+
+    function removePoint(id) {
+      points = points.filter(p => p.id !== id);
+      renderDots();
+      renderLog();
+      renderJSON();
+    }
+
+    function clearAll() {
+      points = [];
+      renderDots();
+      renderLog();
+      renderJSON();
+    }
+
+    function copyJSON() {
+      const obj = {};
+      points.forEach(p => { obj[p.label] = { x: p.x, y: p.y }; });
+      navigator.clipboard.writeText(JSON.stringify(obj, null, 2))
+        .then(() => alert('JSON copied!'));
+    }
+
+    // Initial render
+    renderDots();
+  </script>
+</body>
+</html>

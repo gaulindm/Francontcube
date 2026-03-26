@@ -1,0 +1,49 @@
+{% extends "main/partials/base.html" %}
+{% load static %}
+
+{% block extra_head %}
+
+{% endblock %}
+
+{% block content %}
+
+<nav aria-label="breadcrumb" class="mb-3">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item"><a href="{% url 'main:puzzles_home' %}">Puzzles</a></li>
+    <li class="breadcrumb-item"><a href="{% url 'main:2x2_home' %}">2×2</a></li>
+    <li class="breadcrumb-item active">{{ method.name }}</li>
+  </ol>
+</nav>
+
+<h1 class="h2 fw-bold mb-1">{{ method.name }}</h1>
+<p class="text-muted mb-4">Sélectionne une étape pour voir les algorithmes.</p>
+
+<div class="row g-3">
+  {% for step in method.steps %}
+  <div class="col-12 col-md-4">
+    <a href="{% url 'main:2x2_step' method_slug step.slug %}"
+       class="card h-100 shadow-sm text-decoration-none text-dark hover-lift">
+      <div class="card-body text-center py-4">
+        <i class="{{ step.icon }} fs-1 text-primary mb-3 d-block"></i>
+        <h5 class="fw-semibold mb-1">{{ step.name }}</h5>
+        <p class="text-muted small mb-0">{{ step.desc }}</p>
+      </div>
+      <div class="card-footer bg-transparent border-0 text-center pb-3">
+        <span class="btn btn-outline-primary btn-sm">Voir les cas</span>
+      </div>
+    </a>
+  </div>
+  {% endfor %}
+</div>
+
+<style>
+  .hover-lift {
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+  }
+  .hover-lift:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 .5rem 1rem rgba(0,0,0,.1) !important;
+  }
+</style>
+
+{% endblock %}

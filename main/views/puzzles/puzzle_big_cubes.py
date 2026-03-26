@@ -1,15 +1,45 @@
 """
-francontcube/views/puzzles/puzzle_4x4.py
-francontcube/views/puzzles/puzzle_5x5.py
-
-Les deux utilisent la méthode Reduction — structure identique.
-Un seul fichier pour éviter la duplication, paramétré par puzzle_type.
+main/views/puzzles/puzzle_big_cubes.py
+Vues pour le 4x4 et 5x5 — méthode Reduction.
 """
 
 from django.shortcuts import render
 from django.http import Http404
 from cube.models import PuzzleCase
 
+
+# ── Stickering par étape ───────────────────────────────────────────────────
+# type 'preset'  → experimental-stickering="value"
+# type 'orbits'  → experimental-stickering-mask-orbits="value"
+
+STICKERING = {
+    '4x4': {
+        'centers':   {'type': 'preset', 'value': 'centers-only'},
+        'edges':     {'type': 'preset', 'value': 'ELS'},
+        'parity':    {'type': 'preset', 'value': 'full'},
+        '3x3-phase': {'type': 'preset', 'value': 'full'},
+    },
+    '5x5': {
+        'centers':      {'type': 'preset', 'value': 'centers-only'},
+        'edges':        {'type': 'orbits', 'value': 'CORNERS:dim,WINGS:regular,EDGES:regular,CENTERS:regular'},
+        'last-centers': {'type': 'preset', 'value': 'centers-only'},
+        'last-edges':   {'type': 'orbits', 'value': 'CORNERS:dim,WINGS:regular,EDGES:regular,X_CENTERS:dim,T_CENTERS:dim'},
+        'parity':       {'type': 'preset', 'value': 'full'},
+        '3x3-phase':    {'type': 'preset', 'value': 'full'},
+    },
+}
+
+# ── Template par étape ─────────────────────────────────────────────────────
+
+STEP_TEMPLATES = {
+    'notation':     'main/puzzles/big_cube/notation_4x4.html',
+    'centers':      'main/puzzles/big_cube/centers.html',
+    'edges':        'main/puzzles/big_cube/edges.html',
+    'last-centers': 'main/puzzles/big_cube/centers.html',   # même logique que centers
+    'last-edges':   'main/puzzles/big_cube/last_edges.html',
+    'parity':       'main/puzzles/big_cube/parity.html',       # générique
+    '3x3-phase':    'main/puzzles/big_cube/step.html',       # générique
+}
 
 # ── Catalogues des étapes ──────────────────────────────────────────────────
 
@@ -24,7 +54,7 @@ STEPS_4X4 = [
     {
         'slug':  'edges',
         'name':  'Étape 2 — Arêtes',
-        'desc':  'Regrouper les 12 paires d\'arêtes (edge pairing).',
+        'desc':  "Regrouper les 12 paires d'arêtes (edge pairing).",
         'icon':  'bi-arrows-collapse',
         'tip':   'Garde toujours une arête libre pour le wing flip.',
     },
@@ -55,16 +85,16 @@ STEPS_5X5 = [
     {
         'slug':  'edges',
         'name':  'Étape 2 — Arêtes',
-        'desc':  'Regrouper les 12 trios d\'arêtes.',
+        'desc':  "Regrouper les 12 trios d'arêtes.",
         'icon':  'bi-arrows-collapse',
         'tip':   'Les 8 premières arêtes librement, les 4 dernières avec soin.',
     },
     {
         'slug':  'last-centers',
         'name':  'Étape 3 — Derniers centres',
-        'desc':  'Corriger les centres perturbés pendant l\'étape arêtes.',
+        'desc':  "Corriger les centres perturbés pendant l'étape arêtes.",
         'icon':  'bi-arrow-clockwise',
-        'tip':   'Souvent inutile si tu es prudent à l\'étape 2.',
+        'tip':   "Souvent inutile si tu es prudent à l'étape 2.",
     },
     {
         'slug':  'last-edges',
@@ -91,19 +121,25 @@ STEPS_5X5 = [
 
 PUZZLE_CONFIGS = {
     '4x4': {
-        'name':   '4×4 — Revenge',
-        'method': 'reduction',
-        'steps':  STEPS_4X4,
+        'name':          '4×4 — Revenge',
+        'method':        'reduction',
+        'steps':         STEPS_4X4,
+        'step_url':      'main:4x4_step',
+        'home_url':      'main:4x4_home',
+        'cubing_puzzle': '4x4x4',
     },
     '5x5': {
-        'name':   '5×5 — Professor',
-        'method': 'reduction',
-        'steps':  STEPS_5X5,
+        'name':          '5×5 — Professor',
+        'method':        'reduction',
+        'steps':         STEPS_5X5,
+        'step_url':      'main:5x5_step',
+        'home_url':      'main:5x5_home',
+        'cubing_puzzle': '5x5x5',
     },
 }
 
 
-# ── Vues réutilisables ─────────────────────────────────────────────────────
+# ── Vues ──────────────────────────────────────────────────────────────────
 
 def _get_config(puzzle_type):
     config = PUZZLE_CONFIGS.get(puzzle_type)
@@ -113,27 +149,22 @@ def _get_config(puzzle_type):
 
 
 def puzzle_big_home(request, puzzle_type):
-    """
-    Page d'accueil d'un grand cube (4x4 ou 5x5).
-    Affiche toutes les étapes de la méthode Reduction.
-    """
+    """Page d'accueil d'un grand cube (4x4 ou 5x5)."""
     config = _get_config(puzzle_type)
-    return render(request, 'francontcube/puzzles/big_cube/home.html', {
-        'config':      config,
-        'puzzle_type': puzzle_type,
+    return render(request, 'main/puzzles/big_cube/home.html', {
+        'config':        config,
+        'puzzle_type':   puzzle_type,
+        'step_url':      config['step_url'],
+        'cubing_puzzle': config['cubing_puzzle'],
     })
 
 
 def puzzle_big_step(request, puzzle_type, step):
-    """
-    Page d'une étape spécifique (4x4 ou 5x5).
-    Ex: /puzzles/4x4/parity/
-    """
+    """Page d'une étape spécifique (4x4 ou 5x5)."""
     config = _get_config(puzzle_type)
 
     step_info = next(
-        (s for s in config['steps'] if s['slug'] == step),
-        None
+        (s for s in config['steps'] if s['slug'] == step), None
     )
     if not step_info:
         raise Http404(f"Étape inconnue : {step}")
@@ -144,23 +175,30 @@ def puzzle_big_step(request, puzzle_type, step):
         category=step,
     ).order_by('step_number')
 
-    # Étapes précédente et suivante pour la navigation
     all_slugs = [s['slug'] for s in config['steps']]
     current_index = all_slugs.index(step)
     prev_step = config['steps'][current_index - 1] if current_index > 0 else None
     next_step = config['steps'][current_index + 1] if current_index < len(all_slugs) - 1 else None
 
-    return render(request, 'francontcube/puzzles/big_cube/step.html', {
-        'config':      config,
-        'step':        step_info,
-        'cases':       cases,
-        'puzzle_type': puzzle_type,
-        'prev_step':   prev_step,
-        'next_step':   next_step,
+    # Template et stickering dynamiques selon l'étape
+    template   = STEP_TEMPLATES.get(step, 'main/puzzles/big_cube/step.html')
+    stickering = STICKERING.get(puzzle_type, {}).get(step, {'type': 'preset', 'value': 'full'})
+
+    return render(request, template, {
+        'config':        config,
+        'step':          step_info,
+        'cases':         cases,
+        'puzzle_type':   puzzle_type,
+        'prev_step':     prev_step,
+        'next_step':     next_step,
+        'step_url':      config['step_url'],
+        'home_url':      config['home_url'],
+        'cubing_puzzle': config['cubing_puzzle'],
+        'stickering':    stickering,  # {'type': 'preset'|'orbits', 'value': '...'}
     })
 
 
-# ── Raccourcis pour les URLs nommées ──────────────────────────────────────
+# ── Raccourcis ────────────────────────────────────────────────────────────
 
 def puzzle_4x4_home(request):
     return puzzle_big_home(request, '4x4')

@@ -1,0 +1,34 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8"/>
+  <title>2×2×2 Cube</title>
+  <style>
+    body { margin: 0; padding: 20px; background: #fff; }
+    .s { stroke: #111; stroke-width: 2; stroke-linejoin: round; fill: #ccc; }
+  </style>
+</head>
+<body>
+<svg width="560" height="490" viewBox="60 30 460 445" xmlns="http://www.w3.org/2000/svg">
+
+  <!-- FRONT: TL=(96,109) TR=(384,154) BR=(379,458) BL=(109,397) — bilinear interpolated -->
+  <polygon class="s" points="96.0,109.0 240.0,131.5 242.0,279.5 102.5,253.0"/>
+  <polygon class="s" points="240.0,131.5 384.0,154.0 381.5,306.0 242.0,279.5"/>
+  <polygon class="s" points="102.5,253.0 242.0,279.5 244.0,427.5 109.0,397.0"/>
+  <polygon class="s" points="242.0,279.5 381.5,306.0 379.0,458.0 244.0,427.5"/>
+
+  <!-- TOP: TL=(246,41) TR=(499,73) BR=(384,154) BL=(96,109) — bilinear interpolated -->
+  <polygon class="s" points="246.0,41.0 372.5,57.0 306.2,94.2 171.0,75.0"/>
+  <polygon class="s" points="372.5,57.0 499.0,73.0 441.5,113.5 306.2,94.2"/>
+  <polygon class="s" points="171.0,75.0 306.2,94.2 240.0,131.5 96.0,109.0"/>
+  <polygon class="s" points="306.2,94.2 441.5,113.5 384.0,154.0 240.0,131.5"/>
+
+  <!-- RIGHT: TL=(384,154) TR=(499,73) BR=(493,342) BL=(379,458) — bilinear interpolated -->
+  <polygon class="s" points="384.0,154.0 441.5,113.5 438.8,256.8 381.5,306.0"/>
+  <polygon class="s" points="441.5,113.5 499.0,73.0 496.0,207.5 438.8,256.8"/>
+  <polygon class="s" points="381.5,306.0 438.8,256.8 436.0,400.0 379.0,458.0"/>
+  <polygon class="s" points="438.8,256.8 496.0,207.5 493.0,342.0 436.0,400.0"/>
+
+</svg>
+</body>
+</html>

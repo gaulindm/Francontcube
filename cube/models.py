@@ -22,6 +22,17 @@ class PuzzleCase(models.Model):
         ('difficile', 'Difficile'),
     ]
 
+    SOLVED_4x4 = (
+        'U' * 16 +   # 0–15
+        'R' * 16 +   # 16–31
+        'F' * 16 +   # 32–47
+        'D' * 16 +   # 48–63
+        'L' * 16 +   # 64–79
+        'B' * 16     # 80–95
+    )
+
+
+
     puzzle_type = models.CharField(max_length=10, choices=PUZZLE_CHOICES)
     method      = models.CharField(max_length=50)   # 'ortega', 'reduction', 'cfop'...
     category    = models.CharField(max_length=50, blank=True)  # 'pbl', 'centers', 'edges'...
@@ -77,6 +88,21 @@ class PuzzleCase(models.Model):
             else:
                 inverted.append(m + "'")
         return ' '.join(inverted)
+
+    def get_facelet_string(self):
+        """
+        Return a 96-char facelet string for cubing SVG display.
+        Priority:
+        1. json_state if it's a flat 96-char string
+        2. SOLVED_4x4 as fallback
+        Used by _cube_4x4_svg.html via data-state attribute.
+        """
+        if self.puzzle_type != '4x4':
+            return ''
+        # If you store state as a plain string in a TextField, return it directly.
+        # If you later store it as JSON, serialize here.
+        return getattr(self, 'facelet_state', '') or self.SOLVED_4x4
+
 
     def get_setup_alg(self):
         """

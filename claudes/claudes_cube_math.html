@@ -1,0 +1,213 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8"/>
+  <title>Cube Sticker Math — Bilinear Interpolation</title>
+  <style>
+    body { font-family: Georgia, serif; max-width: 820px; margin: 40px auto; padding: 0 20px; color: #222; background: #fff; line-height: 1.7; }
+    h1 { font-size: 24px; border-bottom: 2px solid #222; padding-bottom: 8px; }
+    h2 { font-size: 18px; margin-top: 36px; color: #333; }
+    h3 { font-size: 15px; margin-top: 24px; color: #555; }
+    code { background: #f4f4f4; padding: 2px 6px; border-radius: 3px; font-family: 'Courier New', monospace; font-size: 14px; }
+    pre { background: #f4f4f4; padding: 16px; border-radius: 6px; overflow-x: auto; font-family: 'Courier New', monospace; font-size: 13px; line-height: 1.6; border-left: 3px solid #888; }
+    .formula { background: #fffbe6; border: 1px solid #e6d800; border-radius: 6px; padding: 14px 18px; margin: 16px 0; font-family: 'Courier New', monospace; font-size: 14px; }
+    .note { background: #e8f4fd; border-left: 3px solid #378ADD; padding: 10px 16px; margin: 16px 0; font-size: 14px; }
+    .warn { background: #fff3e0; border-left: 3px solid #e67e00; padding: 10px 16px; margin: 16px 0; font-size: 14px; }
+    table { border-collapse: collapse; width: 100%; margin: 16px 0; font-size: 14px; }
+    td, th { border: 1px solid #ccc; padding: 8px 12px; text-align: left; }
+    th { background: #f0f0f0; font-weight: bold; }
+    svg { display: block; margin: 16px auto; }
+  </style>
+</head>
+<body>
+
+<h1>Cube Sticker Math — Bilinear Interpolation</h1>
+
+<p>This document explains how to divide any perspective quad (a cube face) into an N×N
+grid of perfectly flat sticker polygons, with no bowing, no bulging, and no gaps between faces.</p>
+
+<!-- ============================================================ -->
+<h2>1. The Problem with Simple Approaches</h2>
+
+<p>A cube face in a perspective or 3D-rendered image is a <strong>general quadrilateral</strong> —
+four corners that do not form a perfect parallelogram. This causes two naive approaches to fail:</p>
+
+<table>
+  <tr><th>Approach</th><th>What goes wrong</th></tr>
+  <tr><td>dx/dy step vectors</td><td>Vectors computed per face drift apart at shared edges — faces don't align</td></tr>
+  <tr><td>Midpoint of diagonal midpoints</td><td>Only correct for parallelograms. On a trapezoid the "center" sinks or bulges off the face plane</td></tr>
+</table>
+
+<p>The correct solution is <strong>bilinear interpolation</strong> — the standard technique used in
+texture mapping, image warping, and 3D graphics to place points inside a quad.</p>
+
+<!-- ============================================================ -->
+<h2>2. The Four Cube Corners</h2>
+
+<p>Label the four corners of any face as:</p>
+
+<svg width="300" height="200" viewBox="0 0 300 200">
+  <polygon points="30,160 220,180 260,30 80,10" fill="#f9f9e8" stroke="#888" stroke-width="1.5"/>
+  <circle cx="30"  cy="160" r="5" fill="#333"/>
+  <circle cx="220" cy="180" r="5" fill="#333"/>
+  <circle cx="260" cy="30"  r="5" fill="#333"/>
+  <circle cx="80"  cy="10"  r="5" fill="#333"/>
+  <text x="4"   y="175" font-family="monospace" font-size="13" fill="#c00">BL</text>
+  <text x="226" y="178" font-family="monospace" font-size="13" fill="#c00">BR</text>
+  <text x="265" y="28"  font-family="monospace" font-size="13" fill="#c00">TR</text>
+  <text x="55"  y="10"  font-family="monospace" font-size="13" fill="#c00">TL</text>
+  <text x="130" y="100" font-family="Georgia,serif" font-size="12" fill="#555" text-anchor="middle">perspective quad</text>
+</svg>
+
+<p>These four corners are the <em>only</em> inputs you need. Everything else is derived.</p>
+
+<!-- ============================================================ -->
+<h2>3. The Bilinear Interpolation Formula</h2>
+
+<p>For parameters <code>u</code> (0→1, left to right) and <code>v</code> (0→1, top to bottom),
+any point inside the quad is:</p>
+
+<div class="formula">
+P(u, v) = (1-v) × [ (1-u)×TL + u×TR ]<br>
+         +    v  × [ (1-u)×BL + u×BR ]
+</div>
+
+<p>Applied separately to x and y:</p>
+
+<div class="formula">
+x = (1-v) × ((1-u)×TL.x + u×TR.x)  +  v × ((1-u)×BL.x + u×BR.x)<br>
+y = (1-v) × ((1-u)×TL.y + u×TR.y)  +  v × ((1-u)×BL.y + u×BR.y)
+</div>
+
+<p>You can think of it as: <em>interpolate along the top edge, interpolate along the bottom edge,
+then interpolate between those two results.</em></p>
+
+<!-- ============================================================ -->
+<h2>4. Generating an N×N Grid</h2>
+
+<p>For a grid of N×N stickers, each sticker at position <code>[row, col]</code>
+(0-indexed) has its four corners at:</p>
+
+<table>
+  <tr><th>Corner</th><th>u</th><th>v</th></tr>
+  <tr><td>Top-left</td>     <td>col / N</td>      <td>row / N</td></tr>
+  <tr><td>Top-right</td>    <td>(col+1) / N</td>  <td>row / N</td></tr>
+  <tr><td>Bottom-right</td> <td>(col+1) / N</td>  <td>(row+1) / N</td></tr>
+  <tr><td>Bottom-left</td>  <td>col / N</td>       <td>(row+1) / N</td></tr>
+</table>
+
+<div class="note">
+  Changing N is the <em>only</em> thing needed to go from a 2×2 to a 4×4 to a 5×5 cube.
+  The four corner coordinates never change.
+</div>
+
+<!-- ============================================================ -->
+<h2>5. Why Shared Edges Always Align</h2>
+
+<p>When two faces share an edge, they share the same two corner points on that edge.
+Because every sticker corner is computed purely from those shared corners via the same formula,
+the edge points are <em>identical floating-point values</em> — not approximations.
+Gaps are geometrically impossible.</p>
+
+<p>Example — the Front face top edge and the Top face bottom edge both pass through
+<code>front(u, 0)</code> and <code>top(u, 1)</code>. Since both faces share the same
+two corner points at that edge, every interpolated point is identical.</p>
+
+<!-- ============================================================ -->
+<h2>6. The Python Generator</h2>
+
+<p>Drop in your 8 cube corners and change <code>N</code> to any size:</p>
+
+<pre>
+def bilerp(TL, TR, BL, BR, u, v):
+    x = (1-v)*((1-u)*TL[0] + u*TR[0]) + v*((1-u)*BL[0] + u*BR[0])
+    y = (1-v)*((1-u)*TL[1] + u*TR[1]) + v*((1-u)*BL[1] + u*BR[1])
+    return (round(x, 1), round(y, 1))
+
+# ── Your 8 cube corners ──────────────────────────────────────────
+# Label:  A=top-back-left   B=top-back-right
+#         C=top-front-left  D=top-front-right
+#         E=bot-front-left  G=bot-front-right  H=bot-back-right
+A=(246,41);  B=(499,73)
+C=(96,109);  D=(384,154)
+E=(109,397); G=(379,458);  H=(493,342)
+
+# ── Face functions (TL, TR, BL, BR per face) ────────────────────
+def front(u,v): return bilerp(C, D, E, G, u, v)
+def top(u,v):   return bilerp(A, B, C, D, u, v)
+def right(u,v): return bilerp(D, B, G, H, u, v)
+
+# ── Grid size: change this one number ───────────────────────────
+N = 4   # 2=2x2  3=3x3  4=4x4  5=5x5  etc.
+
+# ── Generate SVG polygons ────────────────────────────────────────
+def pt(p):        return f"{p[0]},{p[1]}"
+def poly(a,b,c,d): return f"{pt(a)} {pt(b)} {pt(c)} {pt(d)}"
+
+for face_name, face_fn in [("FRONT", front), ("TOP", top), ("RIGHT", right)]:
+    print(f"&lt;!-- {face_name} --&gt;")
+    for row in range(N):
+        for col in range(N):
+            tl = face_fn( col/N,     row/N    )
+            tr = face_fn((col+1)/N,  row/N    )
+            br = face_fn((col+1)/N, (row+1)/N )
+            bl = face_fn( col/N,    (row+1)/N )
+            print(f'&lt;polygon points="{poly(tl,tr,br,bl)}"/&gt;')
+    print()
+</pre>
+
+<!-- ============================================================ -->
+<h2>7. The 8 Corner Points for This Specific Cube</h2>
+
+<p>These were traced from the reference image using the calibration tool:</p>
+
+<table>
+  <tr><th>Label</th><th>Position</th><th>Description</th></tr>
+  <tr><td>A</td><td>(246, 41)</td><td>Top-back-left</td></tr>
+  <tr><td>B</td><td>(499, 73)</td><td>Top-back-right</td></tr>
+  <tr><td>C</td><td>(96, 109)</td><td>Top-front-left</td></tr>
+  <tr><td>D</td><td>(384, 154)</td><td>Top-front-right</td></tr>
+  <tr><td>E</td><td>(109, 397)</td><td>Bottom-front-left</td></tr>
+  <tr><td>G</td><td>(379, 458)</td><td>Bottom-front-right</td></tr>
+  <tr><td>H</td><td>(493, 342)</td><td>Bottom-back-right</td></tr>
+</table>
+
+<div class="note">
+  To reuse this math for a different cube angle or image, you only need to
+  re-trace these 7 corner points. The formula and generator are unchanged.
+</div>
+
+<!-- ============================================================ -->
+<h2>8. Face Corner Assignments</h2>
+
+<table>
+  <tr><th>Face</th><th>TL</th><th>TR</th><th>BL</th><th>BR</th></tr>
+  <tr><td>Front (F)</td><td>C</td><td>D</td><td>E</td><td>G</td></tr>
+  <tr><td>Top (U)</td>  <td>A</td><td>B</td><td>C</td><td>D</td></tr>
+  <tr><td>Right (R)</td><td>D</td><td>B</td><td>G</td><td>H</td></tr>
+</table>
+
+<div class="warn">
+  <strong>Direction matters.</strong> The u-axis on the Right face runs front→back (D→B),
+  which is the reverse of the Top face's v-axis (also runs front→back, C→A reversed).
+  This is why shared edges verify correctly only when you account for traversal direction.
+</div>
+
+<!-- ============================================================ -->
+<h2>9. Extending to Hidden Faces</h2>
+
+<p>The same formula applies to the three hidden faces. Their corners are either
+known cube corners or can be inferred by continuing the geometry:</p>
+
+<table>
+  <tr><th>Face</th><th>TL</th><th>TR</th><th>BL</th><th>BR</th></tr>
+  <tr><td>Left (L)</td>  <td>A</td><td>C</td><td>infer*</td><td>E</td></tr>
+  <tr><td>Bottom (D)</td><td>E</td><td>G</td><td>infer*</td><td>infer*</td></tr>
+  <tr><td>Back (B)</td>  <td>A</td><td>B</td><td>infer*</td><td>infer*</td></tr>
+</table>
+
+<p>*Inferred corner = known corner + down-vector, where <code>down = E - C</code>
+(the vertical step of the front face).</p>
+
+</body>
+</html>

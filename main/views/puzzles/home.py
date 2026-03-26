@@ -14,7 +14,7 @@ PUZZLES = [
         'name':        '2×2 — Pocket Cube',
         'desc':        'Le petit frère du 3×3. Apprends la méthode Ortega.',
         'icon':        'bi-grid',
-        'url':         '/francontcube/puzzles/2x2/',
+        'url':         '/main/puzzles/2x2/',
         'available':   True,
     },
     {
@@ -22,7 +22,7 @@ PUZZLES = [
         'name':        '4×4 — Revenge',
         'desc':        'Méthode Reduction : centres, arêtes, puis phase 3×3.',
         'icon':        'bi-grid-fill',
-        'url':         '/francontcube/puzzles/4x4/',
+        'url':         '/main/puzzles/4x4/',
         'available':   True,
     },
     {
@@ -30,7 +30,7 @@ PUZZLES = [
         'name':        '5×5 — Professor',
         'desc':        'Méthode Reduction étendue avec gestion de la parité.',
         'icon':        'bi-grid-3x3-gap-fill',
-        'url':         '/francontcube/puzzles/5x5/',
+        'url':         '/main/puzzles/5x5/',
         'available':   True,
     },
 ]
@@ -38,6 +38,6 @@ PUZZLES = [
 
 def puzzles_home(request):
     """Page d'accueil listant tous les puzzles disponibles."""
-    return render(request, 'francontcube/puzzles/home.html', {
+    return render(request, 'main/puzzles/home.html', {
         'puzzles': PUZZLES,
     })

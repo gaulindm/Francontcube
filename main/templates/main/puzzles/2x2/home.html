@@ -1,0 +1,69 @@
+{% extends "main/partials/base.html" %}
+{% load static %}
+
+{% block extra_head %}
+
+{% endblock %}
+
+{% block content %}
+
+<div class="row mb-4 align-items-center">
+  <div class="col">
+    <nav aria-label="breadcrumb">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item">
+          <a href="{% url 'main:puzzles_home' %}">Puzzles</a>
+        </li>
+        <li class="breadcrumb-item active">2×2</li>
+      </ol>
+    </nav>
+    <h1 class="h2 fw-bold">2×2 — Pocket Cube</h1>
+    <p class="text-muted">Choisis une méthode pour apprendre à résoudre le 2×2.</p>
+  </div>
+  <div class="col-auto d-none d-md-block">
+    <twisty-player
+      puzzle="2x2x2"
+      visualization="3D"
+      background="none"
+      control-panel="none"
+      hint-facelets="none"
+      camera-longitude="-30"
+      camera-latitude="25"
+      style="width:120px;height:120px;">
+    </twisty-player>
+  </div>
+</div>
+
+<div class="row g-4">
+  {% for method_slug, method in methods.items %}
+  <div class="col-12 col-md-6">
+    <div class="card h-100 shadow-sm">
+      <div class="card-body">
+        <h3 class="h5 fw-bold mb-1">{{ method.name }}</h3>
+        <p class="text-muted small mb-3">{{ method.steps|length }} étapes</p>
+
+        {# Liste des étapes #}
+        <ol class="list-group list-group-numbered list-group-flush mb-3">
+          {% for step in method.steps %}
+          <li class="list-group-item d-flex align-items-center gap-2 px-0">
+            <i class="{{ step.icon }} text-primary"></i>
+            <div>
+              <div class="fw-semibold small">{{ step.name }}</div>
+              <div class="text-muted" style="font-size:.8rem">{{ step.desc }}</div>
+            </div>
+          </li>
+          {% endfor %}
+        </ol>
+      </div>
+      <div class="card-footer bg-transparent border-0 pb-3">
+        <a href="{% url 'main:2x2_method' method_slug %}"
+           class="btn btn-primary w-100">
+          Commencer — {{ method.name }}
+        </a>
+      </div>
+    </div>
+  </div>
+  {% endfor %}
+</div>
+
+{% endblock %}

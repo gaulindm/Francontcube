@@ -1,0 +1,513 @@
+<!-- cube_svg_4x4x4_RL.html - Programmatically generated 4x4x4 cube SVG templates -->
+<!-- Generated from the 3x3x3 original by reverse-engineering the isometric projection -->
+
+<script>
+/*
+  ISOMETRIC PROJECTION MATH
+  =========================
+  The cube is rendered in isometric-like projection with three visible faces:
+    U (top), F (front), R (right)   — right-hand orientation
+    U (top), F (front), L (left)    — left-hand orientation (mirrored)
+
+  Grid basis vectors (derived from the 3x3x3 source):
+  
+  RIGHT-HAND:
+    Along U-face rows (left→right):  dU_col  = (+49.117, +4.690)   [≈ step across U top]
+    Along U-face cols (top→bottom):  dU_row  = (-26.533, +23.906)  [≈ step down U top]
+    Along F-face rows (left→right):  dF_col  = (+54.533, +7.267)   [step across F front]
+    Along F-face cols (top→bottom):  dF_row  = (+6.222, +53.611)   [step down F front]
+    Along R-face rows (left→right):  dR_col  = (+21.756, +26.522)  [step across R right, going up-right]
+    Along R-face cols (top→bottom):  dR_row  = (+2.800, +57.433)   [step down R right]
+
+  Origins (top-left corner of the top-left sticker in each face):
+    U origin: (209.148, 42.905)
+    F origin: (124.100, 112.000)
+    R origin: (287.700, 133.800)  [top-left of R face]
+
+  For 4x4: same origins, same step vectors, just 4 stickers instead of 3 per row/col.
+  The sticker is a parallelogram: given top-left corner P, the 4 corners are:
+    P, P+dCol, P+dCol+dRow, P+dRow
+*/
+
+(function() {
+
+  // ── RIGHT-HAND BASIS ──────────────────────────────────────────────────────
+  // Derived from 3x3 coordinates (averaging actual differences for robustness)
+  const N = 4; // grid size
+
+  // U face
+  const U_origin = [209.148, 42.905];
+  const U_dCol   = [49.117, 4.690];    // step right across a row
+  const U_dRow   = [-26.533, 23.906];  // step down a column (toward viewer)
+
+  // F face
+  const F_origin = [124.100, 112.000];
+  const F_dCol   = [54.533, 7.267];    // step right
+  const F_dRow   = [6.222,  53.611];   // step down
+
+  // R face (right side, going up-right then down)
+  const R_origin = [287.700, 133.800];
+  const R_dCol   = [22.933, -26.633];  // step up-right (col index increases going up)
+  const R_dRow   = [2.800,   57.433];  // step down
+
+  // Hidden faces use the same grid but offset behind the cube
+  // B face (behind U/top, hidden)
+  const B_origin  = [229.14, 22.905];
+  const B_dCol    = [49.119, 4.686];
+  const B_dRow    = [0.469,  54.675];
+
+  // L face (left side, hidden)
+  const L_origin  = [150.799, 45.940]; // sticker-L-0-0 top-left
+  const L_dCol    = [-28.35,  23.032]; // going left-down (col increases = more left)
+  const L_dRow    = [6.001,   51.292]; // step down
+
+  // D face (bottom, hidden)
+  const D_origin = [214.3, 210.8];
+  const D_dCol   = [51.867, 9.733];
+  const D_dRow   = [-19.4,  28.856];
+
+  // ── LEFT-HAND (MIRRORED) BASIS ────────────────────────────────────────────
+  // Mirror: x → 500 - x  (viewBox width = 500)
+  function mirrorX(pts) {
+    return pts.map(([x, y]) => [500 - x, y]);
+  }
+
+  // ── HELPERS ───────────────────────────────────────────────────────────────
+  function add(a, b) { return [a[0]+b[0], a[1]+b[1]]; }
+  function scale(v, s) { return [v[0]*s, v[1]*s]; }
+
+  function parallelogram(origin, dCol, dRow, c, r) {
+    // Returns 4 corners of sticker at grid position (col=c, row=r)
+    const TL = add(origin, add(scale(dCol, c), scale(dRow, r)));
+    const TR = add(TL, dCol);
+    const BR = add(TR, dRow);
+    const BL = add(TL, dRow);
+    return [TL, TR, BR, BL];
+  }
+
+  function fmt(pts) {
+    return pts.map(([x,y]) => `${x.toFixed(3)},${y.toFixed(3)}`).join(' ');
+  }
+
+  function makePolygon(id, cls, pts) {
+    return `<polygon id="${id}" class="${cls}" points="${fmt(pts)}" />`;
+  }
+
+  // ── FACE GENERATORS ──────────────────────────────────────────────────────
+  function genFaceU(n, prefix='', hidden=false) {
+    const cls = hidden ? 'sticker-hidden' : 'sticker';
+    const lines = [];
+    for (let r = 0; r < n; r++)
+      for (let c = 0; c < n; c++)
+        lines.push(makePolygon(`sticker-${prefix}U-${r}-${c}`, cls,
+          parallelogram(U_origin, U_dCol, U_dRow, c, r)));
+    return lines.join('\n          ');
+  }
+
+  function genFaceF(n, prefix='', hidden=false) {
+    const cls = hidden ? 'sticker-hidden' : 'sticker';
+    const lines = [];
+    for (let r = 0; r < n; r++)
+      for (let c = 0; c < n; c++)
+        lines.push(makePolygon(`sticker-${prefix}F-${r}-${c}`, cls,
+          parallelogram(F_origin, F_dCol, F_dRow, c, r)));
+    return lines.join('\n          ');
+  }
+
+  function genFaceR(n, prefix='', hidden=false) {
+    const cls = hidden ? 'sticker-hidden' : 'sticker';
+    const lines = [];
+    // R face: col index goes up-right, so c=0 is at left (= rightmost in world)
+    // In original: sticker-R-row-col where col 0 = leftmost strip (adjacent to F)
+    for (let r = 0; r < n; r++)
+      for (let c = 0; c < n; c++)
+        lines.push(makePolygon(`sticker-${prefix}R-${r}-${c}`, cls,
+          parallelogram(R_origin, R_dCol, R_dRow, c, r)));
+    return lines.join('\n          ');
+  }
+
+  function genFaceB(n, prefix='', hidden=true) {
+    const cls = hidden ? 'sticker-hidden' : 'sticker';
+    const lines = [];
+    for (let r = 0; r < n; r++)
+      for (let c = 0; c < n; c++)
+        lines.push(makePolygon(`sticker-${prefix}B-${r}-${c}`, cls,
+          parallelogram(B_origin, B_dCol, B_dRow, c, r)));
+    return lines.join('\n          ');
+  }
+
+  function genFaceL(n, prefix='', hidden=true) {
+    const cls = hidden ? 'sticker-hidden' : 'sticker';
+    const lines = [];
+    for (let r = 0; r < n; r++)
+      for (let c = 0; c < n; c++)
+        lines.push(makePolygon(`sticker-${prefix}L-${r}-${c}`, cls,
+          parallelogram(L_origin, L_dCol, L_dRow, c, r)));
+    return lines.join('\n          ');
+  }
+
+  function genFaceD(n, prefix='', hidden=true) {
+    const cls = hidden ? 'sticker-hidden' : 'sticker';
+    const lines = [];
+    for (let r = 0; r < n; r++)
+      for (let c = 0; c < n; c++)
+        lines.push(makePolygon(`sticker-${prefix}D-${r}-${c}`, cls,
+          parallelogram(D_origin, D_dCol, D_dRow, c, r)));
+    return lines.join('\n          ');
+  }
+
+  // ── LEFT-HAND FACE GENERATORS (mirror all X coords) ──────────────────────
+  function mirrorFace(genFn, n, prefix, hidden) {
+    // We generate the points, then mirror them
+    const dummy = { lines: [] };
+
+    function makePolygonMirror(id, cls, pts) {
+      return makePolygon(id, cls, mirrorX(pts));
+    }
+
+    const cls = hidden ? 'sticker-hidden' : 'sticker';
+    return null; // handled below via per-face mirror origins
+  }
+
+  // LEFT-HAND mirrored origins (x → 500-x for all basis)
+  function mirrorBasis(origin, dCol, dRow) {
+    const mo = [500 - origin[0], origin[1]];
+    const mdCol = [-dCol[0], dCol[1]];
+    const mdRow = [-dRow[0], dRow[1]];
+    return { mo, mdCol, mdRow };
+  }
+
+  function genFaceMirrored(name, origin, dCol, dRow, n, prefix='', hidden=false) {
+    const cls = hidden ? 'sticker-hidden' : 'sticker';
+    const { mo, mdCol, mdRow } = mirrorBasis(origin, dCol, dRow);
+    const lines = [];
+    for (let r = 0; r < n; r++)
+      for (let c = 0; c < n; c++)
+        lines.push(makePolygon(`sticker-${prefix}${name}-${r}-${c}`, cls,
+          parallelogram(mo, mdCol, mdRow, c, r)));
+    return lines.join('\n          ');
+  }
+
+  // ── BUILD THE HTML ────────────────────────────────────────────────────────
+  function buildRightTemplate(n) {
+    return `<!-- RIGHT-HAND CUBE (${n}x${n}x${n}) -->
+<template id="cube-template-right">
+  <div class="cube-wrapper">
+    <svg id="cube-svg" width="550" height="460" viewBox="0 0 500 360"
+         xmlns="http://www.w3.org/2000/svg" role="img"
+         aria-label="Rubik's cube isometric view (right-hand orientation, ${n}x${n}x${n})">
+
+      <style>
+        .sticker {
+          stroke: #000;
+          stroke-width: 1.5;
+          stroke-linejoin: round;
+        }
+        .sticker-hidden {
+          stroke: #DDDDDD;
+          stroke-width: 3;
+          stroke-linejoin: round;
+        }
+      </style>
+      <polygon points="0,0 500,0 500,360 0,360" style="fill:none" />
+
+      <g id="cube">
+
+        <!-- ===================== -->
+        <!--  B Face (hidden)      -->
+        <!-- ===================== -->
+        <g id="face-B">
+          ${genFaceB(n)}
+        </g>
+
+        <!-- ===================== -->
+        <!--  L Face (hidden)      -->
+        <!-- ===================== -->
+        <g id="face-L">
+          ${genFaceL(n)}
+        </g>
+
+        <!-- ===================== -->
+        <!--  D Face (hidden)      -->
+        <!-- ===================== -->
+        <g id="face-D">
+          ${genFaceD(n)}
+        </g>
+
+        <!-- ===================== -->
+        <!--  F (Front) Face       -->
+        <!-- ===================== -->
+        <g id="face-F">
+          ${genFaceF(n)}
+        </g>
+
+        <!-- ===================== -->
+        <!--  U (Top) Face         -->
+        <!-- ===================== -->
+        <g id="face-U">
+          ${genFaceU(n)}
+        </g>
+
+        <!-- ===================== -->
+        <!--  R (Right) Face       -->
+        <!-- ===================== -->
+        <g id="face-R">
+          ${genFaceR(n)}
+        </g>
+
+      </g>
+    </svg>
+  </div>
+</template>
+
+
+<!-- LEFT-HAND CUBE (${n}x${n}x${n} mirrored) -->
+<template id="cube-template-left">
+  <div class="cube-wrapper">
+    <svg id="cube-svg-left" width="550" height="460" viewBox="0 0 500 360"
+         xmlns="http://www.w3.org/2000/svg" role="img"
+         aria-label="Rubik's cube isometric view (left-hand orientation, ${n}x${n}x${n})">
+
+      <style>
+        .sticker {
+          stroke: #000;
+          stroke-width: 1.5;
+          stroke-linejoin: round;
+        }
+        .sticker-hidden {
+          stroke: #DDDDDD;
+          stroke-width: 3;
+          stroke-linejoin: round;
+        }
+      </style>
+      <polygon points="0,0 500,0 500,360 0,360" style="fill:none" />
+
+      <g id="cube-left">
+
+        <!-- ===================== -->
+        <!--  B Face (hidden, mirrored) -->
+        <!-- ===================== -->
+        <g id="face-B-left">
+          ${genFaceMirrored('B', B_origin, B_dCol, B_dRow, n, '', true)}
+        </g>
+
+        <!-- ===================== -->
+        <!--  R Face (hidden → left side when mirrored) -->
+        <!-- ===================== -->
+        <g id="face-R-left">
+          ${genFaceMirrored('R', R_origin, R_dCol, R_dRow, n, '', true)}
+        </g>
+
+        <!-- ===================== -->
+        <!--  D Face (hidden, mirrored) -->
+        <!-- ===================== -->
+        <g id="face-D-left">
+          ${genFaceMirrored('D', D_origin, D_dCol, D_dRow, n, '', true)}
+        </g>
+
+        <!-- ===================== -->
+        <!--  F Face (mirrored front) -->
+        <!-- ===================== -->
+        <g id="face-F-left">
+          ${genFaceMirrored('F', F_origin, F_dCol, F_dRow, n, '', false)}
+        </g>
+
+        <!-- ===================== -->
+        <!--  U (Top, mirrored)    -->
+        <!-- ===================== -->
+        <g id="face-U-left">
+          ${genFaceMirrored('U', U_origin, U_dCol, U_dRow, n, '', false)}
+        </g>
+
+        <!-- ===================== -->
+        <!--  L Face (becomes right when mirrored) -->
+        <!-- ===================== -->
+        <g id="face-L-left">
+          ${genFaceMirrored('L', L_origin, L_dCol, L_dRow, n, '', false)}
+        </g>
+
+      </g>
+    </svg>
+  </div>
+</template>`;
+  }
+
+  // Inject into page
+  document.currentScript.insertAdjacentHTML('afterend', buildRightTemplate(N));
+
+})();
+</script>
+
+<!-- 
+  ============================================================
+  PREVIEW / TEST PAGE
+  ============================================================
+  Below is a simple test harness that renders both templates
+  side by side and lets you colour individual stickers.
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>4×4×4 Cube SVG Preview</title>
+  <style>
+    body { font-family: sans-serif; background: #f0f0f0; padding: 20px; }
+    h1 { margin-bottom: 4px; }
+    .row { display: flex; gap: 20px; flex-wrap: wrap; }
+    .panel { background: white; border-radius: 8px; padding: 16px;
+             box-shadow: 0 2px 8px rgba(0,0,0,.15); }
+    h2 { margin: 0 0 8px; font-size: 1rem; color: #555; }
+    .controls { margin-top: 16px; }
+    label { display: block; margin: 4px 0; font-size: .85rem; }
+    select, input[type=color] { margin-left: 4px; }
+    button { margin-top: 8px; padding: 6px 14px; cursor: pointer;
+             border: none; border-radius: 4px; background: #333; color: white; }
+    button:hover { background: #555; }
+    .note { font-size:.8rem; color:#888; margin-top:8px; }
+  </style>
+</head>
+<body>
+  <h1>4×4×4 Rubik's Cube SVG</h1>
+  <p class="note">Both right-hand and mirrored (left-hand) orientations. All stickers default to grey — use the controls below to colour them.</p>
+
+  <div class="row">
+    <div class="panel">
+      <h2>Right-hand orientation</h2>
+      <div id="right-host"></div>
+    </div>
+    <div class="panel">
+      <h2>Left-hand (mirrored) orientation</h2>
+      <div id="left-host"></div>
+    </div>
+  </div>
+
+  <div class="panel controls" style="margin-top:16px; max-width:420px;">
+    <h2>Colour a sticker</h2>
+    <label>Orientation:
+      <select id="sel-orientation">
+        <option value="right">Right-hand</option>
+        <option value="left">Left-hand</option>
+      </select>
+    </label>
+    <label>Face:
+      <select id="sel-face">
+        <option>U</option><option>F</option><option>R</option>
+        <option>L</option><option>B</option><option>D</option>
+      </select>
+    </label>
+    <label>Row (0–3): <input type="number" id="sel-row" min="0" max="3" value="0" style="width:48px"></label>
+    <label>Col (0–3): <input type="number" id="sel-col" min="0" max="3" value="0" style="width:48px"></label>
+    <label>Colour: <input type="color" id="sel-color" value="#ff6600"></label>
+    <button onclick="colourSticker()">Apply</button>
+    <button onclick="colourAll()">Colour whole face</button>
+    <button onclick="resetAll()" style="background:#b00">Reset all</button>
+  </div>
+
+  <script>
+    // ── GENERATE SVG PROGRAMMATICALLY ────────────────────────────────────────
+    const N = 4;
+
+    // Basis vectors (right-hand)
+    const U_origin = [209.148, 42.905],  U_dCol = [49.117, 4.690],   U_dRow = [-26.533, 23.906];
+    const F_origin = [124.100, 112.000], F_dCol = [54.533, 7.267],   F_dRow = [6.222, 53.611];
+    const R_origin = [287.700, 133.800], R_dCol = [22.933, -26.633], R_dRow = [2.800, 57.433];
+    const B_origin = [229.14, 22.905],   B_dCol = [49.119, 4.686],   B_dRow = [0.469, 54.675];
+    const L_origin = [150.799, 45.940],  L_dCol = [-28.35, 23.032],  L_dRow = [6.001, 51.292];
+    const D_origin = [214.3, 210.8],     D_dCol = [51.867, 9.733],   D_dRow = [-19.4, 28.856];
+
+    const FACES = { U: [U_origin, U_dCol, U_dRow], F: [F_origin, F_dCol, F_dRow],
+                    R: [R_origin, R_dCol, R_dRow], B: [B_origin, B_dCol, B_dRow],
+                    L: [L_origin, L_dCol, L_dRow], D: [D_origin, D_dCol, D_dRow] };
+    const HIDDEN_FACES = new Set(['B','L','D']);
+
+    const add = (a,b) => [a[0]+b[0], a[1]+b[1]];
+    const sc  = (v,s) => [v[0]*s, v[1]*s];
+
+    function quad(origin, dCol, dRow, c, r) {
+      const TL = add(origin, add(sc(dCol,c), sc(dRow,r)));
+      const TR = add(TL, dCol), BR = add(TR, dRow), BL = add(TL, dRow);
+      return [TL,TR,BR,BL].map(([x,y])=>`${x.toFixed(3)},${y.toFixed(3)}`).join(' ');
+    }
+
+    function mirrorPts(pts) {
+      return pts.replace(/(-?\d+\.?\d*),(-?\d+\.?\d*)/g, (_,x,y)=>
+        `${(500-parseFloat(x)).toFixed(3)},${y}`);
+    }
+
+    function buildSVG(n, mirrored=false) {
+      const suffix = mirrored ? '-left' : '';
+      let polys = '';
+      // Draw hidden faces first, then visible
+      const order = ['B','L','D','F','U','R'];
+      for (const face of order) {
+        const hidden = HIDDEN_FACES.has(face);
+        const cls = hidden ? 'sticker-hidden' : 'sticker';
+        const [orig, dCol, dRow] = FACES[face];
+
+        // For mirrored: flip the L face to be visible (like L-left in original)
+        const effectiveHidden = mirrored
+          ? (face === 'L' ? false : face === 'R' ? true : hidden)
+          : hidden;
+        const effectiveCls = effectiveHidden ? 'sticker-hidden' : 'sticker';
+
+        polys += `<g id="face-${face}${suffix}">`;
+        for (let r=0; r<n; r++) for (let c=0; c<n; c++) {
+          let pts = quad(orig, dCol, dRow, c, r);
+          if (mirrored) pts = mirrorPts(pts);
+          polys += `<polygon id="sticker-${face}${suffix}-${r}-${c}" class="${effectiveCls}" points="${pts}" fill="#cccccc"/>`;
+        }
+        polys += `</g>`;
+      }
+
+      return `<svg width="550" height="460" viewBox="0 0 500 360" xmlns="http://www.w3.org/2000/svg">
+        <style>
+          .sticker { stroke:#000; stroke-width:1.5; stroke-linejoin:round; }
+          .sticker-hidden { stroke:#DDDDDD; stroke-width:3; stroke-linejoin:round; fill:#e8e8e8; }
+        </style>
+        <polygon points="0,0 500,0 500,360 0,360" style="fill:none"/>
+        <g>${polys}</g>
+      </svg>`;
+    }
+
+    document.getElementById('right-host').innerHTML = buildSVG(N, false);
+    document.getElementById('left-host').innerHTML  = buildSVG(N, true);
+
+    // ── COLOUR CONTROLS ───────────────────────────────────────────────────────
+    function stickerId(orientation, face, r, c) {
+      const suffix = orientation === 'left' ? '-left' : '';
+      return `sticker-${face}${suffix}-${r}-${c}`;
+    }
+
+    function colourSticker() {
+      const o = document.getElementById('sel-orientation').value;
+      const f = document.getElementById('sel-face').value;
+      const r = +document.getElementById('sel-row').value;
+      const c = +document.getElementById('sel-col').value;
+      const col = document.getElementById('sel-color').value;
+      const host = document.getElementById(o === 'right' ? 'right-host' : 'left-host');
+      const el = host.querySelector(`#${stickerId(o,f,r,c)}`);
+      if (el) el.setAttribute('fill', col);
+      else alert(`Sticker not found: ${stickerId(o,f,r,c)}`);
+    }
+
+    function colourAll() {
+      const o = document.getElementById('sel-orientation').value;
+      const f = document.getElementById('sel-face').value;
+      const col = document.getElementById('sel-color').value;
+      const host = document.getElementById(o === 'right' ? 'right-host' : 'left-host');
+      for (let r=0; r<N; r++) for (let c=0; c<N; c++) {
+        const el = host.querySelector(`#${stickerId(o,f,r,c)}`);
+        if (el) el.setAttribute('fill', col);
+      }
+    }
+
+    function resetAll() {
+      ['right-host','left-host'].forEach(id => {
+        document.getElementById(id).querySelectorAll('.sticker').forEach(el => {
+          el.setAttribute('fill','#cccccc');
+        });
+      });
+    }
+  </script>
+</body>
+</html>

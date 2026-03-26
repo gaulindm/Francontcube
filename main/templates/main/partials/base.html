@@ -73,6 +73,39 @@
     {% include "main/partials/_footer.html" %}
 
     {% block extra_js %}{% endblock %}
+    
+<script type="module">
+ 
+
+  document.addEventListener("DOMContentLoaded", () => {
+    document.querySelectorAll(".twisty-container").forEach(el => {
+      const puzzle = el.dataset.puzzle;
+      const alg = el.dataset.alg;
+      const setup = el.dataset.setup;
+      const lon = parseFloat(el.dataset.lon);
+      const lat = parseFloat(el.dataset.lat);
+
+      if (!puzzle) {
+        console.warn("Missing puzzle:", el);
+        return;
+      }
+
+      const player = new TwistyPlayer({
+        puzzle: puzzle,
+        alg: alg,
+        experimentalSetupAlg: setup,
+        visualization: "3D",
+        background: "none",
+        controlPanel: "bottom-row",
+        cameraLongitude: lon,
+        cameraLatitude: lat,
+        experimentalStickering: "centers-only",
+      });
+
+      el.appendChild(player);
+    });
+  });
+</script>
 </body>
 
 </html>

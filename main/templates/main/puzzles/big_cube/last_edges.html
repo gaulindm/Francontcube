@@ -1,0 +1,179 @@
+{% extends "main/partials/base.html" %}
+{% load static %}
+
+{% block extra_head %}
+
+<style>
+  .case-card {
+    border-radius: 16px;
+    border: 2px solid #e9ecef;
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+    overflow: hidden;
+  }
+  .case-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 24px rgba(0,0,0,0.10);
+  }
+  .technique-header {
+    border-left: 5px solid var(--bs-primary);
+    padding-left: 12px;
+    margin: 2rem 0 1rem;
+  }
+  .technique-header:first-of-type { margin-top: 0; }
+  .twisty-wrap {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 12px 0 4px;
+    background: #f8f9fa;
+  }
+  .algo-badge {
+    font-family: monospace;
+    font-size: 1.05rem;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    background: #212529;
+    color: #f8f9fa;
+    border-radius: 8px;
+    padding: 6px 14px;
+    display: inline-block;
+  }
+  .tip-box {
+    background: #fff3cd;
+    border-radius: 0 0 14px 14px;
+    padding: 8px 14px;
+    font-size: 0.85rem;
+    color: #664d03;
+    display: flex;
+    gap: 6px;
+    align-items: flex-start;
+  }
+  .step-nav {
+    margin-top: 2.5rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid #dee2e6;
+  }
+</style>
+{% endblock %}
+
+{% block content %}
+
+{# Fil d'Ariane #}
+<nav aria-label="breadcrumb" class="mb-3">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item"><a href="{% url 'main:puzzles_home' %}">Puzzles</a></li>
+    <li class="breadcrumb-item"><a href="{% url home_url %}">{{ config.name }}</a></li>
+    <li class="breadcrumb-item active">{{ step.name }}</li>
+  </ol>
+</nav>
+
+<h1 class="h3 fw-bold mb-1">{{ step.name }}</h1>
+<p class="text-muted mb-4">{{ step.desc }}</p>
+
+{% if cases %}
+
+  {# ── Technique : Insérer (cas 1-4) ───────────────────────────── #}
+  {% with groupe=cases|slice:":4" %}{% if groupe %}
+  <div class="technique-header">
+    <h2 class="h5 fw-bold mb-0">
+      <i class="bi-box-arrow-in-down text-primary me-2"></i>Insérer
+    </h2>
+    <small class="text-muted">Placer les dernières arêtes sans perturber les centres</small>
+  </div>
+  <div class="row g-3 mb-4">
+    {% for case in groupe %}
+    <div class="col-12 col-sm-6 col-lg-4">
+      <div class="case-card h-100 bg-white">
+        <div class="twisty-wrap">
+          <twisty-player
+            puzzle="{{ cubing_puzzle }}"
+            alg="{{ case.algorithm }}"
+            experimental-setup-alg="{{ case.get_setup_alg }}"
+            visualization="3D"
+            background="none"
+            control-panel="bottom-row"
+            {% if stickering.type == 'preset' %}
+              experimental-stickering="{{ stickering.value }}"
+            {% else %}
+              experimental-stickering-mask-orbits="{{ stickering.value }}"
+            {% endif %}
+            camera-longitude="{{ case.camera_longitude|default:'-25' }}"
+            camera-latitude="{{ case.camera_latitude|default:'22' }}"
+            style="width:220px;height:220px;">
+          </twisty-player>
+        </div>
+        <div class="px-3 py-2 text-center">
+          <div class="algo-badge mb-2">{{ case.algorithm }}</div>
+          <p class="text-muted small mb-0">{{ case.name }}</p>
+        </div>
+        {% if case.tip %}<div class="tip-box"><i class="bi-lightbulb-fill flex-shrink-0 mt-1"></i><span>{{ case.tip }}</span></div>{% endif %}
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+  {% endif %}{% endwith %}
+
+  {# ── Technique : Retourner (cas 5+) ───────────────────────────── #}
+  {% with groupe=cases|slice:"4:" %}{% if groupe %}
+  <div class="technique-header">
+    <h2 class="h5 fw-bold mb-0">
+      <i class="bi-arrow-repeat text-danger me-2"></i>Retourner
+    </h2>
+    <small class="text-muted">Arête orientée dans le mauvais sens — flip sans tout défaire</small>
+  </div>
+  <div class="row g-3 mb-4">
+    {% for case in groupe %}
+    <div class="col-12 col-sm-6 col-lg-4">
+      <div class="case-card h-100 bg-white">
+        <div class="twisty-wrap">
+          <twisty-player
+            puzzle="{{ cubing_puzzle }}"
+            alg="{{ case.algorithm }}"
+            experimental-setup-alg="{{ case.get_setup_alg }}"
+            visualization="3D"
+            background="none"
+            control-panel="bottom-row"
+            {% if stickering.type == 'preset' %}
+              experimental-stickering="{{ stickering.value }}"
+            {% else %}
+              experimental-stickering-mask-orbits="{{ stickering.value }}"
+            {% endif %}
+            camera-longitude="{{ case.camera_longitude|default:'-25' }}"
+            camera-latitude="{{ case.camera_latitude|default:'22' }}"
+            style="width:220px;height:220px;">
+          </twisty-player>
+        </div>
+        <div class="px-3 py-2 text-center">
+          <div class="algo-badge mb-2">{{ case.algorithm }}</div>
+          <p class="text-muted small mb-0">{{ case.name }}</p>
+        </div>
+        {% if case.tip %}<div class="tip-box"><i class="bi-lightbulb-fill flex-shrink-0 mt-1"></i><span>{{ case.tip }}</span></div>{% endif %}
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+  {% endif %}{% endwith %}
+
+{% else %}
+<div class="alert alert-secondary text-center py-5">
+  <i class="bi-hourglass-split fs-1 d-block mb-2"></i>
+  <strong>Contenu à venir</strong>
+  <p class="mb-0 text-muted">Les animations pour cette étape seront ajoutées prochainement.</p>
+</div>
+{% endif %}
+
+{# Navigation précédent / suivant #}
+<div class="step-nav d-flex justify-content-between">
+  {% if prev_step %}
+  <a href="{% url step_url prev_step.slug %}" class="btn btn-outline-secondary">
+    <i class="bi-arrow-left"></i> {{ prev_step.name }}
+  </a>
+  {% else %}<div></div>{% endif %}
+  {% if next_step %}
+  <a href="{% url step_url next_step.slug %}" class="btn btn-primary">
+    {{ next_step.name }} <i class="bi-arrow-right"></i>
+  </a>
+  {% endif %}
+</div>
+
+{% endblock %}

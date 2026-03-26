@@ -58,6 +58,12 @@ from django.contrib import admin
 from .models import PuzzleCase
 
 
+# cube/admin.py  — ajouter ces classes sous l'admin existant de CubeState
+
+from django.contrib import admin
+from .models import PuzzleCase
+
+
 @admin.register(PuzzleCase)
 class PuzzleCaseAdmin(admin.ModelAdmin):
 
@@ -68,6 +74,8 @@ class PuzzleCaseAdmin(admin.ModelAdmin):
     ordering      = ('puzzle_type', 'method', 'category', 'step_number')
 
     # ── Formulaire ─────────────────────────────────────────────────────────
+    # prepopulated_fields fonctionne SEULEMENT à la création (slug éditable)
+    # À la modification, slug devient readonly via get_readonly_fields()
     prepopulated_fields = {'slug': ('name',)}
 
     fieldsets = (
@@ -79,15 +87,20 @@ class PuzzleCaseAdmin(admin.ModelAdmin):
         }),
         ('cubing.js', {
             'fields': ('stickering', 'camera_longitude', 'camera_latitude'),
-            'classes': ('collapse',),   # réduit par défaut — rarement modifié
+            'classes': ('collapse',),
         }),
     )
 
-    # ── Readonly ───────────────────────────────────────────────────────────
-    readonly_fields = ('slug',)   # généré automatiquement au save
-
     def get_readonly_fields(self, request, obj=None):
-        """Slug readonly seulement après création."""
-        if obj:  # modification d'un objet existant
+        """
+        - Création (obj=None) : slug est éditable et prépopulé depuis 'name'
+        - Modification (obj exists) : slug devient readonly pour éviter
+          de casser les URLs existantes
+        """
+        if obj:
+            # IMPORTANT: retirer slug de prepopulated_fields quand il est readonly
+            self.prepopulated_fields = {}
             return ('slug',)
-        return ()  # création : slug est pré-rempli mais modifiable
+        else:
+            self.prepopulated_fields = {'slug': ('name',)}
+            return ()
