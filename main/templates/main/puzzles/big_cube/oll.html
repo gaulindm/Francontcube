@@ -1,0 +1,403 @@
+{% extends "main/partials/base.html" %}
+{% load static %}
+
+{% block title %}4×4 — Étape 8 : OLL — Francontcube{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+
+    {% include "cube/partials/_4x4_cube_svg.html" %}
+    {% include "cube/partials/_4x4_moves_sprite.html" %}
+
+    <!-- ── Hero ──────────────────────────────────────────────────────────── -->
+    <div class="text-center mb-5">
+        <h1 class="hero-title">
+            <span class="brand-green">Étape 8 — OLL</span>
+        </h1>
+        <p class="lead text-muted">
+            <strong>Orientation of the Last Layer</strong> — orientez tous les stickers
+            de la dernière couche vers le haut en un seul algorithme.
+        </p>
+    </div>
+
+    <!-- ── Qu'est-ce que l'OLL ───────────────────────────────────────────── -->
+    <div class="card p-4 mb-4">
+        <h3 class="brand-green">🎯 Qu'est-ce que l'OLL?</h3>
+        <p>
+            L'OLL est la première grande étape de la méthode CFOP. Contrairement
+            aux étapes précédentes (croix + face), l'OLL règle
+            <strong>l'orientation de toute la dernière couche en une seule fois</strong>
+            — arêtes ET coins ensemble — avec un algorithme dédié à chaque cas.
+        </p>
+        <div class="row mt-3 g-3">
+            <div class="col-md-6">
+                <div class="alert alert-info mb-0">
+                    <strong>Il y a 57 cas OLL.</strong> Pour commencer, apprenez
+                    les groupes les plus fréquents — les croix (7 cas) et les carrés (2 cas)
+                    couvrent déjà une grande partie des situations rencontrées.
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="alert alert-success mb-0">
+                    <strong>💡 Astuce débutant :</strong> Si vous avez déjà fait
+                    les étapes "Croix du haut" et "Face du haut", vous connaissez
+                    déjà le principe — l'OLL l'automatise en une seule étape!
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ── Comment lire les diagrammes ───────────────────────────────────── -->
+    <div class="card p-4 mb-4 border-warning">
+        <h3 class="brand-green">📖 Lire les Diagrammes OLL</h3>
+        <p>
+            Les diagrammes OLL montrent la face du haut vue d'en haut.
+            Les stickers <strong>jaunes</strong> (ou dans notre cas <strong>blancs</strong>)
+            sont déjà orientés vers le haut, les autres non.
+        </p>
+        <div class="row mt-3 align-items-center">
+            <div class="col-md-4 text-center">
+                <div id="cube-oll-legend" class="cube-case"></div>
+                <p class="mt-2 small text-muted">Vue de dessus — stickers blancs = bien orientés</p>
+            </div>
+            <div class="col-md-8">
+                <ul>
+                    <li class="mb-2">
+                        <strong>Sticker blanc</strong> sur la face du haut = déjà bien orienté ✅
+                    </li>
+                    <li class="mb-2">
+                        <strong>Sticker coloré</strong> sur la face du haut = mal orienté, à corriger ❌
+                    </li>
+                    <li class="mb-2">
+                        Les stickers sur les faces latérales (bord du diagramme)
+                        montrent l'orientation des pièces sur les côtés.
+                    </li>
+                    <li>
+                        <strong>Tournez U</strong> pour faire correspondre votre cube au diagramme
+                        avant d'exécuter l'algorithme.
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- ── Groupe : Croix ─────────────────────────────────────────────────── -->
+    <div class="card p-4 mb-4 border-success">
+        <h3 class="brand-green">✚ Groupe 1 — Croix (7 cas)</h3>
+        <p>
+            La croix blanche est déjà présente sur la face du haut. Il reste
+            à orienter les coins. Ce groupe est le plus fréquent en pratique.
+        </p>
+        <div class="row mt-3 g-3">
+
+            <!-- OLL 21 – Sune -->
+            <div class="col-md-6 col-lg-4">
+                <div class="card h-100 border-success">
+                    <div class="card-header bg-success text-white">
+                        <strong>OLL 26 — Sune</strong>
+                    </div>
+                    <div class="card-body">
+                        <div id="cube-oll-26" class="cube-case mb-2 text-center"></div>
+                        <div class="d-flex align-items-center gap-1 flex-wrap mt-2">
+                            <svg class="move-icon"><use href="#R-4"/></svg>
+                            <svg class="move-icon"><use href="#U-4"/></svg>
+                            <svg class="move-icon"><use href="#R-prime-4"/></svg>
+                            <svg class="move-icon"><use href="#U-4"/></svg>
+                            <svg class="move-icon"><use href="#R-4"/></svg>
+                            <svg class="move-icon"><use href="#U2-4"/></svg>
+                            <svg class="move-icon"><use href="#R-prime-4"/></svg>
+                        </div>
+                        <p class="small text-muted mt-2 mb-0">R U R' U R U2 R'</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- OLL 27 – Anti-Sune -->
+            <div class="col-md-6 col-lg-4">
+                <div class="card h-100 border-success">
+                    <div class="card-header bg-success text-white">
+                        <strong>OLL 27 — Anti-Sune</strong>
+                    </div>
+                    <div class="card-body">
+                        <div id="cube-oll-27" class="cube-case mb-2 text-center"></div>
+                        <div class="d-flex align-items-center gap-1 flex-wrap mt-2">
+                            <svg class="move-icon"><use href="#R-prime-4"/></svg>
+                            <svg class="move-icon"><use href="#U-prime-4"/></svg>
+                            <svg class="move-icon"><use href="#R-4"/></svg>
+                            <svg class="move-icon"><use href="#U-prime-4"/></svg>
+                            <svg class="move-icon"><use href="#R-prime-4"/></svg>
+                            <svg class="move-icon"><use href="#U2-4"/></svg>
+                            <svg class="move-icon"><use href="#R-4"/></svg>
+                        </div>
+                        <p class="small text-muted mt-2 mb-0">R' U' R U' R' U2 R</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- OLL 21 – Croix complète, coins OK -->
+            <div class="col-md-6 col-lg-4">
+                <div class="card h-100 border-info">
+                    <div class="card-header bg-info text-white">
+                        <strong>OLL 21 — Croix complète</strong>
+                    </div>
+                    <div class="card-body">
+                        <div id="cube-oll-21" class="cube-case mb-2 text-center"></div>
+                        <div class="d-flex align-items-center gap-1 flex-wrap mt-2">
+                            <svg class="move-icon"><use href="#R-4"/></svg>
+                            <svg class="move-icon"><use href="#U2-4"/></svg>
+                            <svg class="move-icon"><use href="#R-prime-4"/></svg>
+                            <svg class="move-icon"><use href="#U-prime-4"/></svg>
+                            <svg class="move-icon"><use href="#R-4"/></svg>
+                            <svg class="move-icon"><use href="#U-prime-4"/></svg>
+                            <svg class="move-icon"><use href="#R-prime-4"/></svg>
+                        </div>
+                        <p class="small text-muted mt-2 mb-0">R U2 R' U' R U' R'</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ── Groupe : Pas de croix ──────────────────────────────────────────── -->
+    <div class="card p-4 mb-4 border-danger">
+        <h3 class="brand-green">⬛ Groupe 2 — Pas de Croix (7 cas)</h3>
+        <p>
+            Aucune arête n'est orientée vers le haut. Ces cas nécessitent
+            des algorithmes plus longs. Le cas le plus courant est le "point"
+            (aucune pièce orientée).
+        </p>
+        <div class="row mt-3 g-3">
+
+            <!-- OLL 1 – Point -->
+            <div class="col-md-6 col-lg-4">
+                <div class="card h-100 border-danger">
+                    <div class="card-header bg-danger text-white">
+                        <strong>OLL 1 — Point (0 sticker)</strong>
+                    </div>
+                    <div class="card-body">
+                        <div id="cube-oll-1" class="cube-case mb-2 text-center"></div>
+                        <div class="d-flex align-items-center gap-1 flex-wrap mt-2">
+                            <svg class="move-icon"><use href="#R-4"/></svg>
+                            <svg class="move-icon"><use href="#U2-4"/></svg>
+                            <svg class="move-icon"><use href="#R-prime-4"/></svg>
+                            <svg class="move-icon"><use href="#U-prime-4"/></svg>
+                            <svg class="move-icon"><use href="#R-4"/></svg>
+                            <svg class="move-icon"><use href="#U-4"/></svg>
+                            <svg class="move-icon"><use href="#R-prime-4"/></svg>
+                            <svg class="move-icon"><use href="#F-prime-4"/></svg>
+                            <svg class="move-icon"><use href="#R-4"/></svg>
+                            <svg class="move-icon"><use href="#U-4"/></svg>
+                            <svg class="move-icon"><use href="#R-prime-4"/></svg>
+                            <svg class="move-icon"><use href="#F-4"/></svg>
+                        </div>
+                        <p class="small text-muted mt-2 mb-0">R U2 R' U' R U R' F' R U R' F</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- OLL avec L -->
+            <div class="col-md-6 col-lg-4">
+                <div class="card h-100 border-danger">
+                    <div class="card-header bg-danger text-white">
+                        <strong>OLL 2 — Forme en L</strong>
+                    </div>
+                    <div class="card-body">
+                        <div id="cube-oll-2" class="cube-case mb-2 text-center"></div>
+                        <div class="d-flex align-items-center gap-1 flex-wrap mt-2">
+                            <svg class="move-icon"><use href="#F-4"/></svg>
+                            <svg class="move-icon"><use href="#R-4"/></svg>
+                            <svg class="move-icon"><use href="#U-4"/></svg>
+                            <svg class="move-icon"><use href="#R-prime-4"/></svg>
+                            <svg class="move-icon"><use href="#U-prime-4"/></svg>
+                            <svg class="move-icon"><use href="#F-prime-4"/></svg>
+                            <svg class="move-icon"><use href="#F-prime-4"/></svg>
+                            <svg class="move-icon"><use href="#R-4"/></svg>
+                            <svg class="move-icon"><use href="#U-4"/></svg>
+                            <svg class="move-icon"><use href="#R-prime-4"/></svg>
+                            <svg class="move-icon"><use href="#U-prime-4"/></svg>
+                            <svg class="move-icon"><use href="#F-4"/></svg>
+                        </div>
+                        <p class="small text-muted mt-2 mb-0">F R U R' U' F' f R U R' U' f'</p>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- ── Groupe : Ligne / Carré ─────────────────────────────────────────── -->
+    <div class="card p-4 mb-4 border-warning">
+        <h3 class="brand-green">— Groupe 3 — Ligne et Carré</h3>
+        <p>
+            2 arêtes opposées ou adjacentes sont orientées. Ces groupes intermédiaires
+            sont très fréquents.
+        </p>
+        <div class="row mt-3 g-3">
+
+            <!-- OLL Ligne -->
+            <div class="col-md-6">
+                <div class="card h-100 border-warning">
+                    <div class="card-header bg-warning text-dark">
+                        <strong>OLL — Ligne (I)</strong>
+                    </div>
+                    <div class="card-body">
+                        <div id="cube-oll-line" class="cube-case mb-2 text-center"></div>
+                        <div class="d-flex align-items-center gap-1 flex-wrap mt-2">
+                            <svg class="move-icon"><use href="#F-4"/></svg>
+                            <svg class="move-icon"><use href="#R-4"/></svg>
+                            <svg class="move-icon"><use href="#U-4"/></svg>
+                            <svg class="move-icon"><use href="#R-prime-4"/></svg>
+                            <svg class="move-icon"><use href="#U-prime-4"/></svg>
+                            <svg class="move-icon"><use href="#F-prime-4"/></svg>
+                        </div>
+                        <p class="small text-muted mt-2 mb-0">
+                            F R U R' U' F' — Orientez la ligne horizontalement avant d'exécuter.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- OLL Carré -->
+            <div class="col-md-6">
+                <div class="card h-100 border-warning">
+                    <div class="card-header bg-warning text-dark">
+                        <strong>OLL — Carré</strong>
+                    </div>
+                    <div class="card-body">
+                        <div id="cube-oll-square" class="cube-case mb-2 text-center"></div>
+                        <div class="d-flex align-items-center gap-1 flex-wrap mt-2">
+                            <svg class="move-icon"><use href="#R-4"/></svg>
+                            <svg class="move-icon"><use href="#U2-4"/></svg>
+                            <svg class="move-icon"><use href="#R-prime-4"/></svg>
+                            <svg class="move-icon"><use href="#R-prime-4"/></svg>
+                            <svg class="move-icon"><use href="#F-4"/></svg>
+                            <svg class="move-icon"><use href="#R-4"/></svg>
+                            <svg class="move-icon"><use href="#F-prime-4"/></svg>
+                        </div>
+                        <p class="small text-muted mt-2 mb-0">
+                            R U2 R2 F R F' — 2 arêtes adjacentes + coins spécifiques
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- ── Astuce mémorisation ────────────────────────────────────────────── -->
+    <div class="card p-4 mb-4">
+        <h3 class="brand-green">🧠 Stratégie d'Apprentissage</h3>
+        <p>
+            57 cas OLL, ça peut sembler beaucoup. Voici une progression réaliste :
+        </p>
+        <div class="row mt-3 g-3">
+            <div class="col-md-4">
+                <div class="card h-100 border-success">
+                    <div class="card-header bg-success text-white"><strong>Débutant</strong></div>
+                    <div class="card-body small">
+                        Apprenez seulement Sune et Anti-Sune (OLL 26 et 27).
+                        Appliquez-les plusieurs fois pour orienter tous les coins.
+                        Ça prend plus de temps mais ça marche pour 100% des cas!
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card h-100 border-warning">
+                    <div class="card-header bg-warning text-dark"><strong>Intermédiaire</strong></div>
+                    <div class="card-body small">
+                        Apprenez les 7 cas du groupe "Croix". Avec la croix en
+                        préparation, vous réduisez les cas OLL possibles à seulement
+                        ces 7 — très efficace!
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card h-100 border-danger">
+                    <div class="card-header bg-danger text-white"><strong>Avancé</strong></div>
+                    <div class="card-body small">
+                        Apprenez les 57 cas OLL complets pour une résolution
+                        en une seule étape, sans préparation de croix.
+                        Objectif à long terme pour les speedcubers!
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ── Récapitulatif ─────────────────────────────────────────────────── -->
+    <div class="card p-4 mb-4 bg-light">
+        <h3 class="brand-green">✅ Vérification</h3>
+        <p>Après l'OLL, vérifiez :</p>
+        <ul>
+            <li>La face du haut est entièrement <strong>blanche</strong> — 9 stickers blancs</li>
+            <li>Les deux premières couches sont toujours <strong>correctes</strong></li>
+            <li>Les faces latérales de la dernière couche sont toujours mélangées — c'est normal!</li>
+        </ul>
+        <div class="alert alert-info mt-3 mb-0">
+            <strong>💡 Prochaine étape :</strong> PLL (Permutation of the Last Layer) —
+            les pièces sont toutes bien orientées, il ne reste qu'à les <em>permuter</em>
+            pour les mettre dans le bon ordre. C'est la dernière étape!
+        </div>
+    </div>
+
+    <!-- ── Navigation ────────────────────────────────────────────────────── -->
+    <div class="d-flex justify-content-between align-items-center mt-5 flex-wrap gap-2">
+        {% if prev_step %}
+        <a href="{% url step_url prev_step.slug %}" class="btn btn-outline-secondary">
+            ← {{ prev_step.name }}
+        </a>
+        {% else %}
+        <a href="{% url home_url %}" class="btn btn-outline-secondary">
+            ← Vue d'ensemble 4×4
+        </a>
+        {% endif %}
+        {% if next_step %}
+        <a href="{% url step_url next_step.slug %}" class="btn btn-success">
+            {{ next_step.name }} →
+        </a>
+        {% endif %}
+    </div>
+
+</div>
+
+<style>
+.cube-case svg { max-width: 180px; height: auto; }
+.move-icon { width: 44px; height: 60px; }
+.card { box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
+</style>
+
+<script type="module">
+  import { renderCube } from "{% static 'cube/js/cube_renderer.js' %}";
+
+  function mountCube(containerId, state) {
+    const container = document.getElementById(containerId);
+    if (!container) return;
+    container.innerHTML = '';
+    if (!state) {
+      container.innerHTML = `
+        <div class="alert alert-secondary text-center py-3">
+          <i class="bi bi-cube text-muted" style="font-size:2rem;"></i>
+          <p class="mb-0 mt-1 small text-muted">État non disponible</p>
+        </div>`;
+      return;
+    }
+    const template = document.getElementById("cube-template");
+    const clone    = template.content.cloneNode(true);
+    container.appendChild(clone);
+    const svg = container.querySelector("svg");
+    renderCube(svg, state);
+  }
+
+  document.addEventListener("DOMContentLoaded", () => {
+    mountCube("cube-oll-legend",  {{ state_oll_legend|safe }});
+    mountCube("cube-oll-26",      {{ state_oll_26|safe }});
+    mountCube("cube-oll-27",      {{ state_oll_27|safe }});
+    mountCube("cube-oll-21",      {{ state_oll_21|safe }});
+    mountCube("cube-oll-1",       {{ state_oll_1|safe }});
+    mountCube("cube-oll-2",       {{ state_oll_2|safe }});
+    mountCube("cube-oll-line",    {{ state_oll_line|safe }});
+    mountCube("cube-oll-square",  {{ state_oll_square|safe }});
+  });
+</script>
+
+{% endblock %}

@@ -1,0 +1,243 @@
+{% extends "main/partials/base.html" %}
+{% load static %}
+
+{% block title %}4×4 — Étape 7 : Face du Haut (Blanche) — Francontcube{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+
+    {% include "cube/partials/_4x4_cube_svg.html" %}
+    {% include "cube/partials/_4x4_moves_sprite.html" %}
+
+    <!-- ── Hero ──────────────────────────────────────────────────────────── -->
+    <div class="text-center mb-5">
+        <h1 class="hero-title">
+            <span class="brand-green">Étape 8 — Face du Haut (Blanche)</span>
+        </h1>
+        <p class="lead text-muted">
+            La croix blanche est en place — orientez maintenant les
+            <strong>4 coins blancs</strong> pour compléter entièrement la face du haut.
+        </p>
+    </div>
+
+    <!-- ── Objectif ──────────────────────────────────────────────────────── -->
+    <div class="card p-4 mb-4">
+        <h3 class="brand-green">🎯 Objectif</h3>
+        <p>
+            Orienter les 4 coins de la face blanche pour que tous leurs stickers
+            blancs pointent vers le haut. À la fin de cette étape, la face du haut
+            est entièrement blanche. C'est la première partie de l'<strong>OLL
+            (Orientation of the Last Layer)</strong>.
+        </p>
+        <div class="row mt-3 align-items-center">
+            <div class="col-md-4 text-center">
+                <div id="cube-top-face-goal" class="cube-case"></div>
+                <p class="mt-2 small text-muted">Face blanche entièrement complétée</p>
+            </div>
+            <div class="col-md-8">
+                <div class="alert alert-warning mb-0">
+                    <strong>⚠️ Ne vous inquiétez pas</strong> si les faces latérales
+                    semblent mélangées après cette étape — c'est tout à fait normal.
+                    L'orientation des coins ne garantit pas leur bonne position.
+                    Ça sera corrigé aux étapes OLL et PLL.
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ── L'algorithme de base ───────────────────────────────────────────── -->
+    <div class="card p-4 mb-4 border-success">
+        <h3 class="brand-green">🔑 L'Algorithme — Sune (la chasse au poisson)</h3>
+        <p>
+            Le <em>Sune</em> appliqué en haut permet d'orienter les coins
+            sans déranger la croix blanche. La clé est de positionner correctement
+            le coin cible avant de commencer.
+        </p>
+        <div class="row mt-3 align-items-center">
+            <div class="col-md-4 text-center">
+                <div id="cube-top-face-setup" class="cube-case"></div>
+                <p class="mt-2 small text-muted">Coin mal orienté en position avant-droit-haut</p>
+            </div>
+            <div class="col-md-8">
+                <div class="bg-white p-3 rounded border border-success border-2">
+                    <h5>Algorithme — Orienter 1 coin :</h5>
+                    <div class="d-flex align-items-center gap-1 flex-wrap mb-3">
+                        <svg class="move-icon"><use href="#R-4"/></svg>
+                        <svg class="move-icon"><use href="#U-4"/></svg>
+                        <svg class="move-icon"><use href="#R-prime-4"/></svg>
+                        <svg class="move-icon"><use href="#U-4"/></svg>
+                        <svg class="move-icon"><use href="#R-4"/></svg>
+                        <svg class="move-icon"><use href="#U2-4"/></svg>
+                        <svg class="move-icon"><use href="#R-prime-4"/></svg>
+                    </div>
+                    <p class="small mb-0">
+                        Placez un coin mal orienté en position <strong>avant-droit-haut</strong>.
+                        Exécutez l'algorithme jusqu'à ce que ce coin soit blanc vers le haut
+                        (1 ou 2 fois). <strong>Ne tournez que U</strong> entre les cas pour
+                        amener le prochain coin — ne retournez jamais le cube!
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ── Procédure complète ─────────────────────────────────────────────── -->
+    <div class="card p-4 mb-4 border-warning">
+        <h3 class="brand-green">📋 Procédure — Les 4 Coins</h3>
+        <div class="alert alert-danger mb-3">
+            <strong>⚠️ Règle absolue :</strong> Ne jamais tourner le cube complet
+            pendant cette étape! Seul <code>U</code> est permis entre les insertions.
+            Si vous retournez le cube, les coins déjà orientés se désorientent.
+        </div>
+        <ol>
+            <li class="mb-3">
+                <strong>Repérez un coin mal orienté</strong> sur la face du haut
+                (sticker blanc visible sur une face latérale, pas sur le dessus).
+            </li>
+            <li class="mb-3">
+                <strong>Amenez-le en position avant-droit-haut</strong> avec
+                un mouvement <code>U</code> ou <code>U'</code>.
+            </li>
+            <li class="mb-3">
+                <strong>Exécutez l'algorithme</strong> une ou deux fois jusqu'à
+                ce que le sticker blanc de ce coin pointe vers le haut.
+            </li>
+            <li class="mb-3">
+                <strong>Sans bouger le cube</strong>, faites <code>U</code> pour
+                amener le prochain coin mal orienté en position avant-droit-haut.
+            </li>
+            <li>
+                <strong>Répétez</strong> pour tous les coins restants.
+            </li>
+        </ol>
+        <div class="alert alert-success mb-0">
+            <strong>💡 Comment savoir qu'un coin est bien orienté?</strong>
+            Son sticker blanc pointe directement vers le haut (face U visible en blanc).
+            Les stickers latéraux peuvent ne pas être alignés — c'est attendu.
+        </div>
+    </div>
+
+    <!-- ── Cas visuels ────────────────────────────────────────────────────── -->
+    <div class="card p-4 mb-4">
+        <h3 class="brand-green">🎨 Les 3 Orientations d'un Coin</h3>
+        <p>Chaque coin peut être dans l'une de ces 3 orientations :</p>
+        <div class="row mt-3 g-3">
+            <div class="col-md-4">
+                <div class="card h-100 border-success text-center">
+                    <div class="card-header bg-success text-white">
+                        <strong>✅ Bien orienté</strong>
+                    </div>
+                    <div class="card-body">
+                        <div id="cube-corner-correct" class="cube-case"></div>
+                        <p class="small mt-2 mb-0">
+                            Sticker blanc visible sur la face du haut.
+                            Rien à faire pour ce coin!
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card h-100 border-warning text-center">
+                    <div class="card-header bg-warning text-dark">
+                        <strong>🔄 Orientation 1</strong>
+                    </div>
+                    <div class="card-body">
+                        <div id="cube-corner-twist1" class="cube-case"></div>
+                        <p class="small mt-2 mb-0">
+                            Sticker blanc sur la face avant.
+                            1 application de l'algorithme.
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card h-100 border-danger text-center">
+                    <div class="card-header bg-danger text-white">
+                        <strong>🔄 Orientation 2</strong>
+                    </div>
+                    <div class="card-body">
+                        <div id="cube-corner-twist2" class="cube-case"></div>
+                        <p class="small mt-2 mb-0">
+                            Sticker blanc sur la face droite.
+                            2 applications de l'algorithme.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ── Récapitulatif ─────────────────────────────────────────────────── -->
+    <div class="card p-4 mb-4 bg-light">
+        <h3 class="brand-green">✅ Vérification</h3>
+        <p>Avant de passer à l'OLL, vérifiez :</p>
+        <ul>
+            <li>La face du haut est entièrement <strong>blanche</strong> — 9 stickers blancs visibles</li>
+            <li>La couche du bas est toujours <strong>entièrement jaune</strong></li>
+            <li>Les deux premières couches latérales sont toujours <strong>correctes</strong></li>
+        </ul>
+        <div class="alert alert-info mt-3 mb-0">
+            <strong>💡 Note :</strong> La dernière couche peut sembler très mélangée
+            sur les faces latérales — c'est attendu. L'OLL et le PLL vont maintenant
+            tout régler!
+        </div>
+    </div>
+
+    <!-- ── Navigation ────────────────────────────────────────────────────── -->
+    <div class="d-flex justify-content-between align-items-center mt-5 flex-wrap gap-2">
+        {% if prev_step %}
+        <a href="{% url step_url prev_step.slug %}" class="btn btn-outline-secondary">
+            ← {{ prev_step.name }}
+        </a>
+        {% else %}
+        <a href="{% url home_url %}" class="btn btn-outline-secondary">
+            ← Vue d'ensemble 4×4
+        </a>
+        {% endif %}
+        {% if next_step %}
+        <a href="{% url step_url next_step.slug %}" class="btn btn-success">
+            {{ next_step.name }} →
+        </a>
+        {% endif %}
+    </div>
+
+</div>
+
+<style>
+.cube-case svg { max-width: 220px; height: auto; }
+.move-icon { width: 56px; height: 75px; }
+.card { box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
+</style>
+
+<script type="module">
+  import { renderCube } from "{% static 'cube/js/cube_renderer.js' %}";
+
+  function mountCube(containerId, state) {
+    const container = document.getElementById(containerId);
+    if (!container) return;
+    container.innerHTML = '';
+    if (!state) {
+      container.innerHTML = `
+        <div class="alert alert-secondary text-center py-3">
+          <i class="bi bi-cube text-muted" style="font-size:2rem;"></i>
+          <p class="mb-0 mt-1 small text-muted">État non disponible</p>
+        </div>`;
+      return;
+    }
+    const template = document.getElementById("cube-template");
+    const clone    = template.content.cloneNode(true);
+    container.appendChild(clone);
+    const svg = container.querySelector("svg");
+    renderCube(svg, state);
+  }
+
+  document.addEventListener("DOMContentLoaded", () => {
+    mountCube("cube-top-face-goal",   {{ state_top_face_goal|safe }});
+    mountCube("cube-top-face-setup",  {{ state_top_face_setup|safe }});
+    mountCube("cube-corner-correct",  {{ state_corner_correct|safe }});
+    mountCube("cube-corner-twist1",   {{ state_corner_twist1|safe }});
+    mountCube("cube-corner-twist2",   {{ state_corner_twist2|safe }});
+  });
+</script>
+
+{% endblock %}

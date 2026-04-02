@@ -33,10 +33,7 @@
             <h4 class="text-center mb-4"><strong>💡 Comment utiliser:</strong> Clique sur le bouton <strong>+</strong> sous le cube pour avancer étape par étape. <br>Observe le cube et lis l'instruction pour chaque mouvement!</h4>
                 
             
-            <div class="cube-container">
-                <div class="roofpig" 
-                    data-config="alg=U' R2 y' U2 R2 y' U' R2 y' R2 | colored=D*/e */m | flags=showalg speed:0.7 canvas:400 | hover=2">
-                </div>
+
             </div>
             <!-- Message d'encouragement -->
             <div id="cross-progress-message" class="alert alert-primary text-center py-4" style="display: none;">
@@ -206,18 +203,7 @@
                 min-height: 250px;
             }
             
-            .roofpig {
-                border: 3px solid #667eea;
-                border-radius: 10px;
-                overflow: hidden;
-                width: 400px !important;
-                height: 295px !important;
-            }
-            
-            .roofpig canvas {
-                width: 400px !important;
-                height: 246px !important;
-            }
+
             
             .steps-container {
                 background: #fff;
@@ -327,12 +313,6 @@
                 border-radius: 5px;
             }
             
-            .roofpig-algtext {
-        display: none !important;
-    }
-    /* Hide only the play and pause buttons */
-    .roofpig-button.roofpig-play,
-    .roofpig-button.roofpig-pause {
         display: none !important;
     }
     
@@ -344,64 +324,6 @@
     </style>
     
 
-    <!-- Load jQuery first (required by Roofpig) -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     
-    <!-- Load Roofpig from your Django static files -->
-    <script src="{% static 'cube/js/roofpig_and_three.min.js' %}"></script>
-    
-    <script>
-        console.log('=== SCRIPT CHARGÉ ===');
-        console.log('jQuery disponible?', typeof $ !== 'undefined');
-        
-        // Attendre que la page soit complètement chargée
-        window.addEventListener('load', function() {
-            console.log('=== FENÊTRE CHARGÉE ===');
-            
-            // Attendre l'initialisation de Roofpig
-            setTimeout(function() {
-                console.log('=== DÉMARRAGE DU SUIVI DES ÉTAPES ===');
-                
-                let etapeActuelle = -1;
-                
-                // Afficher l'étape initiale
-                $('#step-0').addClass('active');
-                console.log('Étape initiale step-0 activée');
-                
-                // Vérifier les changements
-                setInterval(function() {
-                    const pastAlg = document.querySelector('.roofpig-past-algtext');
-                    
-                    if (!pastAlg) {
-                        return; // Pas encore prêt
-                    }
-                    
-                    const texteAlg = pastAlg.textContent.trim();
-                    const mouvements = texteAlg.split(/\s+/).filter(m => m.length > 0);
-                    const nouvelleEtape = mouvements.length;
-                    
-                    if (nouvelleEtape !== etapeActuelle) {
-                        console.log('CHANGEMENT ÉTAPE:', etapeActuelle, '->', nouvelleEtape, 'Mouvements:', mouvements);
-                        
-                        // Cacher tout
-                        $('.step').removeClass('active');
-                        $('#step-complete').removeClass('active');
-                        
-                        // Afficher l'étape actuelle
-                        if (nouvelleEtape > 10) {
-                            $('#step-complete').addClass('active');
-                            console.log('Affichage du message de complétion');
-                        } else {
-                            $('#step-' + nouvelleEtape).addClass('active');
-                            console.log('Étape activée: step-' + nouvelleEtape);
-                        }
-                        
-                        etapeActuelle = nouvelleEtape;
-                    }
-                }, 200);
-                
-                console.log('=== VÉRIFICATION DÉMARRÉE ===');
-            }, 2000);
-        });
-    </script>
+  
 {% endblock %}

@@ -1,223 +1,384 @@
 {% extends "main/partials/base.html" %}
 {% load static %}
 
-{% block extra_head %}
-
-<style>
-  .case-card {
-    border-radius: 16px;
-    border: 2px solid #e9ecef;
-    transition: transform 0.15s ease, box-shadow 0.15s ease;
-    overflow: hidden;
-  }
-  .case-card:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 8px 24px rgba(0,0,0,0.10);
-  }
-  .technique-header {
-    border-left: 5px solid var(--bs-primary);
-    padding-left: 12px;
-    margin: 2rem 0 1rem;
-  }
-  .technique-header:first-of-type { margin-top: 0; }
-  .twisty-wrap {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 12px 0 4px;
-    background: #f8f9fa;
-  }
-  .algo-badge {
-    font-family: monospace;
-    font-size: 1.05rem;
-    font-weight: 600;
-    letter-spacing: 0.04em;
-    background: #212529;
-    color: #f8f9fa;
-    border-radius: 8px;
-    padding: 6px 14px;
-    display: inline-block;
-  }
-  .tip-box {
-    background: #fff3cd;
-    border-radius: 0 0 14px 14px;
-    padding: 8px 14px;
-    font-size: 0.85rem;
-    color: #664d03;
-    display: flex;
-    gap: 6px;
-    align-items: flex-start;
-  }
-  .step-nav {
-    margin-top: 2.5rem;
-    padding-top: 1.5rem;
-    border-top: 1px solid #dee2e6;
-  }
-</style>
-{% endblock %}
-
-{# ── Macro réutilisable pour un twisty-player ────────────────────────── #}
-{# Utilisé dans les 3 groupes ci-dessous — stickering vient du contexte  #}
+{% block title %}4×4 — Étape 1 : Les Centres — Francontcube{% endblock %}
 
 {% block content %}
+<div class="container py-5">
 
-{# Fil d'Ariane #}
-<nav aria-label="breadcrumb" class="mb-3">
-  <ol class="breadcrumb">
-    <li class="breadcrumb-item"><a href="{% url 'main:puzzles_home' %}">Puzzles</a></li>
-    <li class="breadcrumb-item"><a href="{% url home_url %}">{{ config.name }}</a></li>
-    <li class="breadcrumb-item active">{{ step.name }}</li>
-  </ol>
-</nav>
+    {% include "cube/partials/_4x4_cube_svg.html" %}
+    {% include "cube/partials/_4x4_moves_sprite.html" %}
 
-<h1 class="h3 fw-bold mb-1">{{ step.name }}</h1>
-<p class="text-muted mb-4">{{ step.desc }}</p>
 
-{% if cases %}
-
-  {# ── Technique : Déplacer (cas 1-3) ──────────────────────────── #}
-  {% with groupe=cases|slice:":3" %}{% if groupe %}
-  <div class="technique-header">
-    <h2 class="h5 fw-bold mb-0">
-      <i class="bi-arrow-up-circle text-primary me-2"></i>Déplacer
-    </h2>
-    <small class="text-muted">Amène un centre vers le dessus</small>
-  </div>
-  <div class="row g-3 mb-4">
-    {% for case in groupe %}
-    <div class="col-12 col-sm-6 col-lg-4">
-      <div class="case-card h-100 bg-white">
-        <div class="twisty-wrap">
-          <twisty-player
-            puzzle="{{ cubing_puzzle }}"
-            alg="{{ case.algorithm }}"
-            experimental-setup-alg="{{ case.get_setup_alg }}"
-            visualization="3D"
-            background="none"
-            control-panel="bottom-row"
-            {% if stickering.type == 'preset' %}
-              experimental-stickering="{{ stickering.value }}"
-            {% else %}
-              experimental-stickering-mask-orbits="{{ stickering.value }}"
-            {% endif %}
-            camera-longitude="{{ case.camera_longitude|default:'-25' }}"
-            camera-latitude="{{ case.camera_latitude|default:'35' }}"
-            style="width:220px;height:220px;">
-          </twisty-player>
-        </div>
-        <div class="px-3 py-2 text-center">
-          <div class="algo-badge mb-2">{{ case.algorithm }}</div>
-          <p class="text-muted small mb-0">{{ case.name }}</p>
-        </div>
-        {% if case.tip %}<div class="tip-box"><i class="bi-lightbulb-fill flex-shrink-0 mt-1"></i><span>{{ case.tip }}</span></div>{% endif %}
-      </div>
+    <!-- ── Hero ──────────────────────────────────────────────────────────── -->
+    <div class="text-center mb-5">
+        <h1 class="hero-title">
+            <span class="brand-green">Étape 1 — Les Centres</span>
+        </h1>
+        <p class="lead text-muted">
+            Assembler les 6 centres du 4×4 avant de passer aux arêtes.
+        </p>
     </div>
-    {% endfor %}
-  </div>
-  {% endif %}{% endwith %}
 
-  {# ── Technique : Préserver (cas 4-6) ─────────────────────────── #}
-  {% with groupe=cases|slice:"3:6" %}{% if groupe %}
-  <div class="technique-header">
-    <h2 class="h5 fw-bold mb-0">
-      <i class="bi-shield-check text-success me-2"></i>Préserver
-    </h2>
-    <small class="text-muted">Résous les centres latéraux sans défaire le dessus</small>
-  </div>
-  <div class="row g-3 mb-4">
-    {% for case in groupe %}
-    <div class="col-12 col-sm-6 col-lg-4">
-      <div class="case-card h-100 bg-white">
-        <div class="twisty-wrap">
-          <twisty-player
-            puzzle="{{ cubing_puzzle }}"
-            alg="{{ case.algorithm }}"
-            experimental-setup-alg="{{ case.get_setup_alg }}"
-            visualization="3D"
-            background="none"
-            control-panel="bottom-row"
-            {% if stickering.type == 'preset' %}
-              experimental-stickering="{{ stickering.value }}"
-            {% else %}
-              experimental-stickering-mask-orbits="{{ stickering.value }}"
-            {% endif %}
-            camera-longitude="{{ case.camera_longitude|default:'-25' }}"
-            camera-latitude="{{ case.camera_latitude|default:'22' }}"
-            style="width:220px;height:220px;">
-          </twisty-player>
+    <!-- ── Objectif ──────────────────────────────────────────────────────── -->
+    <div class="card p-4 mb-4">
+        <h3 class="brand-green">🎯 Objectif</h3>
+        <p>
+            Chaque face du 4×4 a <strong>4 pièces centrales</strong> à assembler.
+            L'objectif de cette étape est de former un bloc de 4 stickers de la même
+            couleur sur chacune des 6 faces — comme ceci :
+        </p>
+        <div class="row mt-3 align-items-center">
+            <div class="col-md-4 text-center">
+                <div id="cube-centers-goal" class="cube-case"></div>
+                <p class="mt-2 small text-muted">Les 6 centres complétés</p>
+            </div>
+            <div class="col-md-8">
+                <div class="alert alert-info">
+                    <strong>À retenir :</strong> une fois les centres placés,
+                    les arêtes et les coins peuvent encore être n'importe où —
+                    c'est normal! On s'en occupe aux étapes suivantes.
+                </div>
+            </div>
         </div>
-        <div class="px-3 py-2 text-center">
-          <div class="algo-badge mb-2">{{ case.algorithm }}</div>
-          <p class="text-muted small mb-0">{{ case.name }}</p>
-        </div>
-        {% if case.tip %}<div class="tip-box"><i class="bi-lightbulb-fill flex-shrink-0 mt-1"></i><span>{{ case.tip }}</span></div>{% endif %}
-      </div>
     </div>
-    {% endfor %}
-  </div>
-  {% endif %}{% endwith %}
 
-  {# ── Technique : Échanger (cas 7+) ───────────────────────────── #}
-  {% with groupe=cases|slice:"6:" %}{% if groupe %}
-  <div class="technique-header">
-    <h2 class="h5 fw-bold mb-0">
-      <i class="bi-arrow-left-right text-danger me-2"></i>Échanger
-    </h2>
-    <small class="text-muted">Les deux derniers centres sont inversés</small>
-  </div>
-  <div class="row g-3 mb-4">
-    {% for case in groupe %}
-    <div class="col-12 col-sm-6 col-lg-4">
-      <div class="case-card h-100 bg-white">
-        <div class="twisty-wrap">
-          <twisty-player
-            puzzle="{{ cubing_puzzle }}"
-            alg="{{ case.algorithm }}"
-            experimental-setup-alg="{{ case.get_setup_alg }}"
-            visualization="3D"
-            background="none"
-            control-panel="bottom-row"
-            {% if stickering.type == 'preset' %}
-              experimental-stickering="{{ stickering.value }}"
-            {% else %}
-              experimental-stickering-mask-orbits="{{ stickering.value }}"
-            {% endif %}
-            camera-longitude="{{ case.camera_longitude|default:'-25' }}"
-            camera-latitude="{{ case.camera_latitude|default:'22' }}"
-            style="width:220px;height:220px;">
-          </twisty-player>
+    <!-- ── Concept clé ───────────────────────────────────────────────────── -->
+    <div class="card p-4 mb-4 border-warning">
+        <h3 class="brand-green">🔑 La grande différence avec le 3×3</h3>
+        <div class="row">
+            <div class="col-md-6">
+                <p>
+                    Sur un <strong>3×3</strong>, le centre de chaque face est une
+                    seule pièce fixe qui ne bouge jamais — il sert de référence
+                    pour toutes les autres pièces.
+                </p>
+                <p>
+                    Sur un <strong>4×4</strong>, il n'y a pas de pièce centrale
+                    unique. Chaque face a <strong>4 pièces centrales</strong> qui
+                    peuvent toutes bouger librement.
+                </p>
+                <p>
+                    Cela veut dire que <strong>c'est vous qui décidez</strong>
+                    quelle couleur va sur quelle face — du moins pour les deux premières!
+                </p>
+            </div>
+            <div class="col-md-6">
+                <div class="alert alert-warning">
+                    <h5>⚠️ Attention aux couleurs opposées</h5>
+                    <p class="mb-1">
+                        Sur un cube standard, les couleurs opposées sont toujours :
+                    </p>
+                    <ul class="mb-0">
+                        <li>Blanc ↔ Jaune</li>
+                        <li>Rouge ↔ Orange</li>
+                        <li>Vert ↔ Bleu</li>
+                    </ul>
+                    <p class="mt-2 mb-0 small">
+                        Si vous ignorez ça, vous pouvez finir avec le rouge en face
+                        du vert — impossible à résoudre correctement!
+                    </p>
+                </div>
+            </div>
         </div>
-        <div class="px-3 py-2 text-center">
-          <div class="algo-badge mb-2">{{ case.algorithm }}</div>
-          <p class="text-muted small mb-0">{{ case.name }}</p>
-        </div>
-        {% if case.tip %}<div class="tip-box"><i class="bi-lightbulb-fill flex-shrink-0 mt-1"></i><span>{{ case.tip }}</span></div>{% endif %}
-      </div>
     </div>
-    {% endfor %}
-  </div>
-  {% endif %}{% endwith %}
 
-{% else %}
-<div class="alert alert-secondary text-center py-5">
-  <i class="bi-hourglass-split fs-1 d-block mb-2"></i>
-  <strong>Contenu à venir</strong>
-  <p class="mb-0 text-muted">Les animations pour cette étape seront ajoutées prochainement.</p>
+<!-- ── Orientation de référence ──────────────────────────────────────── -->
+    <div class="card p-4 mb-4 border-success">
+        <h3 class="brand-green">🏳️ Notre orientation de référence</h3>
+        <p>
+            Contrairement à la plupart des tutoriels qui placent le blanc en bas,
+            <strong>Francontcube utilise le jaune en bas et le blanc en haut</strong>.
+            Ce choix n'est pas anodin — il reflète notre identité!
+        </p>
+        <div class="row mt-3">
+            <div class="col-md-6">
+                <div class="alert alert-success mb-0">
+                    <h6 class="fw-bold">🟢 Face avant — Drapeau franco-ontarien</h6>
+                    <p class="mb-0 small">
+                        Le <strong>vert</strong> devant, le <strong>blanc</strong> en haut
+                        et le <strong>rouge</strong> à droite — les couleurs du drapeau
+                        franco-ontarien sont visibles dès qu'on tient le cube.
+                    </p>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="alert alert-danger mb-0">
+                    <h6 class="fw-bold">🍁 Face droite — Drapeau canadien</h6>
+                    <p class="mb-0 small">
+                        Le <strong>rouge</strong> à droite et le <strong>blanc</strong>
+                        en haut rappellent les couleurs du drapeau canadien —
+                        notre appartenance nationale.
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="alert alert-light border mt-3 mb-0 text-center">
+            <strong>Orientation standard Francontcube :</strong>
+            Jaune en bas · Blanc en haut · Vert devant · Bleu derrière · Rouge à droite · Orange à gauche
+        </div>
+    </div>
+
+    <!-- ── Ordre recommandé ──────────────────────────────────────────────── -->
+    <div class="card p-4 mb-4">
+        <h3 class="brand-green">📋 Ordre recommandé</h3>
+        <p>
+            Suivez toujours cet ordre — les premiers centres se font sans contraintes,
+            ce qui simplifie beaucoup le travail.
+        </p>
+        <div class="row mt-3 g-3">
+            <div class="col-md-3">
+                <div class="card h-100 border-warning">
+                    <div class="card-header bg-warning text-dark">
+                        <strong>1. Jaune</strong>
+                    </div>
+                    <div class="card-body small">
+                        Commencez par le jaune en bas.
+                        Aucune contrainte — placez librement.
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card h-100 border-success">
+                    <div class="card-header bg-success text-white">
+                        <strong>2. Blanc</strong>
+                    </div>
+                    <div class="card-body small">
+                        Blanc en haut, en face du jaune.
+                        Encore facile — une seule contrainte.
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card h-100 border-primary">
+                    <div class="card-header bg-primary text-white">
+                        <strong>3. Rouge + Orange</strong>
+                    </div>
+                    <div class="card-body small">
+                        Rouge et orange doivent être en face
+                        l'un de l'autre. Respectez les positions relatives.
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card h-100 border-info">
+                    <div class="card-header bg-info text-white">
+                        <strong>4. Vert + Bleu</strong>
+                    </div>
+                    <div class="card-body small">
+                        Les deux derniers — plus délicats car
+                        chaque mouvement affecte l'autre.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    
+    <!-- ── Notation wide moves ───────────────────────────────────────────── -->
+    <div class="card p-4 mb-4">
+        <h3 class="brand-green">📐 Nouveaux mouvements — Les Wide Moves</h3>
+        <p>
+            Le 4×4 introduit des mouvements qui tournent <strong>deux couches
+            à la fois</strong>. On les appelle <em>wide moves</em>.
+        </p>
+        <div class="row mt-3 align-items-start">
+            <div class="col-md-6">
+                <table class="table table-sm table-bordered">
+                    <thead class="table-light">
+                        <tr><th>Mouvement</th><th>Signification</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><svg class="move-icon"><use href="#Rw-4"/></svg></td>
+                            <td>Les 2 couches droites ensemble</td>
+                        </tr>
+                        <tr>
+                            <td><svg class="move-icon"><use href="#Lw-4"/></svg></td>
+                            <td>Les 2 couches gauches ensemble</td>
+                        </tr>
+                        <tr>
+                            <td><svg class="move-icon"><use href="#Uw-4"/></svg></td>
+                            <td>Les 2 couches supérieures ensemble</td>
+                        </tr>
+                        <tr>
+                            <td><svg class="move-icon"><use href="#Dw-4"/></svg></td>
+                            <td>Les 2 couches inférieures ensemble</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="col-md-6">
+                <div class="alert alert-light border">
+                    <p class="mb-1"><strong>Astuce de lecture :</strong></p>
+                    <p class="mb-1">
+                        <code>Rw</code> = <code>R</code> + la tranche intérieure droite
+                    </p>
+                    <p class="mb-0 small text-muted">
+                        Certains tutoriels écrivent <code>r</code> (minuscule)
+                        au lieu de <code>Rw</code> — c'est la même chose.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ── Technique 1 : Intuitif ─────────────────────────────────────────── -->
+    <div class="card p-4 mb-4 border-success">
+        <h3 class="brand-green">✋ Les 4 premiers centres — Intuitif</h3>
+        <p>
+            Pour le blanc, le jaune, et les deux premiers centres latéraux,
+            pas besoin d'algorithme. Observez les pièces et déplacez-les
+            logiquement. La seule règle : <strong>gardez blanc en bas
+            et jaune en haut pendant toute cette phase.</strong>
+        </p>
+        <div class="alert alert-success mt-3 mb-0">
+            <strong>💡 Conseil :</strong> Utilisez <code>Rw</code> et <code>Uw</code>
+            pour amener des pièces centrales sur la face du dessus sans déranger
+            les centres déjà complétés.
+        </div>
+    </div>
+
+    <!-- ── Technique 2 : Remplacement ────────────────────────────────────── -->
+    <div class="card p-4 mb-4 border-warning">
+        <h3 class="brand-green">🔄 Technique du Remplacement</h3>
+        <p>
+            Quand un centre est presque complet mais qu'il manque une pièce,
+            et que cette pièce est déjà sur une autre face, utilisez cette
+            technique pour l'insérer <strong>sans défaire ce qui est déjà fait.</strong>
+        </p>
+
+        <div class="row mt-3 align-items-center">
+            <div class="col-md-4 text-center">
+                <div id="cube-centers-remplacement" class="cube-case"></div>
+                <p class="mt-2 small text-muted">La pièce manquante est en haut</p>
+            </div>
+            <div class="col-md-8">
+                <div class="bg-white p-3 rounded border border-warning border-2">
+                    <h5>Algorithme :</h5>
+                    <div class="d-flex align-items-center gap-1 flex-wrap mb-3">
+                        <svg class="move-icon"><use href="#Rw-4"/></svg>
+                        <svg class="move-icon"><use href="#U-4"/></svg>
+                        <svg class="move-icon"><use href="#Rw-prime-4"/></svg>
+                        <svg class="move-icon"><use href="#U-prime-4"/></svg>
+                        <svg class="move-icon"><use href="#Rw-4"/></svg>
+                        <svg class="move-icon"><use href="#U-prime-4"/></svg>
+                        <svg class="move-icon"><use href="#Rw-prime-4"/></svg>
+                    </div>
+                    <ol class="mb-0 small">
+                        <li><strong>Rw</strong> — amène la pièce manquante dans la tranche</li>
+                        <li><strong>U U'</strong> — positionne sans casser les centres latéraux</li>
+                        <li><strong>Rw'</strong> — insère la pièce à sa place</li>
+                    </ol>
+                </div>
+                <div class="alert alert-light border mt-3 mb-0">
+                    Ce mouvement déplace une pièce centrale de la face U vers la
+                    face R <strong>sans toucher</strong> les coins ni les arêtes.
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ── Technique 3 : Deux derniers centres ───────────────────────────── -->
+    <div class="card p-4 mb-4 border-danger">
+        <h3 class="brand-green">⚡ Les Deux Derniers Centres</h3>
+        <p>
+            Les deux derniers centres sont les plus délicats car chaque mouvement
+            sur l'une des faces affecte l'autre. La clé est d'utiliser
+            <code>Rw U2 Rw'</code> pour <strong>cycler des pièces entre
+            les deux faces</strong> sans toucher les quatre centres déjà complétés.
+        </p>
+
+        <div class="row mt-3 align-items-center">
+            <div class="col-md-4 text-center">
+                <div id="cube-centers-last-two" class="cube-case"></div>
+                <p class="mt-2 small text-muted">Un centre fait, un à compléter</p>
+            </div>
+            <div class="col-md-8">
+                <div class="bg-white p-3 rounded border border-danger border-2">
+                    <h5>Algorithme de base :</h5>
+                    <div class="d-flex align-items-center gap-1 flex-wrap mb-3">
+                        <svg class="move-icon"><use href="#Rw-4"/></svg>
+                        <svg class="move-icon"><use href="#U2-4"/></svg>
+                        <svg class="move-icon"><use href="#Rw-prime-4"/></svg>
+                    </div>
+                    <p class="small mb-0">
+                        Répétez en ajustant <code>U</code> entre chaque répétition
+                        pour amener les bonnes pièces en face.
+                    </p>
+                </div>
+                <div class="alert alert-warning mt-3 mb-0">
+                    <strong>⚠️ Rappel :</strong> <code>Rw</code> tourne
+                    <em>deux couches</em> — c'est différent du <code>R</code>
+                    simple du 3×3. Ne les confondez pas!
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ── Récapitulatif ─────────────────────────────────────────────────── -->
+    <div class="card p-4 mb-4 bg-light">
+        <h3 class="brand-green">✅ Vérification finale</h3>
+        <p>Avant de passer aux arêtes, vérifiez :</p>
+        <ul>
+            <li>Chaque face a <strong>4 stickers de la même couleur</strong> au centre</li>
+            <li>Blanc en bas, jaune en haut</li>
+            <li>Rouge en face d'orange, vert en face de bleu</li>
+        </ul>
+        <div class="alert alert-info mt-3 mb-0">
+            <strong>💡 Bon signe :</strong> Si vos centres sont corrects mais que
+            les arêtes semblent complètement mélangées autour — c'est parfaitement
+            normal! C'est exactement ce qu'on règle à l'étape suivante.
+        </div>
+    </div>
+
+    <!-- ── Navigation ────────────────────────────────────────────────────── -->
+    <div class="d-flex justify-content-between align-items-center mt-5 flex-wrap gap-2">
+        <a href="{% url home_url %}" class="btn btn-outline-secondary">
+            ← Vue d'ensemble 4×4
+        </a>
+        {% if next_step %}
+        <a href="{% url step_url next_step.slug %}" class="btn btn-success">
+            {{ next_step.name }} →
+        </a>
+        {% endif %}
+    </div>
+
 </div>
-{% endif %}
 
-{# Navigation précédent / suivant #}
-<div class="step-nav d-flex justify-content-between">
-  {% if prev_step %}
-  <a href="{% url step_url prev_step.slug %}" class="btn btn-outline-secondary">
-    <i class="bi-arrow-left"></i> {{ prev_step.name }}
-  </a>
-  {% else %}<div></div>{% endif %}
-  {% if next_step %}
-  <a href="{% url step_url next_step.slug %}" class="btn btn-primary">
-    {{ next_step.name }} <i class="bi-arrow-right"></i>
-  </a>
-  {% endif %}
-</div>
+<style>
+.cube-case svg { max-width: 220px; height: auto; }
+.move-icon { width: 56px; height: 75px; }
+.card { box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
+</style>
+
+<script type="module">
+  import { renderCube } from "{% static 'cube/js/cube_renderer.js' %}";
+
+  function mountCube(containerId, state) {
+    const container = document.getElementById(containerId);
+    if (!container) return;
+    container.innerHTML = '';
+    if (!state) {
+      container.innerHTML = `
+        <div class="alert alert-secondary text-center py-3">
+          <i class="bi bi-cube text-muted" style="font-size:2rem;"></i>
+          <p class="mb-0 mt-1 small text-muted">État non disponible</p>
+        </div>`;
+      return;
+    }
+    const template = document.getElementById("cube-template");
+    const clone    = template.content.cloneNode(true);
+    container.appendChild(clone);
+    const svg = container.querySelector("svg");
+    renderCube(svg, state);
+  }
+
+  document.addEventListener("DOMContentLoaded", () => {
+    mountCube("cube-centers-goal",         {{ state_goal|safe }});
+    mountCube("cube-centers-remplacement", {{ state_remplacement|safe }});
+    mountCube("cube-centers-last-two",     {{ state_last_two|safe }});
+  });
+</script>
 
 {% endblock %}

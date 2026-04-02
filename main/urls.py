@@ -31,17 +31,18 @@ from main.views.cfop.oll_intro import cfop_oll_intro
 from main.views.cfop.pll_intro import cfop_pll_intro
 
 # Other puzzles (2x2, 4x4, 5x5)
-from main.views.puzzles.home import puzzles_home
-from main.views.puzzles.puzzle_2x2 import (
-    puzzle_2x2_home,
-    puzzle_2x2_method,
-    puzzle_2x2_step,
-)
+#from main.views.puzzles.home import puzzles_home
+#from main.views.puzzles.puzzle_2x2 import (
+#    puzzle_2x2_home,
+#    puzzle_2x2_method,
+#    puzzle_2x2_step,
+#)
 from main.views.puzzles.puzzle_big_cubes import (
     puzzle_4x4_home,
     puzzle_4x4_step,
-    puzzle_5x5_home,
-    puzzle_5x5_step,
+    puzzle_4x4_ref
+#    puzzle_5x5_home,
+#    puzzle_5x5_step,
 )
 
 app_name = "main"
@@ -163,43 +164,24 @@ urlpatterns = [
     # ============================================================
 
     # ── Hub ────────────────────────────────────────────────────
-    path('puzzles/',
-         puzzles_home,
-         name='puzzles_home'),
+    #path('puzzles/',puzzles_home,name='puzzles_home'),
 
     # ── 2x2 ────────────────────────────────────────────────────
     # ⚠️ ORDRE IMPORTANT: Plus spécifique d'abord!
-    path('puzzles/2x2/',
-         puzzle_2x2_home,
-         name='2x2_home'),
-
-    path('puzzles/2x2/<str:method>/<str:step>/',
-         puzzle_2x2_step,
-         name='2x2_step'),
-
-    path('puzzles/2x2/<str:method>/',
-         puzzle_2x2_method,
-         name='2x2_method'),
+#    path('puzzles/2x2/',puzzle_2x2_home,name='2x2_home'),
+#    path('puzzles/2x2/<str:method>/<str:step>/',puzzle_2x2_step,name='2x2_step'),
+#    path('puzzles/2x2/<str:method>/',puzzle_2x2_method,name='2x2_method'),
 
     # ── 4x4 ────────────────────────────────────────────────────
     # ⚠️ ORDRE IMPORTANT: Plus spécifique d'abord!
-    path('puzzles/4x4/<str:step>/',
-         puzzle_4x4_step,
-         name='4x4_step'),
-
-    path('puzzles/4x4/',
-         puzzle_4x4_home,
-         name='4x4_home'),
+    path('puzzles/4x4/ref/<str:ref>/', puzzle_4x4_ref,  name='4x4_ref'),
+    path('puzzles/4x4/<str:step>/',    puzzle_4x4_step, name='4x4_step'),
+    path('puzzles/4x4/',               puzzle_4x4_home, name='4x4_home'),
 
     # ── 5x5 ────────────────────────────────────────────────────
     # ⚠️ ORDRE IMPORTANT: Plus spécifique d'abord!
-    path('puzzles/5x5/<str:step>/',
-         puzzle_5x5_step,
-         name='5x5_step'),
-
-    path('puzzles/5x5/',
-         puzzle_5x5_home,
-         name='5x5_home'),
+#    path('puzzles/5x5/<str:step>/', puzzle_5x5_step, name='5x5_step'),
+#    path('puzzles/5x5/', puzzle_5x5_home, name='5x5_home'),
 
     # ============================================================
     # OTHER METHODS (legacy - to be migrated)

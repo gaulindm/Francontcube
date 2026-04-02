@@ -1,0 +1,201 @@
+{% extends "main/partials/base.html" %}
+{% load static %}
+
+{% block title %}4×4 — Étape 9 : PLL Coins — Francontcube{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+
+    {% include "cube/partials/_4x4_cube_svg.html" %}
+    {% include "cube/partials/_4x4_moves_sprite.html" %}
+
+    <!-- ── Hero ──────────────────────────────────────────────────────────── -->
+    <div class="text-center mb-5">
+        <h1 class="hero-title">
+            <span class="brand-green">Étape 9 — PLL Coins</span>
+        </h1>
+        <p class="lead text-muted">
+            La face du haut est entièrement blanche — placez maintenant les
+            <strong>4 coins de la dernière couche</strong> à leur bonne position.
+        </p>
+    </div>
+
+    <!-- ── Objectif ──────────────────────────────────────────────────────── -->
+    <div class="card p-4 mb-4">
+        <h3 class="brand-green">🎯 Objectif</h3>
+        <p>
+            Chaque coin de la dernière couche doit se retrouver dans le bon coin —
+            c'est-à-dire que ses 3 couleurs correspondent aux 3 faces qu'il touche.
+            À la fin de cette étape, <strong>tous les coins sont à leur place</strong>
+            mais les arêtes peuvent encore être mélangées.
+        </p>
+        <div class="row mt-3 align-items-center">
+            <div class="col-md-4 text-center">
+                <div id="cube-pll-corners-goal" class="cube-case"></div>
+                <p class="mt-2 small text-muted">Coins permutés — arêtes à faire</p>
+            </div>
+            <div class="col-md-8">
+                <div class="alert alert-info mb-0">
+                    <strong>💡 Comment vérifier :</strong> Regardez les coins du haut
+                    de côté. Chaque coin doit avoir ses couleurs qui correspondent
+                    aux faces adjacentes, même si les arêtes à côté de lui sont encore
+                    dans le mauvais ordre.  La facon la plus simple de vérifier est de trouver des phares (headlights) sur les coins — deux couleurs identiques aux coins superieurs de la face.
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ── Trouver un coin bien placé ────────────────────────────────────── -->
+    <div class="card p-4 mb-4 border-warning">
+        <h3 class="brand-green">🔍 Étape 1 — Trouver les phares</h3>
+        <p>
+            Avant d'exécuter l'algorithme, il faut verifier le nombre de phares dans la couche du haut.
+        </p>
+        <div class="row mt-3 g-3">
+            <div class="col-md-6">
+                <div class="card h-100 border-danger">
+                    <div class="card-header bg-danger text-white">
+                        <strong>❌ Aucun phare</strong>
+                    </div>
+                    <div class="card-body">
+                        <div id="cube-pll-corners-no-headlights" class="cube-case mb-2 text-center"></div>
+                        <p class="small mb-0">
+                            Aucun phare dans la couche du haut. Exécutez l'algorithme une fois depuis n'importe quelle orientation — vous aurez alors un ensemble de phares.
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="card h-100 border-success">
+                    <div class="card-header bg-success text-white">
+                        <strong>✅ Un ensemble de phares</strong>
+                    </div>
+                    <div class="card-body">
+                        <div id="cube-pll-corners-one-headlight" class="cube-case mb-2 text-center"></div>
+                        <p class="small mb-0">
+                            Si vous avez un ensemble de phrase, tournez la couche du haut (U) pour placer les phares <strong>en avant</strong>.  Exécutez l'algorithme
+                            
+                        
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ── L'algorithme ───────────────────────────────────────────────────── -->
+    <div class="card p-4 mb-4 border-success">
+        <h3 class="brand-green">🔑 L'Algorithme — Permutation des Coins</h3>
+        <p>
+            Cet algorithme permute <strong>3 coins</strong> dans le sens antihoraire
+            (avant-droit → arrière-droit → avant-gauche) en laissant le coin
+            avant-droit-haut en place. Répétez jusqu'à ce que tous les coins soient
+            à leur bonne position.
+        </p>
+
+        <div class="row mt-3 align-items-center">
+            <div class="col-md-12">
+                <div class="bg-white p-3 rounded border border-success border-2">
+                    <h5>Algorithme :</h5>
+                    <div class="d-flex align-items-center gap-1 flex-wrap mb-3">
+                        <svg class="move-icon"><use href="#R-prime-4"/></svg>
+                        <svg class="move-icon"><use href="#U-4"/></svg>
+                        <svg class="move-icon"><use href="#L-prime-4"/></svg>
+                        <svg class="move-icon"><use href="#U2-4"/></svg>
+                        <svg class="move-icon"><use href="#R-4"/></svg>
+                        <svg class="move-icon"><use href="#U-prime-4"/></svg>
+                        <svg class="move-icon"><use href="#R-prime-4"/></svg>
+                        <svg class="move-icon"><use href="#U2-4"/></svg>
+                        <svg class="move-icon"><use href="#L-4"/></svg>
+                        <svg class="move-icon"><use href="#R-4"/></svg>
+                    </div>
+                    <p class="small mb-1 fw-bold">R' U L' U2 R U' R' U2 L R</p>
+                
+                </div>
+            </div>
+        </div>
+
+        <div class="alert alert-light border mt-4 mb-0">
+            <h6 class="fw-bold">Procédure complète :</h6>
+            <ol class="mb-0 small">
+                <li class="mb-1">Trouvez un coin déjà à sa bonne position (ou exécutez l'algo une fois si aucun).</li>
+                <li class="mb-1">Placez ce coin en <strong>avant-droit-haut</strong> avec un mouvement <code>U</code>.</li>
+                <li class="mb-1">Exécutez l'algorithme.</li>
+                <li class="mb-1">Vérifiez si tous les coins sont placés. Sinon, <strong>ne tournez pas U</strong> — réexécutez directement.</li>
+                <li>Maximum 2 répétitions sont nécessaires pour résoudre tous les coins.</li>
+            </ol>
+        </div>
+    </div>
+
+    <!-- ── Récapitulatif ─────────────────────────────────────────────────── -->
+    <div class="card p-4 mb-4 bg-light">
+        <h3 class="brand-green">✅ Vérification</h3>
+        <p>Avant de passer au PLL Arêtes, vérifiez :</p>
+        <ul>
+            <li>Chaque coin de la dernière couche a ses <strong>3 couleurs qui correspondent</strong> à ses 3 faces</li>
+            <li>La face du haut est toujours entièrement <strong>blanche</strong></li>
+            <li>Les deux premières couches sont toujours <strong>correctes</strong></li>
+        </ul>
+        <div class="alert alert-warning mt-3 mb-0">
+            <strong>⚠️ Les arêtes du haut sont encore mélangées</strong> — c'est
+            tout à fait normal et attendu à ce stade. C'est exactement ce qu'on
+            règle à l'étape suivante!
+        </div>
+    </div>
+
+    <!-- ── Navigation ────────────────────────────────────────────────────── -->
+    <div class="d-flex justify-content-between align-items-center mt-5 flex-wrap gap-2">
+        {% if prev_step %}
+        <a href="{% url step_url prev_step.slug %}" class="btn btn-outline-secondary">
+            ← {{ prev_step.name }}
+        </a>
+        {% else %}
+        <a href="{% url home_url %}" class="btn btn-outline-secondary">
+            ← Vue d'ensemble 4×4
+        </a>
+        {% endif %}
+        {% if next_step %}
+        <a href="{% url step_url next_step.slug %}" class="btn btn-success">
+            {{ next_step.name }} →
+        </a>
+        {% endif %}
+    </div>
+
+</div>
+
+<style>
+.cube-case svg { max-width: 220px; height: auto; }
+.move-icon { width: 56px; height: 75px; }
+.card { box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
+</style>
+
+<script type="module">
+  import { renderCube } from "{% static 'cube/js/cube_renderer.js' %}";
+
+  function mountCube(containerId, state) {
+    const container = document.getElementById(containerId);
+    if (!container) return;
+    container.innerHTML = '';
+    if (!state) {
+      container.innerHTML = `
+        <div class="alert alert-secondary text-center py-3">
+          <i class="bi bi-cube text-muted" style="font-size:2rem;"></i>
+          <p class="mb-0 mt-1 small text-muted">État non disponible</p>
+        </div>`;
+      return;
+    }
+    const template = document.getElementById("cube-template");
+    const clone    = template.content.cloneNode(true);
+    container.appendChild(clone);
+    const svg = container.querySelector("svg");
+    renderCube(svg, state);
+  }
+
+  document.addEventListener("DOMContentLoaded", () => {
+    mountCube("cube-pll-corners-goal", {{ state_pll_corners_goal|safe }});
+    mountCube("cube-pll-corners-no-headlights",  {{ state_pll_corners_no_headlights|safe }});
+    mountCube("cube-pll-corners-one-headlight", {{ state_pll_corners_one_headlight|safe }});
+  });
+</script>
+
+{% endblock %}

@@ -1,0 +1,261 @@
+{% extends "main/partials/base.html" %}
+{% load static %}
+
+{% block title %}4×4 — Étape 2 : Les Quatre Autres Centres — Francontcube{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+
+    {% include "cube/partials/_4x4_cube_svg.html" %}
+    {% include "cube/partials/_4x4_moves_sprite.html" %}
+
+    <!-- ── Hero ──────────────────────────────────────────────────────────── -->
+    <div class="text-center mb-5">
+        <h1 class="hero-title">
+            <span class="brand-green">Étape 2 — Les Quatre Autres Centres</span>
+        </h1>
+        <p class="lead text-muted">
+            Le jaune est en bas, le blanc est en haut. Maintenant, assemblez
+            les 4 centres latéraux sans défaire ce qui est déjà fait.
+        </p>
+    </div>
+
+    <!-- ── Rappel orientation ────────────────────────────────────────────── -->
+    <div class="card p-4 mb-4">
+        <h3 class="brand-green">🧭 Rappel — Gardez cette orientation</h3>
+        <div class="alert alert-light border mb-0 text-center">
+            <strong>Jaune en bas · Blanc en haut · Vert devant · Bleu derrière · Rouge à droite · Orange à gauche</strong>
+        </div>
+        <p class="mt-3 mb-0">
+            Pendant toute cette étape, <strong>ne retournez jamais le cube</strong>
+            de façon à mettre le jaune ou le blanc sur le côté. Si vous perdez
+            l'orientation, les couleurs opposées ne correspondront plus.
+        </p>
+    </div>
+
+    <!-- ── Objectif ──────────────────────────────────────────────────────── -->
+    <div class="card p-4 mb-4">
+        <h3 class="brand-green">🎯 Objectif</h3>
+        <p>
+            Assembler les 4 centres latéraux — Rouge, Orange, Vert et Bleu —
+            en respectant leurs positions relatives. À la fin, voici ce que vous
+            devriez avoir :
+        </p>
+        <div class="row mt-3 align-items-center">
+            <div class="col-md-4 text-center">
+                <div id="cube-goal" class="cube-case"></div>
+                <p class="mt-2 small text-muted">Les 6 centres complétés</p>
+            </div>
+            <div class="col-md-8">
+                <div class="alert alert-warning">
+                    <strong>⚠️ Attention aux couleurs opposées</strong>
+                    <ul class="mb-0 mt-2">
+                        <li>Rouge en face d'Orange</li>
+                        <li>Vert en face de Bleu</li>
+                    </ul>
+                    <p class="mt-2 mb-0 small">
+                        Si vous placez rouge en face de vert par erreur,
+                        le cube sera impossible à résoudre correctement!
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ── Ordre recommandé ──────────────────────────────────────────────── -->
+    <div class="card p-4 mb-4">
+        <h3 class="brand-green">📋 Ordre recommandé pour les 4 centres latéraux</h3>
+        <p>
+            Commencez par le Rouge et l'Orange — choisissez l'un, placez-le,
+            puis l'autre se fera naturellement de l'autre côté.
+            Ensuite Vert et Bleu, qui sont les plus délicats.
+        </p>
+        <div class="row mt-3 g-3">
+            <div class="col-md-6">
+                <div class="card h-100 border-danger">
+                    <div class="card-header bg-danger text-white">
+                        <strong>1. Rouge + Orange</strong>
+                    </div>
+                    <div class="card-body small">
+                        <p>Assemblez le rouge sur une face latérale.</p>
+                        <p class="mb-0">
+                            L'orange ira automatiquement en face. Utilisez
+                            <code>U</code>, <code>U'</code>, <code>Rw</code>
+                            et <code>Lw</code> librement — jaune et blanc
+                            sont protégés par leurs couches.
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="card h-100 border-success">
+                    <div class="card-header bg-success text-white">
+                        <strong>2. Vert + Bleu</strong>
+                    </div>
+                    <div class="card-body small">
+                        <p>Les deux derniers — utilisez la technique du remplacement.</p>
+                        <p class="mb-0">
+                            Chaque mouvement sur une face latérale peut affecter
+                            l'autre. Il faut être plus précis et utiliser
+                            les algorithmes ci-dessous.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ── Technique 1 : Remplacement ────────────────────────────────────── -->
+    <div class="card p-4 mb-4 border-warning">
+        <h3 class="brand-green">🔄 Technique du Remplacement</h3>
+        <p>
+            Quand un centre est presque complet mais qu'il manque une pièce,
+            et que cette pièce est sur une autre face, utilisez cette technique
+            pour l'insérer <strong>sans défaire ce qui est déjà fait.</strong>
+        </p>
+
+        <div class="row mt-3 align-items-center">
+            <div class="col-md-4 text-center">
+                <div id="cube-remplacement" class="cube-case"></div>
+                <p class="mt-2 small text-muted">La pièce manquante est en haut</p>
+            </div>
+            <div class="col-md-8">
+                <div class="bg-white p-3 rounded border border-warning border-2">
+                    <h5>Algorithme :</h5>
+                    <div class="d-flex align-items-center gap-1 flex-wrap mb-3">
+                        <svg class="move-icon"><use href="#Rw-4"/></svg>
+                        <svg class="move-icon"><use href="#U-4"/></svg>
+                        <svg class="move-icon"><use href="#Rw-prime-4"/></svg>
+                        <svg class="move-icon"><use href="#U-prime-4"/></svg>
+                        <svg class="move-icon"><use href="#Rw-4"/></svg>
+                        <svg class="move-icon"><use href="#U-prime-4"/></svg>
+                        <svg class="move-icon"><use href="#Rw-prime-4"/></svg>
+                    </div>
+                    <ol class="mb-0 small">
+                        <li><strong>Rw</strong> — amène la pièce manquante dans la tranche</li>
+                        <li><strong>U U'</strong> — positionne sans casser les centres latéraux</li>
+                        <li><strong>Rw'</strong> — insère la pièce à sa place</li>
+                    </ol>
+                </div>
+                <div class="alert alert-light border mt-3 mb-0">
+                    Ce mouvement déplace une pièce centrale de la face U vers
+                    la face R <strong>sans toucher</strong> les coins ni les arêtes.
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ── Technique 2 : Deux derniers centres ───────────────────────────── -->
+    <div class="card p-4 mb-4 border-danger">
+        <h3 class="brand-green">⚡ Les Deux Derniers Centres</h3>
+        <p>
+            Les deux derniers centres sont les plus délicats — chaque mouvement
+            sur l'une des faces affecte l'autre. La clé est de cycler des pièces
+            entre les deux faces <strong>sans toucher les quatre centres
+            déjà complétés.</strong>
+        </p>
+
+        <div class="row mt-3 align-items-center">
+            <div class="col-md-4 text-center">
+                <div id="cube-last-two" class="cube-case"></div>
+                <p class="mt-2 small text-muted">Un centre fait, un à compléter</p>
+            </div>
+            <div class="col-md-8">
+                <div class="bg-white p-3 rounded border border-danger border-2">
+                    <h5>Algorithme de base :</h5>
+                    <div class="d-flex align-items-center gap-1 flex-wrap mb-3">
+                        <svg class="move-icon"><use href="#Rw-4"/></svg>
+                        <svg class="move-icon"><use href="#U2-4"/></svg>
+                        <svg class="move-icon"><use href="#Rw-prime-4"/></svg>
+                    </div>
+                    <p class="small mb-2">
+                        Répétez en ajustant <code>U</code> entre chaque répétition
+                        pour amener les bonnes pièces en face.
+                    </p>
+                    <p class="small mb-0">
+                        Si une pièce est bloquée dans la mauvaise position,
+                        faites <code>U</code> pour la déplacer puis recommencez.
+                    </p>
+                </div>
+                <div class="alert alert-warning mt-3 mb-0">
+                    <strong>⚠️ Rappel :</strong> <code>Rw</code> tourne
+                    <em>deux couches</em> — différent du <code>R</code> simple
+                    du 3×3. Ne les confondez pas!
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ── Récapitulatif ─────────────────────────────────────────────────── -->
+    <div class="card p-4 mb-4 bg-light">
+        <h3 class="brand-green">✅ Vérification finale — Tous les centres</h3>
+        <p>Avant de passer aux arêtes, vérifiez :</p>
+        <ul>
+            <li>La face du bas a <strong>4 stickers jaunes</strong> au centre</li>
+            <li>La face du haut a <strong>4 stickers blancs</strong> au centre</li>
+            <li>Rouge en face d'orange, vert en face de bleu</li>
+            <li>Chaque face latérale a <strong>4 stickers de la même couleur</strong> au centre</li>
+        </ul>
+        <div class="alert alert-info mt-3 mb-0">
+            <strong>💡 Bon signe :</strong> Si vos centres sont corrects mais que
+            les arêtes semblent complètement mélangées — c'est parfaitement normal!
+            C'est exactement ce qu'on règle à l'étape suivante.
+        </div>
+    </div>
+
+    <!-- ── Navigation ────────────────────────────────────────────────────── -->
+    <div class="d-flex justify-content-between align-items-center mt-5 flex-wrap gap-2">
+        {% if prev_step %}
+        <a href="{% url step_url prev_step.slug %}" class="btn btn-outline-secondary">
+            ← {{ prev_step.name }}
+        </a>
+        {% else %}
+        <a href="{% url home_url %}" class="btn btn-outline-secondary">
+            ← Vue d'ensemble 4×4
+        </a>
+        {% endif %}
+        {% if next_step %}
+        <a href="{% url step_url next_step.slug %}" class="btn btn-success">
+            {{ next_step.name }} →
+        </a>
+        {% endif %}
+    </div>
+
+</div>
+
+<style>
+.cube-case svg { max-width: 220px; height: auto; }
+.move-icon { width: 56px; height: 75px; }
+.card { box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
+</style>
+
+<script type="module">
+  import { renderCube } from "{% static 'cube/js/cube_renderer.js' %}";
+
+  function mountCube(containerId, state) {
+    const container = document.getElementById(containerId);
+    if (!container) return;
+    container.innerHTML = '';
+    if (!state) {
+      container.innerHTML = `
+        <div class="alert alert-secondary text-center py-3">
+          <i class="bi bi-cube text-muted" style="font-size:2rem;"></i>
+          <p class="mb-0 mt-1 small text-muted">État non disponible</p>
+        </div>`;
+      return;
+    }
+    const template = document.getElementById("cube-template");
+    const clone    = template.content.cloneNode(true);
+    container.appendChild(clone);
+    const svg = container.querySelector("svg");
+    renderCube(svg, state);
+  }
+
+  document.addEventListener("DOMContentLoaded", () => {
+    mountCube("cube-goal",          {{ state_goal|safe }});
+    mountCube("cube-remplacement",  {{ state_remplacement|safe }});
+    mountCube("cube-last-two",      {{ state_last_two|safe }});
+  });
+</script>
+
+{% endblock %}

@@ -1,0 +1,251 @@
+{% extends "main/partials/base.html" %}
+{% load static %}
+
+{% block title %}4×4 — Étape 4 : Croix du Bas — Francontcube{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+
+    {% include "cube/partials/_4x4_cube_svg.html" %}
+    {% include "cube/partials/_4x4_moves_sprite.html" %}
+
+    <!-- ── Hero ──────────────────────────────────────────────────────────── -->
+    <div class="text-center mb-5">
+        <h1 class="hero-title">
+            <span class="brand-green">Étape 4 — Croix du Bas</span>
+        </h1>
+        <p class="lead text-muted">
+            Maintenant que le cube se comporte comme un 3×3, formez la
+            <strong>croix jaune sur la face du bas</strong>.
+        </p>
+    </div>
+
+    <!-- ── Transition 4x4 → 3x3 ─────────────────────────────────────────── -->
+    <div class="card p-4 mb-4 border-success">
+        <h3 class="brand-green">🔁 Le cube est maintenant un 3×3</h3>
+        <p>
+            Félicitations — les centres sont en place et toutes les arêtes sont
+            appariées. À partir d'ici, vous pouvez ignorer la structure interne
+            du 4×4 et résoudre le cube <strong>exactement comme un 3×3</strong>.
+        </p>
+        <div class="alert alert-warning mb-0">
+            <strong>⚠️ Règle importante :</strong> N'utilisez plus de <code>Rw</code>,
+            <code>Lw</code>, <code>Uw</code> ni <code>Dw</code> à partir de maintenant —
+            ces mouvements dérangeraient vos centres et vos arêtes appariées. Utilisez
+            uniquement les mouvements standard : <code>R R' R2 L L' L2 U U' U2 D D' D2 F F' F2 B B' B2</code>.
+        </div>
+    </div>
+
+    <!-- ── Objectif ──────────────────────────────────────────────────────── -->
+    <div class="card p-4 mb-4">
+        <h3 class="brand-green">🎯 Objectif</h3>
+        <p>
+            Former une <strong>croix jaune sur la face du bas</strong> — les quatre
+            arêtes du bas doivent avoir leur sticker jaune orienté vers le bas.
+            Les coins du bas ne sont pas encore placés, c'est normal!
+        </p>
+        <div class="row mt-3 align-items-center">
+            <div class="col-md-4 text-center">
+                <div id="cube-cross-goal" class="cube-case"></div>
+                <p class="mt-2 small text-muted">Croix jaune complétée sur la face du bas</p>
+            </div>
+            <div class="col-md-8">
+                <div class="alert alert-info mb-0">
+                    <strong>💡 À retenir :</strong> La croix du bas signifie que les 4
+                    arêtes de la face jaune pointent vers le bas. Les stickers latéraux
+                    de ces arêtes ne sont pas encore alignés — on s'en occupera plus tard.
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ── Étape 1 : Croix intuitive ─────────────────────────────────────── -->
+    <div class="card p-4 mb-4 border-warning">
+        <h3 class="brand-green">✋ Phase 1 — Placer les arêtes jaunes (intuitif)</h3>
+        <p>
+            Commencez par repérer les 4 arêtes qui ont un sticker jaune et
+            amenez-les sur la face du bas <strong>une par une</strong> en utilisant
+            des mouvements intuitifs.
+        </p>
+        <div class="row mt-3 align-items-center">
+            <div class="col-md-4 text-center">
+                <div id="cube-cross-intuitive" class="cube-case"></div>
+                <p class="mt-2 small text-muted">Arête jaune prête à être insérée</p>
+            </div>
+            <div class="col-md-8">
+                <ol>
+                    <li class="mb-2">
+                        <strong>Repérez une arête avec un sticker jaune</strong> sur
+                        la face du haut ou sur une face latérale.
+                    </li>
+                    <li class="mb-2">
+                        <strong>Amenez-la au-dessus de sa position finale</strong>
+                        avec des mouvements <code>U</code>.
+                    </li>
+                    <li class="mb-2">
+                        <strong>Retournez-la vers le bas</strong> avec <code>F2</code>,
+                        <code>R2</code>, <code>L2</code> ou <code>B2</code>.
+                    </li>
+                    <li>
+                        <strong>Répétez</strong> pour les 3 autres arêtes jaunes.
+                    </li>
+                </ol>
+                <div class="alert alert-success mb-0">
+                    <strong>💡 Astuce :</strong> Si une arête est sur une face latérale
+                    avec le jaune orienté vers le côté, utilisez d'abord <code>F U F'</code>
+                    pour la monter sur la face du haut avant de la positionner.
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ── Technique : Arête retournée ───────────────────────────────────── 
+    <div class="card p-4 mb-4 border-danger">
+        <h3 class="brand-green">🔄 Arête jaune retournée en bas</h3>
+        <p>
+            Si une arête jaune est déjà dans la croix du bas mais que son sticker
+            jaune pointe vers le côté (et non vers le bas), elle est <strong>mal
+            orientée</strong>. Utilisez cet algorithme pour la retourner sans
+            défaire les autres arêtes déjà placées.
+        </p>
+        <div class="row mt-3 align-items-center">
+            <div class="col-md-4 text-center">
+                <div id="cube-cross-flip" class="cube-case"></div>
+                <p class="mt-2 small text-muted">Arête mal orientée — sticker jaune sur le côté</p>
+            </div>
+            <div class="col-md-8">
+                <div class="bg-white p-3 rounded border border-danger border-2">
+                    <h5>Algorithme — Retourner l'arête avant-bas :</h5>
+                    <div class="d-flex align-items-center gap-1 flex-wrap mb-3">
+                        <svg class="move-icon"><use href="#F-4"/></svg>
+                        <svg class="move-icon"><use href="#U-4"/></svg>
+                        <svg class="move-icon"><use href="#R-4"/></svg>
+                        <svg class="move-icon"><use href="#U-prime-4"/></svg>
+                        <svg class="move-icon"><use href="#R-prime-4"/></svg>
+                        <svg class="move-icon"><use href="#F-prime-4"/></svg>
+                    </div>
+                    <p class="small mb-0">
+                        Placez l'arête mal orientée sur la face avant-bas, puis
+                        exécutez cet algorithme. L'arête sera retournée et correctement
+                        insérée dans la croix.
+                    </p>
+                </div>
+                <div class="alert alert-light border mt-3 mb-0">
+                    <strong>Alternative :</strong> Sortez simplement l'arête mal orientée
+                    avec <code>F</code>, repositionnez-la sur la face du haut avec
+                    <code>U</code>, puis réinsérez-la avec <code>F'</code>.
+                </div>
+            </div>
+        </div>
+    </div>
+
+     ── Technique : Croix directe ─────────────────────────────────────── 
+    <div class="card p-4 mb-4 border-success">
+        <h3 class="brand-green">⚡ Algorithme de croix directe</h3>
+        <p>
+            Si toutes les arêtes jaunes sont sur la face du haut mais que aucune
+            n'est encore orientée vers le bas, cet algorithme crée directement
+            la croix en deux étapes.
+        </p>
+        <div class="row mt-3 align-items-center">
+            <div class="col-md-4 text-center">
+                <div id="cube-cross-direct" class="cube-case"></div>
+                <p class="mt-2 small text-muted">Arêtes jaunes en haut, à orienter</p>
+            </div>
+            <div class="col-md-8">
+                <div class="bg-white p-3 rounded border border-success border-2">
+                    <h5>Algorithme :</h5>
+                    <div class="d-flex align-items-center gap-1 flex-wrap mb-3">
+                        <svg class="move-icon"><use href="#F-4"/></svg>
+                        <svg class="move-icon"><use href="#R-4"/></svg>
+                        <svg class="move-icon"><use href="#U-4"/></svg>
+                        <svg class="move-icon"><use href="#R-prime-4"/></svg>
+                        <svg class="move-icon"><use href="#U-prime-4"/></svg>
+                        <svg class="move-icon"><use href="#F-prime-4"/></svg>
+                    </div>
+                    <p class="small mb-2">
+                        Répétez au besoin en ajustant la rotation <code>U</code>
+                        entre les répétitions pour aligner les arêtes.
+                    </p>
+                </div>
+                <div class="alert alert-info mt-3 mb-0">
+                    <strong>💡 Note :</strong> Cet algorithme est identique à celui
+                    utilisé pour la phase OLL — une fois mémorisé, il vous servira
+                    à plusieurs étapes de la résolution!
+                </div>
+            </div>
+        </div>
+    </div>-->
+
+    <!-- ── Récapitulatif ─────────────────────────────────────────────────── -->
+    <div class="card p-4 mb-4 bg-light">
+        <h3 class="brand-green">✅ Vérification</h3>
+        <p>Avant de passer aux coins du bas, vérifiez :</p>
+        <ul>
+            <li>La face du bas a une <strong>croix jaune visible</strong> (4 arêtes jaunes orientées vers le bas)</li>
+            <li>Les 4 centres jaunes sont <strong>toujours en place</strong></li>
+            <li>Les coins du bas peuvent être n'importe où — c'est normal</li>
+        </ul>
+        <div class="alert alert-warning mt-3 mb-0">
+            <strong>⚠️ Si une arête est dans la croix mais mal orientée :</strong>
+            Utilisez la technique "arête retournée" décrite ci-dessus avant de continuer.
+        </div>
+    </div>
+
+    <!-- ── Navigation ────────────────────────────────────────────────────── -->
+    <div class="d-flex justify-content-between align-items-center mt-5 flex-wrap gap-2">
+        {% if prev_step %}
+        <a href="{% url step_url prev_step.slug %}" class="btn btn-outline-secondary">
+            ← {{ prev_step.name }}
+        </a>
+        {% else %}
+        <a href="{% url home_url %}" class="btn btn-outline-secondary">
+            ← Vue d'ensemble 4×4
+        </a>
+        {% endif %}
+        {% if next_step %}
+        <a href="{% url step_url next_step.slug %}" class="btn btn-success">
+            {{ next_step.name }} →
+        </a>
+        {% endif %}
+    </div>
+
+</div>
+
+<style>
+.cube-case svg { max-width: 220px; height: auto; }
+.move-icon { width: 56px; height: 75px; }
+.card { box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
+</style>
+
+<script type="module">
+  import { renderCube } from "{% static 'cube/js/cube_renderer.js' %}";
+
+  function mountCube(containerId, state) {
+    const container = document.getElementById(containerId);
+    if (!container) return;
+    container.innerHTML = '';
+    if (!state) {
+      container.innerHTML = `
+        <div class="alert alert-secondary text-center py-3">
+          <i class="bi bi-cube text-muted" style="font-size:2rem;"></i>
+          <p class="mb-0 mt-1 small text-muted">État non disponible</p>
+        </div>`;
+      return;
+    }
+    const template = document.getElementById("cube-template");
+    const clone    = template.content.cloneNode(true);
+    container.appendChild(clone);
+    const svg = container.querySelector("svg");
+    renderCube(svg, state);
+  }
+
+  document.addEventListener("DOMContentLoaded", () => {
+    mountCube("cube-cross-goal",      {{ state_cross_goal|safe }});
+    mountCube("cube-cross-intuitive", {{ state_cross_intuitive|safe }});
+    mountCube("cube-cross-flip",      {{ state_cross_flip|safe }});
+    mountCube("cube-cross-direct",    {{ state_cross_direct|safe }});
+  });
+</script>
+
+{% endblock %}

@@ -1,0 +1,557 @@
+<!--all-cube_moves_sprite.svg-->
+<!--
+  Move icon sprite for big cubes (4×4, 5×5).
+  Each symbol is fully self-contained — no <use> inheritance.
+
+  ID conventions:
+    4×4 : #R-4, #R-prime-4, #Rw-4, #Rw-prime-4  etc.
+    5×5 : #R-5, #Rw-5                             etc.
+
+  4×4 grid geometry:
+    Box         : x=19 y=34 w=62 h=62
+    Col dividers: x = 34.5 | 50 | 65.5
+    Row dividers: y = 49.5 | 65 | 80.5
+    Col centres : x = 26.75 | 42.25 | 57.75 | 73.25
+    Row centres : y = 41.75 | 57.25 | 72.75 | 88.25
+
+  Arrow conventions:
+    R  / R'  : right col,    up / down
+    L  / L'  : left col,     down / up
+    U  / U'  : top row,      left / right
+    D  / D'  : bottom row,   right / left
+    F  / F'  : arc CW / CCW  (solid border)
+    B  / B'  : arc CCW / CW  (DASHED border = hidden face)
+    Wide moves: arrowhead on EVERY active slice line.
+-->
+<svg xmlns="http://www.w3.org/2000/svg">
+<defs>
+
+<!-- ── R ──────────────────────────────────────────────────── -->
+<symbol id="R-4" viewBox="0 0 100 100">
+  <text x="50" y="20" font-size="30" font-weight="700" text-anchor="middle" fill="currentColor">R</text>
+  <rect x="19" y="34" width="62" height="62" rx="5" fill="white" stroke="currentColor" stroke-width="2"/>
+  <line x1="34.5" y1="35.1" x2="34.5" y2="95" stroke="lightgray" stroke-width="1"/>
+  <line x1="50"   y1="35.1" x2="50"   y2="95" stroke="lightgray" stroke-width="1"/>
+  <line x1="65.5" y1="35.1" x2="65.5" y2="95" stroke="lightgray" stroke-width="1"/>
+  <line x1="20" y1="49.5" x2="79.9" y2="49.5" stroke="lightgray" stroke-width="1"/>
+  <line x1="20" y1="65"   x2="79.9" y2="65"   stroke="lightgray" stroke-width="1"/>
+  <line x1="20" y1="80.5" x2="79.9" y2="80.5" stroke="lightgray" stroke-width="1"/>
+  <line x1="73.25" y1="44.5" x2="73.25" y2="85.5" stroke="currentColor" stroke-width="3"/>
+  <polygon points="73.25,40 67.25,50 79.25,50" fill="currentColor"/>
+</symbol>
+<symbol id="R-prime-4" viewBox="0 0 100 100">
+  <text x="50" y="20" font-size="30" font-weight="700" text-anchor="middle" fill="currentColor">R'</text>
+  <rect x="19" y="34" width="62" height="62" rx="5" fill="white" stroke="currentColor" stroke-width="2"/>
+  <line x1="34.5" y1="35.1" x2="34.5" y2="95" stroke="lightgray" stroke-width="1"/>
+  <line x1="50"   y1="35.1" x2="50"   y2="95" stroke="lightgray" stroke-width="1"/>
+  <line x1="65.5" y1="35.1" x2="65.5" y2="95" stroke="lightgray" stroke-width="1"/>
+  <line x1="20" y1="49.5" x2="79.9" y2="49.5" stroke="lightgray" stroke-width="1"/>
+  <line x1="20" y1="65"   x2="79.9" y2="65"   stroke="lightgray" stroke-width="1"/>
+  <line x1="20" y1="80.5" x2="79.9" y2="80.5" stroke="lightgray" stroke-width="1"/>
+  <line x1="73.25" y1="44.5" x2="73.25" y2="85.5" stroke="currentColor" stroke-width="3"/>
+  <polygon points="73.25,90 67.25,80 79.25,80" fill="currentColor"/>
+</symbol>
+<symbol id="R2-4" viewBox="0 0 100 100">
+  <text x="50" y="20" font-size="30" font-weight="700" text-anchor="middle" fill="currentColor">R2</text>
+  <rect x="19" y="34" width="62" height="62" rx="5" fill="white" stroke="currentColor" stroke-width="2"/>
+  <line x1="34.5" y1="35.1" x2="34.5" y2="95" stroke="lightgray" stroke-width="1"/>
+  <line x1="50"   y1="35.1" x2="50"   y2="95" stroke="lightgray" stroke-width="1"/>
+  <line x1="65.5" y1="35.1" x2="65.5" y2="95" stroke="lightgray" stroke-width="1"/>
+  <line x1="20" y1="49.5" x2="79.9" y2="49.5" stroke="lightgray" stroke-width="1"/>
+  <line x1="20" y1="65"   x2="79.9" y2="65"   stroke="lightgray" stroke-width="1"/>
+  <line x1="20" y1="80.5" x2="79.9" y2="80.5" stroke="lightgray" stroke-width="1"/>
+  <line x1="73.25" y1="44.5" x2="73.25" y2="85.5" stroke="currentColor" stroke-width="3"/>
+  <polygon points="73.25,40 67.25,50 79.25,50" fill="currentColor"/>
+  <polygon points="73.25,50 67.25,60 79.25,60" fill="currentColor"/>
+</symbol>
+
+<!-- ── Rw (arrow on BOTH slices) ──────────────────────────── -->
+<symbol id="Rw-4" viewBox="0 0 100 100">
+  <text x="50" y="20" font-size="30" font-weight="700" text-anchor="middle" fill="currentColor">Rw</text>
+  <rect x="19" y="34" width="62" height="62" rx="5" fill="white" stroke="currentColor" stroke-width="2"/>
+  <line x1="34.5" y1="35.1" x2="34.5" y2="95" stroke="lightgray" stroke-width="1"/>
+  <line x1="50"   y1="35.1" x2="50"   y2="95" stroke="lightgray" stroke-width="1"/>
+  <line x1="65.5" y1="35.1" x2="65.5" y2="95" stroke="lightgray" stroke-width="1"/>
+  <line x1="20" y1="49.5" x2="79.9" y2="49.5" stroke="lightgray" stroke-width="1"/>
+  <line x1="20" y1="65"   x2="79.9" y2="65"   stroke="lightgray" stroke-width="1"/>
+  <line x1="20" y1="80.5" x2="79.9" y2="80.5" stroke="lightgray" stroke-width="1"/>
+  <line x1="57.75" y1="44.5" x2="57.75" y2="85.5" stroke="currentColor" stroke-width="3"/>
+  <line x1="73.25" y1="44.5" x2="73.25" y2="85.5" stroke="currentColor" stroke-width="3"/>
+  <polygon points="57.75,40 51.75,50 63.75,50" fill="currentColor"/>
+  <polygon points="73.25,40 67.25,50 79.25,50" fill="currentColor"/>
+</symbol>
+<symbol id="Rw-prime-4" viewBox="0 0 100 100">
+  <text x="50" y="20" font-size="30" font-weight="700" text-anchor="middle" fill="currentColor">Rw'</text>
+  <rect x="19" y="34" width="62" height="62" rx="5" fill="white" stroke="currentColor" stroke-width="2"/>
+  <line x1="34.5" y1="35.1" x2="34.5" y2="95" stroke="lightgray" stroke-width="1"/>
+  <line x1="50"   y1="35.1" x2="50"   y2="95" stroke="lightgray" stroke-width="1"/>
+  <line x1="65.5" y1="35.1" x2="65.5" y2="95" stroke="lightgray" stroke-width="1"/>
+  <line x1="20" y1="49.5" x2="79.9" y2="49.5" stroke="lightgray" stroke-width="1"/>
+  <line x1="20" y1="65"   x2="79.9" y2="65"   stroke="lightgray" stroke-width="1"/>
+  <line x1="20" y1="80.5" x2="79.9" y2="80.5" stroke="lightgray" stroke-width="1"/>
+  <line x1="57.75" y1="44.5" x2="57.75" y2="85.5" stroke="currentColor" stroke-width="3"/>
+  <line x1="73.25" y1="44.5" x2="73.25" y2="85.5" stroke="currentColor" stroke-width="3"/>
+  <polygon points="57.75,90 51.75,80 63.75,80" fill="currentColor"/>
+  <polygon points="73.25,90 67.25,80 79.25,80" fill="currentColor"/>
+</symbol>
+<symbol id="Rw2-4" viewBox="0 0 100 100">
+  <text x="50" y="20" font-size="30" font-weight="700" text-anchor="middle" fill="currentColor">Rw2</text>
+  <rect x="19" y="34" width="62" height="62" rx="5" fill="white" stroke="currentColor" stroke-width="2"/>
+  <line x1="34.5" y1="35.1" x2="34.5" y2="95" stroke="lightgray" stroke-width="1"/>
+  <line x1="50"   y1="35.1" x2="50"   y2="95" stroke="lightgray" stroke-width="1"/>
+  <line x1="65.5" y1="35.1" x2="65.5" y2="95" stroke="lightgray" stroke-width="1"/>
+  <line x1="20" y1="49.5" x2="79.9" y2="49.5" stroke="lightgray" stroke-width="1"/>
+  <line x1="20" y1="65"   x2="79.9" y2="65"   stroke="lightgray" stroke-width="1"/>
+  <line x1="20" y1="80.5" x2="79.9" y2="80.5" stroke="lightgray" stroke-width="1"/>
+  <line x1="57.75" y1="44.5" x2="57.75" y2="85.5" stroke="currentColor" stroke-width="3"/>
+  <line x1="73.25" y1="44.5" x2="73.25" y2="85.5" stroke="currentColor" stroke-width="3"/>
+  <polygon points="57.75,40 51.75,50 63.75,50" fill="currentColor"/>
+  <polygon points="57.75,50 51.75,60 63.75,60" fill="currentColor"/>
+  <polygon points="73.25,40 67.25,50 79.25,50" fill="currentColor"/>
+  <polygon points="73.25,50 67.25,60 79.25,60" fill="currentColor"/>
+</symbol>
+
+<!-- ── L ──────────────────────────────────────────────────── -->
+<symbol id="L-4" viewBox="0 0 100 100">
+  <text x="50" y="20" font-size="30" font-weight="700" text-anchor="middle" fill="currentColor">L</text>
+  <rect x="19" y="34" width="62" height="62" rx="5" fill="white" stroke="currentColor" stroke-width="2"/>
+  <line x1="34.5" y1="35.1" x2="34.5" y2="95" stroke="lightgray" stroke-width="1"/>
+  <line x1="50"   y1="35.1" x2="50"   y2="95" stroke="lightgray" stroke-width="1"/>
+  <line x1="65.5" y1="35.1" x2="65.5" y2="95" stroke="lightgray" stroke-width="1"/>
+  <line x1="20" y1="49.5" x2="79.9" y2="49.5" stroke="lightgray" stroke-width="1"/>
+  <line x1="20" y1="65"   x2="79.9" y2="65"   stroke="lightgray" stroke-width="1"/>
+  <line x1="20" y1="80.5" x2="79.9" y2="80.5" stroke="lightgray" stroke-width="1"/>
+  <line x1="26.75" y1="44.5" x2="26.75" y2="85.5" stroke="currentColor" stroke-width="3"/>
+  <polygon points="26.75,90 20.75,80 32.75,80" fill="currentColor"/>
+</symbol>
+<symbol id="L-prime-4" viewBox="0 0 100 100">
+  <text x="50" y="20" font-size="30" font-weight="700" text-anchor="middle" fill="currentColor">L'</text>
+  <rect x="19" y="34" width="62" height="62" rx="5" fill="white" stroke="currentColor" stroke-width="2"/>
+  <line x1="34.5" y1="35.1" x2="34.5" y2="95" stroke="lightgray" stroke-width="1"/>
+  <line x1="50"   y1="35.1" x2="50"   y2="95" stroke="lightgray" stroke-width="1"/>
+  <line x1="65.5" y1="35.1" x2="65.5" y2="95" stroke="lightgray" stroke-width="1"/>
+  <line x1="20" y1="49.5" x2="79.9" y2="49.5" stroke="lightgray" stroke-width="1"/>
+  <line x1="20" y1="65"   x2="79.9" y2="65"   stroke="lightgray" stroke-width="1"/>
+  <line x1="20" y1="80.5" x2="79.9" y2="80.5" stroke="lightgray" stroke-width="1"/>
+  <line x1="26.75" y1="44.5" x2="26.75" y2="85.5" stroke="currentColor" stroke-width="3"/>
+  <polygon points="26.75,40 20.75,50 32.75,50" fill="currentColor"/>
+</symbol>
+<symbol id="L2-4" viewBox="0 0 100 100">
+  <text x="50" y="20" font-size="30" font-weight="700" text-anchor="middle" fill="currentColor">L2</text>
+  <rect x="19" y="34" width="62" height="62" rx="5" fill="white" stroke="currentColor" stroke-width="2"/>
+  <line x1="34.5" y1="35.1" x2="34.5" y2="95" stroke="lightgray" stroke-width="1"/>
+  <line x1="50"   y1="35.1" x2="50"   y2="95" stroke="lightgray" stroke-width="1"/>
+  <line x1="65.5" y1="35.1" x2="65.5" y2="95" stroke="lightgray" stroke-width="1"/>
+  <line x1="20" y1="49.5" x2="79.9" y2="49.5" stroke="lightgray" stroke-width="1"/>
+  <line x1="20" y1="65"   x2="79.9" y2="65"   stroke="lightgray" stroke-width="1"/>
+  <line x1="20" y1="80.5" x2="79.9" y2="80.5" stroke="lightgray" stroke-width="1"/>
+  <line x1="26.75" y1="44.5" x2="26.75" y2="85.5" stroke="currentColor" stroke-width="3"/>
+  <polygon points="26.75,90 20.75,80 32.75,80" fill="currentColor"/>
+  <polygon points="26.75,80 20.75,70 32.75,70" fill="currentColor"/>
+</symbol>
+
+<!-- ── Lw (arrow on BOTH slices) ──────────────────────────── -->
+<symbol id="Lw-4" viewBox="0 0 100 100">
+  <text x="50" y="20" font-size="30" font-weight="700" text-anchor="middle" fill="currentColor">Lw</text>
+  <rect x="19" y="34" width="62" height="62" rx="5" fill="white" stroke="currentColor" stroke-width="2"/>
+  <line x1="34.5" y1="35.1" x2="34.5" y2="95" stroke="lightgray" stroke-width="1"/>
+  <line x1="50"   y1="35.1" x2="50"   y2="95" stroke="lightgray" stroke-width="1"/>
+  <line x1="65.5" y1="35.1" x2="65.5" y2="95" stroke="lightgray" stroke-width="1"/>
+  <line x1="20" y1="49.5" x2="79.9" y2="49.5" stroke="lightgray" stroke-width="1"/>
+  <line x1="20" y1="65"   x2="79.9" y2="65"   stroke="lightgray" stroke-width="1"/>
+  <line x1="20" y1="80.5" x2="79.9" y2="80.5" stroke="lightgray" stroke-width="1"/>
+  <line x1="26.75" y1="44.5" x2="26.75" y2="85.5" stroke="currentColor" stroke-width="3"/>
+  <line x1="42.25" y1="44.5" x2="42.25" y2="85.5" stroke="currentColor" stroke-width="3"/>
+  <polygon points="26.75,90 20.75,80 32.75,80" fill="currentColor"/>
+  <polygon points="42.25,90 36.25,80 48.25,80" fill="currentColor"/>
+</symbol>
+<symbol id="Lw-prime-4" viewBox="0 0 100 100">
+  <text x="50" y="20" font-size="30" font-weight="700" text-anchor="middle" fill="currentColor">Lw'</text>
+  <rect x="19" y="34" width="62" height="62" rx="5" fill="white" stroke="currentColor" stroke-width="2"/>
+  <line x1="34.5" y1="35.1" x2="34.5" y2="95" stroke="lightgray" stroke-width="1"/>
+  <line x1="50"   y1="35.1" x2="50"   y2="95" stroke="lightgray" stroke-width="1"/>
+  <line x1="65.5" y1="35.1" x2="65.5" y2="95" stroke="lightgray" stroke-width="1"/>
+  <line x1="20" y1="49.5" x2="79.9" y2="49.5" stroke="lightgray" stroke-width="1"/>
+  <line x1="20" y1="65"   x2="79.9" y2="65"   stroke="lightgray" stroke-width="1"/>
+  <line x1="20" y1="80.5" x2="79.9" y2="80.5" stroke="lightgray" stroke-width="1"/>
+  <line x1="26.75" y1="44.5" x2="26.75" y2="85.5" stroke="currentColor" stroke-width="3"/>
+  <line x1="42.25" y1="44.5" x2="42.25" y2="85.5" stroke="currentColor" stroke-width="3"/>
+  <polygon points="26.75,40 20.75,50 32.75,50" fill="currentColor"/>
+  <polygon points="42.25,40 36.25,50 48.25,50" fill="currentColor"/>
+</symbol>
+<symbol id="Lw2-4" viewBox="0 0 100 100">
+  <text x="50" y="20" font-size="30" font-weight="700" text-anchor="middle" fill="currentColor">Lw2</text>
+  <rect x="19" y="34" width="62" height="62" rx="5" fill="white" stroke="currentColor" stroke-width="2"/>
+  <line x1="34.5" y1="35.1" x2="34.5" y2="95" stroke="lightgray" stroke-width="1"/>
+  <line x1="50"   y1="35.1" x2="50"   y2="95" stroke="lightgray" stroke-width="1"/>
+  <line x1="65.5" y1="35.1" x2="65.5" y2="95" stroke="lightgray" stroke-width="1"/>
+  <line x1="20" y1="49.5" x2="79.9" y2="49.5" stroke="lightgray" stroke-width="1"/>
+  <line x1="20" y1="65"   x2="79.9" y2="65"   stroke="lightgray" stroke-width="1"/>
+  <line x1="20" y1="80.5" x2="79.9" y2="80.5" stroke="lightgray" stroke-width="1"/>
+  <line x1="26.75" y1="44.5" x2="26.75" y2="85.5" stroke="currentColor" stroke-width="3"/>
+  <line x1="42.25" y1="44.5" x2="42.25" y2="85.5" stroke="currentColor" stroke-width="3"/>
+  <polygon points="26.75,90 20.75,80 32.75,80" fill="currentColor"/>
+  <polygon points="26.75,80 20.75,70 32.75,70" fill="currentColor"/>
+  <polygon points="42.25,90 36.25,80 48.25,80" fill="currentColor"/>
+  <polygon points="42.25,80 36.25,70 48.25,70" fill="currentColor"/>
+</symbol>
+
+<!-- ── U ──────────────────────────────────────────────────── -->
+<symbol id="U-4" viewBox="0 0 100 100">
+  <text x="50" y="20" font-size="30" font-weight="700" text-anchor="middle" fill="currentColor">U</text>
+  <rect x="19" y="34" width="62" height="62" rx="5" fill="white" stroke="currentColor" stroke-width="2"/>
+  <line x1="34.5" y1="35.1" x2="34.5" y2="95" stroke="lightgray" stroke-width="1"/>
+  <line x1="50"   y1="35.1" x2="50"   y2="95" stroke="lightgray" stroke-width="1"/>
+  <line x1="65.5" y1="35.1" x2="65.5" y2="95" stroke="lightgray" stroke-width="1"/>
+  <line x1="20" y1="49.5" x2="79.9" y2="49.5" stroke="lightgray" stroke-width="1"/>
+  <line x1="20" y1="65"   x2="79.9" y2="65"   stroke="lightgray" stroke-width="1"/>
+  <line x1="20" y1="80.5" x2="79.9" y2="80.5" stroke="lightgray" stroke-width="1"/>
+  <line x1="21" y1="41.75" x2="79" y2="41.75" stroke="currentColor" stroke-width="3"/>
+  <polygon points="20,41.75 30,35.75 30,47.75" fill="currentColor"/>
+</symbol>
+<symbol id="U-prime-4" viewBox="0 0 100 100">
+  <text x="50" y="20" font-size="30" font-weight="700" text-anchor="middle" fill="currentColor">U'</text>
+  <rect x="19" y="34" width="62" height="62" rx="5" fill="white" stroke="currentColor" stroke-width="2"/>
+  <line x1="34.5" y1="35.1" x2="34.5" y2="95" stroke="lightgray" stroke-width="1"/>
+  <line x1="50"   y1="35.1" x2="50"   y2="95" stroke="lightgray" stroke-width="1"/>
+  <line x1="65.5" y1="35.1" x2="65.5" y2="95" stroke="lightgray" stroke-width="1"/>
+  <line x1="20" y1="49.5" x2="79.9" y2="49.5" stroke="lightgray" stroke-width="1"/>
+  <line x1="20" y1="65"   x2="79.9" y2="65"   stroke="lightgray" stroke-width="1"/>
+  <line x1="20" y1="80.5" x2="79.9" y2="80.5" stroke="lightgray" stroke-width="1"/>
+  <line x1="21" y1="41.75" x2="79" y2="41.75" stroke="currentColor" stroke-width="3"/>
+  <polygon points="80,41.75 70,35.75 70,47.75" fill="currentColor"/>
+</symbol>
+<symbol id="U2-4" viewBox="0 0 100 100">
+  <text x="50" y="20" font-size="30" font-weight="700" text-anchor="middle" fill="currentColor">U2</text>
+  <rect x="19" y="34" width="62" height="62" rx="5" fill="white" stroke="currentColor" stroke-width="2"/>
+  <line x1="34.5" y1="35.1" x2="34.5" y2="95" stroke="lightgray" stroke-width="1"/>
+  <line x1="50"   y1="35.1" x2="50"   y2="95" stroke="lightgray" stroke-width="1"/>
+  <line x1="65.5" y1="35.1" x2="65.5" y2="95" stroke="lightgray" stroke-width="1"/>
+  <line x1="20" y1="49.5" x2="79.9" y2="49.5" stroke="lightgray" stroke-width="1"/>
+  <line x1="20" y1="65"   x2="79.9" y2="65"   stroke="lightgray" stroke-width="1"/>
+  <line x1="20" y1="80.5" x2="79.9" y2="80.5" stroke="lightgray" stroke-width="1"/>
+  <line x1="21" y1="41.75" x2="79" y2="41.75" stroke="currentColor" stroke-width="3"/>
+  <polygon points="20,41.75 30,35.75 30,47.75" fill="currentColor"/>
+  <polygon points="30,41.75 40,35.75 40,47.75" fill="currentColor"/>
+</symbol>
+
+<!-- ── Uw (arrow on BOTH rows) ────────────────────────────── -->
+<symbol id="Uw-4" viewBox="0 0 100 100">
+  <text x="50" y="20" font-size="30" font-weight="700" text-anchor="middle" fill="currentColor">Uw</text>
+  <rect x="19" y="34" width="62" height="62" rx="5" fill="white" stroke="currentColor" stroke-width="2"/>
+  <line x1="34.5" y1="35.1" x2="34.5" y2="95" stroke="lightgray" stroke-width="1"/>
+  <line x1="50"   y1="35.1" x2="50"   y2="95" stroke="lightgray" stroke-width="1"/>
+  <line x1="65.5" y1="35.1" x2="65.5" y2="95" stroke="lightgray" stroke-width="1"/>
+  <line x1="20" y1="49.5" x2="79.9" y2="49.5" stroke="lightgray" stroke-width="1"/>
+  <line x1="20" y1="65"   x2="79.9" y2="65"   stroke="lightgray" stroke-width="1"/>
+  <line x1="20" y1="80.5" x2="79.9" y2="80.5" stroke="lightgray" stroke-width="1"/>
+  <line x1="21" y1="41.75" x2="79" y2="41.75" stroke="currentColor" stroke-width="3"/>
+  <line x1="21" y1="57.25" x2="79" y2="57.25" stroke="currentColor" stroke-width="3"/>
+  <polygon points="20,41.75 30,35.75 30,47.75" fill="currentColor"/>
+  <polygon points="20,57.25 30,51.25 30,63.25" fill="currentColor"/>
+</symbol>
+<symbol id="Uw-prime-4" viewBox="0 0 100 100">
+  <text x="50" y="20" font-size="30" font-weight="700" text-anchor="middle" fill="currentColor">Uw'</text>
+  <rect x="19" y="34" width="62" height="62" rx="5" fill="white" stroke="currentColor" stroke-width="2"/>
+  <line x1="34.5" y1="35.1" x2="34.5" y2="95" stroke="lightgray" stroke-width="1"/>
+  <line x1="50"   y1="35.1" x2="50"   y2="95" stroke="lightgray" stroke-width="1"/>
+  <line x1="65.5" y1="35.1" x2="65.5" y2="95" stroke="lightgray" stroke-width="1"/>
+  <line x1="20" y1="49.5" x2="79.9" y2="49.5" stroke="lightgray" stroke-width="1"/>
+  <line x1="20" y1="65"   x2="79.9" y2="65"   stroke="lightgray" stroke-width="1"/>
+  <line x1="20" y1="80.5" x2="79.9" y2="80.5" stroke="lightgray" stroke-width="1"/>
+  <line x1="21" y1="41.75" x2="79" y2="41.75" stroke="currentColor" stroke-width="3"/>
+  <line x1="21" y1="57.25" x2="79" y2="57.25" stroke="currentColor" stroke-width="3"/>
+  <polygon points="80,41.75 70,35.75 70,47.75" fill="currentColor"/>
+  <polygon points="80,57.25 70,51.25 70,63.25" fill="currentColor"/>
+</symbol>
+<symbol id="Uw2-4" viewBox="0 0 100 100">
+  <text x="50" y="20" font-size="30" font-weight="700" text-anchor="middle" fill="currentColor">Uw2</text>
+  <rect x="19" y="34" width="62" height="62" rx="5" fill="white" stroke="currentColor" stroke-width="2"/>
+  <line x1="34.5" y1="35.1" x2="34.5" y2="95" stroke="lightgray" stroke-width="1"/>
+  <line x1="50"   y1="35.1" x2="50"   y2="95" stroke="lightgray" stroke-width="1"/>
+  <line x1="65.5" y1="35.1" x2="65.5" y2="95" stroke="lightgray" stroke-width="1"/>
+  <line x1="20" y1="49.5" x2="79.9" y2="49.5" stroke="lightgray" stroke-width="1"/>
+  <line x1="20" y1="65"   x2="79.9" y2="65"   stroke="lightgray" stroke-width="1"/>
+  <line x1="20" y1="80.5" x2="79.9" y2="80.5" stroke="lightgray" stroke-width="1"/>
+  <line x1="21" y1="41.75" x2="79" y2="41.75" stroke="currentColor" stroke-width="3"/>
+  <line x1="21" y1="57.25" x2="79" y2="57.25" stroke="currentColor" stroke-width="3"/>
+  <polygon points="20,41.75 30,35.75 30,47.75" fill="currentColor"/>
+  <polygon points="30,41.75 40,35.75 40,47.75" fill="currentColor"/>
+  <polygon points="20,57.25 30,51.25 30,63.25" fill="currentColor"/>
+  <polygon points="30,57.25 40,51.25 40,63.25" fill="currentColor"/>
+</symbol>
+
+<!-- ── D ──────────────────────────────────────────────────── -->
+<symbol id="D-4" viewBox="0 0 100 100">
+  <text x="50" y="20" font-size="30" font-weight="700" text-anchor="middle" fill="currentColor">D</text>
+  <rect x="19" y="34" width="62" height="62" rx="5" fill="white" stroke="currentColor" stroke-width="2"/>
+  <line x1="34.5" y1="35.1" x2="34.5" y2="95" stroke="lightgray" stroke-width="1"/>
+  <line x1="50"   y1="35.1" x2="50"   y2="95" stroke="lightgray" stroke-width="1"/>
+  <line x1="65.5" y1="35.1" x2="65.5" y2="95" stroke="lightgray" stroke-width="1"/>
+  <line x1="20" y1="49.5" x2="79.9" y2="49.5" stroke="lightgray" stroke-width="1"/>
+  <line x1="20" y1="65"   x2="79.9" y2="65"   stroke="lightgray" stroke-width="1"/>
+  <line x1="20" y1="80.5" x2="79.9" y2="80.5" stroke="lightgray" stroke-width="1"/>
+  <line x1="21" y1="88.25" x2="79" y2="88.25" stroke="currentColor" stroke-width="3"/>
+  <polygon points="80,88.25 70,82.25 70,94.25" fill="currentColor"/>
+</symbol>
+<symbol id="D-prime-4" viewBox="0 0 100 100">
+  <text x="50" y="20" font-size="30" font-weight="700" text-anchor="middle" fill="currentColor">D'</text>
+  <rect x="19" y="34" width="62" height="62" rx="5" fill="white" stroke="currentColor" stroke-width="2"/>
+  <line x1="34.5" y1="35.1" x2="34.5" y2="95" stroke="lightgray" stroke-width="1"/>
+  <line x1="50"   y1="35.1" x2="50"   y2="95" stroke="lightgray" stroke-width="1"/>
+  <line x1="65.5" y1="35.1" x2="65.5" y2="95" stroke="lightgray" stroke-width="1"/>
+  <line x1="20" y1="49.5" x2="79.9" y2="49.5" stroke="lightgray" stroke-width="1"/>
+  <line x1="20" y1="65"   x2="79.9" y2="65"   stroke="lightgray" stroke-width="1"/>
+  <line x1="20" y1="80.5" x2="79.9" y2="80.5" stroke="lightgray" stroke-width="1"/>
+  <line x1="21" y1="88.25" x2="79" y2="88.25" stroke="currentColor" stroke-width="3"/>
+  <polygon points="20,88.25 30,82.25 30,94.25" fill="currentColor"/>
+</symbol>
+<symbol id="D2-4" viewBox="0 0 100 100">
+  <text x="50" y="20" font-size="30" font-weight="700" text-anchor="middle" fill="currentColor">D2</text>
+  <rect x="19" y="34" width="62" height="62" rx="5" fill="white" stroke="currentColor" stroke-width="2"/>
+  <line x1="34.5" y1="35.1" x2="34.5" y2="95" stroke="lightgray" stroke-width="1"/>
+  <line x1="50"   y1="35.1" x2="50"   y2="95" stroke="lightgray" stroke-width="1"/>
+  <line x1="65.5" y1="35.1" x2="65.5" y2="95" stroke="lightgray" stroke-width="1"/>
+  <line x1="20" y1="49.5" x2="79.9" y2="49.5" stroke="lightgray" stroke-width="1"/>
+  <line x1="20" y1="65"   x2="79.9" y2="65"   stroke="lightgray" stroke-width="1"/>
+  <line x1="20" y1="80.5" x2="79.9" y2="80.5" stroke="lightgray" stroke-width="1"/>
+  <line x1="21" y1="88.25" x2="79" y2="88.25" stroke="currentColor" stroke-width="3"/>
+  <polygon points="80,88.25 70,82.25 70,94.25" fill="currentColor"/>
+  <polygon points="70,88.25 60,82.25 60,94.25" fill="currentColor"/>
+</symbol>
+
+<!-- ── Dw (arrow on BOTH rows) ────────────────────────────── -->
+<symbol id="Dw-4" viewBox="0 0 100 100">
+  <text x="50" y="20" font-size="30" font-weight="700" text-anchor="middle" fill="currentColor">Dw</text>
+  <rect x="19" y="34" width="62" height="62" rx="5" fill="white" stroke="currentColor" stroke-width="2"/>
+  <line x1="34.5" y1="35.1" x2="34.5" y2="95" stroke="lightgray" stroke-width="1"/>
+  <line x1="50"   y1="35.1" x2="50"   y2="95" stroke="lightgray" stroke-width="1"/>
+  <line x1="65.5" y1="35.1" x2="65.5" y2="95" stroke="lightgray" stroke-width="1"/>
+  <line x1="20" y1="49.5" x2="79.9" y2="49.5" stroke="lightgray" stroke-width="1"/>
+  <line x1="20" y1="65"   x2="79.9" y2="65"   stroke="lightgray" stroke-width="1"/>
+  <line x1="20" y1="80.5" x2="79.9" y2="80.5" stroke="lightgray" stroke-width="1"/>
+  <line x1="21" y1="72.75" x2="79" y2="72.75" stroke="currentColor" stroke-width="3"/>
+  <line x1="21" y1="88.25" x2="79" y2="88.25" stroke="currentColor" stroke-width="3"/>
+  <polygon points="80,72.75 70,66.75 70,78.75" fill="currentColor"/>
+  <polygon points="80,88.25 70,82.25 70,94.25" fill="currentColor"/>
+</symbol>
+<symbol id="Dw-prime-4" viewBox="0 0 100 100">
+  <text x="50" y="20" font-size="30" font-weight="700" text-anchor="middle" fill="currentColor">Dw'</text>
+  <rect x="19" y="34" width="62" height="62" rx="5" fill="white" stroke="currentColor" stroke-width="2"/>
+  <line x1="34.5" y1="35.1" x2="34.5" y2="95" stroke="lightgray" stroke-width="1"/>
+  <line x1="50"   y1="35.1" x2="50"   y2="95" stroke="lightgray" stroke-width="1"/>
+  <line x1="65.5" y1="35.1" x2="65.5" y2="95" stroke="lightgray" stroke-width="1"/>
+  <line x1="20" y1="49.5" x2="79.9" y2="49.5" stroke="lightgray" stroke-width="1"/>
+  <line x1="20" y1="65"   x2="79.9" y2="65"   stroke="lightgray" stroke-width="1"/>
+  <line x1="20" y1="80.5" x2="79.9" y2="80.5" stroke="lightgray" stroke-width="1"/>
+  <line x1="21" y1="72.75" x2="79" y2="72.75" stroke="currentColor" stroke-width="3"/>
+  <line x1="21" y1="88.25" x2="79" y2="88.25" stroke="currentColor" stroke-width="3"/>
+  <polygon points="20,72.75 30,66.75 30,78.75" fill="currentColor"/>
+  <polygon points="20,88.25 30,82.25 30,94.25" fill="currentColor"/>
+</symbol>
+
+<!-- ── F (solid border = front/visible face) ──────────────── -->
+<symbol id="F-4" viewBox="0 0 100 100">
+  <text x="50" y="20" font-size="30" font-weight="700" text-anchor="middle" fill="currentColor">F</text>
+  <rect x="19" y="34" width="62" height="62" rx="5" fill="white" stroke="currentColor" stroke-width="2"/>
+  <line x1="34.5" y1="35.1" x2="34.5" y2="95" stroke="lightgray" stroke-width="1"/>
+  <line x1="50"   y1="35.1" x2="50"   y2="95" stroke="lightgray" stroke-width="1"/>
+  <line x1="65.5" y1="35.1" x2="65.5" y2="95" stroke="lightgray" stroke-width="1"/>
+  <line x1="20" y1="49.5" x2="79.9" y2="49.5" stroke="lightgray" stroke-width="1"/>
+  <line x1="20" y1="65"   x2="79.9" y2="65"   stroke="lightgray" stroke-width="1"/>
+  <line x1="20" y1="80.5" x2="79.9" y2="80.5" stroke="lightgray" stroke-width="1"/>
+  <path d="M 50 83 A 18 18 0 1 1 68 65" stroke="currentColor" stroke-width="3" fill="none"/>
+  <polygon points="67.5,73 61.5,63 73.5,63" fill="currentColor"/>
+</symbol>
+<symbol id="F-prime-4" viewBox="0 0 100 100">
+  <text x="50" y="20" font-size="30" font-weight="700" text-anchor="middle" fill="currentColor">F'</text>
+  <rect x="19" y="34" width="62" height="62" rx="5" fill="white" stroke="currentColor" stroke-width="2"/>
+  <line x1="34.5" y1="35.1" x2="34.5" y2="95" stroke="lightgray" stroke-width="1"/>
+  <line x1="50"   y1="35.1" x2="50"   y2="95" stroke="lightgray" stroke-width="1"/>
+  <line x1="65.5" y1="35.1" x2="65.5" y2="95" stroke="lightgray" stroke-width="1"/>
+  <line x1="20" y1="49.5" x2="79.9" y2="49.5" stroke="lightgray" stroke-width="1"/>
+  <line x1="20" y1="65"   x2="79.9" y2="65"   stroke="lightgray" stroke-width="1"/>
+  <line x1="20" y1="80.5" x2="79.9" y2="80.5" stroke="lightgray" stroke-width="1"/>
+  <path d="M 50 83 A 18 18 0 1 0 32 65" stroke="currentColor" stroke-width="3" fill="none"/>
+  <polygon points="32.0,73 26.0,63 38.0,63" fill="currentColor"/>
+</symbol>
+<symbol id="F2-4" viewBox="0 0 100 100">
+  <text x="50" y="20" font-size="30" font-weight="700" text-anchor="middle" fill="currentColor">F2</text>
+  <rect x="19" y="34" width="62" height="62" rx="5" fill="white" stroke="currentColor" stroke-width="2"/>
+  <line x1="34.5" y1="35.1" x2="34.5" y2="95" stroke="lightgray" stroke-width="1"/>
+  <line x1="50"   y1="35.1" x2="50"   y2="95" stroke="lightgray" stroke-width="1"/>
+  <line x1="65.5" y1="35.1" x2="65.5" y2="95" stroke="lightgray" stroke-width="1"/>
+  <line x1="20" y1="49.5" x2="79.9" y2="49.5" stroke="lightgray" stroke-width="1"/>
+  <line x1="20" y1="65"   x2="79.9" y2="65"   stroke="lightgray" stroke-width="1"/>
+  <line x1="20" y1="80.5" x2="79.9" y2="80.5" stroke="lightgray" stroke-width="1"/>
+  <path d="M 50 83 A 18 18 0 1 1 68 65" stroke="currentColor" stroke-width="3" fill="none"/>
+  <polygon points="67.0,67 61.0,57 73.0,57" fill="currentColor"/>
+  <polygon points="67.5,74 61.5,64 73.5,64" fill="currentColor"/>
+</symbol>
+
+<!-- ── B (DASHED border = back/hidden face) ───────────────── -->
+<symbol id="B-4" viewBox="0 0 100 100">
+  <text x="50" y="20" font-size="30" font-weight="700" text-anchor="middle" fill="currentColor">B</text>
+  <rect x="19" y="34" width="62" height="62" rx="5" fill="white" stroke="currentColor" stroke-dasharray="4,3" stroke-width="2"/>
+  <line x1="34.5" y1="35.1" x2="34.5" y2="95" stroke="lightgray" stroke-width="1"/>
+  <line x1="50"   y1="35.1" x2="50"   y2="95" stroke="lightgray" stroke-width="1"/>
+  <line x1="65.5" y1="35.1" x2="65.5" y2="95" stroke="lightgray" stroke-width="1"/>
+  <line x1="20" y1="49.5" x2="79.9" y2="49.5" stroke="lightgray" stroke-width="1"/>
+  <line x1="20" y1="65"   x2="79.9" y2="65"   stroke="lightgray" stroke-width="1"/>
+  <line x1="20" y1="80.5" x2="79.9" y2="80.5" stroke="lightgray" stroke-width="1"/>
+  <path d="M 50.0 82.92 A 35.9 17.92 18.0 1 1 14.08 65.0" stroke="currentColor" stroke-width="3" fill="none"/>
+  <polygon points="32.0,73 26.0,63 38.0,63" fill="currentColor"/>
+</symbol>
+<symbol id="B-prime-4" viewBox="0 0 100 100">
+  <text x="50" y="20" font-size="30" font-weight="700" text-anchor="middle" fill="currentColor">B'</text>
+  <rect x="19" y="34" width="62" height="62" rx="5" fill="white" stroke="currentColor" stroke-dasharray="4,3" stroke-width="2"/>
+  <line x1="34.5" y1="35.1" x2="34.5" y2="95" stroke="lightgray" stroke-width="1"/>
+  <line x1="50"   y1="35.1" x2="50"   y2="95" stroke="lightgray" stroke-width="1"/>
+  <line x1="65.5" y1="35.1" x2="65.5" y2="95" stroke="lightgray" stroke-width="1"/>
+  <line x1="20" y1="49.5" x2="79.9" y2="49.5" stroke="lightgray" stroke-width="1"/>
+  <line x1="20" y1="65"   x2="79.9" y2="65"   stroke="lightgray" stroke-width="1"/>
+  <line x1="20" y1="80.5" x2="79.9" y2="80.5" stroke="lightgray" stroke-width="1"/>
+  <path d="M 50.0 72.92 A 35.9 17.92 18.0 1 0 49.92 55.0" stroke="currentColor" stroke-width="3" fill="none"/>
+  <polygon points="67.5,63 61.5,53 73.5,53" fill="currentColor"/>
+</symbol>
+<symbol id="B2-4" viewBox="0 0 100 100">
+  <text x="50" y="20" font-size="30" font-weight="700" text-anchor="middle" fill="currentColor">B2</text>
+  <rect x="19" y="34" width="62" height="62" rx="5" fill="white" stroke="currentColor" stroke-dasharray="4,3" stroke-width="2"/>
+  <line x1="34.5" y1="35.1" x2="34.5" y2="95" stroke="lightgray" stroke-width="1"/>
+  <line x1="50"   y1="35.1" x2="50"   y2="95" stroke="lightgray" stroke-width="1"/>
+  <line x1="65.5" y1="35.1" x2="65.5" y2="95" stroke="lightgray" stroke-width="1"/>
+  <line x1="20" y1="49.5" x2="79.9" y2="49.5" stroke="lightgray" stroke-width="1"/>
+  <line x1="20" y1="65"   x2="79.9" y2="65"   stroke="lightgray" stroke-width="1"/>
+  <line x1="20" y1="80.5" x2="79.9" y2="80.5" stroke="lightgray" stroke-width="1"/>
+  <path d="M 50.0 72.92 A 35.9 17.92 18.0 1 1 14.08 55.0" stroke="currentColor" stroke-width="3" fill="none"/>
+  <polygon points="32.0,57 26.0,47 38.0,47" fill="currentColor"/>
+  <polygon points="32.0,64 26.0,54 38.0,54" fill="currentColor"/>
+</symbol>
+
+
+<!-- ======================================================= -->
+<!-- ==================  5×5 MOVES  ======================== -->
+<!-- ======================================================= -->
+
+<symbol id="R-5" viewBox="0 0 100 100">
+  <text x="50" y="20" font-size="28" font-weight="700" text-anchor="middle" fill="currentColor">R</text>
+  <rect x="19" y="34" width="62" height="62" rx="5" fill="white" stroke="currentColor" stroke-width="2"/>
+  <line x1="31.4" y1="35.1" x2="31.4" y2="95" stroke="lightgray" stroke-width="1"/>
+  <line x1="43.8" y1="35.1" x2="43.8" y2="95" stroke="lightgray" stroke-width="1"/>
+  <line x1="56.2" y1="35.1" x2="56.2" y2="95" stroke="lightgray" stroke-width="1"/>
+  <line x1="68.6" y1="35.1" x2="68.6" y2="95" stroke="lightgray" stroke-width="1"/>
+  <line x1="20" y1="46.4" x2="79.9" y2="46.4" stroke="lightgray" stroke-width="1"/>
+  <line x1="20" y1="58.8" x2="79.9" y2="58.8" stroke="lightgray" stroke-width="1"/>
+  <line x1="20" y1="71.2" x2="79.9" y2="71.2" stroke="lightgray" stroke-width="1"/>
+  <line x1="20" y1="83.6" x2="79.9" y2="83.6" stroke="lightgray" stroke-width="1"/>
+  <line x1="74.8" y1="44.5" x2="74.8" y2="85.5" stroke="currentColor" stroke-width="3"/>
+  <polygon points="74.8,40 68.8,50 80.8,50" fill="currentColor"/>
+</symbol>
+
+<symbol id="Rw-5" viewBox="0 0 100 100">
+  <text x="50" y="20" font-size="28" font-weight="700" text-anchor="middle" fill="currentColor">Rw</text>
+  <rect x="19" y="34" width="62" height="62" rx="5" fill="white" stroke="currentColor" stroke-width="2"/>
+  <line x1="31.4" y1="35.1" x2="31.4" y2="95" stroke="lightgray" stroke-width="1"/>
+  <line x1="43.8" y1="35.1" x2="43.8" y2="95" stroke="lightgray" stroke-width="1"/>
+  <line x1="56.2" y1="35.1" x2="56.2" y2="95" stroke="lightgray" stroke-width="1"/>
+  <line x1="68.6" y1="35.1" x2="68.6" y2="95" stroke="lightgray" stroke-width="1"/>
+  <line x1="20" y1="46.4" x2="79.9" y2="46.4" stroke="lightgray" stroke-width="1"/>
+  <line x1="20" y1="58.8" x2="79.9" y2="58.8" stroke="lightgray" stroke-width="1"/>
+  <line x1="20" y1="71.2" x2="79.9" y2="71.2" stroke="lightgray" stroke-width="1"/>
+  <line x1="20" y1="83.6" x2="79.9" y2="83.6" stroke="lightgray" stroke-width="1"/>
+  <line x1="62.4" y1="44.5" x2="62.4" y2="85.5" stroke="currentColor" stroke-width="3"/>
+  <line x1="74.8" y1="44.5" x2="74.8" y2="85.5" stroke="currentColor" stroke-width="3"/>
+  <polygon points="62.4,40 56.4,50 68.4,50" fill="currentColor"/>
+  <polygon points="74.8,40 68.8,50 80.8,50" fill="currentColor"/>
+</symbol>
+
+<symbol id="3Rw-5" viewBox="0 0 100 100">
+  <text x="50" y="20" font-size="26" font-weight="700" text-anchor="middle" fill="currentColor">3Rw</text>
+  <rect x="19" y="34" width="62" height="62" rx="5" fill="white" stroke="currentColor" stroke-width="2"/>
+  <line x1="31.4" y1="35.1" x2="31.4" y2="95" stroke="lightgray" stroke-width="1"/>
+  <line x1="43.8" y1="35.1" x2="43.8" y2="95" stroke="lightgray" stroke-width="1"/>
+  <line x1="56.2" y1="35.1" x2="56.2" y2="95" stroke="lightgray" stroke-width="1"/>
+  <line x1="68.6" y1="35.1" x2="68.6" y2="95" stroke="lightgray" stroke-width="1"/>
+  <line x1="20" y1="46.4" x2="79.9" y2="46.4" stroke="lightgray" stroke-width="1"/>
+  <line x1="20" y1="58.8" x2="79.9" y2="58.8" stroke="lightgray" stroke-width="1"/>
+  <line x1="20" y1="71.2" x2="79.9" y2="71.2" stroke="lightgray" stroke-width="1"/>
+  <line x1="20" y1="83.6" x2="79.9" y2="83.6" stroke="lightgray" stroke-width="1"/>
+  <line x1="50.0" y1="44.5" x2="50.0" y2="85.5" stroke="currentColor" stroke-width="3"/>
+  <line x1="62.4" y1="44.5" x2="62.4" y2="85.5" stroke="currentColor" stroke-width="3"/>
+  <line x1="74.8" y1="44.5" x2="74.8" y2="85.5" stroke="currentColor" stroke-width="3"/>
+  <polygon points="50.0,40 44.0,50 56.0,50" fill="currentColor"/>
+  <polygon points="62.4,40 56.4,50 68.4,50" fill="currentColor"/>
+  <polygon points="74.8,40 68.8,50 80.8,50" fill="currentColor"/>
+</symbol>
+
+
+<!-- ── r (inner right slice only) ──────────────────────────── -->
+<symbol id="r-4" viewBox="0 0 100 100">
+  <text x="50" y="20" font-size="30" font-weight="700" text-anchor="middle" fill="currentColor">r</text>
+  <rect x="19" y="34" width="62" height="62" rx="5" fill="white" stroke="currentColor" stroke-width="2"/>
+  <line x1="34.5" y1="35.1" x2="34.5" y2="95" stroke="lightgray" stroke-width="1"/>
+  <line x1="50"   y1="35.1" x2="50"   y2="95" stroke="lightgray" stroke-width="1"/>
+  <line x1="65.5" y1="35.1" x2="65.5" y2="95" stroke="lightgray" stroke-width="1"/>
+  <line x1="20" y1="49.5" x2="79.9" y2="49.5" stroke="lightgray" stroke-width="1"/>
+  <line x1="20" y1="65"   x2="79.9" y2="65"   stroke="lightgray" stroke-width="1"/>
+  <line x1="20" y1="80.5" x2="79.9" y2="80.5" stroke="lightgray" stroke-width="1"/>
+  <line x1="57.75" y1="44.5" x2="57.75" y2="85.5" stroke="currentColor" stroke-width="3"/>
+  <polygon points="57.75,40 51.75,50 63.75,50" fill="currentColor"/>
+</symbol>
+
+<symbol id="r-prime-4" viewBox="0 0 100 100">
+  <text x="50" y="20" font-size="30" font-weight="700" text-anchor="middle" fill="currentColor">r'</text>
+  <rect x="19" y="34" width="62" height="62" rx="5" fill="white" stroke="currentColor" stroke-width="2"/>
+  <line x1="34.5" y1="35.1" x2="34.5" y2="95" stroke="lightgray" stroke-width="1"/>
+  <line x1="50"   y1="35.1" x2="50"   y2="95" stroke="lightgray" stroke-width="1"/>
+  <line x1="65.5" y1="35.1" x2="65.5" y2="95" stroke="lightgray" stroke-width="1"/>
+  <line x1="20" y1="49.5" x2="79.9" y2="49.5" stroke="lightgray" stroke-width="1"/>
+  <line x1="20" y1="65"   x2="79.9" y2="65"   stroke="lightgray" stroke-width="1"/>
+  <line x1="20" y1="80.5" x2="79.9" y2="80.5" stroke="lightgray" stroke-width="1"/>
+  <line x1="57.75" y1="44.5" x2="57.75" y2="85.5" stroke="currentColor" stroke-width="3"/>
+  <polygon points="57.75,90 51.75,80 63.75,80" fill="currentColor"/>
+</symbol>
+
+<symbol id="r2-4" viewBox="0 0 100 100">
+  <text x="50" y="20" font-size="30" font-weight="700" text-anchor="middle" fill="currentColor">r2</text>
+  <rect x="19" y="34" width="62" height="62" rx="5" fill="white" stroke="currentColor" stroke-width="2"/>
+  <line x1="34.5" y1="35.1" x2="34.5" y2="95" stroke="lightgray" stroke-width="1"/>
+  <line x1="50"   y1="35.1" x2="50"   y2="95" stroke="lightgray" stroke-width="1"/>
+  <line x1="65.5" y1="35.1" x2="65.5" y2="95" stroke="lightgray" stroke-width="1"/>
+  <line x1="20" y1="49.5" x2="79.9" y2="49.5" stroke="lightgray" stroke-width="1"/>
+  <line x1="20" y1="65"   x2="79.9" y2="65"   stroke="lightgray" stroke-width="1"/>
+  <line x1="20" y1="80.5" x2="79.9" y2="80.5" stroke="lightgray" stroke-width="1"/>
+  <line x1="57.75" y1="44.5" x2="57.75" y2="85.5" stroke="currentColor" stroke-width="3"/>
+  <polygon points="57.75,40 51.75,50 63.75,50" fill="currentColor"/>
+  <polygon points="57.75,50 51.75,60 63.75,60" fill="currentColor"/>
+</symbol>
+
+<!-- ── l (inner left slice only) ───────────────────────────── -->
+<symbol id="l-4" viewBox="0 0 100 100">
+  <text x="50" y="20" font-size="30" font-weight="700" text-anchor="middle" fill="currentColor">l</text>
+  <rect x="19" y="34" width="62" height="62" rx="5" fill="white" stroke="currentColor" stroke-width="2"/>
+  <line x1="34.5" y1="35.1" x2="34.5" y2="95" stroke="lightgray" stroke-width="1"/>
+  <line x1="50"   y1="35.1" x2="50"   y2="95" stroke="lightgray" stroke-width="1"/>
+  <line x1="65.5" y1="35.1" x2="65.5" y2="95" stroke="lightgray" stroke-width="1"/>
+  <line x1="20" y1="49.5" x2="79.9" y2="49.5" stroke="lightgray" stroke-width="1"/>
+  <line x1="20" y1="65"   x2="79.9" y2="65"   stroke="lightgray" stroke-width="1"/>
+  <line x1="20" y1="80.5" x2="79.9" y2="80.5" stroke="lightgray" stroke-width="1"/>
+  <line x1="42.25" y1="44.5" x2="42.25" y2="85.5" stroke="currentColor" stroke-width="3"/>
+  <polygon points="42.25,90 36.25,80 48.25,80" fill="currentColor"/>
+</symbol>
+
+<symbol id="l-prime-4" viewBox="0 0 100 100">
+  <text x="50" y="20" font-size="30" font-weight="700" text-anchor="middle" fill="currentColor">l'</text>
+  <rect x="19" y="34" width="62" height="62" rx="5" fill="white" stroke="currentColor" stroke-width="2"/>
+  <line x1="34.5" y1="35.1" x2="34.5" y2="95" stroke="lightgray" stroke-width="1"/>
+  <line x1="50"   y1="35.1" x2="50"   y2="95" stroke="lightgray" stroke-width="1"/>
+  <line x1="65.5" y1="35.1" x2="65.5" y2="95" stroke="lightgray" stroke-width="1"/>
+  <line x1="20" y1="49.5" x2="79.9" y2="49.5" stroke="lightgray" stroke-width="1"/>
+  <line x1="20" y1="65"   x2="79.9" y2="65"   stroke="lightgray" stroke-width="1"/>
+  <line x1="20" y1="80.5" x2="79.9" y2="80.5" stroke="lightgray" stroke-width="1"/>
+  <line x1="42.25" y1="44.5" x2="42.25" y2="85.5" stroke="currentColor" stroke-width="3"/>
+  <polygon points="42.25,40 36.25,50 48.25,50" fill="currentColor"/>
+</symbol>
+
+</defs>
+</svg>

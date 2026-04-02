@@ -1,0 +1,248 @@
+{% extends "main/partials/base.html" %}
+{% load static %}
+
+{% block title %}4×4 — Étape 10 : PLL Arêtes — Francontcube{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+
+    {% include "cube/partials/_4x4_cube_svg.html" %}
+    {% include "cube/partials/_4x4_moves_sprite.html" %}
+
+    <!-- ── Hero ──────────────────────────────────────────────────────────── -->
+    <div class="text-center mb-5">
+        <h1 class="hero-title">
+            <span class="brand-green">Étape 10 — PLL Arêtes</span>
+        </h1>
+        <p class="lead text-muted">
+            Les coins sont en place — c'est la <strong>dernière étape</strong>!
+            Permutez les 4 arêtes de la dernière couche pour finir le cube.
+        </p>
+    </div>
+
+    <!-- ── Objectif ──────────────────────────────────────────────────────── -->
+    <div class="card p-4 mb-4">
+        <h3 class="brand-green">🎯 Objectif</h3>
+        <p>
+            Les 4 arêtes de la dernière couche doivent chacune se retrouver
+            devant leur face correspondante. Une fois terminé, le cube est
+            entièrement résolu — <strong>félicitations!</strong>
+        </p>
+        <div class="row mt-3 align-items-center">
+            <div class="col-md-4 text-center">
+                <div id="cube-pll-edges-goal" class="cube-case"></div>
+                <p class="mt-2 small text-muted">Cube entièrement résolu 🎉</p>
+            </div>
+            <div class="col-md-8">
+                <div class="alert alert-success mb-0">
+                    <strong>💡 Comment identifier le cas :</strong> Tournez <code>U</code>
+                    pour aligner autant d'arêtes que possible avec leurs faces.
+                    Comptez combien d'arêtes sont déjà bien placées — vous serez dans
+                    l'un des trois cas ci-dessous.
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ── Cas 1 : Une arête bien placée (adjacent swap) ─────────────────── -->
+    <div class="card p-4 mb-4 border-success">
+        <h3 class="brand-green">➡️ Cas 1 — 3 Arêtes à Permuter (Adjacent)</h3>
+        <p>
+            Une arête est déjà bien placée. Les 3 autres doivent tourner dans
+            un sens ou dans l'autre. C'est le cas le plus fréquent.
+        </p>
+        <div class="row mt-3 align-items-center">
+            <div class="col-md-4 text-center">
+                <div id="cube-pll-edges-adj" class="cube-case"></div>
+                <p class="mt-2 small text-muted">1 arête placée, 3 à permuter</p>
+            </div>
+            <div class="col-md-8">
+                <div class="bg-white p-3 rounded border border-success border-2">
+                    <h5>Préparer la position :</h5>
+                    <p class="small mb-2">
+                        Placez l'arête déjà bien positionnée sur la face
+                        <strong>arrière</strong> avec un mouvement <code>U</code>.
+                    </p>
+                    <h5>Algorithme — Permutation dans le sens horaire :</h5>
+                    <div class="d-flex align-items-center gap-1 flex-wrap mb-2">
+                        <svg class="move-icon"><use href="#R-4"/></svg>
+                        <svg class="move-icon"><use href="#U-prime-4"/></svg>
+
+                        <svg class="move-icon"><use href="#R-4"/></svg>
+                        <svg class="move-icon"><use href="#U-4"/></svg>
+
+                        <svg class="move-icon"><use href="#R-4"/></svg>
+                        <svg class="move-icon"><use href="#U-4"/></svg>
+
+                        <svg class="move-icon"><use href="#R-4"/></svg>
+                        <svg class="move-icon"><use href="#U-prime-4"/></svg>
+                        <svg class="move-icon"><use href="#R-prime-4"/></svg>
+                        <svg class="move-icon"><use href="#U-prime-4"/></svg>
+                        <svg class="move-icon"><use href="#R2-4"/></svg>
+                        
+                    
+                    <h5>Algorithme — Permutation dans le sens antihoraire :</h5>
+                    <div class="d-flex align-items-center gap-1 flex-wrap mb-2">
+                        <svg class="move-icon"><use href="#L-prime-4"/></svg>
+                        <svg class="move-icon"><use href="#U-4"/></svg>
+
+                        <svg class="move-icon"><use href="#L-prime-4"/></svg>
+                        <svg class="move-icon"><use href="#U-prime-4"/></svg>
+
+                        <svg class="move-icon"><use href="#L-prime-4"/></svg>
+                        <svg class="move-icon"><use href="#U-prime-4"/></svg>
+
+                        <svg class="move-icon"><use href="#L-prime-4"/></svg>
+                        <svg class="move-icon"><use href="#U-4"/></svg>
+                        <svg class="move-icon"><use href="#L-4"/></svg>
+                        <svg class="move-icon"><use href="#U-4"/></svg>
+                        <svg class="move-icon"><use href="#L2-4"/></svg>
+                    </div>
+                    <p class="small mb-0 fw-bold">F2 U' L R' F2 L' R U' F2</p>
+                </div>
+                <div class="alert alert-light border mt-3 mb-0">
+                    <strong>Comment choisir le sens :</strong> Regardez les 3 arêtes
+                    à permuter. Si elles doivent tourner dans le sens des aiguilles
+                    d'une montre (horaire), utilisez le premier algorithme. Sinon,
+                    utilisez le second.
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ── Cas 2 : Aucune arête bien placée (opposite swap) ──────────────── -->
+    <div class="card p-4 mb-4 border-warning">
+        <h3 class="brand-green">↔️ Cas 2 — Aucune Arête Bien Placée</h3>
+        <p>
+            Aucune arête n'est à sa bonne place, quelle que soit la rotation
+            <code>U</code> que vous faites. Dans ce cas, deux paires d'arêtes
+            opposées sont échangées entre elles.
+        </p>
+        <div class="row mt-3 align-items-center">
+            <div class="col-md-4 text-center">
+                <div id="cube-pll-3-edges-right" class="cube-case"></div>
+                <p class="mt-2 small text-muted">Aucune arête à sa place</p>
+            </div>
+            <div class="col-md-8">
+                <div class="bg-white p-3 rounded border border-warning border-2">
+                    <h5>Solution :</h5>
+                    <p class="small mb-2">
+                        Exécutez <strong>n'importe lequel</strong> des deux algorithmes
+                        du Cas 1 depuis n'importe quelle orientation. Après, vous serez
+                        dans le Cas 1 — une arête sera bien placée et vous pourrez finir.
+                    </p>
+                    <div class="d-flex align-items-center gap-1 flex-wrap mb-2">
+                        <svg class="move-icon"><use href="#F-4"/></svg>
+                        <svg class="move-icon"><use href="#F-4"/></svg>
+                        <svg class="move-icon"><use href="#U-4"/></svg>
+                        <svg class="move-icon"><use href="#L-4"/></svg>
+                        <svg class="move-icon"><use href="#R-prime-4"/></svg>
+                        <svg class="move-icon"><use href="#F2-4"/></svg>
+                        <svg class="move-icon"><use href="#L-prime-4"/></svg>
+                        <svg class="move-icon"><use href="#R-4"/></svg>
+                        <svg class="move-icon"><use href="#U-4"/></svg>
+                        <svg class="move-icon"><use href="#F-4"/></svg>
+                        <svg class="move-icon"><use href="#F-4"/></svg>
+                    </div>
+                    <p class="small mb-0 text-muted">
+                        Après cette exécution, recommencez la procédure du Cas 1.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ── Parité PLL rappel ──────────────────────────────────────────────── -->
+    <div class="card p-4 mb-4 border-danger">
+        <h3 class="brand-green">⚠️ Si une Seule Arête Résiste — Parité PLL!</h3>
+        <p>
+            Si, après avoir appliqué les algorithmes, une seule arête semble encore
+            échangée avec une autre arête adjacente et qu'il est impossible de la
+            résoudre avec les algorithmes ci-dessus, vous avez un cas de
+            <strong>parité PLL</strong>.
+        </p>
+        <div class="alert alert-danger mb-0">
+            <strong>Que faire :</strong> Rendez-vous à la page <strong>Parité</strong>
+            (Étape 3) et exécutez l'algorithme de parité PLL. Une fois terminé,
+            reprenez cette étape depuis le début — le cube sera maintenant
+            résolvable normalement.
+        </div>
+    </div>
+
+    <!-- ── Récapitulatif final ────────────────────────────────────────────── -->
+    <div class="card p-4 mb-4 bg-light">
+        <h3 class="brand-green">🎉 Félicitations!</h3>
+        <p>Si toutes les arêtes sont en place, votre cube 4×4 est résolu!</p>
+        <ul>
+            <li>Chaque face a une <strong>couleur uniforme</strong></li>
+            <li>Les 6 centres sont <strong>bien orientés</strong></li>
+            <li>Toutes les arêtes et tous les coins sont <strong>à leur place</strong></li>
+        </ul>
+        <div class="alert alert-success mt-3 mb-0">
+            <strong>🏆 Bravo!</strong> Vous maîtrisez maintenant la méthode de réduction
+            pour le 4×4. Continuez à pratiquer pour améliorer votre temps —
+            et n'hésitez pas à explorer la méthode CFOP pour aller encore plus vite!
+        </div>
+    </div>
+
+    <!-- ── Navigation ────────────────────────────────────────────────────── -->
+    <div class="d-flex justify-content-between align-items-center mt-5 flex-wrap gap-2">
+        {% if prev_step %}
+        <a href="{% url step_url prev_step.slug %}" class="btn btn-outline-secondary">
+            ← {{ prev_step.name }}
+        </a>
+        {% else %}
+        <a href="{% url home_url %}" class="btn btn-outline-secondary">
+            ← Vue d'ensemble 4×4
+        </a>
+        {% endif %}
+        {% if next_step %}
+        <a href="{% url step_url next_step.slug %}" class="btn btn-success">
+            {{ next_step.name }} →
+        </a>
+        {% else %}
+        <a href="{% url home_url %}" class="btn btn-success">
+            🏠 Vue d'ensemble 4×4
+        </a>
+        {% endif %}
+    </div>
+
+</div>
+
+<style>
+.cube-case svg { max-width: 220px; height: auto; }
+.move-icon { width: 56px; height: 75px; }
+.card { box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
+</style>
+
+<script type="module">
+  import { renderCube } from "{% static 'cube/js/cube_renderer.js' %}";
+
+  function mountCube(containerId, state) {
+    const container = document.getElementById(containerId);
+    if (!container) return;
+    container.innerHTML = '';
+    if (!state) {
+      container.innerHTML = `
+        <div class="alert alert-secondary text-center py-3">
+          <i class="bi bi-cube text-muted" style="font-size:2rem;"></i>
+          <p class="mb-0 mt-1 small text-muted">État non disponible</p>
+        </div>`;
+      return;
+    }
+    const template = document.getElementById("cube-template");
+    const clone    = template.content.cloneNode(true);
+    container.appendChild(clone);
+    const svg = container.querySelector("svg");
+    renderCube(svg, state);
+  }
+
+  document.addEventListener("DOMContentLoaded", () => {
+    mountCube("cube-pll-edges-goal", {{ state_pll_edges_goal|safe }});
+    mountCube("cube-pll-3-edges-right",  {{ state_pll_3_edges_right|safe }});
+    mountCube("cube-pll-3-edges-left",  {{ state_pll_3_edges_left|safe }});
+    mountCube("cube-pll-edges-opp",  {{ state_pll_edges_opp|safe }});
+  });
+</script>
+
+{% endblock %}

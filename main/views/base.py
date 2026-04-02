@@ -32,7 +32,40 @@ class CubeStateLoader:
             return CubeState.objects.get(slug=slug)
         except CubeState.DoesNotExist:
             return None
-    
+
+    @staticmethod
+    def merge_state(cube_state_obj):
+        """
+        Merge json_state and json_highlight into one blob for the renderer.
+
+        cube_renderer.js expects:
+            { cube: {...}, highlight: { stickers: [...] } }
+
+        json_state already stores { cube: {...} } (and may contain a legacy
+        highlight key from older saves).  json_highlight stores the canonical
+        { stickers: [...] } object.  We always prefer json_highlight over any
+        embedded highlight so the admin widget is the single source of truth.
+
+        Args:
+            cube_state_obj: CubeState model instance
+
+        Returns:
+            dict ready to be serialised with |safe in the template, or None
+        """
+        if cube_state_obj is None:
+            return None
+
+        # Start from json_state (already a dict from JSONField)
+        data = dict(cube_state_obj.json_state or {})
+
+        # Merge in highlight — json_highlight wins over anything embedded in json_state
+        if cube_state_obj.json_highlight:
+            data['highlight'] = cube_state_obj.json_highlight
+        elif 'highlight' not in data:
+            data['highlight'] = {'stickers': []}
+
+        return data
+
     @staticmethod
     def get_multiple(slug_dict):
         """
@@ -44,16 +77,16 @@ class CubeStateLoader:
             
         Returns:
             Tuple of (states_dict, missing_slugs)
-            - states_dict: Dict with same keys as input, values are json_state or None
+            - states_dict: Dict with same keys as input, values are merged state dicts or None
             - missing_slugs: List of slugs that weren't found
         """
         states = {}
         missing = []
         
         for key, slug in slug_dict.items():
-            state = CubeStateLoader.get_safe(slug)
-            states[key] = state.json_state if state else None
-            if state is None:
+            obj = CubeStateLoader.get_safe(slug)
+            states[key] = CubeStateLoader.merge_state(obj)
+            if obj is None:
                 missing.append(slug)
         
         return states, missing
@@ -89,7 +122,7 @@ class StepView:
     step_icon = None
     cube_state_slugs = {}  # Dict of {context_key: slug}
 
-    # Navigation - subclasses can override these  # ← NOUVEAU
+    # Navigation - subclasses can override these
     next_step = None  # URL name for next step
     prev_step = None  # URL name for previous step
     
@@ -129,7 +162,7 @@ class StepView:
         method_urls = {
             'Apprenti Cubi': 'main:method_cubienewbie',
             'Débutant': 'main:method_beginner',
-            'CFOP': 'main:method_cfop',  # ← AJOUTER
+            'CFOP': 'main:method_cfop',
             'Roux': 'main:method_roux',
         }
         
@@ -151,7 +184,6 @@ class StepView:
             **states,
         }
         
-        # Add navigation if defined  # ← NOUVEAU
         if self.step_number is not None:
             context['step_number'] = self.step_number
         if self.next_step:

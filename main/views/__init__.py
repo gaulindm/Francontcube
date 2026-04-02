@@ -101,11 +101,11 @@ from .cfop.oll_pll import (
 # OTHER PUZZLES (2x2, 4x4, 5x5)
 # ============================================================
 from .puzzles.home import puzzles_home
-from .puzzles.puzzle_2x2 import (
-    puzzle_2x2_home,
-    puzzle_2x2_method,
-    puzzle_2x2_step,
-)
+#from .puzzles.puzzle_2x2 import (
+#    puzzle_2x2_home,
+#    puzzle_2x2_method,
+#    puzzle_2x2_step,
+#)
 from .puzzles.puzzle_big_cubes import (
     puzzle_4x4_home,
     puzzle_4x4_step,

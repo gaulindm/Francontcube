@@ -2,12 +2,31 @@ from django import forms
 import json
 
 
+# Colors available in the palette — (value, label)
+CUBE_COLORS = [
+    ('X', 'Gris / inconnu'),
+    ('W', 'Blanc'),
+    ('Y', 'Jaune'),
+    ('G', 'Vert'),
+    ('B', 'Bleu'),
+    ('R', 'Rouge'),
+    ('O', 'Orange'),
+]
+
+
 class CubeStateWidget(forms.Widget):
     template_name = "cube/widgets/cube_state_widget.html"
+
+    class Media:
+        js = (
+            'cube/js/cube_state_widget.js',
+            'cube/js/admin_grid_init.js',
+        )
 
     def get_context(self, name, value, attrs):
         context = super().get_context(name, value, attrs)
 
+        # Parse stored JSON
         if value:
             try:
                 data = json.loads(value) if isinstance(value, str) else value
@@ -16,72 +35,49 @@ class CubeStateWidget(forms.Widget):
         else:
             data = self.default_data()
 
-        # 🔒 Guarantee structure
         if not isinstance(data, dict) or "cube" not in data:
             data = self.default_data()
 
         cube = data.get("cube", self.default_state())
-        highlights = data.get("highlight", {}).get("stickers", [])
 
-        # Normalize highlight format into a set for fast lookup
-        # Expected format example: ["F-0-1", "U-2-2"]
-        highlight_set = set()
+        # Detect grid size from U face
+        u_face    = cube.get("U", [])
+        grid_size = len(u_face) if u_face else 3
 
-        for h in highlights:
-            if isinstance(h, str):
-                highlight_set.add(h)
-            elif isinstance(h, (list, tuple)) and len(h) == 3:
-                face, r, c = h
-                highlight_set.add(f"{face}-{r}-{c}")
-            elif isinstance(h, dict):
-                face = h.get("face")
-                r = h.get("row")
-                c = h.get("col")
-                if face is not None:
-                    highlight_set.add(f"{face}-{r}-{c}")
+        # Pass the raw JSON value so the template can put it in the textarea
+        context['widget'] = type('obj', (object,), {
+            'value': value or json.dumps(data),
+            'attrs': type('obj', (object,), {
+                'name': name,
+                'id':   attrs.get('id', f'id_{name}'),
+            })(),
+        })()
 
-        def build_face(face_key):
-            face = cube.get(face_key, [["X"] * 3 for _ in range(3)])
-
-            cells = []
-            for r in range(3):
-                row = []
-                for c in range(3):
-                    sticker_id = f"{face_key}-{r}-{c}"
-                    row.append({
-                        "color": face[r][c],
-                        "id": sticker_id,
-                        "highlight": sticker_id in highlight_set
-                    })
-                cells.append(row)
-            return cells
-
-        # Build all faces for template
-        context["faces"] = {
-            "U": build_face("U"),
-            "L": build_face("L"),
-            "F": build_face("F"),
-            "R": build_face("R"),
-            "B": build_face("B"),
-            "D": build_face("D"),
-        }
+        context['grid_size'] = grid_size
+        context['colors']    = CUBE_COLORS
 
         return context
 
     def default_data(self):
         return {
-            "cube": self.default_state(),
-            "highlight": {
-                "stickers": []
-            }
+            "cube":      self.default_state(),
+            "highlight": {"stickers": []},
         }
 
     def default_state(self):
+        """Default solved state — Franco-Ontarian orientation.
+        White on top, Yellow on bottom, Green in front,
+        Blue in back, Red on right, Orange on left.
+        """
         return {
-            "U": [["X","X","X"], ["X","Y","X"], ["X","X","X"]],
-            "D": [["W","W","X"], ["W","W","W"], ["W","W","W"]],
-            "F": [["X","X","X"], ["G","G","X"], ["G","G","X"]],
-            "B": [["X","X","X"], ["B","B","B"], ["B","B","B"]],
-            "R": [["X","X","X"], ["X","O","O"], ["X","O","O"]],
-            "L": [["X","X","X"], ["R","R","R"], ["R","R","R"]],
+            "U": [["W","W","W"], ["W","W","W"], ["W","W","W"]],
+            "D": [["Y","Y","Y"], ["Y","Y","Y"], ["Y","Y","Y"]],
+            "F": [["G","G","G"], ["G","G","G"], ["G","G","G"]],
+            "B": [["B","B","B"], ["B","B","B"], ["B","B","B"]],
+            "R": [["R","R","R"], ["R","R","R"], ["R","R","R"]],
+            "L": [["O","O","O"], ["O","O","O"], ["O","O","O"]],
         }
+
+    def value_from_datadict(self, data, files, name):
+        """Read the submitted textarea value back on form save."""
+        return data.get(name)

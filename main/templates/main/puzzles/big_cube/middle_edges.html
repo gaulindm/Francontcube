@@ -1,0 +1,282 @@
+{% extends "main/partials/base.html" %}
+{% load static %}
+
+{% block title %}4×4 — Étape 5 : Arêtes du Milieu — Francontcube{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+
+    {% include "cube/partials/_4x4_cube_svg.html" %}
+    {% include "cube/partials/_4x4_moves_sprite.html" %}
+
+    <!-- ── Hero ──────────────────────────────────────────────────────────── -->
+    <div class="text-center mb-5">
+        <h1 class="hero-title">
+            <span class="brand-green">Étape 5 — Arêtes du Milieu</span>
+        </h1>
+        <p class="lead text-muted">
+            La couche du bas est complète — insérez maintenant les
+            <strong>4 arêtes de la couche du milieu</strong>.
+        </p>
+    </div>
+
+    <!-- ── Objectif ──────────────────────────────────────────────────────── -->
+    <div class="card p-4 mb-4">
+        <h3 class="brand-green">🎯 Objectif</h3>
+        <p>
+            Insérer les 4 arêtes qui relient les faces latérales entre elles —
+            celles qui n'ont ni sticker jaune ni sticker blanc.
+            Une fois ces arêtes en place, les deux premières couches sont
+            entièrement résolues (<strong>F2L — First Two Layers</strong>).
+        </p>
+        <div class="row mt-3 align-items-center">
+            <div class="col-md-4 text-center">
+                <div id="cube-mid-goal" class="cube-case"></div>
+                <p class="mt-2 small text-muted">F2L complet — deux couches résolues</p>
+            </div>
+            <div class="col-md-8">
+                <div class="alert alert-info mb-0">
+                    <strong>💡 Comment reconnaître une arête du milieu?</strong>
+                    Elle a exactement 2 stickers, aucun n'est jaune ni blanc.
+                    Par exemple : vert-rouge, vert-orange, bleu-rouge, bleu-orange.
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ── Technique 1 : Arête à droite ──────────────────────────────────── -->
+    <div class="card p-4 mb-4 border-success">
+        <h3 class="brand-green">➡️ Technique 1 — Insérer à Droite</h3>
+        <p>
+            Utilisez cette technique quand l'arête du milieu doit aller dans le slot
+            <strong>avant-droit</strong> (entre la face verte et la face rouge).
+        </p>
+        <div class="row mt-3 align-items-center">
+            <div class="col-md-4 text-center">
+                <div id="cube-mid-right" class="cube-case"></div>
+                <p class="mt-2 small text-muted">Arête en haut, à insérer à droite</p>
+            </div>
+            <div class="col-md-8">
+                <div class="bg-white p-3 rounded border border-success border-2">
+                    <h5>Position de départ :</h5>
+                    <p class="small mb-2">
+                        L'arête est sur la face du haut, le sticker de la couleur
+                        de la face avant pointe vers l'avant.
+                    </p>
+                    <h5>Algorithme :</h5>
+                    <div class="d-flex align-items-center gap-1 flex-wrap mb-3">
+                        <svg class="move-icon"><use href="#U-4"/></svg>
+                        <svg class="move-icon"><use href="#R-4"/></svg>
+                        <svg class="move-icon"><use href="#U-prime-4"/></svg>
+                        <svg class="move-icon"><use href="#R-prime-4"/></svg>
+                        <svg class="move-icon"><use href="#U-prime-4"/></svg>
+                        <svg class="move-icon"><use href="#F-prime-4"/></svg>
+                        <svg class="move-icon"><use href="#U-4"/></svg>
+                        <svg class="move-icon"><use href="#F-4"/></svg>
+                    </div>
+                    <ol class="small mb-0">
+                        <li><strong>U R U' R'</strong> — positionne l'arête sur la face de droite</li>
+                        <li><strong>U' F' U F</strong> — l'insère dans le slot du milieu</li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ── Technique 2 : Arête à gauche ──────────────────────────────────── -->
+    <div class="card p-4 mb-4 border-primary">
+        <h3 class="brand-green">⬅️ Technique 2 — Insérer à Gauche</h3>
+        <p>
+            Utilisez cette technique quand l'arête du milieu doit aller dans le slot
+            <strong>avant-gauche</strong> (entre la face verte et la face orange).
+        </p>
+        <div class="row mt-3 align-items-center">
+            <div class="col-md-4 text-center">
+                <div id="cube-mid-left" class="cube-case"></div>
+                <p class="mt-2 small text-muted">Arête en haut, à insérer à gauche</p>
+            </div>
+            <div class="col-md-8">
+                <div class="bg-white p-3 rounded border border-primary border-2">
+                    <h5>Position de départ :</h5>
+                    <p class="small mb-2">
+                        L'arête est sur la face du haut, le sticker de la couleur
+                        de la face avant pointe vers l'avant.
+                    </p>
+                    <h5>Algorithme :</h5>
+                    <div class="d-flex align-items-center gap-1 flex-wrap mb-3">
+                        <svg class="move-icon"><use href="#U-prime-4"/></svg>
+                        <svg class="move-icon"><use href="#L-prime-4"/></svg>
+                        <svg class="move-icon"><use href="#U-4"/></svg>
+                        <svg class="move-icon"><use href="#L-4"/></svg>
+                        <svg class="move-icon"><use href="#U-4"/></svg>
+                        <svg class="move-icon"><use href="#F-4"/></svg>
+                        <svg class="move-icon"><use href="#U-prime-4"/></svg>
+                        <svg class="move-icon"><use href="#F-prime-4"/></svg>
+                    </div>
+                    <ol class="small mb-0">
+                        <li><strong>U' L' U L</strong> — positionne l'arête sur la face de gauche</li>
+                        <li><strong>U F U' F'</strong> — l'insère dans le slot du milieu</li>
+                    </ol>
+                </div>
+                <div class="alert alert-light border mt-3 mb-0">
+                    <strong>Astuce :</strong> Si vous préférez, tournez le cube entier
+                    avec <code>y'</code> pour ramener le slot gauche sur la droite, puis
+                    utilisez la technique 1. C'est souvent plus intuitif!
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ── Préparer l'arête ───────────────────────────────────────────────── -->
+    <div class="card p-4 mb-4 border-warning">
+        <h3 class="brand-green">🎯 Préparer l'arête — Alignement</h3>
+        <p>
+            Avant d'exécuter l'algorithme d'insertion, l'arête doit être
+            <strong>correctement positionnée sur la face du haut</strong>.
+            Voici comment la préparer :
+        </p>
+        <div class="row mt-3">
+            <div class="col-md-6">
+                <div class="card h-100 border-success">
+                    <div class="card-header bg-success text-white">
+                        <strong>✅ Position correcte — Insertion à droite</strong>
+                    </div>
+                    <div class="card-body small">
+                        <p class="mb-0">
+                            Sticker de la couleur <strong>avant</strong> sur la face du haut,
+                            orienté vers l'avant. Sticker de la couleur <strong>droite</strong>
+                            visible sur la face de droite.
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="card h-100 border-primary">
+                    <div class="card-header bg-primary text-white">
+                        <strong>✅ Position correcte — Insertion à gauche</strong>
+                    </div>
+                    <div class="card-body small">
+                        <p class="mb-0">
+                            Sticker de la couleur <strong>avant</strong> sur la face du haut,
+                            orienté vers l'avant. Sticker de la couleur <strong>gauche</strong>
+                            visible sur la face de gauche.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ── Cas : arête déjà dans le milieu mais mal placée ───────────────── -->
+    <div class="card p-4 mb-4 border-danger">
+        <h3 class="brand-green">🔄 Arête déjà dans le milieu mais mal placée</h3>
+        <p>
+            Si une arête est dans la couche du milieu mais dans le mauvais slot
+            ou retournée, il faut d'abord la <strong>sortir vers le haut</strong>
+            avant de la réinsérer correctement.
+        </p>
+        <div class="row mt-3 align-items-center">
+            <div class="col-md-4 text-center">
+                <div id="cube-mid-wrong" class="cube-case"></div>
+                <p class="mt-2 small text-muted">Arête dans le mauvais slot</p>
+            </div>
+            <div class="col-md-8">
+                <div class="bg-white p-3 rounded border border-danger border-2">
+                    <h5>Pour sortir l'arête :</h5>
+                    <p class="small mb-2">
+                        Exécutez <strong>n'importe lequel</strong> des deux algorithmes
+                        d'insertion sur le slot occupé — l'arête mal placée montera
+                        sur la face du haut, libérant la position pour la bonne arête.
+                    </p>
+                    <div class="d-flex align-items-center gap-1 flex-wrap">
+                        <svg class="move-icon"><use href="#U-4"/></svg>
+                        <svg class="move-icon"><use href="#R-4"/></svg>
+                        <svg class="move-icon"><use href="#U-prime-4"/></svg>
+                        <svg class="move-icon"><use href="#R-prime-4"/></svg>
+                        <svg class="move-icon"><use href="#U-prime-4"/></svg>
+                        <svg class="move-icon"><use href="#F-prime-4"/></svg>
+                        <svg class="move-icon"><use href="#U-4"/></svg>
+                        <svg class="move-icon"><use href="#F-4"/></svg>
+                    </div>
+                </div>
+                <div class="alert alert-warning mt-3 mb-0">
+                    <strong>⚠️ Résultat attendu :</strong> L'ancienne arête monte
+                    sur la face du haut. Replacez-la correctement, puis insérez
+                    la bonne arête à sa place.
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ── Récapitulatif ─────────────────────────────────────────────────── -->
+    <div class="card p-4 mb-4 bg-light">
+        <h3 class="brand-green">✅ Vérification</h3>
+        <p>Avant de passer à la croix du haut, vérifiez :</p>
+        <ul>
+            <li>La face du bas est toujours entièrement <strong>jaune</strong></li>
+            <li>Chaque face latérale a ses <strong>deux premières rangées</strong> d'une seule couleur</li>
+            <li>Il ne reste que la couche du haut (blanche) non résolue</li>
+        </ul>
+        <div class="alert alert-success mt-3 mb-0">
+            <strong>🎉 Félicitations!</strong> Les deux premières couches sont résolues —
+            c'est le résultat du F2L (First Two Layers). Plus que la dernière couche!
+        </div>
+    </div>
+
+    <!-- ── Navigation ────────────────────────────────────────────────────── -->
+    <div class="d-flex justify-content-between align-items-center mt-5 flex-wrap gap-2">
+        {% if prev_step %}
+        <a href="{% url step_url prev_step.slug %}" class="btn btn-outline-secondary">
+            ← {{ prev_step.name }}
+        </a>
+        {% else %}
+        <a href="{% url home_url %}" class="btn btn-outline-secondary">
+            ← Vue d'ensemble 4×4
+        </a>
+        {% endif %}
+        {% if next_step %}
+        <a href="{% url step_url next_step.slug %}" class="btn btn-success">
+            {{ next_step.name }} →
+        </a>
+        {% endif %}
+    </div>
+
+</div>
+
+<style>
+.cube-case svg { max-width: 220px; height: auto; }
+.move-icon { width: 56px; height: 75px; }
+.card { box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
+</style>
+
+<script type="module">
+  import { renderCube } from "{% static 'cube/js/cube_renderer.js' %}";
+
+  function mountCube(containerId, state) {
+    const container = document.getElementById(containerId);
+    if (!container) return;
+    container.innerHTML = '';
+    if (!state) {
+      container.innerHTML = `
+        <div class="alert alert-secondary text-center py-3">
+          <i class="bi bi-cube text-muted" style="font-size:2rem;"></i>
+          <p class="mb-0 mt-1 small text-muted">État non disponible</p>
+        </div>`;
+      return;
+    }
+    const template = document.getElementById("cube-template");
+    const clone    = template.content.cloneNode(true);
+    container.appendChild(clone);
+    const svg = container.querySelector("svg");
+    renderCube(svg, state);
+  }
+
+  document.addEventListener("DOMContentLoaded", () => {
+    mountCube("cube-mid-goal",  {{ state_mid_goal|safe }});
+    mountCube("cube-mid-right", {{ state_mid_right|safe }});
+    mountCube("cube-mid-left",  {{ state_mid_left|safe }});
+    mountCube("cube-mid-wrong", {{ state_mid_wrong|safe }});
+  });
+</script>
+
+{% endblock %}

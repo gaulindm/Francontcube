@@ -13,13 +13,13 @@
     <nav aria-label="breadcrumb">
       <ol class="breadcrumb">
         <li class="breadcrumb-item">
-          <a href="{% url 'main:puzzles_home' %}">Puzzles</a>
+          <a href="{% url 'main:home' %}">Accueil</a>
         </li>
-        <li class="breadcrumb-item active">{{ config.name }}</li>
+        <li class="breadcrumb-item active">{{ name }}</li>
       </ol>
     </nav>
-    <h1 class="h2 fw-bold">{{ config.name }}</h1>
-    <p class="text-muted">Méthode Reduction — résoudre par étapes progressives.</p>
+    <h1 class="h2 fw-bold">{{ name }}</h1>
+    <p class="text-muted">Méthode Réduction — résoudre par étapes progressives.</p>
   </div>
   <div class="col-auto d-none d-md-block">
     <twisty-player
@@ -37,7 +37,7 @@
 
 {# Grille des étapes #}
 <div class="row g-3">
-  {% for step in config.steps %}
+  {% for step in steps %}
   <div class="col-12 col-md-6">
     <a href="{% url step_url step.slug %}"
        class="card h-100 shadow-sm text-decoration-none text-dark hover-lift">
@@ -60,6 +60,32 @@
   </div>
   {% endfor %}
 </div>
+
+{% if ref_url %}
+{# Lien vers les pages de référence #}
+<div class="row mt-4">
+  <div class="col-12">
+    <div class="card border-warning">
+      <div class="card-body d-flex gap-3 align-items-center">
+        <div class="bg-warning bg-opacity-10 rounded p-2">
+          <i class="bi-exclamation-triangle fs-4 text-warning"></i>
+        </div>
+        <div>
+          <h6 class="mb-1 fw-semibold">Référence — Parité</h6>
+          <p class="text-muted small mb-0">
+            Consultez cette page <strong>seulement si</strong> vous êtes bloqué
+            à l'Étape 6 (Croix du Haut) ou à l'Étape 9 (PLL Arêtes).
+          </p>
+        </div>
+        <a href="{% url ref_url 'parity' %}"
+           class="btn btn-outline-warning btn-sm ms-auto text-nowrap">
+          Voir la Parité →
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+{% endif %}
 
 <style>
   .hover-lift {

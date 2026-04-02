@@ -1,0 +1,251 @@
+{% extends "main/partials/base.html" %}
+{% load static %}
+
+{% block title %}4×4 — Étape 7 : Croix du Haut (Blanche) — Francontcube{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+
+    {% include "cube/partials/_4x4_cube_svg.html" %}
+    {% include "cube/partials/_4x4_moves_sprite.html" %}
+
+    <!-- ── Hero ──────────────────────────────────────────────────────────── -->
+    <div class="text-center mb-5">
+        <h1 class="hero-title">
+            <span class="brand-green">Étape 7 — Croix du Haut (Blanche)</span>
+        </h1>
+        <p class="lead text-muted">
+            F2L complété! Il ne reste plus que la dernière couche.
+            Commencez par former la <strong>croix blanche sur la face du haut</strong>.
+        </p>
+    </div>
+
+    <!-- ── Objectif ──────────────────────────────────────────────────────── -->
+    <div class="card p-4 mb-4">
+        <h3 class="brand-green">🎯 Objectif</h3>
+        <p>
+            Orienter les 4 arêtes de la face blanche pour qu'elles pointent toutes
+            vers le haut. À la fin de cette étape, la face du haut aura une
+            <strong>croix blanche</strong> bien visible.
+        </p>
+        <div class="row mt-3 align-items-center">
+            <div class="col-md-4 text-center">
+                <div id="cube-top-cross-goal" class="cube-case"></div>
+                <p class="mt-2 small text-muted">Croix blanche sur la face du haut</p>
+            </div>
+            <div class="col-md-8">
+                <div class="alert alert-info mb-0">
+                    <strong>💡 Important :</strong> À cette étape, vous orientez
+                    les arêtes — pas les coins. Les stickers latéraux des arêtes
+                    ne sont pas encore alignés avec leurs faces; c'est normal
+                    et ce sera corrigé à l'étape suivante.
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ── Identifier le cas ─────────────────────────────────────────────── -->
+    <div class="card p-4 mb-4 border-warning">
+        <h3 class="brand-green">🔍 Identifier votre cas de départ</h3>
+        <p>
+            Regardez la face du haut — selon le nombre d'arêtes blanches déjà
+            orientées vers le haut, vous êtes dans l'un de ces 4 cas :
+        </p>
+        <div class="row mt-4 g-4">
+            <div class="col-md-3">
+                <div class="card h-100 border-danger text-center">
+                    <div class="card-header bg-danger text-white"><strong>Cas 0</strong></div>
+                    <div class="card-body">
+                        <div id="cube-top-cross-0" class="cube-case"></div>
+                        <p class="small mt-2 mb-0">Aucune arête blanche en haut — point ou L</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card h-100 border-warning text-center">
+                    <div class="card-header bg-warning text-dark"><strong>Cas L</strong></div>
+                    <div class="card-body">
+                        <div id="cube-top-cross-l" class="cube-case"></div>
+                        <p class="small mt-2 mb-0">2 arêtes adjacentes en haut — forme en L</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card h-100 border-info text-center">
+                    <div class="card-header bg-info text-white"><strong>Cas I</strong></div>
+                    <div class="card-body">
+                        <div id="cube-top-cross-i" class="cube-case"></div>
+                        <p class="small mt-2 mb-0">2 arêtes opposées en haut — forme en I</p>
+                    </div>
+                </div>
+            </div>
+        <div class="col-md-3">
+                <div class="card h-100 border-success text-center">
+                    <div class="card-header bg-success text-white"><strong>Cas ✅</strong></div>
+                    <div class="card-body">
+                        <div id="cube-top-cross-done" class="cube-case"></div>
+                        <p class="small mt-2 mb-0">Croix complète — passez à l'étape suivante!</p>
+                    </div>
+                </div>
+            </div>
+        
+        </div>
+    </div>
+
+    <!-- ── L'algorithme ───────────────────────────────────────────────────── -->
+    <div class="card p-4 mb-4 border-success">
+        <h3 class="brand-green">🔑 L'Algorithme Universel de Croix</h3>
+        <p>
+            Un seul algorithme gère tous ces cas. Orientez d'abord le cube selon
+            les instructions de chaque cas, puis exécutez :
+        </p>
+        <div class="row mt-3 align-items-center">
+            <!--
+            <div class="col-md-4 text-center">
+                <div id="cube-top-cross-alg" class="cube-case"></div>
+                <p class="mt-2 small text-muted">Position de départ avant l'algorithme</p>
+            </div>-->
+            <div class="col-md-12">
+                <div class="bg-white p-3 rounded border border-success border-2">
+                    <h5>Algorithme :</h5>
+                    <div class="d-flex align-items-center gap-1 flex-wrap mb-3">
+                        <svg class="move-icon"><use href="#F-4"/></svg>
+                        <svg class="move-icon"><use href="#R-4"/></svg>
+                        <svg class="move-icon"><use href="#U-4"/></svg>
+                        <svg class="move-icon"><use href="#R-prime-4"/></svg>
+                        <svg class="move-icon"><use href="#U-prime-4"/></svg>
+                        <svg class="move-icon"><use href="#F-prime-4"/></svg>
+                    </div>
+                    <table class="table table-sm table-bordered mb-0 small">
+                        <thead class="table-light">
+                            <tr><th>Cas de départ</th><th>Orientation</th><th>Répétitions</th></tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Point (0 arêtes)</td>
+                                <td>N'importe quelle orientation</td>
+                                <td>3 fois</td>
+                            </tr>
+                            <tr>
+                                <td>Forme en L</td>
+                                <td>L en haut à gauche (arêtes: haut + gauche)</td>
+                                <td>2 fois</td>
+                            </tr>
+                            <tr>
+                                <td>Forme en I</td>
+                                <td>Ligne horizontale (arêtes: gauche + droite)</td>
+                                <td>1 fois</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ── Détail cas par cas ─────────────────────────────────────────────── -->
+    <div class="card p-4 mb-4">
+        <h3 class="brand-green">📋 Instructions détaillées par cas</h3>
+
+        <div class="mb-4">
+            <h5>🔴 Cas Point — 0 arête blanche en haut</h5>
+            <p class="small">
+                Aucune arête n'est orientée. Tenez le cube normalement et exécutez
+                l'algorithme <strong>3 fois de suite</strong>. Après la 1ère répétition
+                vous aurez le cas L, après la 2ème le cas I, et après la 3ème la croix.
+            </p>
+        </div>
+        <hr>
+        <div class="mb-4">
+            <h5>🟡 Cas L — 2 arêtes adjacentes blanches en haut</h5>
+            <p class="small">
+                Orientez le cube de sorte que les 2 arêtes blanches soient à
+                <strong>gauche et en haut (coin supérieur gauche de la face U)</strong>.
+                Exécutez l'algorithme <strong>2 fois</strong>.
+            </p>
+        </div>
+        <hr>
+        <div class="mb-0">
+            <h5>🔵 Cas I — 2 arêtes opposées blanches en haut</h5>
+            <p class="small mb-0">
+                Orientez le cube de sorte que les 2 arêtes blanches forment une
+                <strong>ligne horizontale</strong> (gauche-droite).
+                Exécutez l'algorithme <strong>1 fois</strong>.
+            </p>
+        </div>
+    </div>
+
+    <!-- ── Récapitulatif ─────────────────────────────────────────────────── -->
+    <div class="card p-4 mb-4 bg-light">
+        <h3 class="brand-green">✅ Vérification</h3>
+        <p>Avant de passer à la face blanche complète, vérifiez :</p>
+        <ul>
+            <li>La face du haut montre une <strong>croix blanche</strong> — 4 arêtes blanches orientées vers le haut</li>
+            <li>Les deux premières couches sont toujours <strong>correctement résolues</strong></li>
+            <li>Les stickers latéraux des arêtes blanches peuvent ne pas être alignés — c'est normal</li>
+        </ul>
+        <div class="alert alert-info mt-3 mb-0">
+            <strong>💡 Rappel :</strong> Les coins blancs ne sont pas encore orientés.
+            C'est exactement ce qu'on règle à l'étape suivante — la face blanche complète.
+        </div>
+    </div>
+
+    <!-- ── Navigation ────────────────────────────────────────────────────── -->
+    <div class="d-flex justify-content-between align-items-center mt-5 flex-wrap gap-2">
+        {% if prev_step %}
+        <a href="{% url step_url prev_step.slug %}" class="btn btn-outline-secondary">
+            ← {{ prev_step.name }}
+        </a>
+        {% else %}
+        <a href="{% url home_url %}" class="btn btn-outline-secondary">
+            ← Vue d'ensemble 4×4
+        </a>
+        {% endif %}
+        {% if next_step %}
+        <a href="{% url step_url next_step.slug %}" class="btn btn-success">
+            {{ next_step.name }} →
+        </a>
+        {% endif %}
+    </div>
+
+</div>
+
+<style>
+.cube-case svg { max-width: 220px; height: auto; }
+.move-icon { width: 56px; height: 75px; }
+.card { box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
+</style>
+
+<script type="module">
+  import { renderCube } from "{% static 'cube/js/cube_renderer.js' %}";
+
+  function mountCube(containerId, state) {
+    const container = document.getElementById(containerId);
+    if (!container) return;
+    container.innerHTML = '';
+    if (!state) {
+      container.innerHTML = `
+        <div class="alert alert-secondary text-center py-3">
+          <i class="bi bi-cube text-muted" style="font-size:2rem;"></i>
+          <p class="mb-0 mt-1 small text-muted">État non disponible</p>
+        </div>`;
+      return;
+    }
+    const template = document.getElementById("cube-template");
+    const clone    = template.content.cloneNode(true);
+    container.appendChild(clone);
+    const svg = container.querySelector("svg");
+    renderCube(svg, state);
+  }
+
+  document.addEventListener("DOMContentLoaded", () => {
+    mountCube("cube-top-cross-goal", {{ state_top_cross_goal|safe }});
+    mountCube("cube-top-cross-0",    {{ state_top_cross_0|safe }});
+    mountCube("cube-top-cross-l",    {{ state_top_cross_l|safe }});
+    mountCube("cube-top-cross-i",    {{ state_top_cross_i|safe }});
+    mountCube("cube-top-cross-done", {{ state_top_cross_done|safe }});
+    mountCube("cube-top-cross-alg",  {{ state_top_cross_alg|safe }});
+  });
+</script>
+
+{% endblock %}

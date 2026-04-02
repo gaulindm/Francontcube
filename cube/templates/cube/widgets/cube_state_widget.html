@@ -1,108 +1,115 @@
 <style>
+.cube-widget-wrap {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    max-width: 600px;
+}
+
+.cube-palette {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.cube-color {
+    width: 32px;
+    height: 32px;
+    border: 2px solid #555;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: transform 0.1s;
+}
+
+.cube-color:hover  { transform: scale(1.15); }
+.cube-color.active { border: 3px solid #000; box-shadow: 0 0 6px rgba(0,0,0,0.5); }
+
 .cube-net {
     display: grid;
     grid-template-columns: repeat(4, auto);
-    gap: 12px;
-    align-items: center;
+    gap: 10px;
+    align-items: start;
     justify-content: start;
 }
 
-.face {
+.cube-grid {
     display: grid;
-    grid-template-columns: repeat(3, 22px);
-    grid-template-rows: repeat(3, 22px);
     gap: 3px;
 }
 
-.cell {
+.cube-cell {
     width: 22px;
     height: 22px;
-    border: 1px solid #222;
+    border: 1px solid #333;
+    border-radius: 2px;
     box-sizing: border-box;
+    cursor: pointer;
 }
 
-.empty {
-    visibility: hidden;
-}
-
-/* 🎯 Highlight effect */
-.highlight {
+.cube-cell:hover { opacity: 0.75; }
+.cube-cell.highlight {
     outline: 3px solid #000;
     box-shadow: 0 0 6px 3px rgba(255, 215, 0, 0.9);
 }
 
-/* 🎨 Cube colors */
-.c-X { background: #ddd; }
-.c-W { background: white; }
-.c-Y { background: yellow; }
-.c-G { background: green; }
-.c-B { background: blue; }
-.c-R { background: red; }
-.c-O { background: orange; }
+.cube-empty { visibility: hidden; width: 22px; height: 22px; }
+
+.swatch-X { background: #ccc; }
+.swatch-W { background: #fff; }
+.swatch-Y { background: #ff0; }
+.swatch-G { background: #0a0; }
+.swatch-B { background: #00c; }
+.swatch-R { background: #e00; }
+.swatch-O { background: #f80; }
 </style>
 
+<div class="cube-widget-wrap" data-widget data-grid-size="{{ grid_size }}">
 
-<div class="cube-net">
+    <textarea name="{{ widget.attrs.name }}" id="{{ widget.attrs.id }}"
+              style="display:none">{{ widget.value }}</textarea>
 
-    <!-- U -->
-    <div class="empty"></div>
-    <div class="face">
-        {% for row in faces.U %}
-            {% for cell in row %}
-                <div class="cell c-{{ cell.color }} {% if cell.highlight %}highlight{% endif %}"></div>
-            {% endfor %}
+    <div class="cube-palette">
+        <span style="font-size:13px; color:#555; margin-right:4px;">Couleur :</span>
+        {% for color, label in colors %}
+        <button type="button"
+                class="cube-color swatch-{{ color }} {% if forloop.first %}active{% endif %}"
+                data-color="{{ color }}"
+                title="{{ label }}"></button>
         {% endfor %}
+  <span style="font-size:12px; color:#888; margin-left:8px;">
+    Cliquez une couleur puis cliquez les cases. &nbsp;
+    <strong>Maj+clic</strong> pour surligner une case.
+</span>
     </div>
-    <div class="empty"></div>
-    <div class="empty"></div>
 
+    <div class="cube-net">
+        <div class="cube-empty"></div>
+        <div class="cube-face" data-face="U">
+            <div class="cube-grid" style="grid-template-columns: repeat({{ grid_size }}, 22px);"></div>
+        </div>
+        <div class="cube-empty"></div>
+        <div class="cube-empty"></div>
 
+        <div class="cube-face" data-face="L">
+            <div class="cube-grid" style="grid-template-columns: repeat({{ grid_size }}, 22px);"></div>
+        </div>
+        <div class="cube-face" data-face="F">
+            <div class="cube-grid" style="grid-template-columns: repeat({{ grid_size }}, 22px);"></div>
+        </div>
+        <div class="cube-face" data-face="R">
+            <div class="cube-grid" style="grid-template-columns: repeat({{ grid_size }}, 22px);"></div>
+        </div>
+        <div class="cube-face" data-face="B">
+            <div class="cube-grid" style="grid-template-columns: repeat({{ grid_size }}, 22px);"></div>
+        </div>
 
-
-    <!-- D --><!-- L -->
-<div class="face">
-    {% for row in faces.L %}
-        {% for cell in row %}
-            <div class="cell c-{{ cell.color }} {% if cell.highlight %}highlight{% endif %}"></div>
-        {% endfor %}
-    {% endfor %}
-</div>
-
-<!-- F -->
-<div class="face">
-    {% for row in faces.F %}
-        {% for cell in row %}
-            <div class="cell c-{{ cell.color }} {% if cell.highlight %}highlight{% endif %}"></div>
-        {% endfor %}
-    {% endfor %}
-</div>
-
-<!-- R -->
-<div class="face">
-    {% for row in faces.R %}
-        {% for cell in row %}
-            <div class="cell c-{{ cell.color }} {% if cell.highlight %}highlight{% endif %}"></div>
-        {% endfor %}
-    {% endfor %}
-</div>
-
-<!-- B -->
-<div class="face">
-    {% for row in faces.B %}
-        {% for cell in row %}
-            <div class="cell c-{{ cell.color }} {% if cell.highlight %}highlight{% endif %}"></div>
-        {% endfor %}
-    {% endfor %}
-</div>
-    <div class="empty"></div>
-    <div class="face">
-        {% for row in faces.D %}
-            {% for cell in row %}
-                <div class="cell c-{{ cell.color }} {% if cell.highlight %}highlight{% endif %}"></div>
-            {% endfor %}
-        {% endfor %}
+        <div class="cube-empty"></div>
+        <div class="cube-face" data-face="D">
+            <div class="cube-grid" style="grid-template-columns: repeat({{ grid_size }}, 22px);"></div>
+        </div>
+        <div class="cube-empty"></div>
+        <div class="cube-empty"></div>
     </div>
-    <div class="empty"></div>
-    <div class="empty"></div>
 
 </div>

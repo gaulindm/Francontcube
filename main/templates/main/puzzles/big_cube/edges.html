@@ -1,220 +1,377 @@
 {% extends "main/partials/base.html" %}
 {% load static %}
 
-{% block extra_head %}
-
-<style>
-  .case-card {
-    border-radius: 16px;
-    border: 2px solid #e9ecef;
-    transition: transform 0.15s ease, box-shadow 0.15s ease;
-    overflow: hidden;
-  }
-  .case-card:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 8px 24px rgba(0,0,0,0.10);
-  }
-  .technique-header {
-    border-left: 5px solid var(--bs-primary);
-    padding-left: 12px;
-    margin: 2rem 0 1rem;
-  }
-  .technique-header:first-of-type { margin-top: 0; }
-  .twisty-wrap {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 12px 0 4px;
-    background: #f8f9fa;
-  }
-  .algo-badge {
-    font-family: monospace;
-    font-size: 1.05rem;
-    font-weight: 600;
-    letter-spacing: 0.04em;
-    background: #212529;
-    color: #f8f9fa;
-    border-radius: 8px;
-    padding: 6px 14px;
-    display: inline-block;
-  }
-  .tip-box {
-    background: #fff3cd;
-    border-radius: 0 0 14px 14px;
-    padding: 8px 14px;
-    font-size: 0.85rem;
-    color: #664d03;
-    display: flex;
-    gap: 6px;
-    align-items: flex-start;
-  }
-  .step-nav {
-    margin-top: 2.5rem;
-    padding-top: 1.5rem;
-    border-top: 1px solid #dee2e6;
-  }
-</style>
-{% endblock %}
+{% block title %}4×4 — Étape 3 : Les Arêtes — Francontcube{% endblock %}
 
 {% block content %}
+<div class="container py-5">
 
-{# Fil d'Ariane #}
-<nav aria-label="breadcrumb" class="mb-3">
-  <ol class="breadcrumb">
-    <li class="breadcrumb-item"><a href="{% url 'main:puzzles_home' %}">Puzzles</a></li>
-    <li class="breadcrumb-item"><a href="{% url home_url %}">{{ config.name }}</a></li>
-    <li class="breadcrumb-item active">{{ step.name }}</li>
-  </ol>
-</nav>
+    {% include "cube/partials/_4x4_cube_svg.html" %}
+    {% include "cube/partials/_4x4_moves_sprite.html" %}
 
-<h1 class="h3 fw-bold mb-1">{{ step.name }}</h1>
-<p class="text-muted mb-4">{{ step.desc }}</p>
-
-{% if cases %}
-
-  {# ── Technique : Arêtes libres (cas 1-4) ─────────────────────── #}
-  {% with groupe=cases|slice:":4" %}{% if groupe %}
-  <div class="technique-header">
-    <h2 class="h5 fw-bold mb-0">
-      <i class="bi-arrows-collapse text-primary me-2"></i>Arêtes libres
-    </h2>
-    <small class="text-muted">Les 8 premières paires — place libre dans le slot de travail</small>
-  </div>
-  <div class="row g-3 mb-4">
-    {% for case in groupe %}
-    <div class="col-12 col-sm-6 col-lg-4">
-      <div class="case-card h-100 bg-white">
-        <div class="twisty-wrap">
-          <twisty-player
-            puzzle="{{ cubing_puzzle }}"
-            alg="{{ case.algorithm }}"
-            experimental-setup-alg="{{ case.get_setup_alg }}"
-            visualization="3D"
-            background="none"
-            control-panel="bottom-row"
-            {% if stickering.type == 'preset' %}
-              experimental-stickering="{{ stickering.value }}"
-            {% else %}
-              experimental-stickering-mask-orbits="{{ stickering.value }}"
-            {% endif %}
-            camera-longitude="{{ case.camera_longitude|default:'-25' }}"
-            camera-latitude="{{ case.camera_latitude|default:'22' }}"
-            style="width:220px;height:220px;">
-          </twisty-player>
-        </div>
-        <div class="px-3 py-2 text-center">
-          <div class="algo-badge mb-2">{{ case.algorithm }}</div>
-          <p class="text-muted small mb-0">{{ case.name }}</p>
-        </div>
-        {% if case.tip %}<div class="tip-box"><i class="bi-lightbulb-fill flex-shrink-0 mt-1"></i><span>{{ case.tip }}</span></div>{% endif %}
-      </div>
+    <!-- ── Hero ──────────────────────────────────────────────────────────── -->
+    <div class="text-center mb-5">
+        <h1 class="hero-title">
+            <span class="brand-green">Étape 2 — Les Arêtes</span>
+        </h1>
+        <p class="lead text-muted">
+            Regrouper les 12 paires d'arêtes avant la phase 3×3.
+        </p>
     </div>
-    {% endfor %}
-  </div>
-  {% endif %}{% endwith %}
 
-  {# ── Technique : Dernières arêtes (cas 5-8) ───────────────────── #}
-  {% with groupe=cases|slice:"4:8" %}{% if groupe %}
-  <div class="technique-header">
-    <h2 class="h5 fw-bold mb-0">
-      <i class="bi-shield-check text-success me-2"></i>Dernières arêtes
-    </h2>
-    <small class="text-muted">Les 4 dernières paires — sans défaire les arêtes déjà placées</small>
-  </div>
-  <div class="row g-3 mb-4">
-    {% for case in groupe %}
-    <div class="col-12 col-sm-6 col-lg-4">
-      <div class="case-card h-100 bg-white">
-        <div class="twisty-wrap">
-          <twisty-player
-            puzzle="{{ cubing_puzzle }}"
-            alg="{{ case.algorithm }}"
-            experimental-setup-alg="{{ case.get_setup_alg }}"
-            visualization="3D"
-            background="none"
-            control-panel="bottom-row"
-            {% if stickering.type == 'preset' %}
-              experimental-stickering="{{ stickering.value }}"
-            {% else %}
-              experimental-stickering-mask-orbits="{{ stickering.value }}"
-            {% endif %}
-            camera-longitude="{{ case.camera_longitude|default:'-25' }}"
-            camera-latitude="{{ case.camera_latitude|default:'22' }}"
-            style="width:220px;height:220px;">
-          </twisty-player>
+    <!-- ── Objectif ──────────────────────────────────────────────────────── -->
+    <div class="card p-4 mb-4">
+        <h3 class="brand-green">🎯 Objectif</h3>
+        <p>
+            Chaque arête du 4×4 est composée de <strong>2 pièces</strong> appelées
+            <em>wings</em>. Le but de cette étape est d'apparier les deux wings de
+            chaque arête pour reconstituer 12 arêtes complètes — exactement comme
+            les arêtes d'un 3×3.
+        </p>
+        <div class="alert alert-info mt-3 mb-0">
+            <strong>💡 Comment reconnaître une arête appariée?</strong>
+            Les deux wings côte à côte ont exactement les mêmes deux couleurs.
+            Une arête mixte a deux couleurs différentes sur ses deux wings.
         </div>
-        <div class="px-3 py-2 text-center">
-          <div class="algo-badge mb-2">{{ case.algorithm }}</div>
-          <p class="text-muted small mb-0">{{ case.name }}</p>
-        </div>
-        {% if case.tip %}<div class="tip-box"><i class="bi-lightbulb-fill flex-shrink-0 mt-1"></i><span>{{ case.tip }}</span></div>{% endif %}
-      </div>
     </div>
-    {% endfor %}
-  </div>
-  {% endif %}{% endwith %}
 
-  {# ── Technique : Wing flip (cas 9+) ───────────────────────────── #}
-  {% with groupe=cases|slice:"8:" %}{% if groupe %}
-  <div class="technique-header">
-    <h2 class="h5 fw-bold mb-0">
-      <i class="bi-arrow-repeat text-danger me-2"></i>Wing flip
-    </h2>
-    <small class="text-muted">Arête miroir — retourner sans casser les centres</small>
-  </div>
-  <div class="row g-3 mb-4">
-    {% for case in groupe %}
-    <div class="col-12 col-sm-6 col-lg-4">
-      <div class="case-card h-100 bg-white">
-        <div class="twisty-wrap">
-          <twisty-player
-            puzzle="{{ cubing_puzzle }}"
-            alg="{{ case.algorithm }}"
-            experimental-setup-alg="{{ case.get_setup_alg }}"
-            visualization="3D"
-            background="none"
-            control-panel="bottom-row"
-            {% if stickering.type == 'preset' %}
-              experimental-stickering="{{ stickering.value }}"
-            {% else %}
-              experimental-stickering-mask-orbits="{{ stickering.value }}"
-            {% endif %}
-            camera-longitude="{{ case.camera_longitude|default:'-25' }}"
-            camera-latitude="{{ case.camera_latitude|default:'22' }}"
-            style="width:220px;height:220px;">
-          </twisty-player>
+    <!-- ── Concept Wings ─────────────────────────────────────────────────── -->
+    <div class="card p-4 mb-4 border-warning">
+        <h3 class="brand-green">🔑 Concept — Wings et appariement</h3>
+        <div class="row">
+            <div class="col-md-6">
+                <p>
+                    Sur un cube mélangé, les wings sont dispersés partout. Votre travail
+                    est de trouver les deux wings qui appartiennent à la même arête
+                    et de les mettre côte à côte.
+                </p>
+                <p>
+                    Une fois les 12 arêtes appariées, le cube se comporte exactement
+                    comme un 3×3 — c'est le principe de la méthode Réduction!
+                </p>
+                <div class="alert alert-success mb-0">
+                    <strong>Bon à savoir :</strong> Les 8 premières arêtes peuvent
+                    être appariées librement. Les 4 dernières demandent plus d'attention
+                    car il n'y a plus d'arête libre à sacrifier.
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="alert alert-warning">
+                    <h6 class="fw-bold">⚠️ Ne confondez pas</h6>
+                    <ul class="mb-0">
+                        <li>
+                            <strong>Wing</strong> — une des 2 pièces qui forment une arête du 4×4
+                        </li>
+                        <li>
+                            <strong>Arête mixte</strong> — deux wings de couleurs différentes
+                            côte à côte sur la même arête
+                        </li>
+                        <li>
+                            <strong>Arête appariée</strong> — deux wings identiques côte à côte,
+                            prête pour la phase 3×3
+                        </li>
+                    </ul>
+                </div>
+            </div>
         </div>
-        <div class="px-3 py-2 text-center">
-          <div class="algo-badge mb-2">{{ case.algorithm }}</div>
-          <p class="text-muted small mb-0">{{ case.name }}</p>
-        </div>
-        {% if case.tip %}<div class="tip-box"><i class="bi-lightbulb-fill flex-shrink-0 mt-1"></i><span>{{ case.tip }}</span></div>{% endif %}
-      </div>
     </div>
-    {% endfor %}
-  </div>
-  {% endif %}{% endwith %}
 
-{% else %}
-<div class="alert alert-secondary text-center py-5">
-  <i class="bi-hourglass-split fs-1 d-block mb-2"></i>
-  <strong>Contenu à venir</strong>
-  <p class="mb-0 text-muted">Les animations pour cette étape seront ajoutées prochainement.</p>
+
+    <!-- ── Avant de commencer ──────────────────────────────────────────────────────── -->
+    <div class="card p-4 mb-4">
+        <h3 class="brand-green">✅ Avant de commencer</h3>
+        <ol>
+            <li class="mb-2">
+                <strong>Repérez deux wings qui appartiennent à la même arête</strong>
+                (même paire de couleurs)
+            </li>
+            <li class="mb-2">
+                <strong>Amenez le premier wing</strong> à la gauche du centre en utilisant surtout des mouvements <code>U</code> et <code>L</code>
+            </li>
+            <li class="mb-2">
+                <strong>Amenez le deuxième wing</strong> à la droite du centre en utilisant surtout des mouvements <code>R</code> et <code>U</code>.  Utilisez la technique 3 - Wing Flip si le wing n'est pas parfaitement bien positioné et orienté.
+            </li>  
+            <li>
+                <strong>Vérifiez l'orientation</strong> et choisir la technique d'appariement selon la position des wings
+                
+            </li>
+        </ol>
+    </div>
+
+
+
+    <!-- ── Technique 1 : Appariement du haut ────────────────────────────── -->
+    <div class="card p-4 mb-4 border-success">
+        <h3 class="brand-green">🔗 Technique 1 — Appariement du haut</h3>
+        <p>
+            C'est la technique principale pour apparier les 8 premières arêtes.
+            Positionnez les wings comme dans l'illustration et assurez-vous que les arrêtes surlignées ne sont appariées puis exécutez l'algorithme pour les réunir.
+        </p>
+
+        <div class="row mt-3 align-items-center">
+            <div class="col-md-4 text-center">
+                <div id="cube-edge-pairing-from-top" class="cube-case"></div>
+                <p class="mt-2 small text-muted">
+                    Wings en position : gauche en haut, droite en bas
+                </p>
+            </div>
+            <div class="col-md-8">
+                <div class="bg-white p-3 rounded border border-success border-2">
+                    <h5>Algorithme :</h5>
+                    <div class="d-flex align-items-center gap-1 flex-wrap mb-3">
+                        <svg class="move-icon"><use href="#Uw-prime-4"/></svg>
+                        <svg class="move-icon"><use href="#R-4"/></svg>
+                        <svg class="move-icon"><use href="#U-4"/></svg>
+                        <svg class="move-icon"><use href="#R-prime-4"/></svg>
+                        <svg class="move-icon"><use href="#Uw-4"/></svg>
+                    </div>
+                    <p class="small mb-2">
+                        <strong>Ce que fait cet algorithme :</strong>
+                    </p>
+                    <ol class="small mb-0">
+                        <li><strong>Uw'</strong> — amène le wing de gauche sur la face F</li>
+                        <li><strong>R U R'</strong> — insère le wing de droite sans casser les centres</li>
+                        <li><strong>Uw</strong> — replace la couche supérieure et complète l'appariement</li>
+                    </ol>
+                </div>
+                <div class="alert alert-light border mt-3 mb-0">
+                    <strong>Résultat :</strong> Les deux wings se retrouvent côte à côte
+                    sur la face de droite — l'arête est appariée et prête pour la phase 3×3.
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- ── Technique 2 : Appariement du bas ────────────────────────────── -->
+    <div class="card p-4 mb-4 border-success">
+        <h3 class="brand-green">🔗 Technique 2 — Appariement du bas</h3>
+        <p>
+            C'est la technique principale pour apparier les 8 premières arêtes.
+            Positionnez un wing sur la face U à gauche et l'autre wing sur la
+            face F à droite, puis exécutez l'algorithme pour les réunir.
+        </p>
+
+        <div class="row mt-3 align-items-center">
+            <div class="col-md-4 text-center">
+                <div id="cube-edge-pairing-from-bottom" class="cube-case"></div>
+                <p class="mt-2 small text-muted">
+                    Wings en position : gauche en haut, droite en bas
+                </p>
+            </div>
+            <div class="col-md-8">
+                <div class="bg-white p-3 rounded border border-success border-2">
+                    <h5>Algorithme :</h5>
+                    <div class="d-flex align-items-center gap-1 flex-wrap mb-3">
+                        <svg class="move-icon"><use href="#Dw-4"/></svg>
+                        <svg class="move-icon"><use href="#R-4"/></svg>
+                        <svg class="move-icon"><use href="#U-4"/></svg>
+                        <svg class="move-icon"><use href="#R-prime-4"/></svg>
+                        <svg class="move-icon"><use href="#Dw-prime-4"/></svg>
+                    </div>
+                    <p class="small mb-2">
+                        <strong>Ce que fait cet algorithme :</strong>
+                    </p>
+                    <ol class="small mb-0">
+                        <li><strong>Dw</strong> — amène le wing de gauche sur la face F</li>
+                        <li><strong>R U R'</strong> — insère le wing de droite sans casser les centres</li>
+                        <li><strong>Dw'</strong> — replace la couche supérieure et complète l'appariement</li>
+                    </ol>
+                </div>
+                <div class="alert alert-light border mt-3 mb-0">
+                    <strong>Résultat :</strong> Les deux wings se retrouvent côte à côte
+                    sur la face de droite — l'arête est appariée et prête pour la phase 3×3.
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- ── Technique 2 : Wing Flip ───────────────────────────────────────── -->
+    <div class="card p-4 mb-4 border-danger">
+        <h3 class="brand-green">🔄 Technique 3 — Wing Flip</h3>
+        <p>
+            Parfois un wing est dans la bonne position mais <strong>retourné dans
+            le mauvais sens</strong> — ses couleurs sont inversées par rapport à
+            ce qu'on attend. Il faut le retourner avant de pouvoir l'apparier.
+        </p>
+
+        <div class="row mt-3 align-items-center">
+            <div class="col-md-4 text-center">
+                <div id="cube-edge-flip" class="cube-case"></div>
+                <p class="mt-2 small text-muted">
+                    Wing retourné — couleurs inversées
+                </p>
+            </div>
+            <div class="col-md-8">
+                <div class="bg-white p-3 rounded border border-danger border-2">
+                    <h5>Algorithme de flip :</h5>
+                    <div class="d-flex align-items-center gap-1 flex-wrap mb-3">
+                        <svg class="move-icon"><use href="#R-4"/></svg>
+                        <svg class="move-icon"><use href="#U-4"/></svg>
+                        <svg class="move-icon"><use href="#R-prime-4"/></svg>
+                        <svg class="move-icon"><use href="#F-4"/></svg>
+                        <svg class="move-icon"><use href="#R-prime-4"/></svg>
+                        <svg class="move-icon"><use href="#F-prime-4"/></svg>
+                        <svg class="move-icon"><use href="#R-4"/></svg>
+                    </div>
+                    <p class="small mb-0">
+                        Cet algorithme retourne le wing sur la face de droite
+                        sans changer sa position — après ça, il est prêt à être
+                        apparié avec la technique standard.
+                    </p>
+                </div>
+                <div class="alert alert-warning mt-3 mb-0">
+                    <strong>⚠️ Comment reconnaître un wing retourné?</strong>
+                    Placez le wing en position d'appariement et comparez les couleurs
+                    avec son partenaire. Si elles ne correspondent pas mais que
+                    les couleurs inversées correspondraient — c'est un wing retourné!
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+        <!-- ── Ou placer les wings ──────────────────────────────────────────────────────── -->
+    <div class="card p-4 mb-4">
+        <h3 class="brand-green">✅ Ou placer les arêtes appariées?</h3>
+        <ol>
+            <li class="mb-2">
+                <strong>Dans les arêtes du la couche du haut
+            </li>
+            <li class="mb-2">
+                <strong>Dans les arêtes de la couche d'arrièreA</li>
+            <li class="mb-2">
+                <strong>Das l'arête Haut-Gauche et Haut-Devant
+            </li>
+            <li>
+                <strong>Éviter l'arêtes Haut Droite.   Vous allez utiliser cette arêtes pour former vos paires!</strong>
+            </li>
+        </ol>
+    </div>
+
+
+
+
+    <!-- ── Les 4 dernières arêtes ────────────────────────────────────────── -->
+    <div class="card p-4 mb-4 border-warning">
+        <h3 class="brand-green">⚡ Les Deux Dernières Arêtes</h3>
+        <p>
+            Quand il ne reste que 2 arêtes non appariées, il n'y a plus d'arête
+            libre à sacrifier comme tampon. Cet algorithme règle les deux dernières
+            arêtes <strong>en un seul mouvement</strong> sans rien défaire.
+        </p>
+
+        <div class="row mt-3 align-items-center">
+            <div class="col-md-4 text-center">
+                <div id="cube-last-two" class="cube-case"></div>
+                <p class="mt-2 small text-muted">
+                    Deux arêtes restantes non appariées
+                </p>
+            </div>
+            <div class="col-md-8">
+                <div class="bg-white p-3 rounded border border-warning border-2">
+                    <h5>Algorithme :</h5>
+                    <div class="d-flex align-items-center gap-1 flex-wrap mb-3">
+                        <svg class="move-icon"><use href="#Uw-4"/></svg>
+                        <svg class="move-icon"><use href="#R-4"/></svg>
+                        <svg class="move-icon"><use href="#U-4"/></svg>
+                        <svg class="move-icon"><use href="#R-prime-4"/></svg>
+                        <svg class="move-icon"><use href="#F-4"/></svg>
+                        <svg class="move-icon"><use href="#R-prime-4"/></svg>
+                        <svg class="move-icon"><use href="#F-prime-4"/></svg>
+                        <svg class="move-icon"><use href="#R-4"/></svg>
+                        <svg class="move-icon"><use href="#Uw-prime-4"/></svg>
+                    </div>
+                    <p class="small mb-2">
+                        <strong>Ce que fait cet algorithme :</strong>
+                    </p>
+                    <ol class="small mb-0">
+                        <li><strong>Uw</strong> — positionne les deux arêtes restantes</li>
+                        <li><strong>R U R' F R' F' R</strong> — le wing flip classique qui retourne et apparie</li>
+                        <li><strong>Uw'</strong> — replace la couche supérieure</li>
+                    </ol>
+                </div>
+                <div class="alert alert-info mt-3 mb-0">
+                    <strong>💡 Astuce :</strong> Si les deux dernières arêtes
+                    ne semblent pas vouloir s'apparier même après cet algorithme,
+                    vérifiez la <strong>parité</strong> à l'étape suivante —
+                    c'est peut-être un cas de parité OLL!
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ── Récapitulatif ─────────────────────────────────────────────────── -->
+    <div class="card p-4 mb-4 bg-light">
+        <h3 class="brand-green">✅ Vérification</h3>
+        <p>Avant de passer à la parité ou à la phase 3×3, vérifiez :</p>
+        <ul>
+            <li>Chaque arête a <strong>2 wings de la même paire de couleurs</strong> côte à côte</li>
+            <li>Il n'y a <strong>aucune arête mixte</strong> visible sur le cube</li>
+            <li>Les <strong>6 centres</strong> sont toujours correctement placés</li>
+        </ul>
+        <div class="alert alert-warning mt-3 mb-0">
+            <strong>⚠️ Si quelque chose ne va pas :</strong> Vérifiez la parité à l'étape
+            suivante avant de conclure qu'une erreur a été commise. Certains cas de parité
+            ressemblent à des arêtes mal appariées!
+        </div>
+    </div>
+
+    <!-- ── Navigation ────────────────────────────────────────────────────── -->
+    <div class="d-flex justify-content-between align-items-center mt-5 flex-wrap gap-2">
+        {% if prev_step %}
+        <a href="{% url step_url prev_step.slug %}" class="btn btn-outline-secondary">
+            ← {{ prev_step.name }}
+        </a>
+        {% else %}
+        <a href="{% url home_url %}" class="btn btn-outline-secondary">
+            ← Vue d'ensemble 4×4
+        </a>
+        {% endif %}
+        {% if next_step %}
+        <a href="{% url step_url next_step.slug %}" class="btn btn-success">
+            {{ next_step.name }} →
+        </a>
+        {% endif %}
+    </div>
+
 </div>
-{% endif %}
 
-{# Navigation précédent / suivant #}
-<div class="step-nav d-flex justify-content-between">
-  {% if prev_step %}
-  <a href="{% url step_url prev_step.slug %}" class="btn btn-outline-secondary">
-    <i class="bi-arrow-left"></i> {{ prev_step.name }}
-  </a>
-  {% else %}<div></div>{% endif %}
-  {% if next_step %}
-  <a href="{% url step_url next_step.slug %}" class="btn btn-primary">
-    {{ next_step.name }} <i class="bi-arrow-right"></i>
-  </a>
-  {% endif %}
-</div>
+<style>
+.cube-case svg { max-width: 220px; height: auto; }
+.move-icon { width: 56px; height: 75px; }
+.card { box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
+</style>
+
+<script type="module">
+  import { renderCube } from "{% static 'cube/js/cube_renderer.js' %}";
+
+  function mountCube(containerId, state) {
+    const container = document.getElementById(containerId);
+    if (!container) return;
+    container.innerHTML = '';
+    if (!state) {
+      container.innerHTML = `
+        <div class="alert alert-secondary text-center py-3">
+          <i class="bi bi-cube text-muted" style="font-size:2rem;"></i>
+          <p class="mb-0 mt-1 small text-muted">État non disponible</p>
+        </div>`;
+      return;
+    }
+    const template = document.getElementById("cube-template");
+    const clone    = template.content.cloneNode(true);
+    container.appendChild(clone);
+    const svg = container.querySelector("svg");
+    renderCube(svg, state);
+  }
+
+  document.addEventListener("DOMContentLoaded", () => {
+    mountCube("cube-edge-pairing-from-top", {{ state_pairing_from_top|safe }});
+    mountCube("cube-edge-pairing-from-bottom", {{ state_pairing_from_bottom|safe }});
+
+    mountCube("cube-edge-flip",    {{ state_flip|safe }});
+    mountCube("cube-last-two",     {{ state_last_two|safe }});
+  });
+</script>
 
 {% endblock %}

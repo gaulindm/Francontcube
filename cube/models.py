@@ -4,16 +4,15 @@ from django.utils.safestring import mark_safe
 import re
 
 
-# cube/models.py  — ajouter sous CubeState
-
-class PuzzleCase(models.Model):
-
-    # ── Identification ─────────────────────────────────────────────────────
-    PUZZLE_CHOICES = [
-        ('2x2', '2x2'),
-        ('3x3', '3x3'),   # Prévu pour la migration future de CubeState
-        ('4x4', '4x4'),
-        ('5x5', '5x5'),
+class CubeState(models.Model):
+    METHOD_CHOICES = [
+        ("cubienewbie",    "CubieNewbie"),
+        ("beginner",       "Beginner"),
+        ("cfop",           "CFOP"),
+        ("roux",           "Roux"),
+        ("zz",             "ZZ"),
+        ("reduction-4x4",  "Réduction 4×4"),
+        ("reduction-5x5",  "Réduction 5×5"),
     ]
 
     DIFFICULTY_CHOICES = [
@@ -22,158 +21,38 @@ class PuzzleCase(models.Model):
         ('difficile', 'Difficile'),
     ]
 
-    SOLVED_4x4 = (
-        'U' * 16 +   # 0–15
-        'R' * 16 +   # 16–31
-        'F' * 16 +   # 32–47
-        'D' * 16 +   # 48–63
-        'L' * 16 +   # 64–79
-        'B' * 16     # 80–95
-    )
-
-
-
-    puzzle_type = models.CharField(max_length=10, choices=PUZZLE_CHOICES)
-    method      = models.CharField(max_length=50)   # 'ortega', 'reduction', 'cfop'...
-    category    = models.CharField(max_length=50, blank=True)  # 'pbl', 'centers', 'edges'...
-    step_number = models.PositiveIntegerField(default=1)
-
-    name        = models.CharField(max_length=100)
-    slug        = models.SlugField(unique=True, blank=True)
-    algorithm   = models.TextField(blank=True)
-    setup       = models.TextField(blank=True)  # remplace roofpig_setup
-    description = models.TextField(blank=True)
-    tip         = models.TextField(blank=True)  # conseil pratique, absent dans CubeState
-    difficulty  = models.CharField(max_length=20, blank=True, choices=DIFFICULTY_CHOICES)
-
-    # ── cubing.js ──────────────────────────────────────────────────────────
-    # Mêmes champs que CubeState — migration directe possible
-    camera_longitude = models.FloatField(
-        default=-25.0,
-        help_text="Angle horizontal caméra. Négatif = face avant plus visible."
-    )
-    camera_latitude = models.FloatField(
-        default=22.0,
-        help_text="Angle vertical caméra. Plus élevé = vue de dessus."
-    )
-    stickering = models.CharField(
-        max_length=30,
-        blank=True,
-        default='full',
-        help_text="cubing.js stickering: full | OLL | PLL | F2L | LL | Cross"
-    )
-
-    # ── Méthodes ───────────────────────────────────────────────────────────
-    # Copiées de CubeState — identiques, aucune dépendance au 3x3
-
-    def get_clean_algorithm(self):
-        """Retourne l'algorithme sans notation de groupe."""
-        return re.sub(r'[(){}\[\]]', '', self.algorithm).split()
-
-    @staticmethod
-    def invert_alg(alg):
-        """Calcule l'inverse d'un algorithme. R U R' → R U' R'"""
-        if not alg or not alg.strip():
-            return ''
-        clean = re.sub(r'[(){}\[\]]', '', alg).strip()
-        moves = clean.split()
-        inverted = []
-        for m in reversed(moves):
-            if not m:
-                continue
-            if m.endswith("'"):
-                inverted.append(m[:-1])
-            elif m.endswith('2'):
-                inverted.append(m)
-            else:
-                inverted.append(m + "'")
-        return ' '.join(inverted)
-
-    def get_facelet_string(self):
-        """
-        Return a 96-char facelet string for cubing SVG display.
-        Priority:
-        1. json_state if it's a flat 96-char string
-        2. SOLVED_4x4 as fallback
-        Used by _cube_4x4_svg.html via data-state attribute.
-        """
-        if self.puzzle_type != '4x4':
-            return ''
-        # If you store state as a plain string in a TextField, return it directly.
-        # If you later store it as JSON, serialize here.
-        return getattr(self, 'facelet_state', '') or self.SOLVED_4x4
-
-
-    def get_setup_alg(self):
-        """
-        Retourne le setup pour cubing.js.
-        Priorité:
-          1. Champ setup si rempli manuellement
-          2. Sinon, inverse automatique de l'algorithme
-        """
-        if self.setup and self.setup.strip():
-            return self.setup
-        return self.invert_alg(self.algorithm)
-
-    # ── Django boilerplate ────────────────────────────────────────────────
-
-    def save(self, *args, **kwargs):
-        if not self.slug:
-            self.slug = slugify(self.name)
-        super().save(*args, **kwargs)
-
-    def __str__(self):
-        return f"[{self.puzzle_type}] {self.name}"
-
-    class Meta:
-        ordering = ['puzzle_type', 'method', 'category', 'step_number']
-        unique_together = [['puzzle_type', 'method', 'category', 'step_number']]
-        verbose_name = 'Puzzle Case'
-        verbose_name_plural = 'Puzzle Cases'
-
-
-
-
-class CubeState(models.Model):
-    METHOD_CHOICES = [
-        ("cubienewbie", "CubieNewbie"),
-        ("beginner", "Beginner"),
-        ("cfop", "CFOP"),
-        ("roux", "Roux"),
-        ("zz", "ZZ"),
-    ]
-
-    DIFFICULTY_CHOICES = [
-        ('facile', 'Facile'),
-        ('moyen', 'Moyen'),
-        ('difficile', 'Difficile'),
-    ]
-
-    name = models.CharField(max_length=100)
-    slug = models.SlugField(unique=True, blank=True)
-    json_state = models.JSONField()
-    json_highlight = models.JSONField(blank=True, null=True)
-    algorithm = models.TextField(blank=True)
-    description = models.TextField(blank=True)
-    step_number = models.PositiveIntegerField(default=1)
-    method = models.CharField(max_length=20, choices=METHOD_CHOICES, default="beginner")
+    name             = models.CharField(max_length=100)
+    slug             = models.SlugField(unique=True, blank=True)
+    json_state       = models.JSONField()
+    json_highlight   = models.JSONField(blank=True, null=True)
+    algorithm        = models.TextField(blank=True)
+    description      = models.TextField(blank=True)
+    step_number      = models.PositiveIntegerField(default=1)
+    method           = models.CharField(max_length=20, choices=METHOD_CHOICES, default="beginner")
     hand_orientation = models.CharField(
         max_length=10,
         choices=[('right', 'Main Droite'), ('left', 'Main Gauche')],
         default='right',
     )
-    category = models.CharField(max_length=50, blank=True)
+    category   = models.CharField(max_length=50, blank=True)
     difficulty = models.CharField(max_length=20, blank=True, choices=DIFFICULTY_CHOICES)
-    roofpig_setup = models.TextField(blank=True)
-    roofpig_colored = models.TextField(blank=True)
-    roofpig_flags = models.CharField(max_length=200, blank=True, default='showalg')
+
+    # ── Formerly roofpig_* — renamed to generic names ─────────────────────
+    # setup   : algorithm to reach the starting position (was roofpig_setup)
+    # colored : pieces/faces to highlight (was roofpig_colored)
+    # flags   : display options e.g. "showalg speed:1" (was roofpig_flags)
+    setup   = models.TextField(blank=True)
+    colored = models.TextField(blank=True)
+    flags   = models.CharField(max_length=200, blank=True, default='showalg')
+
+    # ── cubing.js camera ──────────────────────────────────────────────────
     camera_longitude = models.FloatField(
         default=-25.0,
-        help_text="cubing.js camera horizontal angle. Negative = more front face visible."
+        help_text="Horizontal camera angle. Negative = more front face visible."
     )
     camera_latitude = models.FloatField(
         default=22.0,
-        help_text="cubing.js camera vertical angle. Higher = more top-down view."
+        help_text="Vertical camera angle. Higher = more top-down view."
     )
     stickering = models.CharField(
         max_length=30,
@@ -181,12 +60,8 @@ class CubeState(models.Model):
         default='full',
         help_text="cubing.js stickering: full | OLL | PLL | F2L | LL | Cross"
     )
- 
 
     # ── Left-hand substitution ─────────────────────────────────────────────
-    # Students hold the cube in their right hand and move with their left.
-    # The ANIMATION stays as F/F' (correct face shown in Roofpig).
-    # The SVG ICONS show L/L' (what the student's left hand actually does).
     LEFT_HAND_MAP = {
         'F':  'L',
         "F'": "L'",
@@ -194,45 +69,36 @@ class CubeState(models.Model):
     }
 
     def _apply_hand_substitution(self, moves):
-        """
-        Swap F-family moves to L-family for left-hand students.
-        Only applied to SVG icon display — NOT to Roofpig.
-        """
         if self.hand_orientation != 'left':
             return moves
         return [self.LEFT_HAND_MAP.get(m, m) for m in moves]
 
     def get_clean_algorithm(self):
         """
-        Return the algorithm as a plain list of moves with grouping notation
-        stripped, WITHOUT hand substitution.
-
-        Used by get_roofpig_config() so the animation always shows the
-        original F/F' moves animating the correct face.
-
-        "(R U' R') [F' U F]"  ->  ['R', "U'", "R'", "F'", 'U', 'F']
+        Return algorithm as a plain list of moves, grouping notation stripped.
+        No hand substitution — used by get_roofpig_config() so animation is correct.
+        "(R U' R') [F' U F]" → ['R', "U'", "R'", "F'", 'U', 'F']
         """
         return re.sub(r'[(){}\[\]]', '', self.algorithm).split()
 
     def get_algorithm_svg(self):
         """
         Generate SVG icons from algorithm string.
-          - ( ) groups  -> Rubik's blue  (#0051A8)
-          - [ ] groups  -> Rubik's red   (#C41E3A)
-          - Left-hand substitution IS applied here so icons show what
-            the student's hand actually does (L/L' instead of F/F').
+        ( ) groups → Rubik's blue, [ ] groups → Rubik's red.
+        Left-hand substitution applied for display only.
         """
         if not self.algorithm or self.algorithm.strip() == '':
             return ''
 
         def move_to_svg(move, extra_class=''):
-            # Substitute for display only
             display_move = self._apply_hand_substitution([move])[0]
             svg_id = display_move.replace("'", "-prime")
             css = f'move-icon {extra_class}'.strip()
-            return (f'<svg class="{css}" aria-label="{display_move}" '
+            return (
+                f'<svg class="{css}" aria-label="{display_move}" '
                 f'width="52" height="52" style="width:52px;height:52px;min-width:0">'
-                f'<use href="#{svg_id}"/></svg>')
+                f'<use href="#{svg_id}"/></svg>'
+            )
 
         alg = self.algorithm.strip()
         tokens = []
@@ -296,40 +162,35 @@ class CubeState(models.Model):
     def get_roofpig_config(self):
         """
         Generate Roofpig configuration string.
-          - Brackets stripped (Roofpig cannot parse them)
-          - NO hand substitution — Roofpig receives the original F/F' moves
-            so the animation shows the correct face moving.
+        Uses the renamed fields (setup, colored, flags).
+        Brackets stripped — Roofpig cannot parse them.
+        No hand substitution — animation shows correct face.
         """
         config_parts = []
 
-        clean_moves = self.get_clean_algorithm()   # brackets only, no F->L swap
+        clean_moves = self.get_clean_algorithm()
         if clean_moves:
             config_parts.append(f"alg={' '.join(clean_moves)}")
 
-        if self.roofpig_setup:
-            config_parts.append(f"setup={self.roofpig_setup}")
-        if self.roofpig_colored:
-            config_parts.append(f"colored={self.roofpig_colored}")
+        if self.setup:
+            config_parts.append(f"setup={self.setup}")
+        if self.colored:
+            config_parts.append(f"colored={self.colored}")
 
-        flags = self.roofpig_flags or 'showalg'
-        config_parts.append(f"flags={flags}")
+        config_parts.append(f"flags={self.flags or 'showalg'}")
         config_parts.append("hover=2")
 
         return " | ".join(config_parts)
-    
+
     @staticmethod
     def invert_alg(alg):
         """
         Compute the inverse of an algorithm string.
- 
-        Used to auto-generate the setup position for cubing.js.
         Strips grouping brackets before inverting.
- 
-        "R U R'"  →  "R U' R'"  (inverse)
+        "R U R'" → "R U' R'"
         """
         if not alg or not alg.strip():
             return ''
-        # Strip grouping notation so brackets don't confuse the parser
         clean = re.sub(r'[(){}\[\]]', '', alg).strip()
         moves = clean.split()
         inverted = []
@@ -337,29 +198,23 @@ class CubeState(models.Model):
             if not m:
                 continue
             if m.endswith("'"):
-                inverted.append(m[:-1])       # R'  → R
+                inverted.append(m[:-1])    # R'  → R
             elif m.endswith('2'):
-                inverted.append(m)             # R2  → R2  (self-inverse)
+                inverted.append(m)          # R2  → R2
             else:
-                inverted.append(m + "'")       # R   → R'
+                inverted.append(m + "'")    # R   → R'
         return ' '.join(inverted)
- 
+
     def get_setup_alg(self):
         """
         Return the cubing.js setup algorithm.
- 
         Priority:
-          1. Use roofpig_setup if it was manually set (backward compat)
-          2. Otherwise auto-invert the main algorithm
- 
-        This means you never NEED to fill roofpig_setup again —
-        it just works automatically.
+          1. setup field if manually set
+          2. Auto-invert the main algorithm
         """
-        if self.roofpig_setup and self.roofpig_setup.strip():
-            return self.roofpig_setup
+        if self.setup and self.setup.strip():
+            return self.setup
         return self.invert_alg(self.algorithm)
-
-
 
     def save(self, *args, **kwargs):
         if not self.slug:
@@ -368,3 +223,6 @@ class CubeState(models.Model):
 
     def __str__(self):
         return self.name
+
+    class Meta:
+        ordering = ['method', 'category', 'step_number']
