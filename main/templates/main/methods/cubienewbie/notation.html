@@ -371,7 +371,7 @@
                 const end = direction === 1 ? 0 : 180;
 
                 if (isDouble) {
-                    arrows.push(circularArc(cx, cy, r, 90, 0, 1));
+                    arrows.push(circularArc(cx, cy, r, start, end, direction));
                     const arrowX = cx - 17;
                     const arrowY = cy - 2;
                     arrows.push(verticalArrow(arrowX, arrowY - 6, -1));

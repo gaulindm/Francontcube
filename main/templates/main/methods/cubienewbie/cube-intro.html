@@ -35,31 +35,33 @@
     </div>
     {% endif %}
 
-    <!-- Section Introduction -->
-    <div class="card p-4 mb-4">
-        <h3 class="brand-green">🎯 Bienvenue dans l'aventure du Rubik's Cube!</h3>
-        <p>
-            Avant de commencer à résoudre ton cube, il est important de comprendre sa structure. 
-            Le Rubik's Cube 3×3×3 n'est pas aussi complexe qu'il n'y paraît une fois qu'on connaît les bases!
-        </p>
+<!-- Section Introduction -->
+<div class="card p-4 mb-4">
+    <h3 class="brand-green">🎯 Bienvenue dans l'aventure du Rubik's Cube!</h3>
+    <p>
+        Avant de commencer à résoudre ton cube, il est important de comprendre sa structure. 
+        Le Rubik's Cube 3×3×3 n'est pas aussi complexe qu'il n'y paraît une fois qu'on connaît les bases!
+    </p>
 
-        <div class="row mt-4">
-            <div class="col-md-6 text-center mb-3">
-                <div id="cube-solved" class="cube-display"></div>
-                <p class="mt-2"><strong>Cube résolu</strong></p>
-            </div>
-            <div class="col-md-6 text-center mb-3">
-                <div id="cube-scrambled" class="cube-display"></div>
-                <p class="mt-2"><strong>Cube mélangé</strong></p>
+    <div class="row mt-4">
+        
+        <!-- Left: Cube -->
+        <div class="col-md-6 text-center mb-3">
+            <div id="cube-scrambled" class="cube-display"></div>
+            <p class="mt-2"><strong>Cube mélangé</strong></p>
+        </div>
+
+        <!-- Right: Blue Info Box -->
+        <div class="col-md-6">
+            <div class="alert alert-info">
+                <strong>💡 Le saviez-vous?</strong> Le Rubik's Cube possède plus de 43 quintillions de 
+                positions possibles (43 252 003 274 489 856 000 exactement)! Mais ne t'inquiète pas, 
+                tu n'as besoin d'apprendre que quelques algorithmes simples pour le résoudre. 🎉
             </div>
         </div>
 
-        <div class="alert alert-info mt-3">
-            <strong>💡 Le saviez-vous?</strong> Le Rubik's Cube possède plus de 43 quintillions de 
-            positions possibles (43 252 003 274 489 856 000 exactement)! Mais ne t'inquiète pas, 
-            tu n'as besoin d'apprendre que quelques algorithmes simples pour le résoudre. 🎉
-        </div>
     </div>
+</div>
 
     <!-- Section Les 6 faces -->
     <div class="card p-4 mb-4">
@@ -72,7 +74,7 @@
         <div class="row mt-3">
             <div class="col-md-6">
                 <div class="text-center">
-                    <div id="cube-faces" class="cube-display"></div>
+                    <div id="cube-solved" class="cube-display"></div>
                 </div>
             </div>
             <div class="col-md-6">
@@ -81,7 +83,7 @@
                         <div class="d-flex align-items-center">
                             <span class="badge bg-light text-dark border me-3" style="width: 40px;">U</span>
                             <div>
-                                <strong>Haut (Up)</strong> — <span style="color: #FFFF00;">●</span> Jaune
+                                <strong>Haut (Up)</strong> — <span style="color: #FFFFFF;">●</span> Blanc
                             </div>
                         </div>
                     </div>
@@ -89,7 +91,7 @@
                         <div class="d-flex align-items-center">
                             <span class="badge bg-light text-dark border me-3" style="width: 40px;">D</span>
                             <div>
-                                <strong>Bas (Down)</strong> — <span style="color: #FFFFFF;">○</span> Blanc
+                                <strong>Bas (Down)</strong> — <span style="color: #FFFF00;">○</span> Jaune
                             </div>
                         </div>
                     </div>
@@ -113,7 +115,7 @@
                         <div class="d-flex align-items-center">
                             <span class="badge bg-light text-dark border me-3" style="width: 40px;">L</span>
                             <div>
-                                <strong>Gauche (Left)</strong> — <span style="color: #FF0000;">●</span> Rouge
+                                <strong>Gauche (Left)</strong> — <span style="color: #FFA500;">●</span> Orange
                             </div>
                         </div>
                     </div>
@@ -121,7 +123,7 @@
                         <div class="d-flex align-items-center">
                             <span class="badge bg-light text-dark border me-3" style="width: 40px;">R</span>
                             <div>
-                                <strong>Droite (Right)</strong> — <span style="color: #FFA500;">●</span> Orange
+                                <strong>Droite (Right)</strong> — <span style="color: #FF0000;">●</span> Rouge
                             </div>
                         </div>
                     </div>
