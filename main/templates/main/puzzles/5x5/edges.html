@@ -1,0 +1,499 @@
+{% extends "main/partials/base.html" %}
+{% load static %}
+
+{% block title %}5×5 — Étape 3 : Arêtes — Francontcube{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+
+    {% include "cube/partials/_5x5_cube_svg.html" %}
+    {% include "cube/partials/_5x5_moves_sprite.html" %}
+
+    <!-- ── Hero ──────────────────────────────────────────────────────────── -->
+    <div class="text-center mb-5">
+        <h1 class="hero-title">
+            <span class="brand-green">Étape 3 — Arêtes</span>
+        </h1>
+        <p class="lead text-muted">
+            Regrouper les <strong>12 arêtes</strong> du cube —
+            chaque arête est formée de <strong>3 pièces</strong>
+            qu'il faut assembler comme un sandwich.
+        </p>
+    </div>
+
+    <!-- ── Objectif ──────────────────────────────────────────────────────── -->
+    <div class="card p-4 mb-4">
+        <h3 class="brand-green">🎯 Objectif</h3>
+        <p>
+            Assemblez toutes <strong>12 les arêtes</strong> du cube afin de pouvoir résoudre le reste du cube comme un <strong>3x3</strong>.
+        
+        </p>
+        <div class="row mt-3 align-items-center">
+            <div class="col-md-4 text-center">
+                <div id="cube-edges-goal" class="cube-case"></div>
+                <p class="mt-2 small text-muted">Croix jaune complétée sur la face du bas</p>
+            </div>
+            <div class="col-md-8">
+                <div class="alert alert-info mb-0">
+                    <strong>💡 À retenir :</strong> La croix du bas signifie que les 4
+                    arêtes de la face jaune pointent vers le bas. Les stickers latéraux
+                    de ces arêtes ne sont pas encore alignés — on s'en occupera plus tard.
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    <!-- ── C'est quoi une arête sur le 5×5? ──────────────────────────────── -->
+    <div class="card p-4 mb-4 border-primary">
+        <h3 class="brand-green">🔍 C'est quoi une arête sur le 5×5?</h3>
+        <div class="row align-items-center">
+            <div class="col-md-7">
+                <p>
+                    Sur un 3×3, chaque arête est <strong>une seule pièce</strong>.
+                    Sur le 5×5, chaque arête est formée de <strong>3 pièces</strong> :
+                </p>
+                <ul>
+                    <li>
+                        <strong>1 pièce centrale</strong> — elle est fixe,
+                        comme sur un 3×3. Elle ne bouge jamais.
+                    </li>
+                    <li>
+                        <strong>2 pièces ailes</strong> (<em>wings</em>) —
+                        elles sont interchangeables et doivent être placées
+                        de chaque côté de la pièce centrale.
+                    </li>
+                </ul>
+                <p>
+                    Une arête est <strong>complète</strong> quand les 3 pièces
+                    sont alignées et forment une seule bande de couleur uniforme —
+                    comme un sandwich!
+                </p>
+                <div class="alert alert-info mb-0">
+                    <strong>💡 Bon à savoir :</strong>
+                    Les 2 pièces ailes d'une même arête sont identiques —
+                    tu n'as pas à t'inquiéter de leur ordre.
+                    Si elles sont toutes les deux de la bonne couleur et
+                    bien orientées, l'arête est résolue.
+                </div>
+            </div>
+            <div class="col-md-5 text-center">
+                <!-- SVG showing one edge: 3 pieces = wing + center + wing -->
+                <svg viewBox="0 0 180 60" width="200" height="67"
+                     xmlns="http://www.w3.org/2000/svg"
+                     aria-label="Une arête du 5×5 : aile + centre + aile">
+                    <!-- wing 1 -->
+                    <rect x="3"   y="5" width="50" height="50" rx="7" fill="#0d6efd" stroke="#0a58ca" stroke-width="2"/>
+                    <text x="28"  y="34" text-anchor="middle" dominant-baseline="middle" font-size="10" fill="white" font-weight="bold">aile</text>
+                    <!-- center piece -->
+                    <rect x="65"  y="5" width="50" height="50" rx="7" fill="#0d6efd" stroke="#0a58ca" stroke-width="3"/>
+                    <text x="90"  y="28" text-anchor="middle" dominant-baseline="middle" font-size="9"  fill="white" font-weight="bold">centre</text>
+                    <text x="90"  y="40" text-anchor="middle" dominant-baseline="middle" font-size="9"  fill="#cfe2ff">fixe</text>
+                    <!-- wing 2 -->
+                    <rect x="127" y="5" width="50" height="50" rx="7" fill="#0d6efd" stroke="#0a58ca" stroke-width="2"/>
+                    <text x="152" y="34" text-anchor="middle" dominant-baseline="middle" font-size="10" fill="white" font-weight="bold">aile</text>
+                    <!-- bracket -->
+                    <path d="M3,58 Q90,70 177,58" fill="none" stroke="#6c757d" stroke-width="1.5" stroke-dasharray="3 2"/>
+                    <text x="90" y="68" text-anchor="middle" font-size="9" fill="#6c757d">arête complète ✅</text>
+                </svg>
+                <p class="small text-muted mt-3">3 pièces = 1 arête complète</p>
+
+                <!-- SVG showing incomplete edge -->
+                <svg viewBox="0 0 180 60" width="200" height="67"
+                     xmlns="http://www.w3.org/2000/svg"
+                     aria-label="Arête incomplète : ailes mal placées">
+                    <rect x="3"   y="5" width="50" height="50" rx="7" fill="#0d6efd" stroke="#0a58ca" stroke-width="2"/>
+                    <text x="28"  y="34" text-anchor="middle" dominant-baseline="middle" font-size="10" fill="white" font-weight="bold">aile</text>
+                    <rect x="65"  y="5" width="50" height="50" rx="7" fill="#0d6efd" stroke="#0a58ca" stroke-width="3"/>
+                    <text x="90"  y="28" text-anchor="middle" dominant-baseline="middle" font-size="9"  fill="white" font-weight="bold">centre</text>
+                    <text x="90"  y="40" text-anchor="middle" dominant-baseline="middle" font-size="9"  fill="#cfe2ff">fixe</text>
+                    <rect x="127" y="5" width="50" height="50" rx="7" fill="#dc3545" stroke="#b02a37" stroke-width="2"/>
+                    <text x="152" y="34" text-anchor="middle" dominant-baseline="middle" font-size="10" fill="white" font-weight="bold">aile ❌</text>
+                    <path d="M3,58 Q90,70 177,58" fill="none" stroke="#dc3545" stroke-width="1.5" stroke-dasharray="3 2"/>
+                    <text x="90" y="68" text-anchor="middle" font-size="9" fill="#dc3545">arête incomplète ❌</text>
+                </svg>
+                <p class="small text-muted mt-2">Aile de la mauvaise couleur — pas encore résolue</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- ── Vue d'ensemble ────────────────────────────────────────────────── -->
+    <div class="card p-4 mb-4">
+        <h3 class="brand-green">🎯 Plan général — 12 arêtes en 2 phases</h3>
+        <div class="row g-3 mt-1">
+            <div class="col-md-6">
+                <div class="card h-100 border-success">
+                    <div class="card-header text-bg-success fw-bold text-center">
+                        <i class="bi bi-unlock-fill me-1"></i>
+                        Phase 1 — Les 8 premières arêtes
+                    </div>
+                    <div class="card-body">
+                        <p class="mb-2">
+                            Tu peux construire et placer les 8 premières arêtes
+                            <strong>librement</strong> — pas de technique spéciale,
+                            juste de l'observation.
+                        </p>
+                        <p class="mb-0 small text-muted">
+                            Utilise n'importe quelle face latérale comme zone de travail.
+                            Si tu casses une arête déjà faite, pas de panique —
+                            tu peux la refaire facilement à ce stade.
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="card h-100 border-danger">
+                    <div class="card-header text-bg-danger fw-bold text-center">
+                        <i class="bi bi-lock-fill me-1"></i>
+                        Phase 2 — Les 4 dernières arêtes
+                    </div>
+                    <div class="card-body">
+                        <p class="mb-2">
+                            Les 4 dernières arêtes demandent une technique précise
+                            pour éviter de défaire les 8 premières.
+                            On les résout <strong>toutes les 4 ensemble</strong>
+                            avec le slot libre.
+                        </p>
+                        <p class="mb-0 small text-muted">
+                            Ne t'inquiète pas si ça semble compliqué — la technique
+                            est expliquée étape par étape ci-dessous.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ── Phase 1 : construire une arête ───────────────────────────────── -->
+    <div class="card p-4 mb-4 border-success">
+        <h3 class="brand-green">🟢 Phase 1 — Construire une arête</h3>
+        <p>
+            Pour assembler une arête, il faut amener les 2 pièces ailes
+            <strong>sur la même face latérale</strong>, de chaque côté
+            de la pièce centrale, puis les glisser ensemble dans leur position finale.
+        </p>
+
+        <div class="row mt-3 g-4">
+
+            <!-- Étape A -->
+            <div class="col-md-3">
+                <div class="card h-100 border-0 bg-light">
+                    <div class="card-header text-center fw-bold text-bg-secondary">
+                        A — Repérer
+                    </div>
+                    <div class="card-body text-center">
+                        <p class="small mb-0">
+                            Choisis une arête à compléter.
+                            Trouve sa pièce centrale (fixe) —
+                            elle indique exactement où les 2 ailes doivent aller.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Étape B -->
+            <div class="col-md-3">
+                <div class="card h-100 border-0 bg-light">
+                    <div class="card-header text-center fw-bold text-bg-primary">
+                        B — Amener les ailes
+                    </div>
+                    <div class="card-body text-center">
+                        <p class="small mb-2">
+                            Utilise <code>Rw</code>, <code>Lw</code>,
+                            <code>F</code>, <code>B</code> pour amener
+                            une aile sur la même face que la pièce centrale,
+                            dans la même colonne.
+                        </p>
+                        <div class="d-flex justify-content-center gap-1">
+                            <div class="text-center">
+                                <svg class="move-icon"><use href="#Rw-5"/></svg>
+                                <p class="small mb-0">Rw</p>
+                            </div>
+                            <div class="text-center">
+                                <svg class="move-icon"><use href="#F-5"/></svg>
+                                <p class="small mb-0">F</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Étape C -->
+            <div class="col-md-3">
+                <div class="card h-100 border-0 bg-light">
+                    <div class="card-header text-center fw-bold text-bg-warning text-dark">
+                        C — Aligner
+                    </div>
+                    <div class="card-body text-center">
+                        <p class="small mb-2">
+                            Tourne <code>U</code> pour amener la 2e aile
+                            dans la même colonne, de l'autre côté
+                            de la pièce centrale.
+                            Les 3 pièces doivent être alignées verticalement.
+                        </p>
+                        <div class="d-flex justify-content-center">
+                            <div class="text-center">
+                                <svg class="move-icon"><use href="#U-5"/></svg>
+                                <p class="small mb-0">U</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Étape D -->
+            <div class="col-md-3">
+                <div class="card h-100 border-0 bg-light">
+                    <div class="card-header text-center fw-bold text-bg-danger">
+                        D — Insérer
+                    </div>
+                    <div class="card-body text-center">
+                        <p class="small mb-2">
+                            Glisse l'arête complète dans sa position finale
+                            avec <code>Rw U' Rw'</code> ou
+                            <code>Lw' U Lw</code>.
+                        </p>
+                        <div class="d-flex justify-content-center gap-1">
+                            <div class="text-center">
+                                <svg class="move-icon"><use href="#Rw-5"/></svg>
+                                <p class="small mb-0" style="font-size:9px;">Rw U' Rw'</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="row mt-4 align-items-center">
+            <div class="col-md-4 text-center">
+                <div id="cube-pairing-start" class="cube-case"></div>
+                <p class="mt-2 small text-muted">Position de départ — ailes séparées</p>
+            </div>
+            <div class="col-md-4 text-center">
+                <div id="cube-pairing-from-top" class="cube-case"></div>
+                <p class="mt-2 small text-muted">Aile amenée depuis le haut</p>
+            </div>
+            <div class="col-md-4 text-center">
+                <div id="cube-pairing-from-bottom" class="cube-case"></div>
+                <p class="mt-2 small text-muted">Arête complète prête à insérer</p>
+            </div>
+        </div>
+
+        <div class="alert alert-warning mt-4 mb-0">
+            <strong>⚠️ Attention à l'orientation des ailes!</strong>
+            Une aile peut être dans la bonne position mais
+            <strong>mal orientée</strong> (retournée).
+            Si c'est le cas, utilise la technique du flip décrite plus bas
+            avant d'insérer l'arête.
+        </div>
+    </div>
+
+    <!-- ── Arête retournée ────────────────────────────────────────────────── -->
+    <div class="card p-4 mb-4 border-warning">
+        <h3 class="brand-green">🔃 Arête retournée — Le flip</h3>
+        <p>
+            Parfois, une arête semble complète mais les couleurs sont
+            <strong>inversées</strong> — l'aile est retournée.
+            On appelle ça un <em>flip</em>.
+            On ne peut pas l'insérer directement — il faut d'abord la retourner.
+        </p>
+
+        <div class="row mt-3 align-items-center">
+            <div class="col-md-4 text-center">
+                <div id="cube-flip" class="cube-case"></div>
+                <p class="mt-2 small text-muted">Arête retournée — couleurs inversées</p>
+            </div>
+            <div class="col-md-8">
+                <h5>Algorithme du flip :</h5>
+                <div class="bg-light p-3 rounded border mb-3">
+                    <p class="mb-2">
+                        Place l'arête retournée sur la face de droite, dans la rangée du haut.
+                        Puis exécute :
+                    </p>
+                    <div class="d-flex align-items-center gap-2 flex-wrap">
+                        <div class="text-center">
+                            <svg class="move-icon"><use href="#Rw-5"/></svg>
+                            <p class="small mb-0">Rw</p>
+                        </div>
+                        <div class="text-center">
+                            <svg class="move-icon"><use href="#U-5"/></svg>
+                            <p class="small mb-0">U</p>
+                        </div>
+                        <div class="text-center">
+                            <svg class="move-icon"><use href="#Rw-prime-5"/></svg>
+                            <p class="small mb-0">Rw'</p>
+                        </div>
+                        <div class="text-center">
+                            <svg class="move-icon"><use href="#F-5"/></svg>
+                            <p class="small mb-0">F</p>
+                        </div>
+                        <div class="text-center">
+                            <svg class="move-icon"><use href="#Rw-prime-5"/></svg>
+                            <p class="small mb-0">Rw'</p>
+                        </div>
+                        <div class="text-center">
+                            <svg class="move-icon"><use href="#F-prime-5"/></svg>
+                            <p class="small mb-0">F'</p>
+                        </div>
+                        <div class="text-center">
+                            <svg class="move-icon"><use href="#Rw-5"/></svg>
+                            <p class="small mb-0">Rw</p>
+                        </div>
+                    </div>
+                    <p class="mt-2 mb-0 text-center fw-bold">
+                        <code>Rw U Rw' F Rw' F' Rw</code>
+                    </p>
+                </div>
+                <div class="alert alert-info mb-0">
+                    <strong>💡 Astuce :</strong>
+                    Garde toujours <strong>une arête libre</strong> (non résolue)
+                    sur la face de travail pendant que tu fais le flip —
+                    l'algorithme va temporairement défaire cette arête libre,
+                    puis la reconstruire correctement à la fin.
+                    Ne fais jamais le flip quand toutes les arêtes de la face
+                    sont déjà résolues!
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ── Phase 2 : les 4 dernières arêtes ─────────────────────────────── -->
+    <div class="card p-4 mb-4 border-danger">
+        <h3 class="brand-green">🔴 Phase 2 — Les 4 dernières arêtes</h3>
+        <p>
+            Quand il ne reste que 4 arêtes à résoudre, on ne peut plus
+            utiliser librement <code>Rw</code> sans défaire les 8 arêtes déjà faites.
+            La solution : utiliser le <strong>slot libre</strong> — une des 4 arêtes
+            incomplètes sert de zone d'échange temporaire.
+        </p>
+
+        <div class="row mt-3 align-items-center">
+            <div class="col-md-4 text-center">
+                <div id="cube-last-two" class="cube-case"></div>
+                <p class="mt-2 small text-muted">4 dernières arêtes à résoudre</p>
+            </div>
+            <div class="col-md-8">
+                <h5>Technique du slot libre :</h5>
+                <div class="bg-light p-3 rounded border mb-3">
+                    <ol class="mb-0">
+                        <li class="mb-2">
+                            Place une des 4 arêtes incomplètes
+                            <strong>à droite sur la face de travail</strong> —
+                            c'est ton slot libre.
+                        </li>
+                        <li class="mb-2">
+                            Construis une arête complète sur la face du haut
+                            avec les pièces disponibles.
+                        </li>
+                        <li class="mb-2">
+                            Fais <code>Rw</code> pour l'insérer à droite
+                            <em>en éjectant</em> le slot libre vers le haut.
+                        </li>
+                        <li class="mb-2">
+                            Repositionne avec <code>U</code> ou <code>U'</code>
+                            pour aligner la prochaine arête à construire.
+                        </li>
+                        <li>
+                            Répète jusqu'à ce que les 4 arêtes soient complètes.
+                        </li>
+                    </ol>
+                </div>
+                <div class="alert alert-danger mb-0">
+                    <strong>⚠️ Règle absolue :</strong>
+                    Pendant la phase 2, ne fais <strong>jamais</strong>
+                    <code>Rw</code> seul suivi d'un mouvement de couche entière
+                    (<code>R</code>, <code>L</code>, <code>F</code>, <code>B</code>)
+                    sans d'abord replacer le slot libre —
+                    tu risques de défaire les 8 arêtes déjà résolues.
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ── Récapitulatif ─────────────────────────────────────────────────── -->
+    <div class="card p-4 mb-4 bg-light">
+        <h3 class="brand-green">✅ Vérification</h3>
+        <p>Avant de passer à l'étape 4, vérifiez :</p>
+        <ul>
+            <li>
+                Les <strong>12 arêtes</strong> sont chacune formées de
+                3 pièces de la même couleur, bien alignées
+            </li>
+            <li>
+                Chaque arête est dans la <strong>bonne position</strong>
+                sur le cube — les couleurs correspondent aux centres adjacents
+            </li>
+            <li>
+                Aucune aile n'est <strong>retournée</strong> (flip) —
+                si c'est le cas, utilise l'algorithme du flip maintenant
+            </li>
+        </ul>
+        <div class="alert alert-success mt-3 mb-0">
+            <strong>🎉 Bravo!</strong>
+            Le cube se comporte maintenant exactement comme un 3×3 —
+            plus de wide moves à partir de cette étape!
+            Les étapes 4 à 10 sont identiques à ce que tu connais déjà.
+        </div>
+    </div>
+
+    <!-- ── Navigation ────────────────────────────────────────────────────── -->
+    <div class="d-flex justify-content-between align-items-center mt-5 flex-wrap gap-2">
+        {% if prev_step %}
+        <a href="{% url step_url prev_step.slug %}" class="btn btn-outline-secondary">
+            ← {{ prev_step.name }}
+        </a>
+        {% else %}
+        <a href="{% url home_url %}" class="btn btn-outline-secondary">
+            ← Vue d'ensemble 5×5
+        </a>
+        {% endif %}
+        {% if next_step %}
+        <a href="{% url step_url next_step.slug %}" class="btn btn-success">
+            {{ next_step.name }} →
+        </a>
+        {% endif %}
+    </div>
+
+</div>
+
+<style>
+.cube-case svg { max-width: 220px; height: auto; }
+.move-icon { width: 56px; height: 75px; }
+.card { box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
+</style>
+
+<script type="module">
+  import { renderCube } from "{% static 'cube/js/cube_renderer.js' %}";
+
+  function mountCube(containerId, state) {
+    const container = document.getElementById(containerId);
+    if (!container) return;
+    container.innerHTML = '';
+    if (!state) {
+      container.innerHTML = `
+        <div class="alert alert-secondary text-center py-3">
+          <i class="bi bi-cube text-muted" style="font-size:2rem;"></i>
+          <p class="mb-0 mt-1 small text-muted">État non disponible</p>
+        </div>`;
+      return;
+    }
+    const template = document.getElementById("cube-template");
+    const clone    = template.content.cloneNode(true);
+    container.appendChild(clone);
+    const svg = container.querySelector("svg");
+    renderCube(svg, state);
+  }
+
+  document.addEventListener("DOMContentLoaded", () => {
+    mountCube("cube-edges-goal",       {{ state_edges_goal|safe }});
+    mountCube("cube-pairing-start",       {{ state_pairing_start|safe }});
+    mountCube("cube-pairing-from-top",    {{ state_pairing_from_top|safe }});
+    mountCube("cube-pairing-from-bottom", {{ state_pairing_from_bottom|safe }});
+    mountCube("cube-flip",                {{ state_flip|safe }});
+    mountCube("cube-last-two",            {{ state_last_two|safe }});
+  });
+</script>
+
+{% endblock %}

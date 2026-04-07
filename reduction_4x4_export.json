@@ -1,0 +1,5970 @@
+[
+{
+  "model": "cube.cubestate",
+  "pk": 109,
+  "fields": {
+    "name": "4x4-centers-objectif",
+    "slug": "4x4-centers-goal",
+    "json_state": {
+      "cube": {
+        "U": [
+          [
+            "X",
+            "X",
+            "X",
+            "X"
+          ],
+          [
+            "X",
+            "W",
+            "W",
+            "X"
+          ],
+          [
+            "X",
+            "W",
+            "W",
+            "X"
+          ],
+          [
+            "X",
+            "X",
+            "X",
+            "X"
+          ]
+        ],
+        "L": [
+          [
+            "X",
+            "X",
+            "X",
+            "X"
+          ],
+          [
+            "X",
+            "O",
+            "O",
+            "X"
+          ],
+          [
+            "X",
+            "O",
+            "O",
+            "X"
+          ],
+          [
+            "X",
+            "X",
+            "X",
+            "X"
+          ]
+        ],
+        "F": [
+          [
+            "X",
+            "X",
+            "X",
+            "X"
+          ],
+          [
+            "X",
+            "G",
+            "G",
+            "X"
+          ],
+          [
+            "X",
+            "G",
+            "G",
+            "X"
+          ],
+          [
+            "X",
+            "X",
+            "X",
+            "X"
+          ]
+        ],
+        "R": [
+          [
+            "X",
+            "X",
+            "X",
+            "X"
+          ],
+          [
+            "X",
+            "R",
+            "R",
+            "X"
+          ],
+          [
+            "X",
+            "R",
+            "R",
+            "X"
+          ],
+          [
+            "X",
+            "X",
+            "X",
+            "X"
+          ]
+        ],
+        "B": [
+          [
+            "X",
+            "X",
+            "X",
+            "X"
+          ],
+          [
+            "X",
+            "B",
+            "B",
+            "X"
+          ],
+          [
+            "X",
+            "B",
+            "B",
+            "X"
+          ],
+          [
+            "X",
+            "X",
+            "X",
+            "X"
+          ]
+        ],
+        "D": [
+          [
+            "X",
+            "X",
+            "X",
+            "X"
+          ],
+          [
+            "X",
+            "Y",
+            "Y",
+            "X"
+          ],
+          [
+            "X",
+            "Y",
+            "Y",
+            "X"
+          ],
+          [
+            "X",
+            "X",
+            "X",
+            "X"
+          ]
+        ]
+      },
+      "highlight": {
+        "stickers": []
+      }
+    },
+    "json_highlight": null,
+    "algorithm": "",
+    "description": "",
+    "step_number": 2,
+    "method": "reduction-4x4",
+    "hand_orientation": "right",
+    "category": "other_centers",
+    "difficulty": "",
+    "setup": "",
+    "colored": "",
+    "flags": "showalg",
+    "camera_longitude": -25.0,
+    "camera_latitude": 22.0,
+    "stickering": "full"
+  }
+},
+{
+  "model": "cube.cubestate",
+  "pk": 110,
+  "fields": {
+    "name": "4x4-centers-remplacement",
+    "slug": "4x4-centers-remplacement",
+    "json_state": {
+      "cube": {
+        "U": [
+          [
+            "X",
+            "X",
+            "X",
+            "X"
+          ],
+          [
+            "X",
+            "W",
+            "W",
+            "X"
+          ],
+          [
+            "X",
+            "G",
+            "W",
+            "X"
+          ],
+          [
+            "X",
+            "X",
+            "X",
+            "X"
+          ]
+        ],
+        "L": [
+          [
+            "X",
+            "X",
+            "X",
+            "X"
+          ],
+          [
+            "X",
+            "O",
+            "O",
+            "X"
+          ],
+          [
+            "X",
+            "O",
+            "O",
+            "X"
+          ],
+          [
+            "X",
+            "X",
+            "X",
+            "X"
+          ]
+        ],
+        "F": [
+          [
+            "X",
+            "X",
+            "X",
+            "X"
+          ],
+          [
+            "X",
+            "G",
+            "G",
+            "X"
+          ],
+          [
+            "X",
+            "G",
+            "W",
+            "X"
+          ],
+          [
+            "X",
+            "X",
+            "X",
+            "X"
+          ]
+        ],
+        "R": [
+          [
+            "X",
+            "X",
+            "X",
+            "X"
+          ],
+          [
+            "X",
+            "R",
+            "R",
+            "X"
+          ],
+          [
+            "X",
+            "R",
+            "R",
+            "X"
+          ],
+          [
+            "X",
+            "X",
+            "X",
+            "X"
+          ]
+        ],
+        "B": [
+          [
+            "X",
+            "X",
+            "X",
+            "X"
+          ],
+          [
+            "X",
+            "G",
+            "B",
+            "X"
+          ],
+          [
+            "X",
+            "B",
+            "B",
+            "X"
+          ],
+          [
+            "X",
+            "X",
+            "X",
+            "X"
+          ]
+        ],
+        "D": [
+          [
+            "X",
+            "X",
+            "X",
+            "X"
+          ],
+          [
+            "X",
+            "Y",
+            "Y",
+            "X"
+          ],
+          [
+            "X",
+            "Y",
+            "Y",
+            "X"
+          ],
+          [
+            "X",
+            "X",
+            "X",
+            "X"
+          ]
+        ]
+      },
+      "highlight": {
+        "stickers": []
+      }
+    },
+    "json_highlight": null,
+    "algorithm": "Rw U Rw'",
+    "description": "",
+    "step_number": 2,
+    "method": "reduction-4x4",
+    "hand_orientation": "right",
+    "category": "other_centers",
+    "difficulty": "",
+    "setup": "",
+    "colored": "",
+    "flags": "showalg",
+    "camera_longitude": -25.0,
+    "camera_latitude": 22.0,
+    "stickering": "full"
+  }
+},
+{
+  "model": "cube.cubestate",
+  "pk": 111,
+  "fields": {
+    "name": "4x4-centers-deux derniers",
+    "slug": "4x4-centers-last-two",
+    "json_state": {
+      "cube": {
+        "U": [
+          [
+            "X",
+            "X",
+            "X",
+            "X"
+          ],
+          [
+            "X",
+            "G",
+            "W",
+            "X"
+          ],
+          [
+            "X",
+            "G",
+            "W",
+            "X"
+          ],
+          [
+            "X",
+            "X",
+            "X",
+            "X"
+          ]
+        ],
+        "L": [
+          [
+            "X",
+            "X",
+            "X",
+            "X"
+          ],
+          [
+            "X",
+            "O",
+            "O",
+            "X"
+          ],
+          [
+            "X",
+            "O",
+            "O",
+            "X"
+          ],
+          [
+            "X",
+            "X",
+            "X",
+            "X"
+          ]
+        ],
+        "F": [
+          [
+            "X",
+            "X",
+            "X",
+            "X"
+          ],
+          [
+            "X",
+            "G",
+            "W",
+            "X"
+          ],
+          [
+            "X",
+            "G",
+            "W",
+            "X"
+          ],
+          [
+            "X",
+            "X",
+            "X",
+            "X"
+          ]
+        ],
+        "R": [
+          [
+            "X",
+            "X",
+            "X",
+            "X"
+          ],
+          [
+            "X",
+            "R",
+            "R",
+            "X"
+          ],
+          [
+            "X",
+            "R",
+            "R",
+            "X"
+          ],
+          [
+            "X",
+            "X",
+            "X",
+            "X"
+          ]
+        ],
+        "B": [
+          [
+            "X",
+            "X",
+            "X",
+            "X"
+          ],
+          [
+            "X",
+            "G",
+            "B",
+            "X"
+          ],
+          [
+            "X",
+            "B",
+            "B",
+            "X"
+          ],
+          [
+            "X",
+            "X",
+            "X",
+            "X"
+          ]
+        ],
+        "D": [
+          [
+            "X",
+            "X",
+            "X",
+            "X"
+          ],
+          [
+            "X",
+            "Y",
+            "Y",
+            "X"
+          ],
+          [
+            "X",
+            "Y",
+            "Y",
+            "X"
+          ],
+          [
+            "X",
+            "X",
+            "X",
+            "X"
+          ]
+        ]
+      },
+      "highlight": {
+        "stickers": []
+      }
+    },
+    "json_highlight": null,
+    "algorithm": "Rw U Rw'",
+    "description": "",
+    "step_number": 2,
+    "method": "reduction-4x4",
+    "hand_orientation": "right",
+    "category": "other_centers",
+    "difficulty": "",
+    "setup": "",
+    "colored": "",
+    "flags": "showalg",
+    "camera_longitude": -25.0,
+    "camera_latitude": 22.0,
+    "stickering": "full"
+  }
+},
+{
+  "model": "cube.cubestate",
+  "pk": 112,
+  "fields": {
+    "name": "4x4 WY — Jaune début",
+    "slug": "4x4-wy-centers-yellow-start",
+    "json_state": {
+      "cube": {
+        "U": [
+          [
+            "X",
+            "X",
+            "X",
+            "X"
+          ],
+          [
+            "X",
+            "X",
+            "X",
+            "X"
+          ],
+          [
+            "X",
+            "X",
+            "X",
+            "X"
+          ],
+          [
+            "X",
+            "X",
+            "X",
+            "X"
+          ]
+        ],
+        "L": [
+          [
+            "X",
+            "X",
+            "X",
+            "X"
+          ],
+          [
+            "X",
+            "X",
+            "X",
+            "X"
+          ],
+          [
+            "X",
+            "Y",
+            "X",
+            "X"
+          ],
+          [
+            "X",
+            "X",
+            "X",
+            "X"
+          ]
+        ],
+        "F": [
+          [
+            "X",
+            "X",
+            "X",
+            "X"
+          ],
+          [
+            "X",
+            "Y",
+            "X",
+            "X"
+          ],
+          [
+            "X",
+            "X",
+            "X",
+            "X"
+          ],
+          [
+            "X",
+            "X",
+            "X",
+            "X"
+          ]
+        ],
+        "R": [
+          [
+            "X",
+            "X",
+            "X",
+            "X"
+          ],
+          [
+            "X",
+            "X",
+            "X",
+            "X"
+          ],
+          [
+            "X",
+            "X",
+            "Y",
+            "X"
+          ],
+          [
+            "X",
+            "X",
+            "X",
+            "X"
+          ]
+        ],
+        "B": [
+          [
+            "X",
+            "X",
+            "X",
+            "X"
+          ],
+          [
+            "X",
+            "X",
+            "X",
+            "X"
+          ],
+          [
+            "X",
+            "X",
+            "X",
+            "X"
+          ],
+          [
+            "X",
+            "X",
+            "X",
+            "X"
+          ]
+        ],
+        "D": [
+          [
+            "X",
+            "X",
+            "X",
+            "X"
+          ],
+          [
+            "X",
+            "X",
+            "X",
+            "X"
+          ],
+          [
+            "X",
+            "X",
+            "Y",
+            "X"
+          ],
+          [
+            "X",
+            "X",
+            "X",
+            "X"
+          ]
+        ]
+      },
+      "highlight": {
+        "stickers": []
+      }
+    },
+    "json_highlight": null,
+    "algorithm": "",
+    "description": "",
+    "step_number": 1,
+    "method": "reduction-4x4",
+    "hand_orientation": "right",
+    "category": "w_y_centers",
+    "difficulty": "",
+    "setup": "",
+    "colored": "",
+    "flags": "showalg",
+    "camera_longitude": -25.0,
+    "camera_latitude": 22.0,
+    "stickering": "full"
+  }
+},
+{
+  "model": "cube.cubestate",
+  "pk": 113,
+  "fields": {
+    "name": "4x4-wy-centers-yellow-done",
+    "slug": "4x4-wy-centers-yellow-done",
+    "json_state": {
+      "cube": {
+        "U": [
+          [
+            "X",
+            "X",
+            "X",
+            "X"
+          ],
+          [
+            "X",
+            "X",
+            "X",
+            "X"
+          ],
+          [
+            "X",
+            "W",
+            "X",
+            "X"
+          ],
+          [
+            "X",
+            "X",
+            "X",
+            "X"
+          ]
+        ],
+        "L": [
+          [
+            "X",
+            "X",
+            "X",
+            "X"
+          ],
+          [
+            "X",
+            "X",
+            "W",
+            "X"
+          ],
+          [
+            "X",
+            "X",
+            "X",
+            "X"
+          ],
+          [
+            "X",
+            "X",
+            "X",
+            "X"
+          ]
+        ],
+        "F": [
+          [
+            "X",
+            "X",
+            "X",
+            "X"
+          ],
+          [
+            "X",
+            "X",
+            "X",
+            "X"
+          ],
+          [
+            "X",
+            "X",
+            "X",
+            "X"
+          ],
+          [
+            "X",
+            "X",
+            "X",
+            "X"
+          ]
+        ],
+        "R": [
+          [
+            "X",
+            "X",
+            "X",
+            "X"
+          ],
+          [
+            "X",
+            "W",
+            "X",
+            "X"
+          ],
+          [
+            "X",
+            "X",
+            "X",
+            "X"
+          ],
+          [
+            "X",
+            "X",
+            "X",
+            "X"
+          ]
+        ],
+        "B": [
+          [
+            "X",
+            "X",
+            "X",
+            "X"
+          ],
+          [
+            "X",
+            "X",
+            "X",
+            "X"
+          ],
+          [
+            "X",
+            "W",
+            "X",
+            "X"
+          ],
+          [
+            "X",
+            "X",
+            "X",
+            "X"
+          ]
+        ],
+        "D": [
+          [
+            "X",
+            "X",
+            "X",
+            "X"
+          ],
+          [
+            "X",
+            "Y",
+            "Y",
+            "X"
+          ],
+          [
+            "X",
+            "Y",
+            "Y",
+            "X"
+          ],
+          [
+            "X",
+            "X",
+            "X",
+            "X"
+          ]
+        ]
+      },
+      "highlight": {
+        "stickers": []
+      }
+    },
+    "json_highlight": null,
+    "algorithm": "",
+    "description": "",
+    "step_number": 1,
+    "method": "reduction-4x4",
+    "hand_orientation": "right",
+    "category": "w_y_centers",
+    "difficulty": "",
+    "setup": "",
+    "colored": "",
+    "flags": "showalg",
+    "camera_longitude": -25.0,
+    "camera_latitude": 22.0,
+    "stickering": "full"
+  }
+},
+{
+  "model": "cube.cubestate",
+  "pk": 114,
+  "fields": {
+    "name": "4x4-wy-centers-white-progress",
+    "slug": "4x4-wy-centers-white-progress",
+    "json_state": {
+      "cube": {
+        "U": [
+          [
+            "X",
+            "X",
+            "X",
+            "X"
+          ],
+          [
+            "X",
+            "W",
+            "X",
+            "X"
+          ],
+          [
+            "X",
+            "W",
+            "X",
+            "X"
+          ],
+          [
+            "X",
+            "X",
+            "X",
+            "X"
+          ]
+        ],
+        "L": [
+          [
+            "X",
+            "X",
+            "X",
+            "X"
+          ],
+          [
+            "X",
+            "X",
+            "X",
+            "X"
+          ],
+          [
+            "X",
+            "X",
+            "X",
+            "X"
+          ],
+          [
+            "X",
+            "X",
+            "X",
+            "X"
+          ]
+        ],
+        "F": [
+          [
+            "X",
+            "X",
+            "X",
+            "X"
+          ],
+          [
+            "X",
+            "W",
+            "X",
+            "X"
+          ],
+          [
+            "X",
+            "W",
+            "X",
+            "X"
+          ],
+          [
+            "X",
+            "X",
+            "X",
+            "X"
+          ]
+        ],
+        "R": [
+          [
+            "X",
+            "X",
+            "X",
+            "X"
+          ],
+          [
+            "X",
+            "X",
+            "X",
+            "X"
+          ],
+          [
+            "X",
+            "X",
+            "X",
+            "X"
+          ],
+          [
+            "X",
+            "X",
+            "X",
+            "X"
+          ]
+        ],
+        "B": [
+          [
+            "X",
+            "X",
+            "X",
+            "X"
+          ],
+          [
+            "X",
+            "X",
+            "X",
+            "X"
+          ],
+          [
+            "X",
+            "X",
+            "X",
+            "X"
+          ],
+          [
+            "X",
+            "X",
+            "X",
+            "X"
+          ]
+        ],
+        "D": [
+          [
+            "X",
+            "X",
+            "X",
+            "X"
+          ],
+          [
+            "X",
+            "Y",
+            "Y",
+            "X"
+          ],
+          [
+            "X",
+            "Y",
+            "Y",
+            "X"
+          ],
+          [
+            "X",
+            "X",
+            "X",
+            "X"
+          ]
+        ]
+      },
+      "highlight": {
+        "stickers": []
+      }
+    },
+    "json_highlight": null,
+    "algorithm": "",
+    "description": "",
+    "step_number": 1,
+    "method": "reduction-4x4",
+    "hand_orientation": "right",
+    "category": "w_y_centers",
+    "difficulty": "",
+    "setup": "",
+    "colored": "",
+    "flags": "showalg",
+    "camera_longitude": -25.0,
+    "camera_latitude": 22.0,
+    "stickering": "full"
+  }
+},
+{
+  "model": "cube.cubestate",
+  "pk": 115,
+  "fields": {
+    "name": "4x4-edge-pairing-from-top",
+    "slug": "4x4-edge-pairing-from-top",
+    "json_state": {
+      "cube": {
+        "U": [
+          [
+            "X",
+            "X",
+            "X",
+            "X"
+          ],
+          [
+            "X",
+            "W",
+            "W",
+            "X"
+          ],
+          [
+            "X",
+            "W",
+            "W",
+            "X"
+          ],
+          [
+            "X",
+            "X",
+            "X",
+            "X"
+          ]
+        ],
+        "L": [
+          [
+            "X",
+            "X",
+            "X",
+            "X"
+          ],
+          [
+            "X",
+            "O",
+            "O",
+            "O"
+          ],
+          [
+            "X",
+            "O",
+            "O",
+            "X"
+          ],
+          [
+            "X",
+            "X",
+            "X",
+            "X"
+          ]
+        ],
+        "F": [
+          [
+            "X",
+            "X",
+            "X",
+            "X"
+          ],
+          [
+            "Y",
+            "G",
+            "G",
+            "X"
+          ],
+          [
+            "X",
+            "G",
+            "G",
+            "O"
+          ],
+          [
+            "X",
+            "X",
+            "X",
+            "X"
+          ]
+        ],
+        "R": [
+          [
+            "X",
+            "X",
+            "X",
+            "X"
+          ],
+          [
+            "X",
+            "R",
+            "R",
+            "X"
+          ],
+          [
+            "Y",
+            "R",
+            "R",
+            "X"
+          ],
+          [
+            "X",
+            "X",
+            "X",
+            "X"
+          ]
+        ],
+        "B": [
+          [
+            "X",
+            "X",
+            "X",
+            "X"
+          ],
+          [
+            "X",
+            "B",
+            "B",
+            "X"
+          ],
+          [
+            "X",
+            "B",
+            "B",
+            "X"
+          ],
+          [
+            "X",
+            "X",
+            "X",
+            "X"
+          ]
+        ],
+        "D": [
+          [
+            "X",
+            "X",
+            "X",
+            "X"
+          ],
+          [
+            "X",
+            "Y",
+            "Y",
+            "X"
+          ],
+          [
+            "X",
+            "Y",
+            "Y",
+            "X"
+          ],
+          [
+            "X",
+            "X",
+            "X",
+            "X"
+          ]
+        ]
+      },
+      "highlight": {
+        "stickers": [
+          [
+            "U",
+            2,
+            3
+          ],
+          [
+            "U",
+            1,
+            3
+          ],
+          [
+            "R",
+            0,
+            1
+          ],
+          [
+            "R",
+            0,
+            2
+          ]
+        ]
+      }
+    },
+    "json_highlight": {
+      "stickers": []
+    },
+    "algorithm": "Uw' R U' R' Uw",
+    "description": "Wings are in top middle on left and bottom middle on right pair appears on right side",
+    "step_number": 3,
+    "method": "reduction-4x4",
+    "hand_orientation": "right",
+    "category": "edges",
+    "difficulty": "",
+    "setup": "",
+    "colored": "",
+    "flags": "showalg",
+    "camera_longitude": -25.0,
+    "camera_latitude": 22.0,
+    "stickering": "full"
+  }
+},
+{
+  "model": "cube.cubestate",
+  "pk": 116,
+  "fields": {
+    "name": "4x4-edge-flip",
+    "slug": "4x4-edge-flip",
+    "json_state": {
+      "cube": {
+        "U": [
+          [
+            "X",
+            "X",
+            "X",
+            "X"
+          ],
+          [
+            "X",
+            "W",
+            "W",
+            "X"
+          ],
+          [
+            "X",
+            "W",
+            "W",
+            "X"
+          ],
+          [
+            "X",
+            "X",
+            "X",
+            "X"
+          ]
+        ],
+        "L": [
+          [
+            "X",
+            "X",
+            "X",
+            "X"
+          ],
+          [
+            "X",
+            "O",
+            "O",
+            "O"
+          ],
+          [
+            "X",
+            "O",
+            "O",
+            "X"
+          ],
+          [
+            "X",
+            "X",
+            "X",
+            "X"
+          ]
+        ],
+        "F": [
+          [
+            "X",
+            "X",
+            "X",
+            "X"
+          ],
+          [
+            "Y",
+            "G",
+            "G",
+            "Y"
+          ],
+          [
+            "X",
+            "G",
+            "G",
+            "X"
+          ],
+          [
+            "X",
+            "X",
+            "X",
+            "X"
+          ]
+        ],
+        "R": [
+          [
+            "X",
+            "X",
+            "X",
+            "X"
+          ],
+          [
+            "O",
+            "R",
+            "R",
+            "X"
+          ],
+          [
+            "X",
+            "R",
+            "R",
+            "X"
+          ],
+          [
+            "X",
+            "X",
+            "X",
+            "X"
+          ]
+        ],
+        "B": [
+          [
+            "X",
+            "X",
+            "X",
+            "X"
+          ],
+          [
+            "X",
+            "B",
+            "B",
+            "X"
+          ],
+          [
+            "X",
+            "B",
+            "B",
+            "X"
+          ],
+          [
+            "X",
+            "X",
+            "X",
+            "X"
+          ]
+        ],
+        "D": [
+          [
+            "X",
+            "X",
+            "X",
+            "X"
+          ],
+          [
+            "X",
+            "Y",
+            "Y",
+            "X"
+          ],
+          [
+            "X",
+            "Y",
+            "Y",
+            "X"
+          ],
+          [
+            "X",
+            "X",
+            "X",
+            "X"
+          ]
+        ]
+      },
+      "highlight": {
+        "stickers": []
+      }
+    },
+    "json_highlight": null,
+    "algorithm": "R U R' F R' F' R",
+    "description": "Right side needs to be flipped to before pairing",
+    "step_number": 3,
+    "method": "reduction-4x4",
+    "hand_orientation": "right",
+    "category": "edges",
+    "difficulty": "",
+    "setup": "",
+    "colored": "",
+    "flags": "showalg",
+    "camera_longitude": -25.0,
+    "camera_latitude": 22.0,
+    "stickering": "full"
+  }
+},
+{
+  "model": "cube.cubestate",
+  "pk": 117,
+  "fields": {
+    "name": "4x4-last-two-edges",
+    "slug": "4x4-last-two-edges",
+    "json_state": {
+      "cube": {
+        "U": [
+          [
+            "X",
+            "X",
+            "X",
+            "X"
+          ],
+          [
+            "X",
+            "W",
+            "W",
+            "X"
+          ],
+          [
+            "X",
+            "W",
+            "W",
+            "X"
+          ],
+          [
+            "X",
+            "W",
+            "W",
+            "X"
+          ]
+        ],
+        "L": [
+          [
+            "X",
+            "X",
+            "X",
+            "X"
+          ],
+          [
+            "X",
+            "O",
+            "O",
+            "B"
+          ],
+          [
+            "X",
+            "O",
+            "O",
+            "O"
+          ],
+          [
+            "X",
+            "X",
+            "X",
+            "X"
+          ]
+        ],
+        "F": [
+          [
+            "X",
+            "X",
+            "X",
+            "X"
+          ],
+          [
+            "O",
+            "G",
+            "G",
+            "O"
+          ],
+          [
+            "G",
+            "G",
+            "G",
+            "G"
+          ],
+          [
+            "X",
+            "X",
+            "X",
+            "X"
+          ]
+        ],
+        "R": [
+          [
+            "X",
+            "X",
+            "X",
+            "X"
+          ],
+          [
+            "B",
+            "R",
+            "R",
+            "X"
+          ],
+          [
+            "O",
+            "R",
+            "R",
+            "X"
+          ],
+          [
+            "X",
+            "X",
+            "X",
+            "X"
+          ]
+        ],
+        "B": [
+          [
+            "X",
+            "X",
+            "X",
+            "X"
+          ],
+          [
+            "X",
+            "B",
+            "B",
+            "X"
+          ],
+          [
+            "X",
+            "B",
+            "B",
+            "X"
+          ],
+          [
+            "X",
+            "X",
+            "X",
+            "X"
+          ]
+        ],
+        "D": [
+          [
+            "X",
+            "X",
+            "X",
+            "X"
+          ],
+          [
+            "X",
+            "Y",
+            "Y",
+            "X"
+          ],
+          [
+            "X",
+            "Y",
+            "Y",
+            "X"
+          ],
+          [
+            "X",
+            "X",
+            "X",
+            "X"
+          ]
+        ]
+      },
+      "highlight": {
+        "stickers": []
+      }
+    },
+    "json_highlight": {
+      "stickers": []
+    },
+    "algorithm": "Uw R U R' F R' F' R Uw'",
+    "description": "Last two edges",
+    "step_number": 1,
+    "method": "reduction-4x4",
+    "hand_orientation": "right",
+    "category": "edges",
+    "difficulty": "",
+    "setup": "",
+    "colored": "",
+    "flags": "showalg",
+    "camera_longitude": -25.0,
+    "camera_latitude": 22.0,
+    "stickering": "full"
+  }
+},
+{
+  "model": "cube.cubestate",
+  "pk": 118,
+  "fields": {
+    "name": "4x4-edge-pairing-from-bottom",
+    "slug": "4x4-edge-pairing-from-bottom",
+    "json_state": {
+      "cube": {
+        "U": [
+          [
+            "X",
+            "X",
+            "X",
+            "X"
+          ],
+          [
+            "X",
+            "W",
+            "W",
+            "X"
+          ],
+          [
+            "X",
+            "W",
+            "W",
+            "X"
+          ],
+          [
+            "X",
+            "X",
+            "X",
+            "X"
+          ]
+        ],
+        "L": [
+          [
+            "X",
+            "X",
+            "X",
+            "X"
+          ],
+          [
+            "X",
+            "O",
+            "O",
+            "X"
+          ],
+          [
+            "X",
+            "O",
+            "O",
+            "O"
+          ],
+          [
+            "X",
+            "X",
+            "X",
+            "X"
+          ]
+        ],
+        "F": [
+          [
+            "X",
+            "X",
+            "X",
+            "X"
+          ],
+          [
+            "X",
+            "G",
+            "G",
+            "O"
+          ],
+          [
+            "Y",
+            "G",
+            "G",
+            "X"
+          ],
+          [
+            "X",
+            "X",
+            "X",
+            "X"
+          ]
+        ],
+        "R": [
+          [
+            "X",
+            "X",
+            "X",
+            "X"
+          ],
+          [
+            "Y",
+            "R",
+            "R",
+            "X"
+          ],
+          [
+            "X",
+            "R",
+            "R",
+            "X"
+          ],
+          [
+            "X",
+            "X",
+            "X",
+            "X"
+          ]
+        ],
+        "B": [
+          [
+            "X",
+            "X",
+            "X",
+            "X"
+          ],
+          [
+            "X",
+            "B",
+            "B",
+            "X"
+          ],
+          [
+            "X",
+            "B",
+            "B",
+            "X"
+          ],
+          [
+            "X",
+            "X",
+            "X",
+            "X"
+          ]
+        ],
+        "D": [
+          [
+            "X",
+            "X",
+            "X",
+            "X"
+          ],
+          [
+            "X",
+            "Y",
+            "Y",
+            "X"
+          ],
+          [
+            "X",
+            "Y",
+            "Y",
+            "X"
+          ],
+          [
+            "X",
+            "X",
+            "X",
+            "X"
+          ]
+        ]
+      },
+      "highlight": {
+        "stickers": [
+          [
+            "F",
+            0,
+            1
+          ],
+          [
+            "F",
+            0,
+            2
+          ],
+          [
+            "U",
+            3,
+            2
+          ],
+          [
+            "U",
+            3,
+            1
+          ]
+        ]
+      }
+    },
+    "json_highlight": {
+      "stickers": []
+    },
+    "algorithm": "Uw' R U' R' Uw",
+    "description": "Wings are in bottom middle on left and top middle on right pair appears on right side",
+    "step_number": 3,
+    "method": "reduction-4x4",
+    "hand_orientation": "right",
+    "category": "edges",
+    "difficulty": "",
+    "setup": "",
+    "colored": "",
+    "flags": "showalg",
+    "camera_longitude": -25.0,
+    "camera_latitude": 22.0,
+    "stickering": "full"
+  }
+},
+{
+  "model": "cube.cubestate",
+  "pk": 119,
+  "fields": {
+    "name": "4x4-bottom-cross-goal",
+    "slug": "4x4-bottom-cross-goal",
+    "json_state": {
+      "cube": {
+        "U": [
+          [
+            "X",
+            "X",
+            "X",
+            "X"
+          ],
+          [
+            "X",
+            "W",
+            "W",
+            "X"
+          ],
+          [
+            "X",
+            "W",
+            "W",
+            "X"
+          ],
+          [
+            "X",
+            "X",
+            "X",
+            "X"
+          ]
+        ],
+        "L": [
+          [
+            "X",
+            "X",
+            "X",
+            "X"
+          ],
+          [
+            "X",
+            "O",
+            "O",
+            "X"
+          ],
+          [
+            "X",
+            "O",
+            "O",
+            "X"
+          ],
+          [
+            "X",
+            "O",
+            "O",
+            "X"
+          ]
+        ],
+        "F": [
+          [
+            "X",
+            "X",
+            "X",
+            "X"
+          ],
+          [
+            "X",
+            "G",
+            "G",
+            "X"
+          ],
+          [
+            "X",
+            "G",
+            "G",
+            "X"
+          ],
+          [
+            "X",
+            "G",
+            "G",
+            "X"
+          ]
+        ],
+        "R": [
+          [
+            "X",
+            "X",
+            "X",
+            "X"
+          ],
+          [
+            "X",
+            "R",
+            "R",
+            "X"
+          ],
+          [
+            "X",
+            "R",
+            "R",
+            "X"
+          ],
+          [
+            "X",
+            "R",
+            "R",
+            "X"
+          ]
+        ],
+        "B": [
+          [
+            "X",
+            "X",
+            "X",
+            "X"
+          ],
+          [
+            "X",
+            "B",
+            "B",
+            "X"
+          ],
+          [
+            "X",
+            "B",
+            "B",
+            "X"
+          ],
+          [
+            "X",
+            "B",
+            "B",
+            "X"
+          ]
+        ],
+        "D": [
+          [
+            "X",
+            "Y",
+            "Y",
+            "X"
+          ],
+          [
+            "Y",
+            "Y",
+            "Y",
+            "Y"
+          ],
+          [
+            "Y",
+            "Y",
+            "Y",
+            "Y"
+          ],
+          [
+            "X",
+            "Y",
+            "Y",
+            "X"
+          ]
+        ]
+      },
+      "highlight": {
+        "stickers": []
+      }
+    },
+    "json_highlight": null,
+    "algorithm": "",
+    "description": "",
+    "step_number": 1,
+    "method": "reduction-4x4",
+    "hand_orientation": "right",
+    "category": "bottom-cross",
+    "difficulty": "",
+    "setup": "",
+    "colored": "",
+    "flags": "showalg",
+    "camera_longitude": -25.0,
+    "camera_latitude": 22.0,
+    "stickering": "full"
+  }
+},
+{
+  "model": "cube.cubestate",
+  "pk": 120,
+  "fields": {
+    "name": "4x4-bottom-cross-intuitive",
+    "slug": "4x4-bottom-cross-intuitive",
+    "json_state": {
+      "cube": {
+        "U": [
+          [
+            "X",
+            "O",
+            "O",
+            "X"
+          ],
+          [
+            "B",
+            "W",
+            "W",
+            "Y"
+          ],
+          [
+            "B",
+            "W",
+            "W",
+            "Y"
+          ],
+          [
+            "X",
+            "Y",
+            "Y",
+            "X"
+          ]
+        ],
+        "L": [
+          [
+            "X",
+            "R",
+            "R",
+            "X"
+          ],
+          [
+            "W",
+            "O",
+            "O",
+            "O"
+          ],
+          [
+            "W",
+            "O",
+            "O",
+            "O"
+          ],
+          [
+            "X",
+            "O",
+            "O",
+            "X"
+          ]
+        ],
+        "F": [
+          [
+            "X",
+            "R",
+            "R",
+            "X"
+          ],
+          [
+            "Y",
+            "G",
+            "G",
+            "G"
+          ],
+          [
+            "Y",
+            "G",
+            "G",
+            "G"
+          ],
+          [
+            "X",
+            "O",
+            "O",
+            "X"
+          ]
+        ],
+        "R": [
+          [
+            "X",
+            "B",
+            "B",
+            "X"
+          ],
+          [
+            "Y",
+            "R",
+            "R",
+            "R"
+          ],
+          [
+            "Y",
+            "R",
+            "R",
+            "R"
+          ],
+          [
+            "X",
+            "W",
+            "W",
+            "X"
+          ]
+        ],
+        "B": [
+          [
+            "X",
+            "W",
+            "W",
+            "X"
+          ],
+          [
+            "G",
+            "B",
+            "B",
+            "G"
+          ],
+          [
+            "G",
+            "B",
+            "B",
+            "G"
+          ],
+          [
+            "X",
+            "W",
+            "W",
+            "X"
+          ]
+        ],
+        "D": [
+          [
+            "X",
+            "G",
+            "G",
+            "X"
+          ],
+          [
+            "B",
+            "Y",
+            "Y",
+            "R"
+          ],
+          [
+            "B",
+            "Y",
+            "Y",
+            "R"
+          ],
+          [
+            "X",
+            "B",
+            "B",
+            "X"
+          ]
+        ]
+      },
+      "highlight": {
+        "stickers": []
+      }
+    },
+    "json_highlight": null,
+    "algorithm": "",
+    "description": "",
+    "step_number": 1,
+    "method": "reduction-4x4",
+    "hand_orientation": "right",
+    "category": "bottom-cross",
+    "difficulty": "",
+    "setup": "",
+    "colored": "",
+    "flags": "showalg",
+    "camera_longitude": -25.0,
+    "camera_latitude": 22.0,
+    "stickering": "full"
+  }
+},
+{
+  "model": "cube.cubestate",
+  "pk": 121,
+  "fields": {
+    "name": "4x4-bottom-corners-goal",
+    "slug": "4x4-bottom-corners-goal",
+    "json_state": {
+      "cube": {
+        "U": [
+          [
+            "X",
+            "X",
+            "X",
+            "X"
+          ],
+          [
+            "X",
+            "W",
+            "W",
+            "X"
+          ],
+          [
+            "X",
+            "W",
+            "W",
+            "X"
+          ],
+          [
+            "X",
+            "X",
+            "X",
+            "X"
+          ]
+        ],
+        "L": [
+          [
+            "X",
+            "X",
+            "X",
+            "X"
+          ],
+          [
+            "X",
+            "O",
+            "O",
+            "X"
+          ],
+          [
+            "X",
+            "O",
+            "O",
+            "X"
+          ],
+          [
+            "O",
+            "O",
+            "O",
+            "O"
+          ]
+        ],
+        "F": [
+          [
+            "X",
+            "X",
+            "X",
+            "X"
+          ],
+          [
+            "X",
+            "G",
+            "G",
+            "X"
+          ],
+          [
+            "X",
+            "G",
+            "G",
+            "X"
+          ],
+          [
+            "G",
+            "G",
+            "G",
+            "G"
+          ]
+        ],
+        "R": [
+          [
+            "X",
+            "X",
+            "X",
+            "X"
+          ],
+          [
+            "X",
+            "R",
+            "R",
+            "X"
+          ],
+          [
+            "X",
+            "R",
+            "R",
+            "X"
+          ],
+          [
+            "R",
+            "R",
+            "R",
+            "R"
+          ]
+        ],
+        "B": [
+          [
+            "X",
+            "X",
+            "X",
+            "X"
+          ],
+          [
+            "X",
+            "B",
+            "B",
+            "X"
+          ],
+          [
+            "X",
+            "B",
+            "B",
+            "X"
+          ],
+          [
+            "B",
+            "B",
+            "B",
+            "B"
+          ]
+        ],
+        "D": [
+          [
+            "Y",
+            "Y",
+            "Y",
+            "Y"
+          ],
+          [
+            "Y",
+            "Y",
+            "Y",
+            "Y"
+          ],
+          [
+            "Y",
+            "Y",
+            "Y",
+            "Y"
+          ],
+          [
+            "Y",
+            "Y",
+            "Y",
+            "Y"
+          ]
+        ]
+      },
+      "highlight": {
+        "stickers": []
+      }
+    },
+    "json_highlight": null,
+    "algorithm": "",
+    "description": "",
+    "step_number": 1,
+    "method": "reduction-4x4",
+    "hand_orientation": "right",
+    "category": "bottom-cross",
+    "difficulty": "",
+    "setup": "",
+    "colored": "",
+    "flags": "showalg",
+    "camera_longitude": -25.0,
+    "camera_latitude": 22.0,
+    "stickering": "full"
+  }
+},
+{
+  "model": "cube.cubestate",
+  "pk": 122,
+  "fields": {
+    "name": "4x4-bottom-corners-setup",
+    "slug": "4x4-bottom-corners-setup",
+    "json_state": {
+      "cube": {
+        "U": [
+          [
+            "X",
+            "X",
+            "X",
+            "X"
+          ],
+          [
+            "X",
+            "W",
+            "W",
+            "X"
+          ],
+          [
+            "X",
+            "W",
+            "W",
+            "X"
+          ],
+          [
+            "X",
+            "X",
+            "X",
+            "R"
+          ]
+        ],
+        "L": [
+          [
+            "X",
+            "X",
+            "X",
+            "X"
+          ],
+          [
+            "X",
+            "O",
+            "O",
+            "X"
+          ],
+          [
+            "X",
+            "O",
+            "O",
+            "X"
+          ],
+          [
+            "X",
+            "O",
+            "O",
+            "X"
+          ]
+        ],
+        "F": [
+          [
+            "X",
+            "X",
+            "X",
+            "G"
+          ],
+          [
+            "X",
+            "G",
+            "G",
+            "X"
+          ],
+          [
+            "X",
+            "G",
+            "G",
+            "X"
+          ],
+          [
+            "X",
+            "G",
+            "G",
+            "X"
+          ]
+        ],
+        "R": [
+          [
+            "Y",
+            "X",
+            "X",
+            "X"
+          ],
+          [
+            "X",
+            "R",
+            "R",
+            "X"
+          ],
+          [
+            "X",
+            "R",
+            "R",
+            "X"
+          ],
+          [
+            "X",
+            "R",
+            "R",
+            "X"
+          ]
+        ],
+        "B": [
+          [
+            "X",
+            "X",
+            "X",
+            "X"
+          ],
+          [
+            "X",
+            "B",
+            "B",
+            "X"
+          ],
+          [
+            "X",
+            "B",
+            "B",
+            "X"
+          ],
+          [
+            "X",
+            "B",
+            "B",
+            "X"
+          ]
+        ],
+        "D": [
+          [
+            "X",
+            "Y",
+            "Y",
+            "X"
+          ],
+          [
+            "Y",
+            "Y",
+            "Y",
+            "Y"
+          ],
+          [
+            "Y",
+            "Y",
+            "Y",
+            "Y"
+          ],
+          [
+            "X",
+            "Y",
+            "Y",
+            "X"
+          ]
+        ]
+      },
+      "highlight": {
+        "stickers": []
+      }
+    },
+    "json_highlight": null,
+    "algorithm": "",
+    "description": "",
+    "step_number": 1,
+    "method": "reduction-4x4",
+    "hand_orientation": "right",
+    "category": "bottom-corner",
+    "difficulty": "",
+    "setup": "",
+    "colored": "",
+    "flags": "showalg",
+    "camera_longitude": -25.0,
+    "camera_latitude": 22.0,
+    "stickering": "full"
+  }
+},
+{
+  "model": "cube.cubestate",
+  "pk": 123,
+  "fields": {
+    "name": "4x4-bottom-corners-wrong-orient",
+    "slug": "4x4-bottom-corners-wrong-orient",
+    "json_state": {
+      "cube": {
+        "U": [
+          [
+            "X",
+            "X",
+            "X",
+            "X"
+          ],
+          [
+            "X",
+            "W",
+            "W",
+            "X"
+          ],
+          [
+            "X",
+            "W",
+            "W",
+            "X"
+          ],
+          [
+            "X",
+            "X",
+            "X",
+            "X"
+          ]
+        ],
+        "L": [
+          [
+            "X",
+            "X",
+            "X",
+            "X"
+          ],
+          [
+            "X",
+            "O",
+            "O",
+            "X"
+          ],
+          [
+            "X",
+            "O",
+            "O",
+            "X"
+          ],
+          [
+            "X",
+            "O",
+            "O",
+            "X"
+          ]
+        ],
+        "F": [
+          [
+            "X",
+            "X",
+            "X",
+            "X"
+          ],
+          [
+            "X",
+            "G",
+            "G",
+            "X"
+          ],
+          [
+            "X",
+            "G",
+            "G",
+            "X"
+          ],
+          [
+            "X",
+            "G",
+            "G",
+            "R"
+          ]
+        ],
+        "R": [
+          [
+            "X",
+            "X",
+            "X",
+            "X"
+          ],
+          [
+            "X",
+            "R",
+            "R",
+            "X"
+          ],
+          [
+            "X",
+            "R",
+            "R",
+            "X"
+          ],
+          [
+            "Y",
+            "R",
+            "R",
+            "X"
+          ]
+        ],
+        "B": [
+          [
+            "X",
+            "X",
+            "X",
+            "X"
+          ],
+          [
+            "X",
+            "B",
+            "B",
+            "X"
+          ],
+          [
+            "X",
+            "B",
+            "B",
+            "X"
+          ],
+          [
+            "X",
+            "B",
+            "B",
+            "X"
+          ]
+        ],
+        "D": [
+          [
+            "X",
+            "Y",
+            "Y",
+            "G"
+          ],
+          [
+            "Y",
+            "Y",
+            "Y",
+            "Y"
+          ],
+          [
+            "Y",
+            "Y",
+            "Y",
+            "Y"
+          ],
+          [
+            "X",
+            "Y",
+            "Y",
+            "X"
+          ]
+        ]
+      },
+      "highlight": {
+        "stickers": []
+      }
+    },
+    "json_highlight": null,
+    "algorithm": "",
+    "description": "",
+    "step_number": 1,
+    "method": "reduction-4x4",
+    "hand_orientation": "right",
+    "category": "bottom-corner",
+    "difficulty": "",
+    "setup": "",
+    "colored": "",
+    "flags": "showalg",
+    "camera_longitude": -25.0,
+    "camera_latitude": 22.0,
+    "stickering": "full"
+  }
+},
+{
+  "model": "cube.cubestate",
+  "pk": 124,
+  "fields": {
+    "name": "4x4-middle-edges-goal",
+    "slug": "4x4-middle-edges-goal",
+    "json_state": {
+      "cube": {
+        "U": [
+          [
+            "X",
+            "X",
+            "X",
+            "X"
+          ],
+          [
+            "X",
+            "W",
+            "W",
+            "X"
+          ],
+          [
+            "X",
+            "W",
+            "W",
+            "X"
+          ],
+          [
+            "X",
+            "X",
+            "X",
+            "X"
+          ]
+        ],
+        "L": [
+          [
+            "X",
+            "X",
+            "X",
+            "X"
+          ],
+          [
+            "O",
+            "O",
+            "O",
+            "O"
+          ],
+          [
+            "O",
+            "O",
+            "O",
+            "O"
+          ],
+          [
+            "O",
+            "O",
+            "O",
+            "O"
+          ]
+        ],
+        "F": [
+          [
+            "X",
+            "X",
+            "X",
+            "X"
+          ],
+          [
+            "G",
+            "G",
+            "G",
+            "G"
+          ],
+          [
+            "G",
+            "G",
+            "G",
+            "G"
+          ],
+          [
+            "G",
+            "G",
+            "G",
+            "G"
+          ]
+        ],
+        "R": [
+          [
+            "X",
+            "X",
+            "X",
+            "X"
+          ],
+          [
+            "R",
+            "R",
+            "R",
+            "R"
+          ],
+          [
+            "R",
+            "R",
+            "R",
+            "R"
+          ],
+          [
+            "R",
+            "R",
+            "R",
+            "R"
+          ]
+        ],
+        "B": [
+          [
+            "X",
+            "X",
+            "X",
+            "X"
+          ],
+          [
+            "B",
+            "B",
+            "B",
+            "B"
+          ],
+          [
+            "B",
+            "B",
+            "B",
+            "B"
+          ],
+          [
+            "B",
+            "B",
+            "B",
+            "B"
+          ]
+        ],
+        "D": [
+          [
+            "Y",
+            "Y",
+            "Y",
+            "Y"
+          ],
+          [
+            "Y",
+            "Y",
+            "Y",
+            "Y"
+          ],
+          [
+            "Y",
+            "Y",
+            "Y",
+            "Y"
+          ],
+          [
+            "Y",
+            "Y",
+            "Y",
+            "Y"
+          ]
+        ]
+      },
+      "highlight": {
+        "stickers": []
+      }
+    },
+    "json_highlight": null,
+    "algorithm": "",
+    "description": "",
+    "step_number": 1,
+    "method": "reduction-4x4",
+    "hand_orientation": "right",
+    "category": "middle edges",
+    "difficulty": "",
+    "setup": "",
+    "colored": "",
+    "flags": "showalg",
+    "camera_longitude": -25.0,
+    "camera_latitude": 22.0,
+    "stickering": "full"
+  }
+},
+{
+  "model": "cube.cubestate",
+  "pk": 125,
+  "fields": {
+    "name": "4x4-middle-edges-right",
+    "slug": "4x4-middle-edges-right",
+    "json_state": {
+      "cube": {
+        "U": [
+          [
+            "X",
+            "X",
+            "X",
+            "X"
+          ],
+          [
+            "X",
+            "W",
+            "W",
+            "X"
+          ],
+          [
+            "X",
+            "W",
+            "W",
+            "X"
+          ],
+          [
+            "X",
+            "R",
+            "R",
+            "X"
+          ]
+        ],
+        "L": [
+          [
+            "X",
+            "X",
+            "X",
+            "X"
+          ],
+          [
+            "X",
+            "O",
+            "O",
+            "X"
+          ],
+          [
+            "X",
+            "O",
+            "O",
+            "X"
+          ],
+          [
+            "O",
+            "O",
+            "O",
+            "O"
+          ]
+        ],
+        "F": [
+          [
+            "X",
+            "G",
+            "G",
+            "X"
+          ],
+          [
+            "X",
+            "G",
+            "G",
+            "X"
+          ],
+          [
+            "X",
+            "G",
+            "G",
+            "X"
+          ],
+          [
+            "G",
+            "G",
+            "G",
+            "G"
+          ]
+        ],
+        "R": [
+          [
+            "X",
+            "X",
+            "X",
+            "X"
+          ],
+          [
+            "X",
+            "R",
+            "R",
+            "X"
+          ],
+          [
+            "X",
+            "R",
+            "R",
+            "X"
+          ],
+          [
+            "R",
+            "R",
+            "R",
+            "R"
+          ]
+        ],
+        "B": [
+          [
+            "X",
+            "X",
+            "X",
+            "X"
+          ],
+          [
+            "X",
+            "B",
+            "B",
+            "X"
+          ],
+          [
+            "X",
+            "B",
+            "B",
+            "X"
+          ],
+          [
+            "B",
+            "B",
+            "B",
+            "B"
+          ]
+        ],
+        "D": [
+          [
+            "Y",
+            "Y",
+            "Y",
+            "Y"
+          ],
+          [
+            "Y",
+            "Y",
+            "Y",
+            "Y"
+          ],
+          [
+            "Y",
+            "Y",
+            "Y",
+            "Y"
+          ],
+          [
+            "Y",
+            "Y",
+            "Y",
+            "Y"
+          ]
+        ]
+      },
+      "highlight": {
+        "stickers": []
+      }
+    },
+    "json_highlight": null,
+    "algorithm": "",
+    "description": "",
+    "step_number": 1,
+    "method": "reduction-4x4",
+    "hand_orientation": "right",
+    "category": "middle edges",
+    "difficulty": "",
+    "setup": "",
+    "colored": "",
+    "flags": "showalg",
+    "camera_longitude": -25.0,
+    "camera_latitude": 22.0,
+    "stickering": "full"
+  }
+},
+{
+  "model": "cube.cubestate",
+  "pk": 126,
+  "fields": {
+    "name": "4x4-middle-edges-left",
+    "slug": "4x4-middle-edges-left",
+    "json_state": {
+      "cube": {
+        "U": [
+          [
+            "X",
+            "X",
+            "X",
+            "X"
+          ],
+          [
+            "X",
+            "W",
+            "W",
+            "X"
+          ],
+          [
+            "X",
+            "W",
+            "W",
+            "X"
+          ],
+          [
+            "X",
+            "O",
+            "O",
+            "X"
+          ]
+        ],
+        "L": [
+          [
+            "X",
+            "X",
+            "X",
+            "X"
+          ],
+          [
+            "X",
+            "O",
+            "O",
+            "X"
+          ],
+          [
+            "X",
+            "O",
+            "O",
+            "X"
+          ],
+          [
+            "O",
+            "O",
+            "O",
+            "O"
+          ]
+        ],
+        "F": [
+          [
+            "X",
+            "G",
+            "G",
+            "X"
+          ],
+          [
+            "X",
+            "G",
+            "G",
+            "X"
+          ],
+          [
+            "X",
+            "G",
+            "G",
+            "X"
+          ],
+          [
+            "G",
+            "G",
+            "G",
+            "G"
+          ]
+        ],
+        "R": [
+          [
+            "X",
+            "X",
+            "X",
+            "X"
+          ],
+          [
+            "X",
+            "R",
+            "R",
+            "X"
+          ],
+          [
+            "X",
+            "R",
+            "R",
+            "X"
+          ],
+          [
+            "R",
+            "R",
+            "R",
+            "R"
+          ]
+        ],
+        "B": [
+          [
+            "X",
+            "X",
+            "X",
+            "X"
+          ],
+          [
+            "X",
+            "B",
+            "B",
+            "X"
+          ],
+          [
+            "X",
+            "B",
+            "B",
+            "X"
+          ],
+          [
+            "B",
+            "B",
+            "B",
+            "B"
+          ]
+        ],
+        "D": [
+          [
+            "Y",
+            "Y",
+            "Y",
+            "Y"
+          ],
+          [
+            "Y",
+            "Y",
+            "Y",
+            "Y"
+          ],
+          [
+            "Y",
+            "Y",
+            "Y",
+            "Y"
+          ],
+          [
+            "Y",
+            "Y",
+            "Y",
+            "Y"
+          ]
+        ]
+      },
+      "highlight": {
+        "stickers": []
+      }
+    },
+    "json_highlight": null,
+    "algorithm": "",
+    "description": "",
+    "step_number": 1,
+    "method": "reduction-4x4",
+    "hand_orientation": "left",
+    "category": "middle edges",
+    "difficulty": "",
+    "setup": "",
+    "colored": "",
+    "flags": "showalg",
+    "camera_longitude": -25.0,
+    "camera_latitude": 22.0,
+    "stickering": "full"
+  }
+},
+{
+  "model": "cube.cubestate",
+  "pk": 127,
+  "fields": {
+    "name": "4x4-middle-edges-wrong",
+    "slug": "4x4-middle-edges-wrong",
+    "json_state": {
+      "cube": {
+        "U": [
+          [
+            "X",
+            "X",
+            "X",
+            "X"
+          ],
+          [
+            "X",
+            "W",
+            "W",
+            "X"
+          ],
+          [
+            "X",
+            "W",
+            "W",
+            "X"
+          ],
+          [
+            "X",
+            "X",
+            "X",
+            "X"
+          ]
+        ],
+        "L": [
+          [
+            "X",
+            "X",
+            "X",
+            "X"
+          ],
+          [
+            "X",
+            "O",
+            "O",
+            "X"
+          ],
+          [
+            "X",
+            "O",
+            "O",
+            "X"
+          ],
+          [
+            "O",
+            "O",
+            "O",
+            "O"
+          ]
+        ],
+        "F": [
+          [
+            "X",
+            "X",
+            "X",
+            "X"
+          ],
+          [
+            "X",
+            "G",
+            "G",
+            "R"
+          ],
+          [
+            "X",
+            "G",
+            "G",
+            "R"
+          ],
+          [
+            "G",
+            "G",
+            "G",
+            "G"
+          ]
+        ],
+        "R": [
+          [
+            "X",
+            "X",
+            "X",
+            "X"
+          ],
+          [
+            "G",
+            "R",
+            "R",
+            "X"
+          ],
+          [
+            "G",
+            "R",
+            "R",
+            "X"
+          ],
+          [
+            "R",
+            "R",
+            "R",
+            "R"
+          ]
+        ],
+        "B": [
+          [
+            "X",
+            "X",
+            "X",
+            "X"
+          ],
+          [
+            "X",
+            "B",
+            "B",
+            "X"
+          ],
+          [
+            "X",
+            "B",
+            "B",
+            "X"
+          ],
+          [
+            "B",
+            "B",
+            "B",
+            "B"
+          ]
+        ],
+        "D": [
+          [
+            "Y",
+            "Y",
+            "Y",
+            "Y"
+          ],
+          [
+            "Y",
+            "Y",
+            "Y",
+            "Y"
+          ],
+          [
+            "Y",
+            "Y",
+            "Y",
+            "Y"
+          ],
+          [
+            "Y",
+            "Y",
+            "Y",
+            "Y"
+          ]
+        ]
+      },
+      "highlight": {
+        "stickers": []
+      }
+    },
+    "json_highlight": null,
+    "algorithm": "",
+    "description": "",
+    "step_number": 1,
+    "method": "reduction-4x4",
+    "hand_orientation": "right",
+    "category": "middle edges",
+    "difficulty": "",
+    "setup": "",
+    "colored": "",
+    "flags": "showalg",
+    "camera_longitude": -25.0,
+    "camera_latitude": 22.0,
+    "stickering": "full"
+  }
+},
+{
+  "model": "cube.cubestate",
+  "pk": 128,
+  "fields": {
+    "name": "4x4-top-face-goal",
+    "slug": "4x4-top-face-goal",
+    "json_state": {
+      "cube": {
+        "U": [
+          [
+            "W",
+            "W",
+            "W",
+            "W"
+          ],
+          [
+            "W",
+            "W",
+            "W",
+            "W"
+          ],
+          [
+            "W",
+            "W",
+            "W",
+            "W"
+          ],
+          [
+            "W",
+            "W",
+            "W",
+            "W"
+          ]
+        ],
+        "L": [
+          [
+            "X",
+            "X",
+            "X",
+            "X"
+          ],
+          [
+            "O",
+            "O",
+            "O",
+            "O"
+          ],
+          [
+            "O",
+            "O",
+            "O",
+            "O"
+          ],
+          [
+            "O",
+            "O",
+            "O",
+            "O"
+          ]
+        ],
+        "F": [
+          [
+            "X",
+            "X",
+            "X",
+            "X"
+          ],
+          [
+            "G",
+            "G",
+            "G",
+            "G"
+          ],
+          [
+            "G",
+            "G",
+            "G",
+            "G"
+          ],
+          [
+            "G",
+            "G",
+            "G",
+            "G"
+          ]
+        ],
+        "R": [
+          [
+            "X",
+            "X",
+            "X",
+            "X"
+          ],
+          [
+            "R",
+            "R",
+            "R",
+            "R"
+          ],
+          [
+            "R",
+            "R",
+            "R",
+            "R"
+          ],
+          [
+            "R",
+            "R",
+            "R",
+            "R"
+          ]
+        ],
+        "B": [
+          [
+            "X",
+            "X",
+            "X",
+            "X"
+          ],
+          [
+            "B",
+            "B",
+            "B",
+            "B"
+          ],
+          [
+            "B",
+            "B",
+            "B",
+            "B"
+          ],
+          [
+            "B",
+            "B",
+            "B",
+            "B"
+          ]
+        ],
+        "D": [
+          [
+            "Y",
+            "Y",
+            "Y",
+            "Y"
+          ],
+          [
+            "Y",
+            "Y",
+            "Y",
+            "Y"
+          ],
+          [
+            "Y",
+            "Y",
+            "Y",
+            "Y"
+          ],
+          [
+            "Y",
+            "Y",
+            "Y",
+            "Y"
+          ]
+        ]
+      },
+      "highlight": {
+        "stickers": []
+      }
+    },
+    "json_highlight": null,
+    "algorithm": "",
+    "description": "",
+    "step_number": 8,
+    "method": "reduction-4x4",
+    "hand_orientation": "right",
+    "category": "top face",
+    "difficulty": "",
+    "setup": "",
+    "colored": "",
+    "flags": "showalg",
+    "camera_longitude": -25.0,
+    "camera_latitude": 22.0,
+    "stickering": "full"
+  }
+},
+{
+  "model": "cube.cubestate",
+  "pk": 129,
+  "fields": {
+    "name": "4x4-top-cross-0",
+    "slug": "4x4-top-cross-0",
+    "json_state": {
+      "cube": {
+        "U": [
+          [
+            "X",
+            "X",
+            "X",
+            "X"
+          ],
+          [
+            "X",
+            "W",
+            "W",
+            "X"
+          ],
+          [
+            "X",
+            "W",
+            "W",
+            "X"
+          ],
+          [
+            "X",
+            "X",
+            "X",
+            "X"
+          ]
+        ],
+        "L": [
+          [
+            "X",
+            "X",
+            "X",
+            "X"
+          ],
+          [
+            "O",
+            "O",
+            "O",
+            "O"
+          ],
+          [
+            "O",
+            "O",
+            "O",
+            "O"
+          ],
+          [
+            "O",
+            "O",
+            "O",
+            "O"
+          ]
+        ],
+        "F": [
+          [
+            "X",
+            "X",
+            "X",
+            "X"
+          ],
+          [
+            "G",
+            "G",
+            "G",
+            "G"
+          ],
+          [
+            "G",
+            "G",
+            "G",
+            "G"
+          ],
+          [
+            "G",
+            "G",
+            "G",
+            "G"
+          ]
+        ],
+        "R": [
+          [
+            "X",
+            "X",
+            "X",
+            "X"
+          ],
+          [
+            "R",
+            "R",
+            "R",
+            "R"
+          ],
+          [
+            "R",
+            "R",
+            "R",
+            "R"
+          ],
+          [
+            "R",
+            "R",
+            "R",
+            "R"
+          ]
+        ],
+        "B": [
+          [
+            "X",
+            "X",
+            "X",
+            "X"
+          ],
+          [
+            "B",
+            "B",
+            "B",
+            "B"
+          ],
+          [
+            "B",
+            "B",
+            "B",
+            "B"
+          ],
+          [
+            "B",
+            "B",
+            "B",
+            "B"
+          ]
+        ],
+        "D": [
+          [
+            "Y",
+            "Y",
+            "Y",
+            "Y"
+          ],
+          [
+            "Y",
+            "Y",
+            "Y",
+            "Y"
+          ],
+          [
+            "Y",
+            "Y",
+            "Y",
+            "Y"
+          ],
+          [
+            "Y",
+            "Y",
+            "Y",
+            "Y"
+          ]
+        ]
+      },
+      "highlight": {
+        "stickers": []
+      }
+    },
+    "json_highlight": null,
+    "algorithm": "",
+    "description": "",
+    "step_number": 7,
+    "method": "reduction-4x4",
+    "hand_orientation": "right",
+    "category": "top cross",
+    "difficulty": "",
+    "setup": "",
+    "colored": "",
+    "flags": "showalg",
+    "camera_longitude": -25.0,
+    "camera_latitude": 22.0,
+    "stickering": "full"
+  }
+},
+{
+  "model": "cube.cubestate",
+  "pk": 130,
+  "fields": {
+    "name": "4x4-top-cross-l",
+    "slug": "4x4-top-cross-l",
+    "json_state": {
+      "cube": {
+        "U": [
+          [
+            "X",
+            "W",
+            "W",
+            "X"
+          ],
+          [
+            "W",
+            "W",
+            "W",
+            "X"
+          ],
+          [
+            "W",
+            "W",
+            "W",
+            "X"
+          ],
+          [
+            "X",
+            "X",
+            "X",
+            "X"
+          ]
+        ],
+        "L": [
+          [
+            "X",
+            "X",
+            "X",
+            "X"
+          ],
+          [
+            "O",
+            "O",
+            "O",
+            "O"
+          ],
+          [
+            "O",
+            "O",
+            "O",
+            "O"
+          ],
+          [
+            "O",
+            "O",
+            "O",
+            "O"
+          ]
+        ],
+        "F": [
+          [
+            "X",
+            "X",
+            "X",
+            "X"
+          ],
+          [
+            "G",
+            "G",
+            "G",
+            "G"
+          ],
+          [
+            "G",
+            "G",
+            "G",
+            "G"
+          ],
+          [
+            "G",
+            "G",
+            "G",
+            "G"
+          ]
+        ],
+        "R": [
+          [
+            "X",
+            "X",
+            "X",
+            "X"
+          ],
+          [
+            "R",
+            "R",
+            "R",
+            "R"
+          ],
+          [
+            "R",
+            "R",
+            "R",
+            "R"
+          ],
+          [
+            "R",
+            "R",
+            "R",
+            "R"
+          ]
+        ],
+        "B": [
+          [
+            "X",
+            "X",
+            "X",
+            "X"
+          ],
+          [
+            "B",
+            "B",
+            "B",
+            "B"
+          ],
+          [
+            "B",
+            "B",
+            "B",
+            "B"
+          ],
+          [
+            "B",
+            "B",
+            "B",
+            "B"
+          ]
+        ],
+        "D": [
+          [
+            "Y",
+            "Y",
+            "Y",
+            "Y"
+          ],
+          [
+            "Y",
+            "Y",
+            "Y",
+            "Y"
+          ],
+          [
+            "Y",
+            "Y",
+            "Y",
+            "Y"
+          ],
+          [
+            "Y",
+            "Y",
+            "Y",
+            "Y"
+          ]
+        ]
+      },
+      "highlight": {
+        "stickers": []
+      }
+    },
+    "json_highlight": null,
+    "algorithm": "",
+    "description": "",
+    "step_number": 7,
+    "method": "reduction-4x4",
+    "hand_orientation": "right",
+    "category": "top cross",
+    "difficulty": "",
+    "setup": "",
+    "colored": "",
+    "flags": "showalg",
+    "camera_longitude": -25.0,
+    "camera_latitude": 22.0,
+    "stickering": "full"
+  }
+},
+{
+  "model": "cube.cubestate",
+  "pk": 131,
+  "fields": {
+    "name": "4x4-top-cross-i",
+    "slug": "4x4-top-cross-i",
+    "json_state": {
+      "cube": {
+        "U": [
+          [
+            "X",
+            "X",
+            "X",
+            "X"
+          ],
+          [
+            "W",
+            "W",
+            "W",
+            "W"
+          ],
+          [
+            "W",
+            "W",
+            "W",
+            "W"
+          ],
+          [
+            "X",
+            "X",
+            "X",
+            "X"
+          ]
+        ],
+        "L": [
+          [
+            "X",
+            "X",
+            "X",
+            "X"
+          ],
+          [
+            "O",
+            "O",
+            "O",
+            "O"
+          ],
+          [
+            "O",
+            "O",
+            "O",
+            "O"
+          ],
+          [
+            "O",
+            "O",
+            "O",
+            "O"
+          ]
+        ],
+        "F": [
+          [
+            "X",
+            "X",
+            "X",
+            "X"
+          ],
+          [
+            "G",
+            "G",
+            "G",
+            "G"
+          ],
+          [
+            "G",
+            "G",
+            "G",
+            "G"
+          ],
+          [
+            "G",
+            "G",
+            "G",
+            "G"
+          ]
+        ],
+        "R": [
+          [
+            "X",
+            "X",
+            "X",
+            "X"
+          ],
+          [
+            "R",
+            "R",
+            "R",
+            "R"
+          ],
+          [
+            "R",
+            "R",
+            "R",
+            "R"
+          ],
+          [
+            "R",
+            "R",
+            "R",
+            "R"
+          ]
+        ],
+        "B": [
+          [
+            "X",
+            "X",
+            "X",
+            "X"
+          ],
+          [
+            "B",
+            "B",
+            "B",
+            "B"
+          ],
+          [
+            "B",
+            "B",
+            "B",
+            "B"
+          ],
+          [
+            "B",
+            "B",
+            "B",
+            "B"
+          ]
+        ],
+        "D": [
+          [
+            "Y",
+            "Y",
+            "Y",
+            "Y"
+          ],
+          [
+            "Y",
+            "Y",
+            "Y",
+            "Y"
+          ],
+          [
+            "Y",
+            "Y",
+            "Y",
+            "Y"
+          ],
+          [
+            "Y",
+            "Y",
+            "Y",
+            "Y"
+          ]
+        ]
+      },
+      "highlight": {
+        "stickers": []
+      }
+    },
+    "json_highlight": null,
+    "algorithm": "",
+    "description": "",
+    "step_number": 7,
+    "method": "reduction-4x4",
+    "hand_orientation": "right",
+    "category": "top cross",
+    "difficulty": "",
+    "setup": "",
+    "colored": "",
+    "flags": "showalg",
+    "camera_longitude": -25.0,
+    "camera_latitude": 22.0,
+    "stickering": "full"
+  }
+},
+{
+  "model": "cube.cubestate",
+  "pk": 132,
+  "fields": {
+    "name": "4x4-top-cross-done",
+    "slug": "4x4-top-cross-done",
+    "json_state": {
+      "cube": {
+        "U": [
+          [
+            "X",
+            "W",
+            "W",
+            "X"
+          ],
+          [
+            "W",
+            "W",
+            "W",
+            "W"
+          ],
+          [
+            "W",
+            "W",
+            "W",
+            "W"
+          ],
+          [
+            "X",
+            "W",
+            "W",
+            "X"
+          ]
+        ],
+        "L": [
+          [
+            "X",
+            "X",
+            "X",
+            "X"
+          ],
+          [
+            "O",
+            "O",
+            "O",
+            "O"
+          ],
+          [
+            "O",
+            "O",
+            "O",
+            "O"
+          ],
+          [
+            "O",
+            "O",
+            "O",
+            "O"
+          ]
+        ],
+        "F": [
+          [
+            "X",
+            "X",
+            "X",
+            "X"
+          ],
+          [
+            "G",
+            "G",
+            "G",
+            "G"
+          ],
+          [
+            "G",
+            "G",
+            "G",
+            "G"
+          ],
+          [
+            "G",
+            "G",
+            "G",
+            "G"
+          ]
+        ],
+        "R": [
+          [
+            "X",
+            "X",
+            "X",
+            "X"
+          ],
+          [
+            "R",
+            "R",
+            "R",
+            "R"
+          ],
+          [
+            "R",
+            "R",
+            "R",
+            "R"
+          ],
+          [
+            "R",
+            "R",
+            "R",
+            "R"
+          ]
+        ],
+        "B": [
+          [
+            "X",
+            "X",
+            "X",
+            "X"
+          ],
+          [
+            "B",
+            "B",
+            "B",
+            "B"
+          ],
+          [
+            "B",
+            "B",
+            "B",
+            "B"
+          ],
+          [
+            "B",
+            "B",
+            "B",
+            "B"
+          ]
+        ],
+        "D": [
+          [
+            "Y",
+            "Y",
+            "Y",
+            "Y"
+          ],
+          [
+            "Y",
+            "Y",
+            "Y",
+            "Y"
+          ],
+          [
+            "Y",
+            "Y",
+            "Y",
+            "Y"
+          ],
+          [
+            "Y",
+            "Y",
+            "Y",
+            "Y"
+          ]
+        ]
+      },
+      "highlight": {
+        "stickers": []
+      }
+    },
+    "json_highlight": null,
+    "algorithm": "",
+    "description": "",
+    "step_number": 7,
+    "method": "reduction-4x4",
+    "hand_orientation": "right",
+    "category": "top cross",
+    "difficulty": "",
+    "setup": "",
+    "colored": "",
+    "flags": "showalg",
+    "camera_longitude": -25.0,
+    "camera_latitude": 22.0,
+    "stickering": "full"
+  }
+},
+{
+  "model": "cube.cubestate",
+  "pk": 133,
+  "fields": {
+    "name": "4x4-top-face-corner-correct",
+    "slug": "4x4-top-face-corner-correct",
+    "json_state": {
+      "cube": {
+        "U": [
+          [
+            "W",
+            "W",
+            "W",
+            "W"
+          ],
+          [
+            "W",
+            "W",
+            "W",
+            "W"
+          ],
+          [
+            "W",
+            "W",
+            "W",
+            "W"
+          ],
+          [
+            "W",
+            "W",
+            "W",
+            "W"
+          ]
+        ],
+        "L": [
+          [
+            "X",
+            "X",
+            "X",
+            "X"
+          ],
+          [
+            "O",
+            "O",
+            "O",
+            "O"
+          ],
+          [
+            "O",
+            "O",
+            "O",
+            "O"
+          ],
+          [
+            "O",
+            "O",
+            "O",
+            "O"
+          ]
+        ],
+        "F": [
+          [
+            "X",
+            "X",
+            "X",
+            "X"
+          ],
+          [
+            "G",
+            "G",
+            "G",
+            "G"
+          ],
+          [
+            "G",
+            "G",
+            "G",
+            "G"
+          ],
+          [
+            "G",
+            "G",
+            "G",
+            "G"
+          ]
+        ],
+        "R": [
+          [
+            "X",
+            "X",
+            "X",
+            "X"
+          ],
+          [
+            "R",
+            "R",
+            "R",
+            "R"
+          ],
+          [
+            "R",
+            "R",
+            "R",
+            "R"
+          ],
+          [
+            "R",
+            "R",
+            "R",
+            "R"
+          ]
+        ],
+        "B": [
+          [
+            "X",
+            "X",
+            "X",
+            "X"
+          ],
+          [
+            "B",
+            "B",
+            "B",
+            "B"
+          ],
+          [
+            "B",
+            "B",
+            "B",
+            "B"
+          ],
+          [
+            "B",
+            "B",
+            "B",
+            "B"
+          ]
+        ],
+        "D": [
+          [
+            "Y",
+            "Y",
+            "Y",
+            "Y"
+          ],
+          [
+            "Y",
+            "Y",
+            "Y",
+            "Y"
+          ],
+          [
+            "Y",
+            "Y",
+            "Y",
+            "Y"
+          ],
+          [
+            "Y",
+            "Y",
+            "Y",
+            "Y"
+          ]
+        ]
+      },
+      "highlight": {
+        "stickers": []
+      }
+    },
+    "json_highlight": null,
+    "algorithm": "",
+    "description": "",
+    "step_number": 8,
+    "method": "reduction-4x4",
+    "hand_orientation": "right",
+    "category": "top face",
+    "difficulty": "",
+    "setup": "",
+    "colored": "",
+    "flags": "showalg",
+    "camera_longitude": -25.0,
+    "camera_latitude": 22.0,
+    "stickering": "full"
+  }
+},
+{
+  "model": "cube.cubestate",
+  "pk": 134,
+  "fields": {
+    "name": "4x4-top-face-setup",
+    "slug": "4x4-top-face-setup",
+    "json_state": {
+      "cube": {
+        "U": [
+          [
+            "X",
+            "W",
+            "W",
+            "X"
+          ],
+          [
+            "W",
+            "W",
+            "W",
+            "W"
+          ],
+          [
+            "W",
+            "W",
+            "W",
+            "W"
+          ],
+          [
+            "W",
+            "W",
+            "W",
+            "X"
+          ]
+        ],
+        "L": [
+          [
+            "X",
+            "X",
+            "X",
+            "X"
+          ],
+          [
+            "O",
+            "O",
+            "O",
+            "O"
+          ],
+          [
+            "O",
+            "O",
+            "O",
+            "O"
+          ],
+          [
+            "O",
+            "O",
+            "O",
+            "O"
+          ]
+        ],
+        "F": [
+          [
+            "X",
+            "X",
+            "X",
+            "W"
+          ],
+          [
+            "G",
+            "G",
+            "G",
+            "G"
+          ],
+          [
+            "G",
+            "G",
+            "G",
+            "G"
+          ],
+          [
+            "G",
+            "G",
+            "G",
+            "G"
+          ]
+        ],
+        "R": [
+          [
+            "X",
+            "X",
+            "X",
+            "W"
+          ],
+          [
+            "R",
+            "R",
+            "R",
+            "R"
+          ],
+          [
+            "R",
+            "R",
+            "R",
+            "R"
+          ],
+          [
+            "R",
+            "R",
+            "R",
+            "R"
+          ]
+        ],
+        "B": [
+          [
+            "X",
+            "X",
+            "X",
+            "W"
+          ],
+          [
+            "B",
+            "B",
+            "B",
+            "B"
+          ],
+          [
+            "B",
+            "B",
+            "B",
+            "B"
+          ],
+          [
+            "B",
+            "B",
+            "B",
+            "B"
+          ]
+        ],
+        "D": [
+          [
+            "Y",
+            "Y",
+            "Y",
+            "Y"
+          ],
+          [
+            "Y",
+            "Y",
+            "Y",
+            "Y"
+          ],
+          [
+            "Y",
+            "Y",
+            "Y",
+            "Y"
+          ],
+          [
+            "Y",
+            "Y",
+            "Y",
+            "Y"
+          ]
+        ]
+      },
+      "highlight": {
+        "stickers": []
+      }
+    },
+    "json_highlight": null,
+    "algorithm": "",
+    "description": "",
+    "step_number": 8,
+    "method": "reduction-4x4",
+    "hand_orientation": "right",
+    "category": "top face",
+    "difficulty": "",
+    "setup": "",
+    "colored": "",
+    "flags": "showalg",
+    "camera_longitude": -25.0,
+    "camera_latitude": 22.0,
+    "stickering": "full"
+  }
+},
+{
+  "model": "cube.cubestate",
+  "pk": 135,
+  "fields": {
+    "name": "4x4-top-cross-goal",
+    "slug": "4x4-top-cross-goal",
+    "json_state": {
+      "cube": {
+        "U": [
+          [
+            "X",
+            "W",
+            "W",
+            "X"
+          ],
+          [
+            "W",
+            "W",
+            "W",
+            "W"
+          ],
+          [
+            "W",
+            "W",
+            "W",
+            "W"
+          ],
+          [
+            "X",
+            "W",
+            "W",
+            "X"
+          ]
+        ],
+        "L": [
+          [
+            "X",
+            "X",
+            "X",
+            "X"
+          ],
+          [
+            "O",
+            "O",
+            "O",
+            "O"
+          ],
+          [
+            "O",
+            "O",
+            "O",
+            "O"
+          ],
+          [
+            "O",
+            "O",
+            "O",
+            "O"
+          ]
+        ],
+        "F": [
+          [
+            "X",
+            "X",
+            "X",
+            "X"
+          ],
+          [
+            "G",
+            "G",
+            "G",
+            "G"
+          ],
+          [
+            "G",
+            "G",
+            "G",
+            "G"
+          ],
+          [
+            "G",
+            "G",
+            "G",
+            "G"
+          ]
+        ],
+        "R": [
+          [
+            "X",
+            "X",
+            "X",
+            "X"
+          ],
+          [
+            "R",
+            "R",
+            "R",
+            "R"
+          ],
+          [
+            "R",
+            "R",
+            "R",
+            "R"
+          ],
+          [
+            "R",
+            "R",
+            "R",
+            "R"
+          ]
+        ],
+        "B": [
+          [
+            "X",
+            "X",
+            "X",
+            "X"
+          ],
+          [
+            "B",
+            "B",
+            "B",
+            "B"
+          ],
+          [
+            "B",
+            "B",
+            "B",
+            "B"
+          ],
+          [
+            "B",
+            "B",
+            "B",
+            "B"
+          ]
+        ],
+        "D": [
+          [
+            "Y",
+            "Y",
+            "Y",
+            "Y"
+          ],
+          [
+            "Y",
+            "Y",
+            "Y",
+            "Y"
+          ],
+          [
+            "Y",
+            "Y",
+            "Y",
+            "Y"
+          ],
+          [
+            "Y",
+            "Y",
+            "Y",
+            "Y"
+          ]
+        ]
+      },
+      "highlight": {
+        "stickers": []
+      }
+    },
+    "json_highlight": null,
+    "algorithm": "",
+    "description": "",
+    "step_number": 7,
+    "method": "reduction-4x4",
+    "hand_orientation": "right",
+    "category": "top cross",
+    "difficulty": "",
+    "setup": "",
+    "colored": "",
+    "flags": "showalg",
+    "camera_longitude": -25.0,
+    "camera_latitude": 22.0,
+    "stickering": "full"
+  }
+},
+{
+  "model": "cube.cubestate",
+  "pk": 136,
+  "fields": {
+    "name": "4x4-pll-corners-goal",
+    "slug": "4x4-pll-corners-goal",
+    "json_state": {
+      "cube": {
+        "U": [
+          [
+            "W",
+            "W",
+            "W",
+            "W"
+          ],
+          [
+            "W",
+            "W",
+            "W",
+            "W"
+          ],
+          [
+            "W",
+            "W",
+            "W",
+            "W"
+          ],
+          [
+            "W",
+            "W",
+            "W",
+            "W"
+          ]
+        ],
+        "L": [
+          [
+            "O",
+            "X",
+            "X",
+            "O"
+          ],
+          [
+            "O",
+            "O",
+            "O",
+            "O"
+          ],
+          [
+            "O",
+            "O",
+            "O",
+            "O"
+          ],
+          [
+            "O",
+            "O",
+            "O",
+            "O"
+          ]
+        ],
+        "F": [
+          [
+            "G",
+            "X",
+            "X",
+            "G"
+          ],
+          [
+            "G",
+            "G",
+            "G",
+            "G"
+          ],
+          [
+            "G",
+            "G",
+            "G",
+            "G"
+          ],
+          [
+            "G",
+            "G",
+            "G",
+            "G"
+          ]
+        ],
+        "R": [
+          [
+            "R",
+            "X",
+            "X",
+            "R"
+          ],
+          [
+            "R",
+            "R",
+            "R",
+            "R"
+          ],
+          [
+            "R",
+            "R",
+            "R",
+            "R"
+          ],
+          [
+            "R",
+            "R",
+            "R",
+            "R"
+          ]
+        ],
+        "B": [
+          [
+            "B",
+            "X",
+            "X",
+            "B"
+          ],
+          [
+            "B",
+            "B",
+            "B",
+            "B"
+          ],
+          [
+            "B",
+            "B",
+            "B",
+            "B"
+          ],
+          [
+            "B",
+            "B",
+            "B",
+            "B"
+          ]
+        ],
+        "D": [
+          [
+            "Y",
+            "Y",
+            "Y",
+            "Y"
+          ],
+          [
+            "Y",
+            "Y",
+            "Y",
+            "Y"
+          ],
+          [
+            "Y",
+            "Y",
+            "Y",
+            "Y"
+          ],
+          [
+            "Y",
+            "Y",
+            "Y",
+            "Y"
+          ]
+        ]
+      },
+      "highlight": {
+        "stickers": []
+      }
+    },
+    "json_highlight": null,
+    "algorithm": "",
+    "description": "",
+    "step_number": 9,
+    "method": "reduction-4x4",
+    "hand_orientation": "right",
+    "category": "Corner orientation",
+    "difficulty": "",
+    "setup": "",
+    "colored": "",
+    "flags": "showalg",
+    "camera_longitude": -25.0,
+    "camera_latitude": 22.0,
+    "stickering": "full"
+  }
+},
+{
+  "model": "cube.cubestate",
+  "pk": 137,
+  "fields": {
+    "name": "4x4-pll-corners-no-headlights",
+    "slug": "4x4-pll-corners-no-headlights",
+    "json_state": {
+      "cube": {
+        "U": [
+          [
+            "W",
+            "W",
+            "W",
+            "W"
+          ],
+          [
+            "W",
+            "W",
+            "W",
+            "W"
+          ],
+          [
+            "W",
+            "W",
+            "W",
+            "W"
+          ],
+          [
+            "W",
+            "W",
+            "W",
+            "W"
+          ]
+        ],
+        "L": [
+          [
+            "G",
+            "X",
+            "X",
+            "B"
+          ],
+          [
+            "O",
+            "O",
+            "O",
+            "O"
+          ],
+          [
+            "O",
+            "O",
+            "O",
+            "O"
+          ],
+          [
+            "O",
+            "O",
+            "O",
+            "O"
+          ]
+        ],
+        "F": [
+          [
+            "O",
+            "X",
+            "X",
+            "R"
+          ],
+          [
+            "G",
+            "G",
+            "G",
+            "G"
+          ],
+          [
+            "G",
+            "G",
+            "G",
+            "G"
+          ],
+          [
+            "G",
+            "G",
+            "G",
+            "G"
+          ]
+        ],
+        "R": [
+          [
+            "B",
+            "X",
+            "X",
+            "G"
+          ],
+          [
+            "R",
+            "R",
+            "R",
+            "R"
+          ],
+          [
+            "R",
+            "R",
+            "R",
+            "R"
+          ],
+          [
+            "R",
+            "R",
+            "R",
+            "R"
+          ]
+        ],
+        "B": [
+          [
+            "R",
+            "X",
+            "X",
+            "O"
+          ],
+          [
+            "B",
+            "B",
+            "B",
+            "B"
+          ],
+          [
+            "B",
+            "B",
+            "B",
+            "B"
+          ],
+          [
+            "B",
+            "B",
+            "B",
+            "B"
+          ]
+        ],
+        "D": [
+          [
+            "Y",
+            "Y",
+            "Y",
+            "Y"
+          ],
+          [
+            "Y",
+            "Y",
+            "Y",
+            "Y"
+          ],
+          [
+            "Y",
+            "Y",
+            "Y",
+            "Y"
+          ],
+          [
+            "Y",
+            "Y",
+            "Y",
+            "Y"
+          ]
+        ]
+      },
+      "highlight": {
+        "stickers": []
+      }
+    },
+    "json_highlight": null,
+    "algorithm": "",
+    "description": "",
+    "step_number": 9,
+    "method": "reduction-4x4",
+    "hand_orientation": "right",
+    "category": "Corner orientation",
+    "difficulty": "",
+    "setup": "",
+    "colored": "",
+    "flags": "showalg",
+    "camera_longitude": -25.0,
+    "camera_latitude": 22.0,
+    "stickering": "full"
+  }
+},
+{
+  "model": "cube.cubestate",
+  "pk": 138,
+  "fields": {
+    "name": "4x4-pll-corners-one-headlight",
+    "slug": "4x4-pll-corners-one-headlight",
+    "json_state": {
+      "cube": {
+        "U": [
+          [
+            "W",
+            "W",
+            "W",
+            "W"
+          ],
+          [
+            "W",
+            "W",
+            "W",
+            "W"
+          ],
+          [
+            "W",
+            "W",
+            "W",
+            "W"
+          ],
+          [
+            "W",
+            "W",
+            "W",
+            "W"
+          ]
+        ],
+        "L": [
+          [
+            "G",
+            "X",
+            "X",
+            "R"
+          ],
+          [
+            "O",
+            "O",
+            "O",
+            "O"
+          ],
+          [
+            "O",
+            "O",
+            "O",
+            "O"
+          ],
+          [
+            "O",
+            "O",
+            "O",
+            "O"
+          ]
+        ],
+        "F": [
+          [
+            "B",
+            "X",
+            "X",
+            "B"
+          ],
+          [
+            "G",
+            "G",
+            "G",
+            "G"
+          ],
+          [
+            "G",
+            "G",
+            "G",
+            "G"
+          ],
+          [
+            "G",
+            "G",
+            "G",
+            "G"
+          ]
+        ],
+        "R": [
+          [
+            "O",
+            "X",
+            "X",
+            "G"
+          ],
+          [
+            "R",
+            "R",
+            "R",
+            "R"
+          ],
+          [
+            "R",
+            "R",
+            "R",
+            "R"
+          ],
+          [
+            "R",
+            "R",
+            "R",
+            "R"
+          ]
+        ],
+        "B": [
+          [
+            "R",
+            "X",
+            "X",
+            "O"
+          ],
+          [
+            "B",
+            "B",
+            "B",
+            "B"
+          ],
+          [
+            "B",
+            "B",
+            "B",
+            "B"
+          ],
+          [
+            "B",
+            "B",
+            "B",
+            "B"
+          ]
+        ],
+        "D": [
+          [
+            "Y",
+            "Y",
+            "Y",
+            "Y"
+          ],
+          [
+            "Y",
+            "Y",
+            "Y",
+            "Y"
+          ],
+          [
+            "Y",
+            "Y",
+            "Y",
+            "Y"
+          ],
+          [
+            "Y",
+            "Y",
+            "Y",
+            "Y"
+          ]
+        ]
+      },
+      "highlight": {
+        "stickers": []
+      }
+    },
+    "json_highlight": null,
+    "algorithm": "",
+    "description": "",
+    "step_number": 9,
+    "method": "reduction-4x4",
+    "hand_orientation": "right",
+    "category": "Corner orientation",
+    "difficulty": "",
+    "setup": "",
+    "colored": "",
+    "flags": "showalg",
+    "camera_longitude": -25.0,
+    "camera_latitude": 22.0,
+    "stickering": "full"
+  }
+},
+{
+  "model": "cube.cubestate",
+  "pk": 139,
+  "fields": {
+    "name": "4x4-pll-edges-goal",
+    "slug": "4x4-pll-edges-goal",
+    "json_state": {
+      "cube": {
+        "U": [
+          [
+            "W",
+            "W",
+            "W",
+            "W"
+          ],
+          [
+            "W",
+            "W",
+            "W",
+            "W"
+          ],
+          [
+            "W",
+            "W",
+            "W",
+            "W"
+          ],
+          [
+            "W",
+            "W",
+            "W",
+            "W"
+          ]
+        ],
+        "L": [
+          [
+            "O",
+            "O",
+            "O",
+            "O"
+          ],
+          [
+            "O",
+            "O",
+            "O",
+            "O"
+          ],
+          [
+            "O",
+            "O",
+            "O",
+            "O"
+          ],
+          [
+            "O",
+            "O",
+            "O",
+            "O"
+          ]
+        ],
+        "F": [
+          [
+            "G",
+            "G",
+            "G",
+            "G"
+          ],
+          [
+            "G",
+            "G",
+            "G",
+            "G"
+          ],
+          [
+            "G",
+            "G",
+            "G",
+            "G"
+          ],
+          [
+            "G",
+            "G",
+            "G",
+            "G"
+          ]
+        ],
+        "R": [
+          [
+            "R",
+            "R",
+            "R",
+            "R"
+          ],
+          [
+            "R",
+            "R",
+            "R",
+            "R"
+          ],
+          [
+            "R",
+            "R",
+            "R",
+            "R"
+          ],
+          [
+            "R",
+            "R",
+            "R",
+            "R"
+          ]
+        ],
+        "B": [
+          [
+            "B",
+            "B",
+            "B",
+            "B"
+          ],
+          [
+            "B",
+            "B",
+            "B",
+            "B"
+          ],
+          [
+            "B",
+            "B",
+            "B",
+            "B"
+          ],
+          [
+            "B",
+            "B",
+            "B",
+            "B"
+          ]
+        ],
+        "D": [
+          [
+            "Y",
+            "Y",
+            "Y",
+            "Y"
+          ],
+          [
+            "Y",
+            "Y",
+            "Y",
+            "Y"
+          ],
+          [
+            "Y",
+            "Y",
+            "Y",
+            "Y"
+          ],
+          [
+            "Y",
+            "Y",
+            "Y",
+            "Y"
+          ]
+        ]
+      },
+      "highlight": {
+        "stickers": []
+      }
+    },
+    "json_highlight": null,
+    "algorithm": "",
+    "description": "",
+    "step_number": 10,
+    "method": "reduction-4x4",
+    "hand_orientation": "right",
+    "category": "Corner orientation",
+    "difficulty": "",
+    "setup": "",
+    "colored": "",
+    "flags": "showalg",
+    "camera_longitude": -25.0,
+    "camera_latitude": 22.0,
+    "stickering": "full"
+  }
+},
+{
+  "model": "cube.cubestate",
+  "pk": 140,
+  "fields": {
+    "name": "4x4-pll-3-edges-right",
+    "slug": "4x4-pll-3-edges-right",
+    "json_state": {
+      "cube": {
+        "U": [
+          [
+            "W",
+            "W",
+            "W",
+            "W"
+          ],
+          [
+            "W",
+            "W",
+            "W",
+            "W"
+          ],
+          [
+            "W",
+            "W",
+            "W",
+            "W"
+          ],
+          [
+            "W",
+            "W",
+            "W",
+            "W"
+          ]
+        ],
+        "L": [
+          [
+            "O",
+            "G",
+            "G",
+            "O"
+          ],
+          [
+            "O",
+            "O",
+            "O",
+            "O"
+          ],
+          [
+            "O",
+            "O",
+            "O",
+            "O"
+          ],
+          [
+            "O",
+            "O",
+            "O",
+            "O"
+          ]
+        ],
+        "F": [
+          [
+            "G",
+            "R",
+            "R",
+            "G"
+          ],
+          [
+            "G",
+            "G",
+            "G",
+            "G"
+          ],
+          [
+            "G",
+            "G",
+            "G",
+            "G"
+          ],
+          [
+            "G",
+            "G",
+            "G",
+            "G"
+          ]
+        ],
+        "R": [
+          [
+            "R",
+            "O",
+            "O",
+            "R"
+          ],
+          [
+            "R",
+            "R",
+            "R",
+            "R"
+          ],
+          [
+            "R",
+            "R",
+            "R",
+            "R"
+          ],
+          [
+            "R",
+            "R",
+            "R",
+            "R"
+          ]
+        ],
+        "B": [
+          [
+            "B",
+            "B",
+            "B",
+            "B"
+          ],
+          [
+            "B",
+            "B",
+            "B",
+            "B"
+          ],
+          [
+            "B",
+            "B",
+            "B",
+            "B"
+          ],
+          [
+            "B",
+            "B",
+            "B",
+            "B"
+          ]
+        ],
+        "D": [
+          [
+            "Y",
+            "Y",
+            "Y",
+            "Y"
+          ],
+          [
+            "Y",
+            "Y",
+            "Y",
+            "Y"
+          ],
+          [
+            "Y",
+            "Y",
+            "Y",
+            "Y"
+          ],
+          [
+            "Y",
+            "Y",
+            "Y",
+            "Y"
+          ]
+        ]
+      },
+      "highlight": {
+        "stickers": []
+      }
+    },
+    "json_highlight": null,
+    "algorithm": "",
+    "description": "",
+    "step_number": 9,
+    "method": "reduction-4x4",
+    "hand_orientation": "right",
+    "category": "Corner orientation",
+    "difficulty": "",
+    "setup": "",
+    "colored": "",
+    "flags": "showalg",
+    "camera_longitude": -25.0,
+    "camera_latitude": 22.0,
+    "stickering": "full"
+  }
+}
+]

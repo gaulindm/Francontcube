@@ -1,0 +1,431 @@
+{% extends "main/partials/base.html" %}
+{% load static %}
+
+{% block title %}5×5 — Étape 2 : Les Quatre Autres Centres — Francontcube{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+
+    {% include "cube/partials/_5x5_cube_svg.html" %}
+    {% include "cube/partials/_5x5_moves_sprite.html" %}
+
+    <!-- ── Hero ──────────────────────────────────────────────────────────── -->
+    <div class="text-center mb-5">
+        <h1 class="hero-title">
+            <span class="brand-green">Étape 2 — Les Quatre Autres Centres</span>
+        </h1>
+        <p class="lead text-muted">
+            Assembler les 4 centres latéraux en construisant des
+            <strong>blocs de 2 stickers</strong> — comme des dominos —
+            et en les plaçant un par un dans le centre.
+        </p>
+    </div>
+
+    <!-- ── Rappel d'orientation ───────────────────────────────────────────── -->
+    <div class="card p-4 mb-4 border-success">
+        <h3 class="brand-green">🏳️ Rappel — Orientation fixe</h3>
+        <div class="alert alert-light border mb-0 text-center">
+            <strong>Pour toute cette étape :</strong>
+            Jaune en bas · Blanc en haut · Ne jamais faire D, Dw, U ni Uw
+        </div>
+        <p class="mt-3 mb-0">
+            Les mouvements <code>D</code> et <code>Dw</code> dérangeraient le centre jaune.
+            Les mouvements <code>U</code> et <code>Uw</code> dérangeraient le centre blanc.
+        </p>
+    </div>
+
+    <!-- ── C'est quoi un bloc 1×2? ───────────────────────────────────────── -->
+    <div class="card p-4 mb-4 border-primary">
+        <h3 class="brand-green">🧩 C'est quoi un bloc 1×2?</h3>
+        <div class="row align-items-center">
+            <div class="col-md-7">
+                <p>
+                    Un <strong>bloc 1×2</strong> c'est simplement
+                    <strong>2 stickers de la même couleur côte à côte</strong> —
+                    comme un domino. C'est le plus petit morceau utile
+                    qu'on peut construire et déplacer d'un coup.
+                </p>
+                <p>
+                    Pour remplir un centre 3×3 (9 stickers), on va construire
+                    <strong>4 blocs 1×2</strong>, puis placer le dernier sticker
+                    seul à la fin.
+                </p>
+                <div class="alert alert-info mb-0">
+                    <strong>💡 Pourquoi des blocs?</strong>
+                    Déplacer 2 stickers d'un coup est deux fois plus rapide
+                    que de les placer un par un, et tu risques moins de
+                    défaire ce que tu as déjà fait.
+                </div>
+            </div>
+            <div class="col-md-5 text-center">
+                <!-- SVG showing a 3×3 grid split into 4 dominoes + 1 single -->
+                <svg viewBox="0 0 140 140" width="160" height="160"
+                     xmlns="http://www.w3.org/2000/svg"
+                     aria-label="Centre 3×3 divisé en 4 blocs 1×2 et 1 sticker seul">
+                    <!-- bloc 1 : top-left + top-mid (horizontal) -->
+                    <rect x="5"  y="5"  width="40" height="40" rx="5" fill="#0d6efd" stroke="#0a58ca" stroke-width="2"/>
+                    <rect x="50" y="5"  width="40" height="40" rx="5" fill="#0d6efd" stroke="#0a58ca" stroke-width="2"/>
+                    <rect x="5"  y="3"  width="85" height="44" rx="6" fill="none"    stroke="#0a58ca" stroke-width="2" stroke-dasharray="4 2"/>
+                    <text x="47" y="30" text-anchor="middle" dominant-baseline="middle" font-size="10" font-weight="bold" fill="white">①</text>
+
+                    <!-- bloc 2 : top-right + mid-right (vertical) -->
+                    <rect x="95" y="5"  width="40" height="40" rx="5" fill="#198754" stroke="#146c43" stroke-width="2"/>
+                    <rect x="95" y="50" width="40" height="40" rx="5" fill="#198754" stroke="#146c43" stroke-width="2"/>
+                    <rect x="93" y="3"  width="44" height="89" rx="6" fill="none"    stroke="#146c43" stroke-width="2" stroke-dasharray="4 2"/>
+                    <text x="115" y="52" text-anchor="middle" dominant-baseline="middle" font-size="10" font-weight="bold" fill="white">②</text>
+
+                    <!-- bloc 3 : mid-left + bot-left (vertical) -->
+                    <rect x="5"  y="50" width="40" height="40" rx="5" fill="#dc3545" stroke="#b02a37" stroke-width="2"/>
+                    <rect x="5"  y="95" width="40" height="40" rx="5" fill="#dc3545" stroke="#b02a37" stroke-width="2"/>
+                    <rect x="3"  y="48" width="44" height="89" rx="6" fill="none"    stroke="#b02a37" stroke-width="2" stroke-dasharray="4 2"/>
+                    <text x="25" y="92" text-anchor="middle" dominant-baseline="middle" font-size="10" font-weight="bold" fill="white">③</text>
+
+                    <!-- bloc 4 : bot-mid + bot-right (horizontal) -->
+                    <rect x="50" y="95" width="40" height="40" rx="5" fill="#fd7e14" stroke="#c96a12" stroke-width="2"/>
+                    <rect x="95" y="95" width="40" height="40" rx="5" fill="#fd7e14" stroke="#c96a12" stroke-width="2"/>
+                    <rect x="48" y="93" width="89" height="44" rx="6" fill="none"    stroke="#c96a12" stroke-width="2" stroke-dasharray="4 2"/>
+                    <text x="115" y="117" text-anchor="middle" dominant-baseline="middle" font-size="10" font-weight="bold" fill="white">④</text>
+
+                    <!-- sticker 9 : centre seul -->
+                    <rect x="50" y="50" width="40" height="40" rx="5" fill="#ffc107" stroke="#cc9a06" stroke-width="2"/>
+                    <text x="70" y="72" text-anchor="middle" dominant-baseline="middle" font-size="11" font-weight="bold" fill="#5a4000">5e</text>
+                </svg>
+                <p class="small text-muted mt-1">4 blocs + 1 sticker seul = centre complet</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- ── Objectif ──────────────────────────────────────────────────────── -->
+    <div class="card p-4 mb-4">
+        <h3 class="brand-green">🎯 Objectif de cette étape</h3>
+        <div class="row align-items-center">
+            <div class="col-md-8">
+                <p>
+                    Assembler les centres <strong>vert, bleu, rouge et orange</strong>
+                    en construisant chaque centre bloc par bloc.
+                </p>
+                <div class="alert alert-info mb-0">
+                    <strong>💡 Ordre recommandé :</strong>
+                    <ol class="mb-0 mt-2">
+                        <li>Vert (face avant) — entièrement libre</li>
+                        <li>Bleu (face arrière) — entièrement libre</li>
+                        <li>Rouge et Orange — les deux derniers ensemble</li>
+                    </ol>
+                </div>
+            </div>
+            <div class="col-md-4 text-center">
+                <div id="cube-goal" class="cube-case"></div>
+                <p class="mt-2 small text-muted">Les 6 centres terminés</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- ── Étape par étape : construire un bloc ───────────────────────────── -->
+    <div class="card p-4 mb-4 border-info">
+        <h3 class="brand-green">🔧 Comment construire un bloc 1×2</h3>
+        <p>
+            Un bloc se construit <strong>sur une face latérale</strong> en
+            alignant 2 stickers côte à côte, puis en l'insérant dans le centre
+            en construction.
+        </p>
+
+        <div class="row g-3 mt-1">
+
+            <!-- Phase 1 -->
+            <div class="col-md-3">
+                <div class="card h-100 border-0 bg-light">
+                    <div class="card-header text-center fw-bold text-bg-primary">
+                        1 — Trouver
+                    </div>
+                    <div class="card-body text-center">
+                        <!-- mini SVG: 2 matching stickers on top face -->
+                        <svg viewBox="0 0 95 50" width="110" height="58" class="mb-2" xmlns="http://www.w3.org/2000/svg">
+                            <rect x="3"  y="3" width="40" height="40" rx="5" fill="#198754" stroke="#146c43" stroke-width="1.5"/>
+                            <rect x="52" y="3" width="40" height="40" rx="5" fill="#dee2e6" stroke="#adb5bd" stroke-width="1.5"/>
+                            <text x="23" y="26" text-anchor="middle" dominant-baseline="middle" font-size="16">🟢</text>
+                            <text x="72" y="26" text-anchor="middle" dominant-baseline="middle" font-size="16">❓</text>
+                        </svg>
+                        <p class="small mb-0">
+                            Repère 2 stickers de la même couleur sur n'importe quelle face.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Phase 2 -->
+            <div class="col-md-3">
+                <div class="card h-100 border-0 bg-light">
+                    <div class="card-header text-center fw-bold text-bg-success">
+                        2 — Aligner
+                    </div>
+                    <div class="card-body text-center">
+                        <!-- mini SVG: 2 stickers side by side on top face -->
+                        <svg viewBox="0 0 95 50" width="110" height="58" class="mb-2" xmlns="http://www.w3.org/2000/svg">
+                            <rect x="3"  y="3" width="40" height="40" rx="5" fill="#198754" stroke="#146c43" stroke-width="1.5"/>
+                            <rect x="52" y="3" width="40" height="40" rx="5" fill="#198754" stroke="#146c43" stroke-width="1.5"/>
+                            <rect x="1"  y="1" width="93" height="44" rx="6" fill="none" stroke="#146c43" stroke-width="2" stroke-dasharray="4 2"/>
+                            <text x="23" y="26" text-anchor="middle" dominant-baseline="middle" font-size="16">🟢</text>
+                            <text x="72" y="26" text-anchor="middle" dominant-baseline="middle" font-size="16">🟢</text>
+                        </svg>
+                        <p class="small mb-0">
+                            Utilise <code>F</code>, <code>B</code>, <code>Rw</code>
+                            pour les mettre côte à côte sur la face du haut.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Phase 3 -->
+            <div class="col-md-3">
+                <div class="card h-100 border-0 bg-light">
+                    <div class="card-header text-center fw-bold text-bg-warning text-dark">
+                        3 — Positionner
+                    </div>
+                    <div class="card-body text-center">
+                        <!-- mini SVG: bloc aligned above the target slot in center -->
+                        <svg viewBox="0 0 95 95" width="95" height="95" class="mb-2" xmlns="http://www.w3.org/2000/svg">
+                            <!-- centre en construction (3×3) -->
+                            {% for r in "012" %}{% for c in "012" %}
+                            <rect
+                                x="{% if forloop.counter0 == 0 %}3{% elif forloop.counter0 == 1 %}35{% else %}67{% endif %}"
+                                y="{% if forloop.parentloop.counter0 == 0 %}3{% elif forloop.parentloop.counter0 == 1 %}35{% else %}67{% endif %}"
+                                width="28" height="28" rx="4"
+                                fill="{% if forloop.parentloop.counter0 == 0 and forloop.counter0 == 0 %}#198754{% elif forloop.parentloop.counter0 == 0 and forloop.counter0 == 1 %}#198754{% else %}#dee2e6{% endif %}"
+                                stroke="#adb5bd" stroke-width="1"/>
+                            {% endfor %}{% endfor %}
+                            <!-- arrow pointing down into slot -->
+                            <path d="M52,4 L52,0" stroke="#dc3545" stroke-width="2" marker-end="url(#arr-d)"/>
+                            <defs>
+                                <marker id="arr-d" markerWidth="6" markerHeight="6" refX="3" refY="3" orient="auto">
+                                    <path d="M0,0 L6,3 L0,6 Z" fill="#dc3545"/>
+                                </marker>
+                            </defs>
+                        </svg>
+                        <p class="small mb-0">
+                            Tourne <code>y</code> / <code>y'</code> pour que
+                            le bloc soit au-dessus de l'espace libre dans le centre.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Phase 4 -->
+            <div class="col-md-3">
+                <div class="card h-100 border-0 bg-light">
+                    <div class="card-header text-center fw-bold text-bg-danger">
+                        4 — Insérer
+                    </div>
+                    <div class="card-body text-center">
+                        <div class="d-flex justify-content-center gap-2 mb-2">
+                            <div class="text-center">
+                                <svg class="move-icon"><use href="#Rw-5"/></svg>
+                                <p class="small mb-0">Rw</p>
+                            </div>
+                            <div class="text-center">
+                                <svg class="move-icon"><use href="#Lw-prime-5"/></svg>
+                                <p class="small mb-0">Lw'</p>
+                            </div>
+                        </div>
+                        <p class="small mb-0">
+                            <code>Rw</code> insère le bloc dans la moitié droite du centre.
+                            <code>Lw'</code> insère dans la moitié gauche.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- Visual example -->
+        <div class="row mt-4 align-items-center">
+            <div class="col-md-4 text-center">
+                <div id="cube-block-insert" class="cube-case"></div>
+                <p class="mt-2 small text-muted">Bloc prêt à insérer</p>
+            </div>
+            <div class="col-md-8">
+                <div class="alert alert-success mb-0">
+                    <strong>✅ Résultat attendu après 4 blocs + 1 sticker :</strong>
+                    <ul class="mb-0 mt-2">
+                        <li>Le centre est complet — 9 stickers de la même couleur</li>
+                        <li>Les centres jaune et blanc n'ont pas bougé</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ── Technique de remplacement ─────────────────────────────────────── -->
+    <div class="card p-4 mb-4 border-warning">
+        <h3 class="brand-green">🔄 Quand un sticker est bloqué — Le remplacement</h3>
+        <p>
+            Parfois le sticker dont tu as besoin est déjà dans un centre
+            <strong>terminé</strong> — tu ne peux pas le prendre sans tout casser.
+            La solution : <strong>échanger</strong> ce sticker contre un autre
+            du même centre.
+        </p>
+
+        <div class="row mt-3 align-items-center">
+            <div class="col-md-4 text-center">
+                <div id="cube-remplacement" class="cube-case"></div>
+                <p class="mt-2 small text-muted">Sticker bloqué dans un centre terminé</p>
+            </div>
+            <div class="col-md-8">
+                <div class="bg-light p-3 rounded border mb-3">
+                    <ol class="mb-0">
+                        <li class="mb-2">
+                            Repère le sticker dont tu as besoin dans un centre terminé.
+                        </li>
+                        <li class="mb-2">
+                            Prépare un bloc 1×2 de <strong>remplacement</strong> —
+                            2 stickers de la <em>même couleur que le centre source</em> —
+                            aligné exactement au-dessus de la position du sticker cible.
+                        </li>
+                        <li class="mb-2">
+                            Fais <code>Rw</code> ou <code>Lw'</code> :
+                            ton bloc de remplacement descend dans le centre source,
+                            ton sticker cible monte dans la face du haut.
+                        </li>
+                        <li>
+                            Le centre source reste complet ✅ —
+                            il a juste reçu ton bloc de remplacement.
+                        </li>
+                    </ol>
+                </div>
+                <div class="alert alert-warning mb-0">
+                    <strong>⚠️ Important :</strong>
+                    Le bloc de remplacement doit être exactement de la
+                    <strong>même couleur</strong> que le centre dans lequel
+                    il entre — sinon tu casses ce centre!
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ── Les deux derniers centres ─────────────────────────────────────── -->
+    <div class="card p-4 mb-4 border-danger">
+        <h3 class="brand-green">⚡ Les deux derniers centres</h3>
+        <p>
+            Quand il ne reste que <strong>deux coins</strong> à échanger pour terminer les deux derniers centres, ça devient compliqué.
+        </p>
+
+        <div class="row mt-3 align-items-center">
+            <div class="col-md-4 text-center">
+                <div id="cube-last-two-corners" class="cube-case"></div>
+                <p class="mt-2 small text-muted">Deux derniers centres à terminer</p>
+            </div>
+            <div class="col-md-8">
+                <h5>Échange de coins:(Le sune pour les centres)</h5>
+               <div class="d-flex align-items-center gap-2 flex-wrap mb-3">
+                    <div class="text-center">
+                        <svg class="move-icon"><use href="#Rw-5"/></svg>
+                    </div>                    
+                    <div class="text-center">
+                        <svg class="move-icon"><use href="#U-5"/></svg>
+                    </div>
+
+                    <div class="text-center">
+                        <svg class="move-icon"><use href="#Rw-prime-5"/></svg>
+                    </div>                   
+                    <div class="text-center">
+                        <svg class="move-icon"><use href="#U-5"/></svg>
+                    </div>
+                    <div class="text-center">
+                        <svg class="move-icon"><use href="#Rw-5"/></svg>
+                    </div>                    
+                    <div class="text-center">
+                        <svg class="move-icon"><use href="#U2-5"/></svg>
+                    </div>
+
+                    <div class="text-center">
+                        <svg class="move-icon"><use href="#Rw-prime-5"/></svg>
+                    </div>                   
+
+
+                    
+                </div> <div class="alert alert-danger mb-0">
+                    <strong>⚠️ Règle absolue :</strong>
+                    À cette étape, utilise toujours <code>Rw</code> et
+                    <code>Lw'</code> <em>ensemble</em> (ou <code>Lw</code> +
+                    <code>Rw'</code>) pour que les faces avant et arrière
+                    déjà terminées ne bougent pas.
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ── Récapitulatif ─────────────────────────────────────────────────── -->
+    <div class="card p-4 mb-4 bg-light">
+        <h3 class="brand-green">✅ Vérification</h3>
+        <p>Avant de passer à l'étape 3, vérifiez :</p>
+        <ul>
+            <li>Les <strong>6 centres</strong> sont chacun d'une seule couleur</li>
+            <li>
+                Les centres sont dans le bon ordre —
+                <strong>jaune en bas · blanc en haut · vert devant ·
+                bleu derrière · rouge à droite · orange à gauche</strong>
+            </li>
+            <li>Aucun sticker d'une autre couleur ne s'est glissé dans un centre</li>
+        </ul>
+        <div class="alert alert-info mt-3 mb-0">
+            Les arêtes et les coins sont probablement encore tout mélangés — c'est normal!
+            On s'en occupe à l'étape suivante.
+        </div>
+    </div>
+
+    <!-- ── Navigation ────────────────────────────────────────────────────── -->
+    <div class="d-flex justify-content-between align-items-center mt-5 flex-wrap gap-2">
+        {% if prev_step %}
+        <a href="{% url step_url prev_step.slug %}" class="btn btn-outline-secondary">
+            ← {{ prev_step.name }}
+        </a>
+        {% else %}
+        <a href="{% url home_url %}" class="btn btn-outline-secondary">
+            ← Vue d'ensemble 5×5
+        </a>
+        {% endif %}
+        {% if next_step %}
+        <a href="{% url step_url next_step.slug %}" class="btn btn-success">
+            {{ next_step.name }} →
+        </a>
+        {% endif %}
+    </div>
+
+</div>
+
+<style>
+.cube-case svg { max-width: 220px; height: auto; }
+.move-icon { width: 56px; height: 75px; }
+.card { box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
+</style>
+
+<script type="module">
+  import { renderCube } from "{% static 'cube/js/cube_renderer.js' %}";
+
+  function mountCube(containerId, state) {
+    const container = document.getElementById(containerId);
+    if (!container) return;
+    container.innerHTML = '';
+    if (!state) {
+      container.innerHTML = `
+        <div class="alert alert-secondary text-center py-3">
+          <i class="bi bi-cube text-muted" style="font-size:2rem;"></i>
+          <p class="mb-0 mt-1 small text-muted">État non disponible</p>
+        </div>`;
+      return;
+    }
+    const template = document.getElementById("cube-template");
+    const clone    = template.content.cloneNode(true);
+    container.appendChild(clone);
+    const svg = container.querySelector("svg");
+    renderCube(svg, state);
+  }
+
+  document.addEventListener("DOMContentLoaded", () => {
+    mountCube("cube-goal",         {{ state_goal|safe }});
+    mountCube("cube-block-insert",   {{ state_block_insert|safe }});
+    mountCube("cube-remplacement", {{ state_remplacement|safe }});
+    mountCube("cube-last-two-corners",     {{ state_last_two_corners|safe }});
+  });
+</script>
+
+{% endblock %}

@@ -1,0 +1,588 @@
+{% extends "main/partials/base.html" %}
+{% load static %}
+
+{% block title %}5×5 — Étape 1 : Centres Jaune et Blanc — Francontcube{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+
+    {% include "cube/partials/_5x5_cube_svg.html" %}
+    {% include "cube/partials/_5x5_moves_sprite.html" %}
+
+    <!-- ── Hero ──────────────────────────────────────────────────────────── -->
+    <div class="text-center mb-5">
+        <h1 class="hero-title">
+            <span class="brand-green">Étape 1 — Centres Jaune et Blanc</span>
+        </h1>
+        <p class="lead text-muted">
+            Les deux premiers centres se font de façon <strong>entièrement intuitive</strong> —
+            pas d'algorithme, juste de l'observation et de la logique.
+        </p>
+    </div>
+
+    <!-- ── Orientation Francontcube ──────────────────────────────────────── -->
+    <div class="card p-4 mb-4 border-success">
+        <h3 class="brand-green">🏳️ Notre orientation de référence</h3>
+        <p>
+            Contrairement à la plupart des tutoriels qui placent le blanc en bas,
+            <strong>Francontcube utilise le jaune en bas et le blanc en haut</strong>.
+            Ce choix reflète notre identité!
+        </p>
+        <div class="row mt-3">
+            <div class="col-md-6">
+                <div class="alert alert-success mb-0">
+                    <h6 class="fw-bold">🟢 Face avant — Drapeau franco-ontarien</h6>
+                    <p class="mb-0 small">
+                        Le <strong>vert</strong> devant, le <strong>blanc</strong> en haut
+                        et le <strong>rouge</strong> à droite — les couleurs du drapeau
+                        franco-ontarien sont visibles dès qu'on tient le cube.
+                    </p>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="alert alert-danger mb-0">
+                    <h6 class="fw-bold">🍁 Face droite — Drapeau canadien</h6>
+                    <p class="mb-0 small">
+                        Le <strong>rouge</strong> à droite et le <strong>blanc</strong>
+                        en haut rappellent les couleurs du drapeau canadien —
+                        notre appartenance nationale.
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="alert alert-light border mt-3 mb-0 text-center">
+            <strong>Orientation standard Francontcube :</strong>
+            Jaune en bas · Blanc en haut · Vert devant · Bleu derrière · Rouge à droite · Orange à gauche
+        </div>
+    </div>
+
+    <!-- ── Objectif ──────────────────────────────────────────────────────── -->
+    <div class="card p-4 mb-4">
+        <h3 class="brand-green">🎯 Objectif de cette page</h3>
+        <p>
+            Assembler le centre <strong>jaune</strong> (face du bas) puis le centre
+            <strong>blanc</strong> (face du haut) — sans défaire le jaune!
+            Ces deux centres sont les plus simples car vous avez beaucoup de liberté.
+        </p>
+        <div class="alert alert-info mb-0">
+            <strong>💡 Pourquoi commencer par le jaune?</strong>
+            Le jaune en bas est hors de vue pendant que vous travaillez —
+            une fois placé, il est naturellement protégé par votre main.
+            Le blanc en haut sera votre référence visuelle pour toute la suite.
+        </div>
+    </div>
+
+    <!-- ── C'est quoi un centre sur le 5×5? ─────────────────────────────── -->
+    <div class="card p-4 mb-4 border-primary">
+        <h3 class="brand-green">🔍 C'est quoi un centre sur le 5×5?</h3>
+        <div class="row align-items-center">
+            <div class="col-md-8">
+                <p>
+                    Sur un 3×3, chaque face a <strong>1 seul sticker</strong> au centre —
+                    il ne bouge jamais.
+                    Sur le 5×5, chaque centre est une <strong>grille de 3×3 (9 stickers)</strong>.
+                </p>
+                <p>
+                    Bonne nouvelle : les <strong>4 stickers des coins</strong> du centre
+                    sont fixes, exactement comme sur le 3×3.
+                    Tu n'as que les <strong>5 stickers restants</strong> à placer
+                    (le centre + les 4 stickers des bords de la grille).
+                </p>
+                <div class="alert alert-warning mb-0">
+                    <strong>⚠️ Attention!</strong>
+                    Contrairement au 3×3, les stickers du centre <strong>peuvent bouger</strong>
+                    si tu fais un mauvais mouvement. C'est pour ça que la stratégie
+                    colonne par colonne est importante.
+                </div>
+            </div>
+            <div class="col-md-4 text-center">
+                <!-- 3×3 centre grid diagram -->
+                <svg viewBox="0 0 130 130" width="130" height="130"
+                     xmlns="http://www.w3.org/2000/svg"
+                     aria-label="Grille 3×3 du centre 5×5">
+                    <!-- corners: fixed, grey -->
+                    <rect x="5"  y="5"  width="35" height="35" rx="5" fill="#adb5bd" stroke="#6c757d" stroke-width="1.5"/>
+                    <rect x="90" y="5"  width="35" height="35" rx="5" fill="#adb5bd" stroke="#6c757d" stroke-width="1.5"/>
+                    <rect x="5"  y="90" width="35" height="35" rx="5" fill="#adb5bd" stroke="#6c757d" stroke-width="1.5"/>
+                    <rect x="90" y="90" width="35" height="35" rx="5" fill="#adb5bd" stroke="#6c757d" stroke-width="1.5"/>
+                    <!-- cross: to place, yellow -->
+                    <rect x="48" y="5"  width="35" height="35" rx="5" fill="#ffd700" stroke="#e6a800" stroke-width="1.5"/>
+                    <rect x="5"  y="48" width="35" height="35" rx="5" fill="#ffd700" stroke="#e6a800" stroke-width="1.5"/>
+                    <rect x="48" y="48" width="35" height="35" rx="5" fill="#ffd700" stroke="#e6a800" stroke-width="1.5"/>
+                    <rect x="90" y="48" width="35" height="35" rx="5" fill="#ffd700" stroke="#e6a800" stroke-width="1.5"/>
+                    <rect x="48" y="90" width="35" height="35" rx="5" fill="#ffd700" stroke="#e6a800" stroke-width="1.5"/>
+                    <!-- labels -->
+                    <text x="22"  y="25"  text-anchor="middle" dominant-baseline="middle" font-size="9"  fill="#495057">fixe</text>
+                    <text x="107" y="25"  text-anchor="middle" dominant-baseline="middle" font-size="9"  fill="#495057">fixe</text>
+                    <text x="22"  y="108" text-anchor="middle" dominant-baseline="middle" font-size="9"  fill="#495057">fixe</text>
+                    <text x="107" y="108" text-anchor="middle" dominant-baseline="middle" font-size="9"  fill="#495057">fixe</text>
+                    <text x="65"  y="65"  text-anchor="middle" dominant-baseline="middle" font-size="9"  font-weight="bold" fill="#664d00">5 à<tspan x="65" dy="11">placer</tspan></text>
+                </svg>
+                <p class="small text-muted mt-1">Gris = fixe · Jaune = à placer</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- ── Test moves ──────────────────────────────────────────────── -->
+    <div class="card p-4 mb-4 border-info">
+                    <div class="d-flex align-items-center gap-2 flex-wrap mb-3">                        <div class="text-center">
+                        <svg class="move-icon"><use href="#R-5"/></svg>
+                    </div>      
+            
+            
+                    <div class="text-center">
+                        <svg class="move-icon"><use href="#L-5"/></svg>
+                    </div>
+                    <div class="text-center">
+                        <svg class="move-icon"><use href="#iconL-prime-5"/></svg>
+                    </div>
+                    <div class="text-center">
+                        <svg class="move-icon"><use href="#L2-5"/></svg>
+                    </div>
+                    <div class="text-center">
+                        <svg class="move-icon"><use href="#Lw2-5"/></svg>
+                    </div>
+                    
+                    <div class="text-center">
+                        <svg class="move-icon"><use href="#icon-L-5"/></svg>
+                    </div>
+                    <div class="text-center">
+                        <svg class="move-icon"><use href="#Lw-prime-5"/></svg>
+                    </div>
+                    <div class="text-center">
+                        <svg class="move-icon"><use href="#3Lw-5"/></svg>
+                    </div>
+                    <div class="text-center">
+                        <svg class="move-icon"><use href="#3Lw2-5"/></svg>
+                    </div>
+                    <div class="text-center">
+                        <svg class="move-icon"><use href="#3Lw-prime-5"/></svg>
+                    </div>
+                    <div class="text-center">
+                        <svg class="move-icon"><use href="#l-5"/></svg>
+                    </div>
+                    <div class="text-center">
+                        <svg class="move-icon"><use href="#l-prime-5"/></svg>
+                    </div>
+                    <div class="text-center">
+                        <svg class="move-icon"><use href="#l2-5"/></svg>
+                    </div>
+
+        </div>
+        
+
+
+
+        <div class="d-flex align-items-center gap-2 flex-wrap mb-3">
+                    <div class="text-center">
+                        <svg class="move-icon"><use href="#R-5"/></svg>
+                    </div>
+                    <div class="text-center">
+                        <svg class="move-icon"><use href="#R-prime-5"/></svg>
+                    </div>
+                    <div class="text-center">
+                        <svg class="move-icon"><use href="#R2-5"/></svg>
+                    </div>
+                    <div class="text-center">
+                        <svg class="move-icon"><use href="#Rw2-5"/></svg>
+                    </div>
+                    
+                    <div class="text-center">
+                        <svg class="move-icon"><use href="#Rw-5"/></svg>
+                    </div>
+                    <div class="text-center">
+                        <svg class="move-icon"><use href="#Rw-prime-5"/></svg>
+                    </div>
+                    <div class="text-center">
+                        <svg class="move-icon"><use href="#3Rw-5"/></svg>
+                    </div>
+                    <div class="text-center">
+                        <svg class="move-icon"><use href="#3Rw2-5"/></svg>
+                    </div>
+                    <div class="text-center">
+                        <svg class="move-icon"><use href="#3Rw-prime-5"/></svg>
+                    </div>
+                    <div class="text-center">
+                        <svg class="move-icon"><use href="#r-5"/></svg>
+                    </div>
+                    <div class="text-center">
+                        <svg class="move-icon"><use href="#r-prime-5"/></svg>
+                    </div>
+                    <div class="text-center">
+                        <svg class="move-icon"><use href="#r2-5"/></svg>
+                    </div>
+
+        </div>
+    </div>
+    <!-- ── Nouvelle notation ──────────────────────────────────────────────── -->
+    <div class="card p-4 mb-4 border-info">
+        <h3 class="brand-green">📐 Nouvelle notation — Les wide moves</h3>
+        <p>
+            Pour déplacer les stickers du centre, tu as besoin de
+            <strong>wide moves</strong> (mouvements larges) —
+            des mouvements qui tournent <em>plusieurs couches à la fois</em>.
+        </p>
+        <div class="row g-3 mt-1">
+
+            <!-- Rw -->
+            <div class="col-md-4">
+                <div class="card h-100 border-primary">
+                    <div class="card-header bg-primary text-white fw-bold text-center">
+                        Rw &nbsp;/&nbsp; Rw'
+                    </div>
+                    <div class="card-body text-center">
+                        <div class="d-flex justify-content-center gap-3 mb-2">
+                            <div>
+                                <svg class="move-icon"><use href="#Rw-5"/></svg>
+                                <p class="small mb-0">Rw</p>
+                            </div>
+                            <div>
+                                <svg class="move-icon"><use href="#Rw-prime-5"/></svg>
+                                <p class="small mb-0">Rw'</p>
+                            </div>
+                        </div>
+                        <p class="small mb-0">
+                            Tourne les <strong>2 couches de droite</strong> ensemble.
+                            <code>Rw'</code> = sens inverse.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Uw -->
+            <div class="col-md-4">
+                <div class="card h-100 border-success">
+                    <div class="card-header bg-success text-white fw-bold text-center">
+                        Uw &nbsp;/&nbsp; Uw'
+                    </div>
+                    <div class="card-body text-center">
+                        <div class="d-flex justify-content-center gap-3 mb-2">
+                            <div>
+                                <svg class="move-icon"><use href="#Uw-5"/></svg>
+                                <p class="small mb-0">Uw</p>
+                            </div>
+                            <div>
+                                <svg class="move-icon"><use href="#Uw-prime-5"/></svg>
+                                <p class="small mb-0">Uw'</p>
+                            </div>
+                        </div>
+                        <p class="small mb-0">
+                            Tourne les <strong>2 couches du haut</strong> ensemble.
+                            <code>Uw'</code> = sens inverse.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 3Rw — 5×5 exclusive -->
+            <div class="col-md-4">
+                <div class="card h-100 border-danger">
+                    <div class="card-header bg-danger text-white fw-bold text-center">
+                        3Rw &nbsp;/&nbsp; 3Rw'
+                        <span class="badge bg-warning text-dark ms-1">Nouveau!</span>
+                    </div>
+                    <div class="card-body text-center">
+                        <div class="d-flex justify-content-center gap-3 mb-2">
+                            <div>
+                                <svg class="move-icon"><use href="#3Rw-5"/></svg>
+                                <p class="small mb-0">3Rw</p>
+                            </div>
+                            <div>
+                                <svg class="move-icon"><use href="#3Rw-prime-5"/></svg>
+                                <p class="small mb-0">3Rw'</p>
+                            </div>
+                        </div>
+                        <p class="small mb-0">
+                            Tourne les <strong>3 couches de droite</strong> ensemble.
+                            Uniquement possible sur les cubes 5×5 et plus grands.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <div class="alert alert-info mt-3 mb-0">
+            <strong>💡 Astuce mémoire :</strong>
+            Le chiffre devant le mouvement = le nombre de couches que tu prends avec toi.
+            <code>R</code> = 1 couche · <code>Rw</code> = 2 couches · <code>3Rw</code> = 3 couches.
+        </div>
+    </div>
+
+    <!-- ── Centre Jaune ───────────────────────────────────────────────────── -->
+    <div class="card p-4 mb-4 border-warning">
+        <h3 class="brand-green">🟡 Le Centre Jaune — En bas</h3>
+        <p>
+            Le premier centre est le plus libre — vous n'avez aucune contrainte.
+            Trouvez les 9 pièces jaunes du centre et assemblez-les sur la même face
+            en construisant <strong>colonne par colonne</strong>.
+        </p>
+
+        <!-- Colonne 1 -->
+        <div class="row mt-3 align-items-center">
+            <div class="col-md-4 text-center">
+                <div id="cube-yellow-start" class="cube-case"></div>
+                <p class="mt-2 small text-muted">Position de départ</p>
+            </div>
+            <div class="col-md-8">
+                <h5>Stratégie — Colonne par colonne</h5>
+                <p>Le centre 3×3 a <strong>3 colonnes verticales</strong>.
+                Tu les construis une par une, en commençant par la gauche.</p>
+                <div class="row g-2">
+                    <div class="col-4 text-center">
+                        <!-- mini grid col 1 highlighted -->
+                        <svg viewBox="0 0 75 75" width="65" height="65" xmlns="http://www.w3.org/2000/svg">
+                            {% for row in "012" %}{% for col in "012" %}
+                            <rect x="{% if forloop.counter0 == 0 %}3{% elif forloop.counter0 == 1 %}28{% else %}53{% endif %}"
+                                  y="{% if forloop.parentloop.counter0 == 0 %}3{% elif forloop.parentloop.counter0 == 1 %}28{% else %}53{% endif %}"
+                                  width="20" height="20" rx="3"
+                                  fill="{% if forloop.counter0 == 0 %}#ffd700{% else %}#dee2e6{% endif %}"
+                                  stroke="#adb5bd" stroke-width="1"/>
+                            {% endfor %}{% endfor %}
+                        </svg>
+                        <p class="small mt-1 mb-0 fw-bold">① Gauche</p>
+                        <p class="small text-muted mb-0">Libre!</p>
+                    </div>
+                    <div class="col-4 text-center">
+                        <!-- mini grid col 2 highlighted -->
+                        <svg viewBox="0 0 75 75" width="65" height="65" xmlns="http://www.w3.org/2000/svg">
+                            {% for row in "012" %}{% for col in "012" %}
+                            <rect x="{% if forloop.counter0 == 0 %}3{% elif forloop.counter0 == 1 %}28{% else %}53{% endif %}"
+                                  y="{% if forloop.parentloop.counter0 == 0 %}3{% elif forloop.parentloop.counter0 == 1 %}28{% else %}53{% endif %}"
+                                  width="20" height="20" rx="3"
+                                  fill="{% if forloop.counter0 == 0 or forloop.counter0 == 1 %}#ffd700{% else %}#dee2e6{% endif %}"
+                                  stroke="{% if forloop.counter0 == 1 %}#0d6efd{% else %}#adb5bd{% endif %}"
+                                  stroke-width="{% if forloop.counter0 == 1 %}2{% else %}1{% endif %}"/>
+                            {% endfor %}{% endfor %}
+                        </svg>
+                        <p class="small mt-1 mb-0 fw-bold">② Milieu</p>
+                        <p class="small text-muted mb-0"><code>Rw</code> + <code>U</code></p>
+                    </div>
+                    <div class="col-4 text-center">
+                        <!-- mini grid col 3 highlighted -->
+                        <svg viewBox="0 0 75 75" width="65" height="65" xmlns="http://www.w3.org/2000/svg">
+                            {% for row in "012" %}{% for col in "012" %}
+                            <rect x="{% if forloop.counter0 == 0 %}3{% elif forloop.counter0 == 1 %}28{% else %}53{% endif %}"
+                                  y="{% if forloop.parentloop.counter0 == 0 %}3{% elif forloop.parentloop.counter0 == 1 %}28{% else %}53{% endif %}"
+                                  width="20" height="20" rx="3"
+                                  fill="#ffd700"
+                                  stroke="{% if forloop.counter0 == 2 %}#dc3545{% else %}#adb5bd{% endif %}"
+                                  stroke-width="{% if forloop.counter0 == 2 %}2{% else %}1{% endif %}"/>
+                            {% endfor %}{% endfor %}
+                        </svg>
+                        <p class="small mt-1 mb-0 fw-bold">③ Droite</p>
+                        <p class="small text-muted mb-0"><code>3Rw</code> + <code>U</code></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row mt-4 align-items-center">
+            <div class="col-md-4 text-center">
+                <div id="cube-yellow-col1" class="cube-case"></div>
+                <p class="mt-2 small text-muted">Après la colonne 1</p>
+            </div>
+            <div class="col-md-8">
+                <h5>Comment insérer la colonne du milieu sans casser la première?</h5>
+                <div class="bg-light p-3 rounded border">
+                    <ol class="mb-0">
+                        <li class="mb-2">
+                            Repère 3 stickers jaunes sur une face latérale et
+                            aligne-les dans la colonne la plus à gauche de cette face.
+                        </li>
+                        <li class="mb-2">
+                            Fais <code>Rw</code> pour les amener sur la face du bas —
+                            ils arrivent dans la colonne du milieu.
+                        </li>
+                        <li>
+                            Si la colonne gauche déjà faite a bougé, fais <code>Rw'</code>
+                            pour revenir et repositionne d'abord avec <code>U</code> ou <code>U'</code>.
+                        </li>
+                    </ol>
+                </div>
+                <div class="alert alert-warning mt-3 mb-0">
+                    <strong>Pour la colonne de droite :</strong>
+                    même logique, mais avec <code>3Rw'</code> à la place de <code>Rw</code>.
+                    <code>3Rw'</code> tire les 3 couches de droite — la colonne droite
+                    du centre arrive sur la face du bas.
+                </div>
+            </div>
+        </div>
+
+        <div class="row mt-4 align-items-center">
+            <div class="col-md-4 text-center">
+                <div id="cube-yellow-done" class="cube-case"></div>
+                <p class="mt-2 small text-muted">Centre jaune complété, en bas</p>
+            </div>
+            <div class="col-md-8">
+                <div class="alert alert-success mb-0">
+                    <h6>✅ Le centre jaune est prêt quand :</h6>
+                    <ul class="mb-0">
+                        <li>Les 9 pièces centrales jaunes sont sur la même face</li>
+                        <li>Cette face est placée vers le bas</li>
+                        <li>Vous ne la retournez plus pour le reste des centres</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ── Centre Blanc ───────────────────────────────────────────────────── -->
+    <div class="card p-4 mb-4 border-success">
+        <h3 class="brand-green">⬜ Le Centre Blanc — En haut</h3>
+        <p>
+            Le blanc va en haut, en face du jaune. C'est encore intuitif, mais
+            il faut maintenant faire attention à <strong>ne pas défaire le jaune
+            qui est en bas.</strong>
+        </p>
+
+        <div class="row mt-3 align-items-center">
+            <div class="col-md-4 text-center">
+                <div id="cube-white-progress" class="cube-case"></div>
+                <p class="mt-2 small text-muted">Blanc en construction, jaune protégé en bas</p>
+            </div>
+            <div class="col-md-8">
+                <h5>La règle d'or :</h5>
+                <div class="alert alert-danger mb-3">
+                    <strong>Ne jamais faire de mouvement D, Dw ou 3Dw</strong> —
+                    ces mouvements tournent la couche du bas et dérangeraient
+                    votre centre jaune déjà complété!
+                </div>
+                <h5>Mouvements sûrs :</h5>
+                <div class="d-flex align-items-center gap-2 flex-wrap mb-3">
+                    <div class="text-center">
+                        <svg class="move-icon"><use href="#Rw-5"/></svg>
+                        <p class="small mb-0">Rw ✅</p>
+                    </div>
+                    <div class="text-center">
+                        <svg class="move-icon"><use href="#Rw-prime-5"/></svg>
+                        <p class="small mb-0">Rw' ✅</p>
+                    </div>
+                    <div class="text-center">
+                        <svg class="move-icon"><use href="#3Rw-5"/></svg>
+                        <p class="small mb-0">3Rw ✅</p>
+                    </div>
+                    <div class="text-center">
+                        <svg class="move-icon"><use href="#3Rw-prime-5"/></svg>
+                        <p class="small mb-0">3Rw' ✅</p>
+                    </div>
+                    <div class="text-center">
+                        <svg class="move-icon"><use href="#U-5"/></svg>
+                        <p class="small mb-0">U ✅</p>
+                    </div>
+                    <div class="text-center">
+                        <svg class="move-icon"><use href="#U-prime-5"/></svg>
+                        <p class="small mb-0">U' ✅</p>
+                    </div>
+                </div>
+                <p class="small text-muted">
+                    Ces mouvements déplacent des pièces centrales entre les faces
+                    latérales et la face du haut <strong>sans jamais toucher
+                    la face du bas</strong>.
+                </p>
+            </div>
+        </div>
+
+        <!-- Technique: même stratégie colonne par colonne -->
+        <hr class="my-4">
+        <h5>Technique — Mêmes 3 colonnes, mais pour le blanc</h5>
+        <p>
+            Exactement la même stratégie qu'avec le jaune.
+            La seule différence : tu construis le centre sur la face du <strong>haut</strong>
+            au lieu du bas.
+        </p>
+        <div class="bg-light p-3 rounded border mt-2">
+            <ol class="mb-0">
+                <li class="mb-2">
+                    <strong>Colonne gauche</strong> — tourne librement jusqu'à
+                    aligner 3 stickers blancs sur une face latérale, puis amène-les en haut.
+                </li>
+                <li class="mb-2">
+                    <strong>Colonne du milieu</strong> — utilise <code>Rw</code> +
+                    <code>U</code> ou <code>U'</code> pour insérer sans casser la colonne gauche.
+                </li>
+                <li>
+                    <strong>Colonne de droite</strong> — utilise <code>3Rw'</code> +
+                    <code>U</code> ou <code>U'</code> pour compléter le centre blanc.
+                </li>
+            </ol>
+        </div>
+
+        <div class="alert alert-success mt-3 mb-0">
+            <strong>💡 Astuce :</strong> Si une pièce blanche est coincée sur une
+            face latérale directement adjacente au centre jaune, faites
+            <code>Rw U Rw'</code> pour la monter sans risque.
+        </div>
+    </div>
+
+    <!-- ── Récapitulatif ─────────────────────────────────────────────────── -->
+    <div class="card p-4 mb-4 bg-light">
+        <h3 class="brand-green">✅ Vérification</h3>
+        <p>Avant de passer aux 4 autres centres, vérifiez :</p>
+        <ul>
+            <li>La face du bas a <strong>9 stickers jaunes</strong> au centre (grille 3×3)</li>
+            <li>La face du haut a <strong>9 stickers blancs</strong> au centre (grille 3×3)</li>
+            <li>Vous tenez le cube avec <strong>jaune en bas, blanc en haut</strong></li>
+        </ul>
+        <div class="alert alert-info mt-3 mb-0">
+            Les 4 faces latérales sont probablement encore mélangées — c'est normal!
+            On s'en occupe à l'étape suivante.
+        </div>
+    </div>
+
+    <!-- ── Navigation ────────────────────────────────────────────────────── -->
+    <div class="d-flex justify-content-between align-items-center mt-5 flex-wrap gap-2">
+        {% if prev_step %}
+        <a href="{% url step_url prev_step.slug %}" class="btn btn-outline-secondary">
+            ← {{ prev_step.name }}
+        </a>
+        {% else %}
+        <a href="{% url home_url %}" class="btn btn-outline-secondary">
+            ← Vue d'ensemble 5×5
+        </a>
+        {% endif %}
+        {% if next_step %}
+        <a href="{% url step_url next_step.slug %}" class="btn btn-success">
+            {{ next_step.name }} →
+        </a>
+        {% endif %}
+    </div>
+
+</div>
+
+<style>
+.cube-case svg { max-width: 220px; height: auto; }
+.move-icon { width: 56px; height: 75px; }
+.card { box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
+</style>
+
+<script type="module">
+  import { renderCube } from "{% static 'cube/js/cube_renderer.js' %}";
+
+  function mountCube(containerId, state) {
+    const container = document.getElementById(containerId);
+    if (!container) return;
+    container.innerHTML = '';
+    if (!state) {
+      container.innerHTML = `
+        <div class="alert alert-secondary text-center py-3">
+          <i class="bi bi-cube text-muted" style="font-size:2rem;"></i>
+          <p class="mb-0 mt-1 small text-muted">État non disponible</p>
+        </div>`;
+      return;
+    }
+    const template = document.getElementById("cube-template");
+    const clone    = template.content.cloneNode(true);
+    container.appendChild(clone);
+    const svg = container.querySelector("svg");
+    renderCube(svg, state);
+  }
+
+  document.addEventListener("DOMContentLoaded", () => {
+    mountCube("cube-yellow-start",   {{ state_yellow_start|safe }});
+    mountCube("cube-yellow-col1",    {{ state_yellow_col1|safe }});
+    mountCube("cube-yellow-done",    {{ state_yellow_done|safe }});
+    mountCube("cube-white-progress", {{ state_white_progress|safe }});
+  });
+</script>
+
+{% endblock %}

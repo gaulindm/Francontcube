@@ -1,0 +1,122 @@
+<svg xmlns="http://www.w3.org/2000/svg" style="display:none">
+
+  <!-- ========================= -->
+  <!-- DEFINITIONS -->
+  <!-- ========================= -->
+  <defs>
+    <marker id="arrowhead" markerWidth="6" markerHeight="6"
+            refX="5" refY="3" orient="auto">
+      <polygon points="0 0, 6 3, 0 6" fill="currentColor"/>
+    </marker>
+  </defs>
+
+
+  <!-- ========================= -->
+  <!-- GRIDS -->
+  <!-- ========================= -->
+
+  <symbol id="grid-4x4" viewBox="0 0 100 100">
+    <rect x="19" y="34" width="62" height="62" rx="5"
+          fill="white" stroke="currentColor" stroke-width="2"/>
+    <line x1="34.5" y1="35.1" x2="34.5" y2="95" stroke="lightgray"/>
+    <line x1="50" y1="35.1" x2="50" y2="95" stroke="lightgray"/>
+    <line x1="65.5" y1="35.1" x2="65.5" y2="95" stroke="lightgray"/>
+    <line x1="20" y1="49.5" x2="79.9" y2="49.5" stroke="lightgray"/>
+    <line x1="20" y1="65" x2="79.9" y2="65" stroke="lightgray"/>
+    <line x1="20" y1="80.5" x2="79.9" y2="80.5" stroke="lightgray"/>
+  </symbol>
+
+  <symbol id="grid-5x5" viewBox="0 0 100 100">
+    <rect x="19" y="34" width="62" height="62" rx="5"
+          fill="white" stroke="currentColor" stroke-width="2"/>
+    <line x1="31.4" y1="35.1" x2="31.4" y2="95" stroke="lightgray"/>
+    <line x1="43.8" y1="35.1" x2="43.8" y2="95" stroke="lightgray"/>
+    <line x1="56.2" y1="35.1" x2="56.2" y2="95" stroke="lightgray"/>
+    <line x1="68.6" y1="35.1" x2="68.6" y2="95" stroke="lightgray"/>
+    <line x1="20" y1="46.4" x2="79.9" y2="46.4" stroke="lightgray"/>
+    <line x1="20" y1="58.8" x2="79.9" y2="58.8" stroke="lightgray"/>
+    <line x1="20" y1="71.2" x2="79.9" y2="71.2" stroke="lightgray"/>
+    <line x1="20" y1="83.6" x2="79.9" y2="83.6" stroke="lightgray"/>
+  </symbol>
+
+
+  <!-- ========================= -->
+  <!-- HIGHLIGHTS -->
+  <!-- ========================= -->
+
+  <symbol id="col-right"><rect x="68.6" y="34" width="12.4" height="62" fill="rgba(0,0,0,0.08)"/></symbol>
+  <symbol id="col-left"><rect x="19" y="34" width="12.4" height="62" fill="rgba(0,0,0,0.08)"/></symbol>
+
+  <symbol id="row-top"><rect x="19" y="34" width="62" height="12.4" fill="rgba(0,0,0,0.08)"/></symbol>
+  <symbol id="row-bottom"><rect x="19" y="83.6" width="62" height="12.4" fill="rgba(0,0,0,0.08)"/></symbol>
+
+  <symbol id="slice-middle-vertical"><rect x="56.2" y="34" width="12.4" height="62" fill="rgba(0,0,0,0.08)"/></symbol>
+  <symbol id="slice-middle-horizontal"><rect x="19" y="58.8" width="62" height="12.4" fill="rgba(0,0,0,0.08)"/></symbol>
+
+  <symbol id="face-front"><rect x="19" y="34" width="62" height="62" fill="rgba(0,0,0,0.04)"/></symbol>
+  <symbol id="face-back"><rect x="19" y="34" width="62" height="62" fill="rgba(0,0,0,0.02)"/></symbol>
+
+
+  <!-- ========================= -->
+  <!-- ARROWS -->
+  <!-- ========================= -->
+
+  <symbol id="arrow-R"><path d="M78 40 Q92 60 78 80" fill="none" stroke="currentColor" stroke-width="3" marker-end="url(#arrowhead)"/></symbol>
+  <symbol id="arrow-Rp"><path d="M78 80 Q92 60 78 40" fill="none" stroke="currentColor" stroke-width="3" marker-end="url(#arrowhead)"/></symbol>
+
+  <symbol id="arrow-U"><path d="M40 36 Q60 20 80 36" fill="none" stroke="currentColor" stroke-width="3" marker-end="url(#arrowhead)"/></symbol>
+  <symbol id="arrow-Up"><path d="M80 36 Q60 20 40 36" fill="none" stroke="currentColor" stroke-width="3" marker-end="url(#arrowhead)"/></symbol>
+
+  <symbol id="arrow-F"><path d="M40 50 A20 20 0 1 1 60 50" fill="none" stroke="currentColor" stroke-width="3" marker-end="url(#arrowhead)"/></symbol>
+  <symbol id="arrow-Fp"><path d="M60 50 A20 20 0 1 1 40 50" fill="none" stroke="currentColor" stroke-width="3" marker-end="url(#arrowhead)"/></symbol>
+
+
+  <!-- ========================= -->
+  <!-- CORE MOVES (PATTERNED) -->
+  <!-- ========================= -->
+
+  <!-- R -->
+  <symbol id="icon-R-4"><use href="#grid-4x4"/><use href="#col-right"/><use href="#arrow-R"/></symbol>
+  <symbol id="icon-Rp-4"><use href="#grid-4x4"/><use href="#col-right"/><use href="#arrow-Rp"/></symbol>
+  <symbol id="icon-R2-4"><use href="#grid-4x4"/><use href="#col-right"/><use href="#arrow-R"/></symbol>
+
+  <symbol id="icon-R-5"><use href="#grid-5x5"/><use href="#col-right"/><use href="#arrow-R"/></symbol>
+  <symbol id="icon-Rp-5"><use href="#grid-5x5"/><use href="#col-right"/><use href="#arrow-Rp"/></symbol>
+  <symbol id="icon-R2-5"><use href="#grid-5x5"/><use href="#col-right"/><use href="#arrow-R"/></symbol>
+
+  <!-- L -->
+  <symbol id="icon-L-4"><use href="#grid-4x4"/><use href="#col-left"/><use href="#arrow-Rp"/></symbol>
+  <symbol id="icon-Lp-4"><use href="#grid-4x4"/><use href="#col-left"/><use href="#arrow-R"/></symbol>
+
+  <symbol id="icon-L-5"><use href="#grid-5x5"/><use href="#col-left"/><use href="#arrow-Rp"/></symbol>
+  <symbol id="icon-Lp-5"><use href="#grid-5x5"/><use href="#col-left"/><use href="#arrow-R"/></symbol>
+
+  <!-- U -->
+  <symbol id="icon-U-4"><use href="#grid-4x4"/><use href="#row-top"/><use href="#arrow-U"/></symbol>
+  <symbol id="icon-Up-4"><use href="#grid-4x4"/><use href="#row-top"/><use href="#arrow-Up"/></symbol>
+
+  <symbol id="icon-U-5"><use href="#grid-5x5"/><use href="#row-top"/><use href="#arrow-U"/></symbol>
+  <symbol id="icon-Up-5"><use href="#grid-5x5"/><use href="#row-top"/><use href="#arrow-Up"/></symbol>
+
+  <!-- D -->
+  <symbol id="icon-D-4"><use href="#grid-4x4"/><use href="#row-bottom"/><use href="#arrow-Up"/></symbol>
+  <symbol id="icon-Dp-4"><use href="#grid-4x4"/><use href="#row-bottom"/><use href="#arrow-U"/></symbol>
+
+  <symbol id="icon-D-5"><use href="#grid-5x5"/><use href="#row-bottom"/><use href="#arrow-Up"/></symbol>
+  <symbol id="icon-Dp-5"><use href="#grid-5x5"/><use href="#row-bottom"/><use href="#arrow-U"/></symbol>
+
+  <!-- F -->
+  <symbol id="icon-F-4"><use href="#grid-4x4"/><use href="#face-front"/><use href="#arrow-F"/></symbol>
+  <symbol id="icon-Fp-4"><use href="#grid-4x4"/><use href="#face-front"/><use href="#arrow-Fp"/></symbol>
+
+  <symbol id="icon-F-5"><use href="#grid-5x5"/><use href="#face-front"/><use href="#arrow-F"/></symbol>
+  <symbol id="icon-Fp-5"><use href="#grid-5x5"/><use href="#face-front"/><use href="#arrow-Fp"/></symbol>
+
+  <!-- B -->
+  <symbol id="icon-B-4"><use href="#grid-4x4"/><use href="#face-back"/><use href="#arrow-Fp"/></symbol>
+  <symbol id="icon-Bp-4"><use href="#grid-4x4"/><use href="#face-back"/><use href="#arrow-F"/></symbol>
+
+  <symbol id="icon-B-5"><use href="#grid-5x5"/><use href="#face-back"/><use href="#arrow-Fp"/></symbol>
+  <symbol id="icon-Bp-5"><use href="#grid-5x5"/><use href="#face-back"/><use href="#arrow-F"/></symbol>
+
+</svg>

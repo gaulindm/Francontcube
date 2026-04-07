@@ -60,11 +60,11 @@ def home(request):
             'available': True,
         },
         {
-            'name': 'Other puzzles',
-            'desc': 'Autres casse-têtes (2x2, 4x4 et 5x5)',
+            'name': 'Methode debutant pour le 4x4',
+            'desc': 'Rubix Revenge',
             'icon': 'bi-stopwatch',
             'logo': None,
-            'url': '/main/puzzles/',
+            'url': '/main/puzzles/4x4/',
             'available': True,
         },
 

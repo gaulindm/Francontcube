@@ -4,7 +4,7 @@ Francontcube views module.
 This module organizes views into a clean directory structure:
 - base.py: Reusable utilities and base classes
 - home.py: Home page and legacy views
-- mosaic/: Pages for preparing mosaic  #NEW
+- mosaic/: Pages for preparing mosaic
 - cubienewbie/: Apprenti Cubi method views (8 step views)
 - beginner/: Beginner method views
 - cfop/: CFOP method views
@@ -31,13 +31,11 @@ from .home import (
 )
 
 # ============================================================
-# MOSAIC preparation # NEW
+# MOSAIC
 # ============================================================
 from .mosaic.main import mosaic
 from .mosaic.about import about as about
 from .mosaic.mosaic_steps import mosaic_steps as mosaic_steps
-
-
 
 
 # ============================================================
@@ -77,14 +75,12 @@ from .cfop.about import about as cfop_about
 from .cfop.cross import cross as cfop_cross
 from .cfop.f2l import cfop, cfop_f2l_basic
 
-# CFOP Introduction Pages (NEW)
+# CFOP Introduction Pages
 from .cfop.f2l_intro import cfop_f2l_intro
 from .cfop.oll_intro import cfop_oll_intro
 from .cfop.pll_intro import cfop_pll_intro
 
 from .cfop.beginner_to_f2l import beginner_to_f2l_bridge
-
-
 
 # 2-Look OLL
 from .cfop.two_look_oll import two_look_oll_view
@@ -101,16 +97,23 @@ from .cfop.oll_pll import (
 # OTHER PUZZLES (2x2, 4x4, 5x5)
 # ============================================================
 from .puzzles.home import puzzles_home
+
 #from .puzzles.puzzle_2x2 import (
 #    puzzle_2x2_home,
 #    puzzle_2x2_method,
 #    puzzle_2x2_step,
 #)
-from .puzzles.puzzle_big_cubes import (
+
+from .puzzles.puzzle_4x4 import (
     puzzle_4x4_home,
     puzzle_4x4_step,
+    puzzle_4x4_ref,
+)
+
+from .puzzles.puzzle_5x5 import (
     puzzle_5x5_home,
     puzzle_5x5_step,
+    puzzle_5x5_ref,
 )
 
 # ============================================================
@@ -128,11 +131,11 @@ __all__ = [
     'ressources3par3',
     'tutorial_step',
 
-    # Mosaic ****** NEW *******
+    # Mosaic
     'mosaic',
     'about',
     'mosaic_steps',
-    
+
     # Cubie Newbie
     'method_cubienewbie',
     'cubienewbie_about',
@@ -146,7 +149,7 @@ __all__ = [
     'cubienewbie_top_face',
     'cubienewbie_corner_permutation',
     'cubienewbie_edge_permutation',
-    
+
     # Beginner Method
     'beginner_method',
     'beginner_about',
@@ -164,14 +167,14 @@ __all__ = [
     'cfop_cross',
     'cfop',
     'cfop_f2l_basic',
-    
-    # CFOP Introduction Pages (NEW)
+
+    # CFOP Introduction Pages
     'cfop_f2l_intro',
     'cfop_oll_intro',
     'cfop_pll_intro',
     'beginner_to_f2l_bridge',
 
-    # OLL & PLL - New system
+    # OLL & PLL
     'cfop_oll_view',
     'cfop_pll_view',
     'oll_case_detail',
@@ -180,11 +183,13 @@ __all__ = [
 
     # Other puzzles
     'puzzles_home',
-    'puzzle_2x2_home',
-    'puzzle_2x2_method',
-    'puzzle_2x2_step',
+    #'puzzle_2x2_home',
+    #'puzzle_2x2_method',
+    #'puzzle_2x2_step',
     'puzzle_4x4_home',
     'puzzle_4x4_step',
+    'puzzle_4x4_ref',
     'puzzle_5x5_home',
     'puzzle_5x5_step',
+    'puzzle_5x5_ref',
 ]

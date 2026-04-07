@@ -1,12 +1,3 @@
-#from django.urls import path
-#from . import views
-
-#app_name = 'main'
-
-#urlpatterns = [
-#    path('', views.home, name='home'),
-#]
-
 from django.urls import path
 
 # Import organized views
@@ -30,19 +21,22 @@ from main.views.cfop.f2l_intro import cfop_f2l_intro
 from main.views.cfop.oll_intro import cfop_oll_intro
 from main.views.cfop.pll_intro import cfop_pll_intro
 
-# Other puzzles (2x2, 4x4, 5x5)
+# Other puzzles — each cube has its own view file
 #from main.views.puzzles.home import puzzles_home
 #from main.views.puzzles.puzzle_2x2 import (
 #    puzzle_2x2_home,
 #    puzzle_2x2_method,
 #    puzzle_2x2_step,
 #)
-from main.views.puzzles.puzzle_big_cubes import (
+from main.views.puzzles.puzzle_4x4 import (
     puzzle_4x4_home,
     puzzle_4x4_step,
-    puzzle_4x4_ref
-#    puzzle_5x5_home,
-#    puzzle_5x5_step,
+    puzzle_4x4_ref,
+)
+from main.views.puzzles.puzzle_5x5 import (
+    puzzle_5x5_home,
+    puzzle_5x5_step,
+    puzzle_5x5_ref,
 )
 
 app_name = "main"
@@ -56,15 +50,13 @@ urlpatterns = [
     path("pdfs/", views.pdfs, name="pdfs"),
     path("videos/", views.videos, name="videos"),
     path("ressources3par3/", views.ressources3par3, name="ressources3par3"),
-    
+
     # ============================================================
     # MOSAIC
     # ============================================================
     path('mosaic/', views.mosaic, name='mosaic'),
     path('mosaic/about/', views.about, name='about'),
     path('mosaic/mosaic_steps/', views.mosaic_steps, name='mosiac_steps'),
-
-
 
     # ============================================================
     # CUBIE NEWBIE METHOD
@@ -81,7 +73,7 @@ urlpatterns = [
     path('methods/cubienewbie/top-face/', views.cubienewbie_top_face, name='cubienewbie_top_face'),
     path('methods/cubienewbie/corner-permutation/', views.cubienewbie_corner_permutation, name='cubienewbie_corner_permutation'),
     path('methods/cubienewbie/edge-permutation/', views.cubienewbie_edge_permutation, name='cubienewbie_edge_permutation'),
-    
+
     # ============================================================
     # BEGINNER METHOD
     # ============================================================
@@ -94,94 +86,61 @@ urlpatterns = [
     path('methods/beginner/top-face/', views.beginner_top_face, name='beginner_top_face'),
     path('methods/beginner/corner-permutation/', views.beginner_corner_permutation, name='beginner_corner_permutation'),
     path('methods/beginner/edge-permutation/', views.beginner_edge_permutation, name='beginner_edge_permutation'),
-    
+
     # ============================================================
     # CFOP METHOD
     # ============================================================
-    # Main pages
     path('methods/cfop/', views.method_cfop, name='method_cfop'),
     path('methods/cfop/about/', views.cfop_about, name='cfop_about'),
     path('methods/cfop/cross/', views.cfop_cross, name='cfop_cross'),
     path('methods/cfop/beginner-to-f2l/', beginner_to_f2l_bridge, name='beginner_to_f2l'),
-    
 
     # ──────────────────────────────────────────────────────────
-    # F2L Routes
+    # F2L Routes — most specific first
     # ──────────────────────────────────────────────────────────
-    # ⚠️ ORDRE IMPORTANT: Plus spécifique d'abord!
-    
-    # 1. Introduction (plus spécifique)
     path('methods/cfop/f2l/introduction/', cfop_f2l_intro, name='cfop_f2l_intro'),
-    
-    # 2. Basic cases (spécifique aussi)
     path('methods/cfop/f2l/basic/', views.cfop_f2l_basic, name='cfop_f2l_basic'),
-    
-    # 3. Catégorie générique (moins spécifique, en dernier)
     path('methods/cfop/f2l/<str:category>/', cfop_f2l_basic, name='cfop_f2l_category'),
-    
+
     # ──────────────────────────────────────────────────────────
-    # OLL Routes
+    # OLL Routes — most specific first
     # ──────────────────────────────────────────────────────────
-    # ⚠️ ORDRE IMPORTANT: Plus spécifique d'abord!
-    
-    # 1. 2-Look OLL (très spécifique)
     path('methods/cfop/oll/2-look/', two_look_oll_view, name='two_look_oll'),
-    
-    # 2. Introduction (spécifique)
     path('methods/cfop/oll/introduction/', cfop_oll_intro, name='cfop_oll_intro'),
-    
-    # 3. Cas détaillé avec slug (spécifique avec prefix 'case/')
     path('methods/cfop/oll/case/<slug:slug>/', oll_case_detail, name='oll_case_detail'),
-    
-    # 4. Vue par catégorie (moins spécifique)
     path('methods/cfop/oll/<str:category>/', cfop_oll_view, name='cfop_oll_category'),
-    
-    # 5. Vue générale (la moins spécifique, en dernier)
     path('methods/cfop/oll/', cfop_oll_view, name='cfop_oll'),
-    
+
     # ──────────────────────────────────────────────────────────
-    # PLL Routes
+    # PLL Routes — most specific first
     # ──────────────────────────────────────────────────────────
-    # ⚠️ ORDRE IMPORTANT: Plus spécifique d'abord!
-    
-    # 1. 2-Look PLL (très spécifique)
     path('methods/cfop/pll/2-look/', two_look_pll_view, name='two_look_pll'),
-    
-    # 2. Introduction (spécifique)
     path('methods/cfop/pll/introduction/', cfop_pll_intro, name='cfop_pll_intro'),
-    
-    # 3. Cas détaillé avec slug (spécifique avec prefix 'case/')
     path('methods/cfop/pll/case/<slug:slug>/', pll_case_detail, name='pll_case_detail'),
-    
-    # 4. Vue par catégorie (moins spécifique)
     path('methods/cfop/pll/<str:category>/', cfop_pll_view, name='cfop_pll_category'),
-    
-    # 5. Vue générale (la moins spécifique, en dernier)
     path('methods/cfop/pll/', cfop_pll_view, name='cfop_pll'),
 
     # ============================================================
-    # OTHER PUZZLES (2x2, 4x4, 5x5)
+    # OTHER PUZZLES
     # ============================================================
 
     # ── Hub ────────────────────────────────────────────────────
-    #path('puzzles/',puzzles_home,name='puzzles_home'),
+    #path('puzzles/', puzzles_home, name='puzzles_home'),
 
-    # ── 2x2 ────────────────────────────────────────────────────
-    # ⚠️ ORDRE IMPORTANT: Plus spécifique d'abord!
-#    path('puzzles/2x2/',puzzle_2x2_home,name='2x2_home'),
-#    path('puzzles/2x2/<str:method>/<str:step>/',puzzle_2x2_step,name='2x2_step'),
-#    path('puzzles/2x2/<str:method>/',puzzle_2x2_method,name='2x2_method'),
+    # ── 2×2 ────────────────────────────────────────────────────
+#    path('puzzles/2x2/', puzzle_2x2_home, name='2x2_home'),
+#    path('puzzles/2x2/<str:method>/<str:step>/', puzzle_2x2_step, name='2x2_step'),
+#    path('puzzles/2x2/<str:method>/', puzzle_2x2_method, name='2x2_method'),
 
-    # ── 4x4 ────────────────────────────────────────────────────
-    # ⚠️ ORDRE IMPORTANT: Plus spécifique d'abord!
+    # ── 4×4 — most specific first ──────────────────────────────
     path('puzzles/4x4/ref/<str:ref>/', puzzle_4x4_ref,  name='4x4_ref'),
     path('puzzles/4x4/<str:step>/',    puzzle_4x4_step, name='4x4_step'),
     path('puzzles/4x4/',               puzzle_4x4_home, name='4x4_home'),
 
-    # ── 5x5 ────────────────────────────────────────────────────
-    # ⚠️ ORDRE IMPORTANT: Plus spécifique d'abord!
-#    path('puzzles/5x5/<str:step>/', puzzle_5x5_step, name='5x5_step'),
-#    path('puzzles/5x5/', puzzle_5x5_home, name='5x5_home'),
+    # ── 5×5 — most specific first ──────────────────────────────
+    path('puzzles/5x5/ref/<str:ref>/', puzzle_5x5_ref,  name='5x5_ref'),
+    path('puzzles/5x5/<str:step>/',    puzzle_5x5_step, name='5x5_step'),
+    path('puzzles/5x5/',               puzzle_5x5_home, name='5x5_home'),
 
     # ============================================================
     # OTHER METHODS (legacy - to be migrated)
