@@ -54,7 +54,7 @@
                     <h4 class="text-danger mb-3">❌ Mauvaise arête</h4>
                     <p class="lead mb-3">A du blanc =<br><strong>Pas pour maintenant!</strong></p>
                     <div class="d-flex justify-content-center">
-                        <div id="cube-edge-yellow"></div>
+                        <div id="cube-edge-white"></div>
                     </div>
                 </div>
             </div>
@@ -70,7 +70,7 @@
     <div class="card shadow-sm mb-4">
         <div class="card-body p-4">
             <h2 class="text-center mb-4">🎮 Les 2 cas possibles</h2>
-            <p class="text-center lead mb-4">Regarde où la couleur du centre devant apparaît sur ton arête</p>
+            <p class="text-center lead mb-4">Regarde à la au dessus de ton "T" en l'envers</p>
             
             <!-- Cas 1: Couleur devant -->
             <div class="case-card p-4 mb-4 border border-3 border-success rounded">
@@ -183,7 +183,7 @@
                         <h5 class="text-danger mb-3">Solution simple:</h5>
                         <ol class="mb-0">
                             <li class="mb-2">Mets n'importe quelle arête au-dessus</li>
-                            <li class="mb-2">Fais un des 2 algorithmes</li>
+                            <li class="mb-2">Fais l'algorithme du cas 1: Vers l'avant</li>
                             <li class="mb-0">L'arête coincée sort en haut - maintenant tu peux la replacer!</li>
                         </ol>
                     </div>
@@ -355,7 +355,7 @@
     mountCube("cube-goal", {{ goal_state|safe }});
     mountCube("cube-case-front", {{ case_front_state|safe }});
     mountCube("cube-case-back", {{ case_back_state|safe }});
-    mountCube("cube-edge-yellow", {{ edge_yellow_state|safe }});
+    mountCube("cube-edge-white", {{ edge_white_state|safe }});
     mountCube("cube-edge-stuck", {{ edge_stuck_state|safe }});
   });
 </script>

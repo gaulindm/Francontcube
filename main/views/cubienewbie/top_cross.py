@@ -22,11 +22,11 @@ class TopCrossView(StepView):
     
     # Map template context variable names to CubeState slugs
     cube_state_slugs = {
-        'goal_state': 'yellow-cross-goal',
+        'goal_state': 'top-cross-goal',
         #'before_state': 'yellow-cross-before',
-        'pattern_dot_state': 'yellow-cross-pattern-dot',
-        'pattern_l_state': 'yellow-cross-pattern-l',
-        'pattern_line_state': 'yellow-cross-pattern-line',
+        'pattern_dot_state': 'top-cross-pattern-dot',
+        'pattern_l_state': 'top-cross-pattern-l',
+        'pattern_line_state': 'top-cross-pattern-line',
     }
 
 

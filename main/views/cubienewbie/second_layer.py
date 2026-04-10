@@ -25,7 +25,7 @@ class SecondLayerView(StepView):
         'goal_state': 'second-layer-goal',
         'case_back_state': 'second-layer-case-back',
         'case_front_state': 'second-layer-case-front',
-        'edge_yellow_state': 'second-layer-edge-yellow',
+        'edge_white_state': 'second-layer-edge-white',
         
         'edge_stuck_state': 'second-layer-edge-stuck',
 
