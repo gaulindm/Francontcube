@@ -80,16 +80,18 @@ def setup_django(settings_module: str):
 # ── Colour map ─────────────────────────────────────────────────────────────────
 STICKER_COLORS = {
     "W": "#FFFFFF",
-    "Y": "#FFD500",
-    "R": "#B71234",
-    "O": "#FF5800",
-    "B": "#0046AD",
-    "G": "#009B48",
+    "Y": "#FFFF00",
+    "R": "#FF0000",
+    "O": "#FF8000",
+    "B": "#0000ff",
+    "G": "#00cc00",
     "X": "#CCCCCC",   # unknown / hidden
+
 }
 
-HIDDEN_FILL   = "#DDDDDD"
-HIDDEN_STROKE = "#BBBBBB"
+HIDDEN_FILL         = "#EFEFEF"   # very light grey fill
+HIDDEN_STROKE       = "#DDDDDD"
+HIDDEN_STROKE_WIDTH = .20
 
 # ── Polygon data (from _cube_svg_RL.html) ─────────────────────────────────────
 # Each face is a 3×3 list of point strings.
@@ -130,37 +132,41 @@ POLYGONS = {
         ],
         # Hidden faces
         "B": [
-            ["229.14,22.905 278.26,27.594 278.729,82.269 229.61,77.581",
-             "278.26,27.594 327.379,32.28 327.847,86.96 278.729,82.269",
-             "327.379,32.28 376.499,36.973 376.966,91.649 327.847,86.96"],
-            ["229.61,77.581 278.729,82.269 279.197,136.945 230.079,132.256",
+            ["331.9,37.85 371.1,41.05 371.1,85.05 331.9,81.05",
+             "282.9,32.95 322.1,36.95 322.1,80.15 282.9,76.95",
+             "233.9,28 273.1,32 273.1,76 233.9,72"],
+
+            ["332,92 371.2,96 372,140 332.8,136",
              "278.729,82.269 327.847,86.96 328.315,141.634 279.197,136.945",
-             "327.847,86.96 376.966,91.649 377.433,146.324 328.315,141.634"],
+             "229.61,77.581 278.729,82.269 279.197,136.945 230.079,132.256"],
+
+
+
             ["230.079,132.256 279.197,136.945 279.666,191.62 230.549,186.932",
              "279.197,136.945 328.315,141.634 328.783,196.311 279.666,191.62",
-             "328.315,141.634 377.433,146.324 377.9,201 328.783,196.311"],
+             "332.9,147 372.1,151 372.1,195 332.9,191"],
         ],
         "L": [
-            ["150.799,45.94 179.148,22.905 182.485,72.27 155.468,96.591",
-             "122.449,68.968 150.799,45.94 155.468,96.591 128.45,120.912",
-             "94.1,92 122.449,68.968 128.45,120.912 101.433,145.233"],
+            ["153.3,47.75 176.5,29.35 178.9,69.35 157.3,88.55",
+             "125.35,70.85 147.75,52.45 151.75,93.25 130.15,112.45",
+             "97.45,94.85 119.85,75.65 124.65,117.25 103.05,137.25"],
             ["155.468,96.591 182.485,72.27 185.821,121.635 160.136,147.247",
              "128.45,120.912 155.468,96.591 160.136,147.247 134.452,172.856",
-             "101.433,145.233 128.45,120.912 134.452,172.856 108.767,198.467"],
+             "104.35,147.75 125.95,127.75 130.75,169.35 109.95,190.15"],
             ["160.136,147.247 185.821,121.635 189.158,171 164.805,197.9",
              "134.452,172.856 160.136,147.247 164.805,197.9 140.453,224.8",
-             "108.767,198.467 134.452,172.856 140.453,224.8 116.1,251.7"],
+             "111.3,200.65 132.1,179.85 136.9,221.45 117.7,243.05"],
         ],
         "D": [
-            ["175.5,267.4 226.922,278.244 207.3,307.1 156.1,295.7",
-             "226.922,278.244 278.344,289.09 258.5,318.5 207.3,307.1",
-             "278.344,289.09 329.767,299.933 309.7,329.9 258.5,318.5"],
+            ["178.2,270.95 219,279.75 203.8,302.95 163,293.35",
+             "229.25,282 270.85,290.8 254.85,314 214.05,305.2",
+             "281.1,292.95 321.9,300.95 305.9,324.95 265.1,316.15"],
             ["194.9,239.1 246.545,249.389 226.922,278.244 175.5,267.4",
              "246.545,249.389 298.189,259.678 278.344,289.09 226.922,278.244",
-             "298.189,259.678 349.833,269.967 329.767,299.933 278.344,289.09"],
+             "301.1,263 341.9,271 325.9,295 285.1,287"],
             ["214.3,210.8 266.167,220.533 246.545,249.389 194.9,239.1",
              "266.167,220.533 318.033,230.27 298.189,259.678 246.545,249.389",
-             "318.033,230.27 369.9,240 349.833,269.967 298.189,259.678"],
+             "321.1,233.9 361.9,241.9 345.9,265.1 305.1,257.1"],
         ],
     },
     "left": {
@@ -266,15 +272,15 @@ def resolve_color(code: str, highlight_set: set, face: str, r: int, c: int) -> s
     key = f"{face}-{r}-{c}"
     base = STICKER_COLORS.get(code.upper(), STICKER_COLORS["X"])
     return base
-
-
+ 
+ 
 def is_highlighted(highlight_data, face: str, r: int, c: int) -> bool:
     if not highlight_data:
         return False
     stickers = highlight_data.get("stickers", [])
     return f"{face}-{r}-{c}" in stickers or [face, r, c] in stickers
-
-
+ 
+ 
 # ── SVG polygon helpers ────────────────────────────────────────────────────────
 def poly_el(points: str, fill: str, stroke: str, stroke_width: float,
             dashed: bool = False, opacity: float = 1.0) -> str:
@@ -286,13 +292,13 @@ def poly_el(points: str, fill: str, stroke: str, stroke_width: float,
         f'stroke-width="{stroke_width}" stroke-linejoin="round"'
         f'{dash}{op}/>'
     )
-
-
+ 
+ 
 # ── Arrow helpers ──────────────────────────────────────────────────────────────
 def arrow_marker_id(color: str) -> str:
     return "ah" + color.lstrip("#")
-
-
+ 
+ 
 def arrow_defs(arrows: list) -> str:
     seen = {}
     for a in arrows:
@@ -309,8 +315,8 @@ def arrow_defs(arrows: list) -> str:
             f'</marker>'
         )
     return "<defs>" + "".join(parts) + "</defs>" if parts else ""
-
-
+ 
+ 
 def arrow_el(a: dict) -> str:
     color = a.get("color", "#cc2200")
     width = a.get("width", 4)
@@ -321,51 +327,73 @@ def arrow_el(a: dict) -> str:
         f'stroke="{color}" stroke-width="{width}" stroke-linecap="round" '
         f'marker-end="url(#{mid})"/>'
     )
-
-
+ 
+ 
+# ── Bounding box helper ───────────────────────────────────────────────────────
+def tight_viewbox(polys_map: dict, padding: float = 4.0) -> tuple[float,float,float,float]:
+    """Return (x, y, width, height) tightly wrapping all polygon points."""
+    all_x, all_y = [], []
+    for face_data in polys_map.values():
+        for row in face_data:
+            for pts in row:
+                for pair in pts.split():
+                    px, py = pair.split(",")
+                    all_x.append(float(px))
+                    all_y.append(float(py))
+    x = min(all_x) - padding
+    y = min(all_y) - padding
+    w = max(all_x) - min(all_x) + padding * 2
+    h = max(all_y) - min(all_y) + padding * 2
+    return x, y, w, h
+ 
+ 
 # ── Main SVG builder ──────────────────────────────────────────────────────────
 def build_svg(cube_data: dict, highlight_data: dict | None,
               orientation: str, arrows: list) -> str:
     ori = orientation if orientation in ("right", "left") else "right"
     order = DRAW_ORDER[ori]
     polys_map = POLYGONS[ori]
-
+ 
     # json_state["cube"] keyed by face letter (U L F R B D)
     face_colors = cube_data  # already the inner cube dict
-
-    parts = ["<svg xmlns='http://www.w3.org/2000/svg' "
-             "width='500' height='360' viewBox='0 0 500 360'>"]
-
+ 
+    vx, vy, vw, vh = tight_viewbox(polys_map)
+    parts = [f"<svg xmlns='http://www.w3.org/2000/svg' "
+             f"width='{vw:.1f}' height='{vh:.1f}' "
+             f"viewBox='{vx:.1f} {vy:.1f} {vw:.1f} {vh:.1f}'>"]
+ 
     # Arrow defs
     if arrows:
         parts.append(arrow_defs(arrows))
-
+ 
     for face, hidden, dashed in order:
         face_grid = face_colors.get(face, [])
         for r in range(3):
             row = face_grid[r] if r < len(face_grid) else []
             for c in range(3):
                 pts = polys_map[face][r][c]
+                code = row[c] if c < len(row) else "X"
+                fill = resolve_color(code, set(), face, r, c)
                 if hidden:
-                    parts.append(poly_el(pts, HIDDEN_FILL, HIDDEN_STROKE,
-                                         1.5, dashed=dashed))
+                    # Use actual sticker color but ghosted — muted stroke, reduced opacity
+                    parts.append(poly_el(pts, fill, HIDDEN_STROKE,
+                                         HIDDEN_STROKE_WIDTH, dashed=dashed,
+                                         opacity=1))
                 else:
-                    code  = row[c] if c < len(row) else "X"
-                    fill  = resolve_color(code, set(), face, r, c)
                     parts.append(poly_el(pts, fill, "#111111", 2.0))
                     # Highlight overlay
                     if is_highlighted(highlight_data, face, r, c):
                         parts.append(poly_el(pts, "#FFFF00", "#FFD500",
                                               2.0, opacity=0.45))
-
+ 
     # Arrows on top
     for a in arrows:
         parts.append(arrow_el(a))
-
+ 
     parts.append("</svg>")
     return "\n".join(parts)
-
-
+ 
+ 
 # ── PNG export ────────────────────────────────────────────────────────────────
 def svg_to_png(svg_str: str, out_path: str, size: int):
     try:
@@ -373,20 +401,27 @@ def svg_to_png(svg_str: str, out_path: str, size: int):
     except ImportError:
         print("[error] cairosvg not installed.  Run:  pip install cairosvg")
         sys.exit(1)
-
-    # viewBox is 500×360 — scale so longest edge = size
-    scale = size / 500
-    out_h = round(360 * scale)
-
+ 
+    # Parse actual SVG dimensions so the output matches the tight viewBox
+    import re as _re
+    m = _re.search(r"width='([\d.]+)'.*?height='([\d.]+)'", svg_str)
+    if m:
+        svg_w, svg_h = float(m.group(1)), float(m.group(2))
+    else:
+        svg_w, svg_h = 500.0, 360.0
+    scale  = size / max(svg_w, svg_h)
+    out_w  = round(svg_w * scale)
+    out_h  = round(svg_h * scale)
+ 
     cairosvg.svg2png(
         bytestring=svg_str.encode("utf-8"),
         write_to=out_path,
-        output_width=size,
+        output_width=out_w,
         output_height=out_h,
         background_color="transparent",
     )
-
-
+ 
+ 
 # ── DB fetch ──────────────────────────────────────────────────────────────────
 def fetch_states(slugs=None, method=None, category=None):
     from cube.models import CubeState   # import after django.setup()
@@ -398,8 +433,8 @@ def fetch_states(slugs=None, method=None, category=None):
     if category:
         qs = qs.filter(category=category)
     return list(qs.order_by("method", "category", "step_number"))
-
-
+ 
+ 
 # ── Arrow loading ─────────────────────────────────────────────────────────────
 def load_arrows(arrow_arg: str | None) -> list:
     if not arrow_arg:
@@ -414,7 +449,7 @@ def load_arrows(arrow_arg: str | None) -> list:
         except json.JSONDecodeError as e:
             print(f"[error] Could not parse --arrows value: {e}")
             sys.exit(1)
-
+ 
     required = {"x1", "y1", "x2", "y2"}
     for i, a in enumerate(data):
         missing = required - a.keys()
@@ -422,8 +457,8 @@ def load_arrows(arrow_arg: str | None) -> list:
             print(f"[error] Arrow #{i} is missing fields: {missing}")
             sys.exit(1)
     return data
-
-
+ 
+ 
 # ── CLI ───────────────────────────────────────────────────────────────────────
 def main():
     parser = argparse.ArgumentParser(
@@ -447,31 +482,31 @@ def main():
     parser.add_argument("--dry-run", action="store_true",
                         help="Print what would be exported without writing files")
     args = parser.parse_args()
-
+ 
     if not args.slugs and not args.method and not args.category:
         parser.error("Provide at least one slug, --method, or --category.")
-
+ 
     setup_django(args.django_settings)
-
+ 
     states = fetch_states(
         slugs=args.slugs or None,
         method=args.method,
         category=args.category,
     )
-
+ 
     if not states:
         print("[warn] No CubeState records matched your query.")
         return
-
+ 
     arrows = load_arrows(args.arrows)
     os.makedirs(args.output, exist_ok=True)
-
+ 
     print(f"Exporting {len(states)} cube state(s) → '{args.output}' "
           f"at {args.size}px wide …")
     if arrows:
         print(f"  Arrow overlay: {len(arrows)} arrow(s)")
     print()
-
+ 
     for cs in states:
         raw = cs.json_state
         # Support both {"cube": {...}} and raw {face: [[...]]} formats
@@ -481,14 +516,14 @@ def main():
         else:
             cube_data      = raw
             highlight_data = cs.json_highlight
-
+ 
         filename = f"{cs.slug}.png"
         out_path = os.path.join(args.output, filename)
-
+ 
         if args.dry_run:
             print(f"  [dry-run] {filename}  (ori={cs.hand_orientation})")
             continue
-
+ 
         svg_str = build_svg(
             cube_data=cube_data,
             highlight_data=highlight_data,
@@ -497,10 +532,10 @@ def main():
         )
         svg_to_png(svg_str, out_path, args.size)
         print(f"  ✓ {filename}  (ori={cs.hand_orientation})")
-
+ 
     if not args.dry_run:
         print(f"\nDone! {len(states)} PNG(s) saved to '{args.output}'.")
-
-
+ 
+ 
 if __name__ == "__main__":
     main()
