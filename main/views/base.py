@@ -116,7 +116,7 @@ class StepView:
     
     # Configuration - subclasses should override these
     template_name = None
-    method_name = "Apprenti Cubi"
+    method_name = "Cubienewbie"  # Default method name, can be overridden
     step_name = None
     step_number = None
     step_icon = None
@@ -236,7 +236,7 @@ def build_breadcrumbs(method_name=None, step_name=None, step_icon=None):
         })
         
         method_urls = {
-            'Apprenti Cubi': '/main/methods/cubienewbie/',
+            'Cubie Newbie': '/main/methods/cubienewbie/',
             'CFOP': '/main/methods/beginner/',
             'F2L': '/main/methods/f2l/',
             'Roux': '/main/methods/roux/',

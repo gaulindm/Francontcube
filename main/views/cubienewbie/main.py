@@ -18,7 +18,7 @@ def method_cubienewbie(request):
     """
     breadcrumbs = [
         {'name': 'Méthodes', 'url': '/francontcube/', 'icon': 'book'},
-        {'name': 'Apprenti Cubi', 'url': '', 'icon': 'star-fill'},
+        {'name': 'Cubie Newbie', 'url': '', 'icon': 'star-fill'},
     ]
     
     # Helper function to get cube state safely
@@ -57,7 +57,7 @@ def method_cubienewbie(request):
         },
         {
             "name": "4 — Étape 1: La marguerite",
-            "desc": "Premier objectif : construire la marguerite autour du centre jaune.",
+            "desc": "Premier objectif : construire la marguerite autour du centre blanc.",
             "icon": "bi-flower3",
             "url": "/main/methods/cubienewbie/daisy/",
             "available": True,
@@ -65,7 +65,7 @@ def method_cubienewbie(request):
         },
         {
             "name": "5 — Étape 2 : La croix du bas (jaune)",
-            "desc": "Aligner les arêtes blanches avec les centres pour former la croix.",
+            "desc": "Aligner les arêtes jaunes avec les centres pour former la croix.",
             "icon": "bi-plus-circle",
             "url": "/main/methods/cubienewbie/bottom-cross/",
             "available": True,
@@ -73,7 +73,7 @@ def method_cubienewbie(request):
         },
         {
             "name": "6 — Étape 3 : Les coins inférieurs",
-            "desc": "Placer les coins inferieurs blancs pour compléter la première couche.",
+            "desc": "Placer les coins inferieurs jaunes pour compléter la première couche.",
             "icon": "bi-box",
             "url": "/main/methods/cubienewbie/bottom-corners/",
             "available": True,
@@ -104,7 +104,7 @@ def method_cubienewbie(request):
             "cube_state": get_cube_state('top-face-goal')
         },
         {
-            "name": "10 — Étape 7 : La permutation des coins jaunes",
+            "name": "10 — Étape 7 : La permutation des coins blancs",
             "desc": "Placer les coins à leur bon emplacement.",
             "icon": "bi-arrow-repeat",
             "url": "/main/methods/cubienewbie/corner-permutation/",

@@ -32,6 +32,12 @@ Usage examples:
   # Custom size and output dir
   python export_cube_state.py f2l-05 --size 512 --output ./my_pngs
 
+  # Only the three visible faces (U, F, R / U, F, L) — no ghosted back layers
+  python export_cube_state.py f2l-05 --no-hidden
+
+  # Combine with other options
+  python export_cube_state.py --method cfop --no-hidden --size 400
+
 ARROW JSON FORMAT
 -----------------
 A JSON array of arrow objects. Each arrow:
@@ -330,10 +336,16 @@ def arrow_el(a: dict) -> str:
  
  
 # ── Bounding box helper ───────────────────────────────────────────────────────
-def tight_viewbox(polys_map: dict, padding: float = 4.0) -> tuple[float,float,float,float]:
-    """Return (x, y, width, height) tightly wrapping all polygon points."""
+def tight_viewbox(polys_map: dict, padding: float = 4.0,
+                  faces: set | None = None) -> tuple[float,float,float,float]:
+    """Return (x, y, width, height) tightly wrapping all polygon points.
+
+    ``faces`` – if given, only consider polygons for those face keys.
+    """
     all_x, all_y = [], []
-    for face_data in polys_map.values():
+    for face_key, face_data in polys_map.items():
+        if faces is not None and face_key not in faces:
+            continue
         for row in face_data:
             for pts in row:
                 for pair in pts.split():
@@ -349,15 +361,30 @@ def tight_viewbox(polys_map: dict, padding: float = 4.0) -> tuple[float,float,fl
  
 # ── Main SVG builder ──────────────────────────────────────────────────────────
 def build_svg(cube_data: dict, highlight_data: dict | None,
-              orientation: str, arrows: list) -> str:
+              orientation: str, arrows: list,
+              no_hidden: bool = False) -> str:
+    """Build an SVG string for a cube state.
+
+    Parameters
+    ----------
+    no_hidden:
+        When True, the three hidden/back layers (L, D, B for the right-hand
+        orientation; R, D, B for the left-hand orientation) are omitted
+        entirely.  The viewBox is tightened to the visible faces only.
+    """
     ori = orientation if orientation in ("right", "left") else "right"
     order = DRAW_ORDER[ori]
     polys_map = POLYGONS[ori]
  
     # json_state["cube"] keyed by face letter (U L F R B D)
     face_colors = cube_data  # already the inner cube dict
- 
-    vx, vy, vw, vh = tight_viewbox(polys_map)
+
+    # Determine which faces to include in the viewBox / draw pass
+    visible_faces: set | None = None
+    if no_hidden:
+        visible_faces = {face for face, hidden, _ in order if not hidden}
+
+    vx, vy, vw, vh = tight_viewbox(polys_map, faces=visible_faces)
     parts = [f"<svg xmlns='http://www.w3.org/2000/svg' "
              f"width='{vw:.1f}' height='{vh:.1f}' "
              f"viewBox='{vx:.1f} {vy:.1f} {vw:.1f} {vh:.1f}'>"]
@@ -367,6 +394,9 @@ def build_svg(cube_data: dict, highlight_data: dict | None,
         parts.append(arrow_defs(arrows))
  
     for face, hidden, dashed in order:
+        # Skip the hidden layers when --no-hidden is requested
+        if no_hidden and hidden:
+            continue
         face_grid = face_colors.get(face, [])
         for r in range(3):
             row = face_grid[r] if r < len(face_grid) else []
@@ -481,6 +511,10 @@ def main():
                         help="Django settings module. Default: francontcube.settings")
     parser.add_argument("--dry-run", action="store_true",
                         help="Print what would be exported without writing files")
+    parser.add_argument("--no-hidden", action="store_true",
+                        help="Omit the three hidden/back layers (L, D, B for right-hand; "
+                             "R, D, B for left-hand orientation). The output canvas is "
+                             "tightened to the three visible faces only.")
     args = parser.parse_args()
  
     if not args.slugs and not args.method and not args.category:
@@ -505,6 +539,8 @@ def main():
           f"at {args.size}px wide …")
     if arrows:
         print(f"  Arrow overlay: {len(arrows)} arrow(s)")
+    if args.no_hidden:
+        print("  Hidden layers (L/D/B) will be omitted")
     print()
  
     for cs in states:
@@ -521,7 +557,8 @@ def main():
         out_path = os.path.join(args.output, filename)
  
         if args.dry_run:
-            print(f"  [dry-run] {filename}  (ori={cs.hand_orientation})")
+            hidden_tag = " no-hidden" if args.no_hidden else ""
+            print(f"  [dry-run] {filename}  (ori={cs.hand_orientation}{hidden_tag})")
             continue
  
         svg_str = build_svg(
@@ -529,6 +566,7 @@ def main():
             highlight_data=highlight_data,
             orientation=cs.hand_orientation,
             arrows=arrows,
+            no_hidden=args.no_hidden,
         )
         svg_to_png(svg_str, out_path, args.size)
         print(f"  ✓ {filename}  (ori={cs.hand_orientation})")

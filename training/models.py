@@ -8,7 +8,7 @@ class Algorithm(models.Model):
     """Différents algorithmes que les élèves peuvent pratiquer"""
     
     DIFFICULTY_CHOICES = [
-        ('apprenti', 'Apprenti Cubi'),
+        ('apprenti', 'Cubie Newbie'),
         ('confirme', 'Cubiste Confirmé'),
         ('speedcube', 'Speedcubiste'),
         ('maitre', 'Maître Cubi'),

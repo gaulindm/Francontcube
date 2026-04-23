@@ -289,7 +289,9 @@
 
         #mosaic-wrapper {
             display: flex;
-            justify-content: center;
+            justify-content: flex-start;
+            overflow-x: auto;    /* add this */
+            width: ;
             margin: 20px 0;
         }
 
@@ -447,6 +449,16 @@ hr {
                     <option value="8x12">8×12 (96 cubes) 🏴</option>
                     <optgroup label="🏁 Drapeaux (Ratio 3:4)">
                     <option value="3x4">4×6 (24 cubes) 🏴</option>
+                </optgroup>
+                <optgroup label="messages">
+                    <option value="3x6">3×6</option>
+                    <option value="3x9">3x9</option>
+                    <option value="3x10" selected>3×10</option>
+                    <option value="3x11" selected>3×11</option>
+                    <option value="3x33">3x33</option>
+                    <option value="4x25">4x25</option>
+                    <option value="5x20">5x20</option>
+
                 </optgroup>
                 <optgroup label="⬛ Carrés Classiques">
                     <option value="1x1">1×1</option>
