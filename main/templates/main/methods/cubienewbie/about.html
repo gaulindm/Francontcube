@@ -4,185 +4,449 @@
 {% block title %}À propos de Cubie Newbie — Francontcube{% endblock %}
 
 {% block content %}
+
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Fredoka+One&family=Nunito:wght@400;600;700;800&display=swap');
+
+  .ruru-hero {
+    background: linear-gradient(135deg, #fff9f0 0%, #f0f9ff 50%, #f0fff4 100%);
+    border-radius: 2rem;
+    position: relative;
+    overflow: hidden;
+    padding: 3rem 2rem;
+    margin-bottom: 2.5rem;
+  }
+  .ruru-hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image:
+      radial-gradient(circle at 10% 20%, rgba(255,200,50,0.12) 0%, transparent 40%),
+      radial-gradient(circle at 90% 80%, rgba(50,180,100,0.12) 0%, transparent 40%),
+      radial-gradient(circle at 80% 10%, rgba(220,50,50,0.08) 0%, transparent 30%);
+    pointer-events: none;
+  }
+  .ruru-badge {
+    display: inline-block;
+    background: linear-gradient(90deg, #e63946, #f4a261);
+    color: #fff;
+    font-family: 'Fredoka One', cursive;
+    font-size: 0.9rem;
+    letter-spacing: 0.12em;
+    padding: 0.35rem 1.1rem;
+    border-radius: 2rem;
+    margin-bottom: 1rem;
+    text-transform: uppercase;
+    box-shadow: 0 3px 12px rgba(230,57,70,0.3);
+  }
+  .ruru-title {
+    font-family: 'Fredoka One', cursive;
+    font-size: clamp(2.4rem, 5vw, 3.8rem);
+    line-height: 1.1;
+    color: #1a1a2e;
+    margin-bottom: 0.5rem;
+  }
+  .ruru-title .accent-red   { color: #e63946; }
+  .ruru-title .accent-blue  { color: #3a86ff; }
+  .ruru-title .accent-green { color: #2dc653; }
+  .ruru-title .accent-yel   { color: #f4a261; }
+
+  .ruru-subtitle {
+    font-family: 'Nunito', sans-serif;
+    font-size: 1.15rem;
+    font-weight: 700;
+    color: #555;
+    margin-bottom: 1.5rem;
+  }
+
+  .ruru-img-wrap {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .ruru-img-wrap img {
+    max-width: 420px;
+    width: 100%;
+    filter: drop-shadow(0 12px 32px rgba(0,0,0,0.15));
+    animation: ruru-float 4s ease-in-out infinite;
+  }
+  @keyframes ruru-float {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-10px); }
+  }
+
+  .ruru-trait-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+    font-family: 'Nunito', sans-serif;
+    font-weight: 800;
+    font-size: 0.92rem;
+    padding: 0.45rem 1rem;
+    border-radius: 2rem;
+    margin: 0.3rem;
+    color: #fff;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.12);
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+  .ruru-trait-pill:hover {
+    transform: translateY(-2px) scale(1.04);
+    box-shadow: 0 5px 18px rgba(0,0,0,0.16);
+  }
+  .pill-red    { background: linear-gradient(135deg, #e63946, #c1121f); }
+  .pill-blue   { background: linear-gradient(135deg, #3a86ff, #1a56c4); }
+  .pill-green  { background: linear-gradient(135deg, #2dc653, #1a8f3a); }
+  .pill-orange { background: linear-gradient(135deg, #f4a261, #d4621a); }
+  .pill-purple { background: linear-gradient(135deg, #7b2d8b, #9b59b6); }
+
+  .ruru-quote-box {
+    background: #1a1a2e;
+    border-radius: 1.25rem;
+    padding: 2rem 2.5rem;
+    position: relative;
+    overflow: hidden;
+    margin-bottom: 2.5rem;
+  }
+  .ruru-quote-box::before {
+    content: '"';
+    font-family: 'Fredoka One', cursive;
+    font-size: 10rem;
+    color: rgba(255,255,255,0.05);
+    position: absolute;
+    top: -2rem;
+    left: 1rem;
+    line-height: 1;
+    pointer-events: none;
+  }
+  .ruru-quote-box p {
+    font-family: 'Nunito', sans-serif;
+    font-size: 1.2rem;
+    font-weight: 700;
+    font-style: italic;
+    color: #fff;
+    margin: 0;
+    position: relative;
+    z-index: 1;
+  }
+  .ruru-quote-box .ruru-speaker {
+    font-family: 'Fredoka One', cursive;
+    font-size: 0.95rem;
+    color: #f4a261;
+    margin-top: 0.75rem;
+    display: block;
+    font-style: normal;
+  }
+
+  /* ---- Section cards re-styled ---- */
+  .about-section-title {
+    font-family: 'Fredoka One', cursive;
+    font-size: 1.7rem;
+    color: #1a1a2e;
+    margin-bottom: 1.2rem;
+  }
+  .about-section-title .dot {
+    display: inline-block;
+    width: 10px; height: 10px;
+    border-radius: 50%;
+    background: #2dc653;
+    margin-right: 8px;
+    vertical-align: middle;
+    margin-bottom: 3px;
+  }
+
+  .ruru-divider {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin: 2rem 0;
+    font-family: 'Fredoka One', cursive;
+    font-size: 1rem;
+    color: #aaa;
+  }
+  .ruru-divider::before, .ruru-divider::after {
+    content: '';
+    flex: 1;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, #ddd, transparent);
+  }
+
+  .funfact-card {
+    background: #fff;
+    border-radius: 1.25rem;
+    padding: 1.2rem 1.4rem;
+    border: 2.5px solid;
+    font-family: 'Nunito', sans-serif;
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+  .funfact-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 24px rgba(0,0,0,0.10);
+  }
+  .funfact-card .funfact-icon { font-size: 1.8rem; margin-bottom: 0.4rem; }
+  .funfact-card .funfact-label { font-size: 0.78rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: #999; }
+  .funfact-card .funfact-value { font-size: 1.05rem; font-weight: 800; color: #1a1a2e; }
+  .fc-red    { border-color: #e63946; }
+  .fc-blue   { border-color: #3a86ff; }
+  .fc-green  { border-color: #2dc653; }
+  .fc-orange { border-color: #f4a261; }
+</style>
+
 <div class="container py-5">
 
-    <!-- Titre principal -->
-    <div class="text-center mb-5">
-        <h1 class="hero-title">
-            🎯 <span class="brand-green">La Méthode Cubie Newbie</span>
+  <!-- ========== RURU HERO — NEW SECTION ========== -->
+  <div class="ruru-hero shadow-sm mb-4">
+    <div class="row align-items-center gy-4">
+
+      <!-- Text side -->
+      <div class="col-lg-6 order-2 order-lg-1">
+        <span class="ruru-badge">✨ Présentation officielle</span>
+        <h1 class="ruru-title">
+          Rencontrez<br>
+          <span class="accent-red">R</span><span class="accent-blue">u</span><span class="accent-green">R</span><span class="accent-yel">u</span> !
         </h1>
-        <p class="lead">
-            Votre première aventure avec le Rubik's Cube
+        <p class="ruru-subtitle">La mascotte officielle de Cubie Newbie 🎉</p>
+        <p style="font-family:'Nunito',sans-serif; font-size:1.05rem; color:#444; line-height:1.7; margin-bottom:1.5rem;">
+          Cubie Newbie a maintenant un visage — et quelle tête ! <strong>Ruru</strong> est un oiseau coloré dont la tête est elle-même un Rubik's Cube. Il porte toujours son livre <em>CubieNewbie</em> et répète son mantra partout où il va :
+          <span style="font-weight:800; color:#e63946;">Apprends</span> ·
+          <span style="font-weight:800; color:#3a86ff;">Comprends</span> ·
+          <span style="font-weight:800; color:#2dc653;">Réussis</span>.
         </p>
-    </div>
 
-    <!-- Section Bienvenue -->
-    <div class="card border-success border-3 shadow-sm mb-4">
-        <div class="card-body p-4">
-            <h2 class="mb-3">Bienvenue dans le monde du Cubing !</h2>
-            <p>
-                Vous tenez un Rubik's Cube entre vos mains et vous vous demandez par où commencer ? La méthode <strong>Cubie Newbie</strong> a été conçue spécialement pour vous ! C'est une méthode ultra-simple, étape par étape, qui vous permettra de résoudre votre premier cube sans frustration.
-            </p>
-            <p>
-                Contrairement aux méthodes avancées qui demandent de mémoriser des dizaines d'algorithmes complexes, la méthode Cubie Newbie se concentre sur la <strong>compréhension</strong> et la <strong>simplicité</strong>. Vous apprendrez à résoudre le cube couche par couche, avec seulement quelques mouvements faciles à retenir.
-            </p>
-            <p class="mb-0">
-                Personne ne naît en sachant résoudre un Rubik's Cube — chaque expert a commencé exactement là où vous êtes maintenant. Ce qui fait la différence, ce n'est pas le talent : c'est la <strong>volonté d'essayer, de se tromper, et de réessayer</strong>. À chaque étape franchie, votre cerveau crée de nouvelles connexions. Vous n'apprenez pas seulement à résoudre un cube — vous apprenez à <strong>apprendre</strong>.
-            </p>
+        <!-- Trait pills -->
+        <div>
+          <span class="ruru-trait-pill pill-red">🎓 Toujours en train d'apprendre</span>
+          <span class="ruru-trait-pill pill-blue">📚 Accro aux livres</span>
+          <span class="ruru-trait-pill pill-green">🧩 Fan de puzzles</span>
+          <span class="ruru-trait-pill pill-orange">🏆 Encourageant</span>
+          <span class="ruru-trait-pill pill-purple">🎨 Ultra coloré</span>
         </div>
-    </div>
+      </div>
 
-    <!-- Citation inspirante -->
-    <div class="card bg-gradient shadow-sm mb-4" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">
-        <div class="card-body text-center text-white p-5">
-            <h3 class="mb-0" style="font-style: italic; font-size: 1.3rem;">
-                "Tout expert a déjà été débutant. Commencez simplement, et vous serez étonné de ce que vous pourrez accomplir !"
-            </h3>
+      <!-- Image side -->
+      <div class="col-lg-6 order-1 order-lg-2">
+        <div class="ruru-img-wrap">
+          <img src="{% static 'main/img/voici_ruru.png' %}" alt="Ruru — mascotte officielle de Cubie Newbie" class="rounded-3" />
         </div>
+      </div>
+
     </div>
+  </div>
 
+  <!-- Ruru quote -->
+  <div class="ruru-quote-box mb-4">
+    <p>
+      "Je suis né avec un cube sur la tête et un livre dans les mains — c'était peut-être un signe que j'allais passer ma vie à apprendre et à partager. Rejoins-moi dans cette aventure, un mouvement à la fois !"
+    </p>
+    <span class="ruru-speaker">— Ruru 🐦</span>
+  </div>
 
-    <!-- Comparaison -->
-    <div class="card shadow-sm mb-4">
-        <div class="card-body p-4">
-            <h2 class="brand-green mb-4">Pourquoi la Méthode Cubie Newbie ?</h2>
-            
-            <div class="row g-3">
-                <div class="col-md-6">
-                    <div class="card h-100 border-success border-2">
-                        <div class="card-body bg-light">
-                            <h4 class="text-success text-center mb-3">✨ Cubie Newbie</h4>
-                            <ul class="list-unstyled">
-                                <li class="mb-2">✅ Seulement 7 algorithmes</li>
-                                <li class="mb-2">✅ Instructions claires</li>
-                                <li class="mb-2">✅ Logique facile à suivre</li>
-                                <li class="mb-2">✅ Utilise surtout des mouvements de la main droite</li>
-                                <li class="mb-2">✅ Premier cube en 1-2 heures</li>
-                                <li class="mb-0">✅ Aucune expérience requise</li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="col-md-6">
-                    <div class="card h-100 border-secondary">
-                        <div class="card-body">
-                            <h4 class="text-secondary text-center mb-3">😰 Méthodes Complexes</h4>
-                            <ul class="list-unstyled text-muted">
-                                <li class="mb-2">❌ 50+ algorithmes</li>
-                                <li class="mb-2">❌ Explications techniques</li>
-                                <li class="mb-2">❌ Courbe d'apprentissage raide</li>
-                                <li class="mb-2">❌ Plusieurs jours d'étude</li>
-                                <li class="mb-0">❌ Peut être décourageant</li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
+  <!-- Fun facts about Ruru -->
+  <div class="row g-3 mb-5">
+    <div class="col-6 col-md-3">
+      <div class="funfact-card fc-red text-center">
+        <div class="funfact-icon">🎨</div>
+        <div class="funfact-label">Couleurs</div>
+        <div class="funfact-value">6 — comme le cube !</div>
+      </div>
+    </div>
+    <div class="col-6 col-md-3">
+      <div class="funfact-card fc-blue text-center">
+        <div class="funfact-icon">📖</div>
+        <div class="funfact-label">Livre préféré</div>
+        <div class="funfact-value">CubieNewbie (évidemment)</div>
+      </div>
+    </div>
+    <div class="col-6 col-md-3">
+      <div class="funfact-card fc-green text-center">
+        <div class="funfact-icon">💬</div>
+        <div class="funfact-label">Mantra</div>
+        <div class="funfact-value">Apprends · Comprends · Réussis</div>
+      </div>
+    </div>
+    <div class="col-6 col-md-3">
+      <div class="funfact-card fc-orange text-center">
+        <div class="funfact-icon">🧊</div>
+        <div class="funfact-label">Tête</div>
+        <div class="funfact-value">Un vrai Rubik's Cube 3×3</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="ruru-divider">— et maintenant, la méthode —</div>
+
+  <!-- ========== ORIGINAL ABOUT CONTENT ========== -->
+
+  <!-- Titre principal -->
+  <div class="text-center mb-5">
+    <h2 class="ruru-title" style="font-size:2.2rem;">
+      🎯 <span style="color:#2dc653;">La Méthode Cubie Newbie</span>
+    </h2>
+    <p class="lead" style="font-family:'Nunito',sans-serif;">
+      Votre première aventure avec le Rubik's Cube
+    </p>
+  </div>
+
+  <!-- Section Bienvenue -->
+  <div class="card border-success border-3 shadow-sm mb-4">
+    <div class="card-body p-4">
+      <h2 class="about-section-title"><span class="dot"></span>Bienvenue dans le monde du Cubing !</h2>
+      <p style="font-family:'Nunito',sans-serif;">
+        Vous tenez un Rubik's Cube entre vos mains et vous vous demandez par où commencer ? La méthode <strong>Cubie Newbie</strong> a été conçue spécialement pour vous ! C'est une méthode ultra-simple, étape par étape, qui vous permettra de résoudre votre premier cube sans frustration.
+      </p>
+      <p style="font-family:'Nunito',sans-serif;">
+        Contrairement aux méthodes avancées qui demandent de mémoriser des dizaines d'algorithmes complexes, la méthode Cubie Newbie se concentre sur la <strong>compréhension</strong> et la <strong>simplicité</strong>. Vous apprendrez à résoudre le cube couche par couche, avec seulement quelques mouvements faciles à retenir.
+      </p>
+      <p class="mb-0" style="font-family:'Nunito',sans-serif;">
+        Personne ne naît en sachant résoudre un Rubik's Cube — chaque expert a commencé exactement là où vous êtes maintenant. Ce qui fait la différence, ce n'est pas le talent : c'est la <strong>volonté d'essayer, de se tromper, et de réessayer</strong>. À chaque étape franchie, votre cerveau crée de nouvelles connexions. Vous n'apprenez pas seulement à résoudre un cube — vous apprenez à <strong>apprendre</strong>.
+      </p>
+    </div>
+  </div>
+
+  <!-- Citation inspirante -->
+  <div class="card bg-gradient shadow-sm mb-4" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">
+    <div class="card-body text-center text-white p-5">
+      <h3 class="mb-0" style="font-family:'Nunito',sans-serif; font-style: italic; font-size: 1.3rem;">
+        "Tout expert a déjà été débutant. Commencez simplement, et vous serez étonné de ce que vous pourrez accomplir !"
+      </h3>
+    </div>
+  </div>
+
+  <!-- Comparaison -->
+  <div class="card shadow-sm mb-4">
+    <div class="card-body p-4">
+      <h2 class="about-section-title"><span class="dot" style="background:#3a86ff;"></span>Pourquoi la Méthode Cubie Newbie ?</h2>
+      <div class="row g-3">
+        <div class="col-md-6">
+          <div class="card h-100 border-success border-2">
+            <div class="card-body bg-light">
+              <h4 class="text-success text-center mb-3" style="font-family:'Fredoka One',cursive;">✨ Cubie Newbie</h4>
+              <ul class="list-unstyled" style="font-family:'Nunito',sans-serif;">
+                <li class="mb-2">✅ Seulement 7 algorithmes</li>
+                <li class="mb-2">✅ Instructions claires</li>
+                <li class="mb-2">✅ Logique facile à suivre</li>
+                <li class="mb-2">✅ Utilise surtout des mouvements de la main droite</li>
+                <li class="mb-2">✅ Premier cube en 1-2 heures</li>
+                <li class="mb-0">✅ Aucune expérience requise</li>
+              </ul>
             </div>
+          </div>
         </div>
-    </div>
-
-    <!-- Philosophie -->
-    <div class="card shadow-sm mb-4">
-        <div class="card-body p-4">
-            <h2 class="brand-green mb-4">Philosophie de la Méthode</h2>
-            
-            <div class="alert alert-primary">
-                <h5><span class="me-2">🎓</span>Apprendre, pas mémoriser</h5>
-                <p class="mb-0">Nous privilégions la compréhension. Vous saurez <em>pourquoi</em> vous faites chaque mouvement, pas seulement comment le faire.</p>
+        <div class="col-md-6">
+          <div class="card h-100 border-secondary">
+            <div class="card-body">
+              <h4 class="text-secondary text-center mb-3" style="font-family:'Fredoka One',cursive;">😰 Méthodes Complexes</h4>
+              <ul class="list-unstyled text-muted" style="font-family:'Nunito',sans-serif;">
+                <li class="mb-2">❌ 50+ algorithmes</li>
+                <li class="mb-2">❌ Explications techniques</li>
+                <li class="mb-2">❌ Courbe d'apprentissage raide</li>
+                <li class="mb-2">❌ Plusieurs jours d'étude</li>
+                <li class="mb-0">❌ Peut être décourageant</li>
+              </ul>
             </div>
-
-            <div class="alert alert-info">
-                <h5><span class="me-2">🔁</span>Répétition et simplicité</h5>
-                <p class="mb-0">Les mêmes algorithmes reviennent souvent. Vous les maîtriserez naturellement sans effort de mémorisation intense.</p>
-            </div>
-
-            <div class="alert alert-success">
-                <h5><span class="me-2">🎯</span>Un pas à la fois</h5>
-                <p class="mb-0">Chaque étape est indépendante. Concentrez-vous sur une chose à la fois, sans vous soucier des étapes suivantes.</p>
-            </div>
-
-            <div class="alert alert-warning">
-                <h5><span class="me-2">🚀</span>Évolution progressive</h5>
-                <p class="mb-0">Une fois à l'aise, vous pourrez passer à des méthodes plus rapides. Cubie Newbie est votre tremplin parfait !</p>
-            </div>
+          </div>
         </div>
+      </div>
     </div>
+  </div>
 
-    <!-- À quoi s'attendre -->
-    <div class="card shadow-sm mb-4">
-        <div class="card-body p-4">
-            <h2 class="brand-green mb-4">À quoi s'attendre ?</h2>
-            <ul>
-                <li><strong>Temps de résolution initial :</strong> 5-10 minutes (c'est normal !)</li>
-                <li><strong>Avec pratique :</strong> 2-3 minutes après quelques cubes</li>
-                <li><strong>Mémorisation :</strong> 7 algorithmes simples</li>
-                <li><strong>Difficulté :</strong> Facile - Tout le monde peut y arriver !</li>
-                <li><strong>Temps d'apprentissage :</strong> 1-2 heures pour votre premier cube complet</li>
-            </ul>
-        </div>
+  <!-- Philosophie -->
+  <div class="card shadow-sm mb-4">
+    <div class="card-body p-4">
+      <h2 class="about-section-title"><span class="dot" style="background:#f4a261;"></span>Philosophie de la Méthode</h2>
+      <div class="alert alert-primary" style="font-family:'Nunito',sans-serif;">
+        <h5><span class="me-2">🎓</span>Apprendre, pas mémoriser</h5>
+        <p class="mb-0">Nous privilégions la compréhension. Vous saurez <em>pourquoi</em> vous faites chaque mouvement, pas seulement comment le faire.</p>
+      </div>
+      <div class="alert alert-info" style="font-family:'Nunito',sans-serif;">
+        <h5><span class="me-2">🔁</span>Répétition et simplicité</h5>
+        <p class="mb-0">Les mêmes algorithmes reviennent souvent. Vous les maîtriserez naturellement sans effort de mémorisation intense.</p>
+      </div>
+      <div class="alert alert-success" style="font-family:'Nunito',sans-serif;">
+        <h5><span class="me-2">🎯</span>Un pas à la fois</h5>
+        <p class="mb-0">Chaque étape est indépendante. Concentrez-vous sur une chose à la fois, sans vous soucier des étapes suivantes.</p>
+      </div>
+      <div class="alert alert-warning" style="font-family:'Nunito',sans-serif;">
+        <h5><span class="me-2">🚀</span>Évolution progressive</h5>
+        <p class="mb-0">Une fois à l'aise, vous pourrez passer à des méthodes plus rapides. Cubie Newbie est votre tremplin parfait !</p>
+      </div>
     </div>
+  </div>
 
-    <!-- Ce que vous allez gagner -->
-    <div class="card shadow-sm mb-4">
-        <div class="card-body p-4">
-            <h2 class="brand-green mb-4">Ce que vous allez gagner</h2>
-            <p>En maîtrisant la méthode Cubie Newbie, vous ne résoudrez pas seulement un cube. Vous développerez :</p>
-            <ul>
-                <li><strong>Confiance :</strong> La fierté d'avoir résolu un puzzle considéré comme difficile</li>
-                <li><strong>Patience :</strong> L'apprentissage étape par étape forge la persévérance</li>
-                <li><strong>Logique spatiale :</strong> Vous entraînez votre cerveau à visualiser en 3D</li>
-                <li><strong>Base solide :</strong> Prêt à explorer des méthodes plus avancées si vous le souhaitez</li>
-                <li><strong>Un talent impressionnant :</strong> Épatez vos amis et votre famille !</li>
-            </ul>
-        </div>
+  <!-- À quoi s'attendre -->
+  <div class="card shadow-sm mb-4">
+    <div class="card-body p-4">
+      <h2 class="about-section-title"><span class="dot" style="background:#e63946;"></span>À quoi s'attendre ?</h2>
+      <ul style="font-family:'Nunito',sans-serif;">
+        <li><strong>Temps de résolution initial :</strong> 5-10 minutes (c'est normal !)</li>
+        <li><strong>Avec pratique :</strong> 2-3 minutes après quelques cubes</li>
+        <li><strong>Mémorisation :</strong> 7 algorithmes simples</li>
+        <li><strong>Difficulté :</strong> Facile — Tout le monde peut y arriver !</li>
+        <li><strong>Temps d'apprentissage :</strong> 1-2 heures pour votre premier cube complet</li>
+      </ul>
     </div>
+  </div>
 
-    <!-- Et après -->
-    <div class="card shadow-sm mb-4">
-        <div class="card-body p-4">
-            <h2 class="brand-green mb-4">Et après ?</h2>
-            <p>Une fois que vous maîtrisez Cubie Newbie et que vous pouvez résoudre le cube confortablement en 3-5 minutes, vous aurez plusieurs options :</p>
-            <ul>
-                <li><strong>Continuez à pratiquer :</strong> Améliorez votre fluidité et votre vitesse avec cette méthode</li>
-                <li><strong>Explorez d'autres puzzles :</strong> Cube 2x2, 4x4, Pyraminx, et plus encore !</li>
-                <li><strong>Passez à la méthode CFOP :</strong> La méthode des champions pour aller plus vite</li>
-                <li><strong>Apprenez d'autres méthodes :</strong> Roux, ZZ, Petrus... Il y a tout un monde à découvrir !</li>
-            </ul>
-        </div>
+  <!-- Ce que vous allez gagner -->
+  <div class="card shadow-sm mb-4">
+    <div class="card-body p-4">
+      <h2 class="about-section-title"><span class="dot" style="background:#7b2d8b;"></span>Ce que vous allez gagner</h2>
+      <p style="font-family:'Nunito',sans-serif;">En maîtrisant la méthode Cubie Newbie, vous ne résoudrez pas seulement un cube. Vous développerez :</p>
+      <ul style="font-family:'Nunito',sans-serif;">
+        <li><strong>Confiance :</strong> La fierté d'avoir résolu un puzzle considéré comme difficile</li>
+        <li><strong>Patience :</strong> L'apprentissage étape par étape forge la persévérance</li>
+        <li><strong>Logique spatiale :</strong> Vous entraînez votre cerveau à visualiser en 3D</li>
+        <li><strong>Base solide :</strong> Prêt à explorer des méthodes plus avancées si vous le souhaitez</li>
+        <li><strong>Un talent impressionnant :</strong> Épatez vos amis et votre famille !</li>
+      </ul>
     </div>
+  </div>
 
-    <!-- Prêt à commencer -->
-    <div class="card bg-success text-white shadow-sm mb-4">
-        <div class="card-body text-center p-5">
-            <h2 class="mb-3">Prêt à commencer votre aventure ?</h2>
-            <p class="mb-3">
-                Le Rubik's Cube peut sembler impossible au début, mais avec la méthode Cubie Newbie, vous découvrirez que c'est accessible à tous. Pas besoin d'être un génie ou d'avoir des talents spéciaux - juste un peu de patience et la volonté d'apprendre.
-            </p>
-            <p class="mb-0">
-                Des millions de personnes dans le monde ont appris à résoudre le Rubik's Cube. Vous êtes sur le point de rejoindre cette communauté passionnante. Allons-y ensemble, un mouvement à la fois !
-            </p>
-        </div>
+  <!-- Et après -->
+  <div class="card shadow-sm mb-4">
+    <div class="card-body p-4">
+      <h2 class="about-section-title"><span class="dot" style="background:#3a86ff;"></span>Et après ?</h2>
+      <p style="font-family:'Nunito',sans-serif;">Une fois que vous maîtrisez Cubie Newbie et que vous pouvez résoudre le cube confortablement en 3-5 minutes, vous aurez plusieurs options :</p>
+      <ul style="font-family:'Nunito',sans-serif;">
+        <li><strong>Continuez à pratiquer :</strong> Améliorez votre fluidité et votre vitesse avec cette méthode</li>
+        <li><strong>Explorez d'autres puzzles :</strong> Cube 2x2, 4x4, Pyraminx, et plus encore !</li>
+        <li><strong>Passez à la méthode CFOP :</strong> La méthode des champions pour aller plus vite</li>
+        <li><strong>Apprenez d'autres méthodes :</strong> Roux, ZZ, Petrus... Il y a tout un monde à découvrir !</li>
+      </ul>
     </div>
+  </div>
 
-    <!-- Citation finale -->
-    <div class="card bg-gradient shadow-sm mb-4" style="background: linear-gradient(135deg, #43cea2 0%, #185a9d 100%);">
-        <div class="card-body text-center text-white p-4">
-            <h4 class="mb-0" style="font-style: italic;">
-                "Le secret n'est pas d'être rapide, c'est de ne jamais abandonner. Chaque cube résolu est une victoire !"
-            </h4>
-        </div>
+  <!-- Prêt à commencer -->
+  <div class="card bg-success text-white shadow-sm mb-4">
+    <div class="card-body text-center p-5">
+      <h2 class="mb-3" style="font-family:'Fredoka One',cursive;">Prêt à commencer votre aventure ?</h2>
+      <p class="mb-3" style="font-family:'Nunito',sans-serif;">
+        Le Rubik's Cube peut sembler impossible au début, mais avec la méthode Cubie Newbie, vous découvrirez que c'est accessible à tous. Pas besoin d'être un génie ou d'avoir des talents spéciaux — juste un peu de patience et la volonté d'apprendre.
+      </p>
+      <p class="mb-0" style="font-family:'Nunito',sans-serif;">
+        Des millions de personnes dans le monde ont appris à résoudre le Rubik's Cube. Vous êtes sur le point de rejoindre cette communauté passionnante. Ruru sera là à chaque étape — allons-y ensemble, un mouvement à la fois !
+      </p>
     </div>
+  </div>
 
-    <!-- Navigation -->
-    <div class="d-flex justify-content-between flex-wrap gap-2">
-        <a href="{% url 'main:method_cubienewbie' %}" class="btn btn-outline-secondary btn-lg">
-            ← Retour aux étapes
-        </a>
-        <a href="{% url 'main:cubienewbie_cube_intro' %}" class="btn btn-success btn-lg">
-            Le cube →
-        </a>
+  <!-- Citation finale -->
+  <div class="card bg-gradient shadow-sm mb-4" style="background: linear-gradient(135deg, #43cea2 0%, #185a9d 100%);">
+    <div class="card-body text-center text-white p-4">
+      <h4 class="mb-0" style="font-family:'Nunito',sans-serif; font-style: italic;">
+        "Le secret n'est pas d'être rapide, c'est de ne jamais abandonner. Chaque cube résolu est une victoire !"
+      </h4>
     </div>
+  </div>
+
+  <!-- Navigation -->
+  <div class="d-flex justify-content-between flex-wrap gap-2">
+    <a href="{% url 'main:method_cubienewbie' %}" class="btn btn-outline-secondary btn-lg" style="font-family:'Nunito',sans-serif; font-weight:700;">
+      ← Retour aux étapes
+    </a>
+    <a href="{% url 'main:cubienewbie_cube_intro' %}" class="btn btn-success btn-lg" style="font-family:'Nunito',sans-serif; font-weight:700;">
+      Le cube →
+    </a>
+  </div>
+
 </div>
-
 {% endblock %}

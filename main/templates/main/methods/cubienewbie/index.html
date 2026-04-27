@@ -9,11 +9,15 @@
     <!-- Load the SVG template -->
     {% include "cube/partials/_cube_svg.html" %}
 
-    <h1 class="text-center mb-4">Méthode Cubie-Newbie  Cube 3×3</h1>
-    <p class="lead text-center mb-5">
-        Une méthode simple et progressive pour apprendre à résoudre votre premier Rubik's Cube.
-    </p>
-
+   <div class="d-flex align-items-center gap-4 mb-5">
+<img src="{% static 'main/img/ruru_livre_cubienewbie.png' %}" alt="Logo Francontcube" width="200" class="rounded-3">
+    <div>
+        <h1 class="mb-4">Méthode Cubie-Newbie</h1>
+        <p class="lead mb-0">
+            Une méthode super simple et progressive pour apprendre à résoudre votre premier Rubik's Cube.
+        </p>
+    </div>
+</div>
     <div class="row g-4">
 
         {% for step in steps %}
