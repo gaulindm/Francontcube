@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <title>Teleprompter</title>
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; }
+
+    html, body {
+      margin: 0;
+      padding: 0;
+      background: #000;
+      color: #fff;
+      overflow: hidden;
+      font-family: Georgia, 'Times New Roman', serif;
+      height: 100%;
+      width: 100%;
+    }
+
+    /* ── Controls bar ── */
+    #controls {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%;
+      background: rgba(15, 15, 15, 0.97);
+      border-bottom: 1px solid #333;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      align-items: center;
+      gap: 6px;
+      padding: 8px 10px;
+      z-index: 1000;
+    }
+
+    .ctrl-group {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      background: #1a1a1a;
+      border: 1px solid #333;
+      border-radius: 10px;
+      padding: 4px 8px;
+    }
+
+    .ctrl-group label {
+      font-size: 11px;
+      color: #888;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-right: 2px;
+    }
+
+    button {
+      font-size: 15px;
+      padding: 7px 12px;
+      border-radius: 8px;
+      border: 1px solid #444;
+      background: #2a2a2a;
+      color: #eee;
+      cursor: pointer;
+      line-height: 1;
+      touch-action: manipulation;
+      -webkit-tap-highlight-color: transparent;
+      transition: background 0.1s;
+    }
+
+    button:active { background: #555; }
+
+    button.active {
+      background: #e63946;
+      border-color: #e63946;
+      color: #fff;
+    }
+
+    .ctrl-group span {
+      font-size: 14px;
+      min-width: 44px;
+      text-align: center;
+      color: #ddd;
+      font-variant-numeric: tabular-nums;
+    }
+
+    /* play/pause bigger */
+    #playBtn {
+      font-size: 20px;
+      padding: 7px 16px;
+    }
+
+    /* ── Scrolling viewport ── */
+    #content-wrapper {
+      position: fixed;
+      top: 0; bottom: 0;
+      left: 0; right: 0;
+      overflow: hidden;
+    }
+
+    /* ── Text ── */
+    #content {
+      padding: 40px 60px 200px;
+      font-size: 48px;
+      line-height: 1.6;
+      text-align: center;
+      white-space: pre-wrap;
+      transform-origin: center top;
+      will-change: transform;
+      /* controls bar height offset applied via JS */
+    }
+
+    /* ── Reading guide lines ── */
+    #reading-zone {
+      position: fixed;
+      top: 50%;
+      left: 0;
+      width: 100%;
+      height: 90px;
+      transform: translateY(-50%);
+      border-top: 2px solid rgba(255, 255, 255, 0.25);
+      border-bottom: 2px solid rgba(255, 255, 255, 0.25);
+      pointer-events: none;
+      z-index: 500;
+    }
+
+    /* ── Tap hint ── */
+    #tap-hint {
+      position: fixed;
+      bottom: 20px;
+      width: 100%;
+      text-align: center;
+      font-size: 13px;
+      color: rgba(255,255,255,0.25);
+      pointer-events: none;
+      z-index: 900;
+      letter-spacing: 0.08em;
+    }
+  </style>
+</head>
+<body>
+
+<!-- Controls -->
+<div id="controls">
+
+  <div class="ctrl-group">
+    <label>Font</label>
+    <button ontouchend="tap(event, decreaseFont)" onclick="decreaseFont()">A−</button>
+    <span id="fontDisplay">48px</span>
+    <button ontouchend="tap(event, increaseFont)" onclick="increaseFont()">A+</button>
+  </div>
+
+  <div class="ctrl-group">
+    <label>Speed</label>
+    <button ontouchend="tap(event, decreaseSpeed)" onclick="decreaseSpeed()">−</button>
+    <span id="speedDisplay">0.3</span>
+    <button ontouchend="tap(event, increaseSpeed)" onclick="increaseSpeed()">+</button>
+  </div>
+
+  <button id="playBtn" ontouchend="tap(event, togglePlay)" onclick="togglePlay()">⏸</button>
+
+  <button id="mirrorBtn" ontouchend="tap(event, toggleMirror)" onclick="toggleMirror()">⇔ Mirror</button>
+
+  <button ontouchend="tap(event, resetPosition)" onclick="resetPosition()">↩ Reset</button>
+
+</div>
+
+<!-- Reading guide -->
+<div id="reading-zone"></div>
+
+<!-- Scrolling text -->
+<div id="content-wrapper">
+  <div id="content"></div>
+</div>
+
+<div id="tap-hint">tap anywhere to pause / resume</div>
+
+<script>
+/* ═══════════════════════════════════════════════
+   📝  YOUR SCRIPT — edit between the backticks
+   ═══════════════════════════════════════════════ */
+const SCRIPT_TEXT = `
+                 
+ 
+ 
+« Félicitations ! Tu as résolu ton Rubik's Cube avec les 8 missions ! » 🎉
+« Tu es officiellement plus un Cubie Newbie ! »
+
+« Mais dis-moi… est-ce que tu trouves que c'est un peu long ? »
+« Est-ce que tu répètes toujours les mêmes mouvements encore… et encore… et encore ? » 
+
+« Bonne nouvelle ! Tu es prêt pour la prochaine étape… »
+« Bienvenue dans Cubie Curieux ! » 🌟
+
+« Ici, je vais t'apprendre des façons plus intelligentes et plus rapides de résoudre des parties de ton cube ! »
+« Alors, tu es prêt à devenir un Cubie Curieux ? »
+`;
+/* ═══════════════════════════════════════════════ */
+
+// ── State ──
+let position   = 0;
+let speed      = 0.3;
+let targetSpeed= 0.3;
+let fontSize   = 48;
+let mirrored   = true;
+let isPlaying  = true;
+let animId     = null;
+let ctrlHeight = 60;
+
+// ── Init ──
+loadSettings();
+updateContent();
+updateDisplays();
+applyMirrorBtn();
+startScrolling();
+
+// Measure control bar after render
+window.addEventListener('load', measureControls);
+window.addEventListener('resize', measureControls);
+
+function measureControls() {
+  ctrlHeight = document.getElementById('controls').offsetHeight;
+  document.getElementById('content').style.paddingTop =
+    (ctrlHeight + 40) + 'px';
+}
+
+function updateContent() {
+  const el = document.getElementById('content');
+  el.innerText = SCRIPT_TEXT.trim();
+  el.style.fontSize = fontSize + 'px';
+}
+
+// ── Scroll engine ──
+function startScrolling() {
+  if (animId) return;
+
+  function step() {
+    if (isPlaying) {
+      speed += (targetSpeed - speed) * 0.08; // smooth easing
+
+      const el = document.getElementById('content');
+      const maxScroll = Math.max(0, el.scrollHeight - window.innerHeight + ctrlHeight);
+
+      if (position < maxScroll) {
+        position += speed;
+      } else {
+        position = maxScroll; // stop at end
+      }
+
+      el.style.transform =
+        (mirrored ? 'scaleX(-1) ' : '') +
+        'translateY(-' + position + 'px)';
+    }
+    animId = requestAnimationFrame(step);
+  }
+  animId = requestAnimationFrame(step);
+}
+
+// ── Controls ──
+function togglePlay() {
+  isPlaying = !isPlaying;
+  document.getElementById('playBtn').innerText = isPlaying ? '⏸' : '▶';
+}
+
+function increaseSpeed() {
+  targetSpeed = Math.min(5, +(targetSpeed + 0.1).toFixed(1));
+  updateDisplays(); saveSettings();
+}
+
+function decreaseSpeed() {
+  targetSpeed = Math.max(0, +(targetSpeed - 0.1).toFixed(1));
+  updateDisplays(); saveSettings();
+}
+
+function increaseFont() {
+  fontSize = Math.min(120, fontSize + 4);
+  document.getElementById('content').style.fontSize = fontSize + 'px';
+  updateDisplays(); saveSettings();
+}
+
+function decreaseFont() {
+  fontSize = Math.max(16, fontSize - 4);
+  document.getElementById('content').style.fontSize = fontSize + 'px';
+  updateDisplays(); saveSettings();
+}
+
+function toggleMirror() {
+  mirrored = !mirrored;
+  applyMirrorBtn();
+  saveSettings();
+}
+
+function applyMirrorBtn() {
+  const btn = document.getElementById('mirrorBtn');
+  btn.classList.toggle('active', mirrored);
+}
+
+function resetPosition() {
+  position = 0;
+  isPlaying = false;
+  document.getElementById('playBtn').innerText = '▶';
+}
+
+// ── Displays ──
+function updateDisplays() {
+  document.getElementById('speedDisplay').innerText = targetSpeed.toFixed(1);
+  document.getElementById('fontDisplay').innerText  = fontSize + 'px';
+}
+
+// ── Settings persistence ──
+function saveSettings() {
+  try {
+    localStorage.setItem('tpSettings', JSON.stringify({
+      speed: targetSpeed, fontSize, mirrored
+    }));
+  } catch(e) {}
+}
+
+function loadSettings() {
+  try {
+    const s = JSON.parse(localStorage.getItem('tpSettings'));
+    if (s) {
+      targetSpeed = s.speed    ?? 0.3;
+      speed       = targetSpeed;
+      fontSize    = s.fontSize ?? 48;
+      mirrored    = s.mirrored ?? true;
+    }
+  } catch(e) {}
+}
+
+// ── Tap anywhere = play/pause (not on buttons) ──
+// Use touchend for iOS responsiveness; prevent ghost click
+function tap(e, fn) {
+  e.preventDefault();
+  e.stopPropagation();
+  fn();
+}
+
+document.addEventListener('touchend', function(e) {
+  if (e.target.tagName === 'BUTTON') return;
+  e.preventDefault();
+  togglePlay();
+}, { passive: false });
+
+// Fallback for mouse (desktop)
+document.addEventListener('click', function(e) {
+  if (e.target.tagName === 'BUTTON') return;
+  togglePlay();
+});
+</script>
+
+</body>
+</html>

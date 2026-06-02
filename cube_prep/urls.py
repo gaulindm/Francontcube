@@ -1,5 +1,7 @@
 from django.urls import path
 from . import views
+from django.views.generic import TemplateView  # ← add this import
+
 
 app_name = 'cube_prep'
 
@@ -20,5 +22,7 @@ urlpatterns = [
     #path('generate-cube-pdf/<int:cube_id>/', views.generate_cube_pdf_view, name='generate_cube_pdf'),
     #path('pdf-generator/', views.pdf_generator_view, name='pdf_generator_view'),
     #path('pdf-generator/download/', views.generate_three_copies_pdf, name='generate_three_copies_pdf'),
+
+    path('teleprompter/', TemplateView.as_view(template_name='cube_prep/teleprompter.html'), name='teleprompter'),  # ← add this
 
 ]
