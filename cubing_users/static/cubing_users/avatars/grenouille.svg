@@ -1,0 +1,362 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   viewBox="0 0 200 220"
+   width="200"
+   height="220"
+   version="1.1"
+   id="svg34"
+   sodipodi:docname="grenouille.svg"
+   inkscape:version="1.4.4 (dcaf3e7d9e, 2026-05-05)"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  
+  
+  <!-- =================== CORPS =================== -->
+  <g
+     id="body"
+     style="display:inline">
+    <ellipse
+       cx="100"
+       cy="170"
+       rx="42"
+       ry="38"
+       fill="#5ACA5A"
+       stroke="#1a4a1a"
+       stroke-width="3"
+       id="ellipse10" />
+  </g>
+  <!-- Ventre clair -->
+  <g
+     id="belly"
+     style="display:inline">
+    <ellipse
+       cx="100"
+       cy="172"
+       rx="28"
+       ry="26"
+       fill="#E8F8C8"
+       stroke="none"
+       id="ellipse11" />
+  </g>
+  <!-- =================== PATTES ARRIÈRE =================== -->
+  <!-- Cuisse arrière gauche -->
+  <!-- Pied arrière gauche (palmé) -->
+  <!-- Cuisse arrière droite -->
+  <!-- Pied arrière droit (palmé) -->
+  <g
+     id="back-limbs"
+     style="display:inline">
+    <ellipse
+       cx="58"
+       cy="188"
+       rx="20"
+       ry="13"
+       fill="#5ACA5A"
+       stroke="#1a4a1a"
+       stroke-width="2.8"
+       transform="rotate(30,58,188)"
+       id="ellipse12" />
+    <path
+       d="m 42,202 q -6,-6 -4,-14 6,6 12,10 -2,-10 4,-14 2,10 8,12 -4,-10 4,-12 -2,12 4,16 -10,4 -28,2 z"
+       fill="#5ACA5A"
+       stroke="#1a4a1a"
+       stroke-width="2.2"
+       stroke-linejoin="round"
+       id="path12" />
+    <ellipse
+       cx="142"
+       cy="188"
+       rx="20"
+       ry="13"
+       fill="#5ACA5A"
+       stroke="#1a4a1a"
+       stroke-width="2.8"
+       transform="rotate(-30,142,188)"
+       id="ellipse13" />
+    <path
+       d="m 158,202 q 6,-6 4,-14 -6,6 -12,10 2,-10 -4,-14 -2,10 -8,12 4,-10 -4,-12 2,12 -4,16 10,4 28,2 z"
+       fill="#5ACA5A"
+       stroke="#1a4a1a"
+       stroke-width="2.2"
+       stroke-linejoin="round"
+       id="path13" />
+  </g>
+  <!-- =================== BRAS =================== -->
+  <!-- Bras gauche -->
+  <!-- Main gauche (3 doigts ronds) -->
+  <!-- Bras droit -->
+  <!-- Main droite (3 doigts ronds) -->
+  <g
+     id="front-limbs"
+     style="display:inline">
+    <ellipse
+       cx="62"
+       cy="164"
+       rx="13"
+       ry="18"
+       fill="#5ACA5A"
+       stroke="#1a4a1a"
+       stroke-width="2.8"
+       transform="rotate(-20,62,164)"
+       id="ellipse14" />
+    <circle
+       cx="48"
+       cy="170"
+       r="6"
+       fill="#5ACA5A"
+       stroke="#1a4a1a"
+       stroke-width="2.2"
+       id="circle14" />
+    <circle
+       cx="44"
+       cy="162"
+       r="6"
+       fill="#5ACA5A"
+       stroke="#1a4a1a"
+       stroke-width="2.2"
+       id="circle15" />
+    <circle
+       cx="50"
+       cy="156"
+       r="6"
+       fill="#5ACA5A"
+       stroke="#1a4a1a"
+       stroke-width="2.2"
+       id="circle16" />
+    <ellipse
+       cx="138"
+       cy="164"
+       rx="13"
+       ry="18"
+       fill="#5ACA5A"
+       stroke="#1a4a1a"
+       stroke-width="2.8"
+       transform="rotate(20,138,164)"
+       id="ellipse16" />
+    <circle
+       cx="152"
+       cy="170"
+       r="6"
+       fill="#5ACA5A"
+       stroke="#1a4a1a"
+       stroke-width="2.2"
+       id="circle17" />
+    <circle
+       cx="156"
+       cy="162"
+       r="6"
+       fill="#5ACA5A"
+       stroke="#1a4a1a"
+       stroke-width="2.2"
+       id="circle18" />
+    <circle
+       cx="150"
+       cy="156"
+       r="6"
+       fill="#5ACA5A"
+       stroke="#1a4a1a"
+       stroke-width="2.2"
+       id="circle19" />
+  </g>
+  <g
+     id="bandana"
+     transform="translate(0.30468802,-2.3665059)"
+     style="display:inline">
+    <!-- Tissu principal du foulard -->
+    <path
+       d="m 62,138 q 38,10 76,0 -18,37 -38,42 -20,-5 -38,-42 z"
+       fill="#0051a2"
+       stroke="#2c1810"
+       stroke-width="2.5"
+       stroke-linejoin="round"
+       id="path16-3" />
+    <!-- Pli central du foulard (ombre) -->
+    <path
+       d="m 100,148 q 0,17 0,32"
+       fill="none"
+       stroke="#003a7a"
+       stroke-width="1.5"
+       opacity="0.5"
+       id="path17-6" />
+    <!-- Reflet gauche -->
+    <path
+       d="m 70,142 q 15,13 25,20"
+       fill="none"
+       stroke="#4a90d9"
+       stroke-width="1.5"
+       opacity="0.4"
+       id="path18-7" />
+    <!-- Nœud du foulard à gauche -->
+    <!-- Brin gauche du nœud -->
+    <!-- Brin droit du nœud -->
+  </g>
+  <!-- =================== FOULARD =================== -->
+  <!-- Triangle pendant -->
+  <!-- =================== TÊTE =================== -->
+  <!-- Tête large et aplatie (style grenouille) -->
+  <g
+     id="Head"
+     style="display:inline">
+    <ellipse
+       cx="100"
+       cy="100"
+       rx="56"
+       ry="46"
+       fill="#6AD86A"
+       stroke="#1a4a1a"
+       stroke-width="3.5"
+       id="ellipse20" />
+  </g>
+  <!-- Gorge / menton clair -->
+  <!-- =================== YEUX GLOBULEUX (sur le dessus de la tête) =================== -->
+  <!-- Globe oculaire gauche -->
+  <!-- Blanc de l'œil gauche -->
+  <!-- Pupille gauche -->
+  <!-- Reflet gauche -->
+  <!-- Globe oculaire droit -->
+  <!-- Blanc de l'œil droit -->
+  <!-- Pupille droite -->
+  <!-- Reflet droit -->
+  <!-- =================== VISAGE =================== -->
+  <!-- Nez (2 narines sur le museau plat) -->
+  <!-- Grande bouche souriante caractéristique -->
+  <!-- Coins relevés -->
+  <!-- Joues rondes roses -->
+  <g
+     id="face"
+     style="display:inline">
+    <ellipse
+       cx="100"
+       cy="118"
+       rx="34"
+       ry="18"
+       fill="#E8F8C8"
+       stroke="none"
+       id="ellipse21" />
+    <circle
+       cx="72"
+       cy="72"
+       r="22"
+       fill="#7AE87A"
+       stroke="#1a4a1a"
+       stroke-width="3"
+       id="circle21" />
+    <circle
+       cx="72"
+       cy="72"
+       r="15"
+       fill="#ffffff"
+       stroke="#1a4a1a"
+       stroke-width="1.5"
+       id="circle22" />
+    <circle
+       cx="74"
+       cy="73"
+       r="9"
+       fill="#1a1a1a"
+       id="circle23" />
+    <circle
+       cx="78"
+       cy="68"
+       r="3"
+       fill="#ffffff"
+       id="circle24" />
+    <circle
+       cx="70"
+       cy="77"
+       r="1.5"
+       fill="#ffffff"
+       opacity="0.6"
+       id="circle25" />
+    <circle
+       cx="128"
+       cy="72"
+       r="22"
+       fill="#7AE87A"
+       stroke="#1a4a1a"
+       stroke-width="3"
+       id="circle26" />
+    <circle
+       cx="128"
+       cy="72"
+       r="15"
+       fill="#ffffff"
+       stroke="#1a4a1a"
+       stroke-width="1.5"
+       id="circle27" />
+    <circle
+       cx="130"
+       cy="73"
+       r="9"
+       fill="#1a1a1a"
+       id="circle28" />
+    <circle
+       cx="134"
+       cy="68"
+       r="3"
+       fill="#ffffff"
+       id="circle29" />
+    <circle
+       cx="126"
+       cy="77"
+       r="1.5"
+       fill="#ffffff"
+       opacity="0.6"
+       id="circle30" />
+    <ellipse
+       cx="94"
+       cy="104"
+       rx="4"
+       ry="3"
+       fill="#1a4a1a"
+       opacity="0.65"
+       id="ellipse30" />
+    <ellipse
+       cx="106"
+       cy="104"
+       rx="4"
+       ry="3"
+       fill="#1a4a1a"
+       opacity="0.65"
+       id="ellipse31" />
+    <path
+       d="m 68,112 q 32,18 64,0"
+       stroke="#1a4a1a"
+       stroke-width="3"
+       fill="none"
+       stroke-linecap="round"
+       id="path31" />
+    <path
+       d="m 68,112 q -3,6 2,8"
+       stroke="#1a4a1a"
+       stroke-width="2.5"
+       fill="none"
+       stroke-linecap="round"
+       id="path32" />
+    <path
+       d="m 132,112 q 3,6 -2,8"
+       stroke="#1a4a1a"
+       stroke-width="2.5"
+       fill="none"
+       stroke-linecap="round"
+       id="path33" />
+    <ellipse
+       cx="72"
+       cy="118"
+       rx="10"
+       ry="7"
+       fill="#ff9999"
+       opacity="0.45"
+       id="ellipse33" />
+    <ellipse
+       cx="128"
+       cy="118"
+       rx="10"
+       ry="7"
+       fill="#ff9999"
+       opacity="0.45"
+       id="ellipse34" />
+  </g>
+</svg>

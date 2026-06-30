@@ -1,0 +1,272 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   viewBox="0 0 200 220"
+   width="200"
+   height="220"
+   version="1.1"
+   id="svg25"
+   sodipodi:docname="manchot.svg"
+   inkscape:version="1.4.4 (dcaf3e7d9e, 2026-05-05)"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <defs
+     id="defs1" />
+  <sodipodi:namedview
+     id="namedview1"
+     pagecolor="#ffffff"
+     bordercolor="#000000"
+     borderopacity="0.25"
+     inkscape:showpageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1"
+     inkscape:zoom="3.65"
+     inkscape:cx="100"
+     inkscape:cy="148.08219"
+     inkscape:window-width="1862"
+     inkscape:window-height="1011"
+     inkscape:window-x="0"
+     inkscape:window-y="0"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="svg25" />
+  <!-- =================== CORPS =================== -->
+  <g
+     id="g28">
+    <ellipse
+       cx="100"
+       cy="168"
+       rx="40"
+       ry="44"
+       fill="#3A3D4A"
+       stroke="#0E0F14"
+       stroke-width="3"
+       id="ellipse10" />
+  </g>
+  <!-- Ventre blanc ovale -->
+  <g
+     id="g27">
+    <ellipse
+       cx="100"
+       cy="170"
+       rx="26"
+       ry="34"
+       fill="#FFFFFF"
+       stroke="none"
+       id="ellipse11" />
+  </g>
+  <!-- Aile gauche (aplatie, style pingouin) -->
+  <!-- Aile droite -->
+  <g
+     id="g26">
+    <path
+       d="M62,130 Q36,148 38,182 Q40,200 56,202 Q64,194 64,174 Q66,154 66,138 Z"
+       fill="#3A3D4A"
+       stroke="#0E0F14"
+       stroke-width="3"
+       stroke-linejoin="round"
+       id="path11" />
+    <path
+       d="M138,130 Q164,148 162,182 Q160,200 144,202 Q136,194 136,174 Q134,154 134,138 Z"
+       fill="#3A3D4A"
+       stroke="#0E0F14"
+       stroke-width="3"
+       stroke-linejoin="round"
+       id="path12" />
+  </g>
+  <!-- Patte gauche -->
+  <!-- Patte droite -->
+  <g
+     id="g25">
+    <path
+       d="M84,206 L74,216 M84,206 L82,218 M84,206 L90,218"
+       stroke="#FFAA00"
+       stroke-width="4"
+       stroke-linecap="round"
+       id="path13" />
+    <ellipse
+       cx="82"
+       cy="214"
+       rx="10"
+       ry="5"
+       fill="#FFAA00"
+       stroke="#0E0F14"
+       stroke-width="2"
+       transform="rotate(-10 82 214)"
+       id="ellipse13" />
+    <path
+       d="M116,206 L110,218 M116,206 L118,218 M116,206 L126,216"
+       stroke="#FFAA00"
+       stroke-width="4"
+       stroke-linecap="round"
+       id="path14" />
+    <ellipse
+       cx="118"
+       cy="214"
+       rx="10"
+       ry="5"
+       fill="#FFAA00"
+       stroke="#0E0F14"
+       stroke-width="2"
+       transform="rotate(10 118 214)"
+       id="ellipse14" />
+  </g>
+  <g
+     id="bandana"
+     transform="translate(-0.8870923,-7.3254055)"
+     style="display:inline">
+    <!-- Tissu principal du foulard -->
+    <path
+       d="m 62,138 q 38,10 76,0 -18,37 -38,42 -20,-5 -38,-42 z"
+       fill="#0051a2"
+       stroke="#2c1810"
+       stroke-width="2.5"
+       stroke-linejoin="round"
+       id="path16-7" />
+    <!-- Pli central du foulard (ombre) -->
+    <path
+       d="m 100,148 q 0,17 0,32"
+       fill="none"
+       stroke="#003a7a"
+       stroke-width="1.5"
+       opacity="0.5"
+       id="path17-5" />
+    <!-- Reflet gauche -->
+    <path
+       d="m 70,142 q 15,13 25,20"
+       fill="none"
+       stroke="#4a90d9"
+       stroke-width="1.5"
+       opacity="0.4"
+       id="path18" />
+    <!-- Nœud du foulard à gauche -->
+    <!-- Brin gauche du nœud -->
+    <!-- Brin droit du nœud -->
+  </g>
+  <!-- =================== FOULARD =================== -->
+  <!-- Triangle pendant -->
+  <!-- =================== TÊTE =================== -->
+  <g
+     id="g29">
+    <ellipse
+       cx="100"
+       cy="98"
+       rx="50"
+       ry="48"
+       fill="#404350"
+       stroke="#0E0F14"
+       stroke-width="3.5"
+       id="ellipse16" />
+  </g>
+  <!-- Masque blanc facial (joues + tour des yeux) -->
+  <!-- Tache noire sur le dessus de la tête -->
+  <!-- =================== VISAGE =================== -->
+  <!-- Œil gauche -->
+  <!-- Œil droit -->
+  <!-- Bec triangulaire orange -->
+  <!-- Ligne milieu bec -->
+  <!-- Joues roses -->
+  <g
+     id="g30">
+    <path
+       d="M62,100 Q66,78 82,72 Q100,68 118,72 Q134,78 138,100 Q136,118 118,126 Q100,130 82,126 Q64,118 62,100 Z"
+       fill="#FFFFFF"
+       stroke="none"
+       id="path17" />
+    <ellipse
+       cx="100"
+       cy="80"
+       rx="36"
+       ry="20"
+       fill="#404350"
+       stroke="none"
+       id="ellipse17" />
+    <circle
+       cx="80"
+       cy="94"
+       r="14"
+       fill="white"
+       stroke="#0E0F14"
+       stroke-width="2.5"
+       id="circle17" />
+    <circle
+       cx="82"
+       cy="95"
+       r="8"
+       fill="#1A1A1A"
+       id="circle18" />
+    <circle
+       cx="86"
+       cy="91"
+       r="3"
+       fill="white"
+       id="circle19" />
+    <circle
+       cx="79"
+       cy="98"
+       r="1.3"
+       fill="white"
+       opacity="0.6"
+       id="circle20" />
+    <circle
+       cx="120"
+       cy="94"
+       r="14"
+       fill="white"
+       stroke="#0E0F14"
+       stroke-width="2.5"
+       id="circle21" />
+    <circle
+       cx="122"
+       cy="95"
+       r="8"
+       fill="#1A1A1A"
+       id="circle22" />
+    <circle
+       cx="126"
+       cy="91"
+       r="3"
+       fill="white"
+       id="circle23" />
+    <circle
+       cx="119"
+       cy="98"
+       r="1.3"
+       fill="white"
+       opacity="0.6"
+       id="circle24" />
+    <path
+       d="M90,112 L100,107 L110,112 Q104,122 100,124 Q96,122 90,112 Z"
+       fill="#FFAA00"
+       stroke="#0E0F14"
+       stroke-width="2"
+       stroke-linejoin="round"
+       id="path24" />
+    <line
+       x1="100"
+       y1="107"
+       x2="100"
+       y2="121"
+       stroke="#0E0F14"
+       stroke-width="1.5"
+       opacity="0.5"
+       id="line24" />
+    <ellipse
+       cx="66"
+       cy="108"
+       rx="9"
+       ry="6.5"
+       fill="#FF9999"
+       opacity="0.5"
+       id="ellipse24" />
+    <ellipse
+       cx="134"
+       cy="108"
+       rx="9"
+       ry="6.5"
+       fill="#FF9999"
+       opacity="0.5"
+       id="ellipse25" />
+  </g>
+</svg>

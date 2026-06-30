@@ -1,117 +1,93 @@
 # cubing_users/authentication.py
-from django.contrib.auth.hashers import check_password, make_password
+import hashlib
+import random
 from .models import Cuber
 
-class CuberAuthenticationBackend:
-    """
-    Backend d'authentification custom pour les cubeurs.
-    Authentifie avec: color + adjective + superhero + color_code
-    """
-    
-    def authenticate(self, request, color=None, adjective=None, superhero=None, color_code=None, **kwargs):
-        """
-        Authentifie un cubeur avec son identité et son code couleur.
-        
-        Args:
-            color: Rouge, Bleu, Vert, Jaune, Orange, Blanc
-            adjective: Rapide, Éclair, Génial, etc.
-            superhero: Solveur, Maître, Cubeur, etc.
-            color_code: Liste de 6 couleurs (ex: ['Rouge', 'Bleu', 'Vert', 'Jaune', 'Orange', 'Blanc'])
-        
-        Returns:
-            Cuber object si authentification réussie, None sinon
-        """
-        if not all([color, adjective, superhero, color_code]):
-            return None
-        
-        try:
-            # Trouve le cubeur par son identité
-            cuber = Cuber.objects.get(
-                color=color,
-                adjective=adjective,
-                superhero=superhero
-            )
-            
-            # Vérifie le color_code
-            if check_password(color_code, cuber.color_code_hash):
-                return cuber
-            
-        except Cuber.DoesNotExist:
-            # Crée un hash dummy pour éviter le timing attack
-            make_password(color_code)
-        
-        return None
-    
-    def get_user(self, cuber_id):
-        """
-        Récupère un cubeur par son ID.
-        Utilisé par Django pour maintenir la session.
-        """
-        try:
-            return Cuber.objects.get(pk=cuber_id)
-        except Cuber.DoesNotExist:
-            return None
 
-
-# Fonctions helper pour gérer les color codes
 def hash_color_code(color_code):
     """
-    Hash un color_code (liste de 6 couleurs) de façon sécurisée.
-    
+    Hash un color_code avec SHA256.
+
     Args:
-        color_code: Liste ou string (ex: ['Rouge', 'Bleu', ...] ou "Rouge,Bleu,...")
-    
+        color_code: liste ou string (ex: ['Rouge','Bleu','Vert'] ou "Rouge,Bleu,Vert")
+
     Returns:
-        String hashé
+        String hexadécimal SHA256
     """
     if isinstance(color_code, list):
         color_code = ','.join(color_code)
-    return make_password(color_code)
+    return hashlib.sha256(color_code.encode()).hexdigest()
 
 
 def verify_color_code(color_code, hashed):
     """
-    Vérifie si un color_code correspond au hash.
-    
+    Vérifie si un color_code correspond au hash stocké.
+
     Args:
-        color_code: Liste ou string
-        hashed: Le hash stocké en DB
-    
+        color_code: liste ou string
+        hashed:     le hash SHA256 stocké en DB
+
     Returns:
         Boolean
     """
-    if isinstance(color_code, list):
-        color_code = ','.join(color_code)
-    return check_password(color_code, hashed)
+    return hash_color_code(color_code) == hashed
 
 
 def generate_color_code():
     """
-    Génère un color_code aléatoire de 6 couleurs.
-    
+    Génère un color_code aléatoire de 3 couleurs (répétitions permises).
+
     Returns:
-        Liste de 6 couleurs
+        Liste de 3 couleurs
     """
-    import random
     colors = ['Rouge', 'Bleu', 'Vert', 'Jaune', 'Orange', 'Blanc']
-    return [random.choice(colors) for _ in range(6)]
+    return [random.choice(colors) for _ in range(3)]
 
 
-def is_color_code_unique(color, adjective, superhero, color_code):
+class CuberAuthenticationBackend:
     """
-    Vérifie si cette combinaison identité + color_code est unique.
-    
-    Returns:
-        Boolean
+    Backend d'authentification custom pour les cubeurs.
+    Authentifie avec: animal + cube_color + quality_1 + quality_2 + color_code (3 couleurs)
     """
-    try:
-        cuber = Cuber.objects.get(
-            color=color,
-            adjective=adjective,
-            superhero=superhero
-        )
-        # L'identité existe, vérifie si le color_code est différent
-        return not verify_color_code(color_code, cuber.color_code_hash)
-    except Cuber.DoesNotExist:
-        # L'identité n'existe pas, donc c'est unique
-        return True
+
+    def authenticate(self, request, animal=None, cube_color=None,
+                     quality_1=None, quality_2=None, color_code=None, **kwargs):
+        """
+        Authentifie un cubeur avec son identité visuelle et son code couleur.
+
+        Args:
+            animal:     clé de l'animal   (ex: 'hibou')
+            cube_color: clé de la couleur  (ex: 'bleu')
+            quality_1:  clé 1re qualité    (ex: 'curieux')
+            quality_2:  clé 2e qualité     (ex: 'courageux')
+            color_code: string 3 couleurs séparées par virgule (ex: 'Rouge,Bleu,Rouge')
+
+        Returns:
+            Cuber si authentification réussie, None sinon
+        """
+        if not all([animal, cube_color, quality_1, quality_2, color_code]):
+            return None
+
+        try:
+            cuber = Cuber.objects.get(
+                animal=animal,
+                cube_color=cube_color,
+                quality_1=quality_1,
+                quality_2=quality_2,
+            )
+
+            if verify_color_code(color_code, cuber.color_code_hash):
+                return cuber
+
+        except Cuber.DoesNotExist:
+            # Hash dummy pour éviter les timing attacks
+            hash_color_code(color_code)
+
+        return None
+
+    def get_user(self, cuber_id):
+        """Récupère un cubeur par son ID — utilisé par Django pour la session."""
+        try:
+            return Cuber.objects.get(pk=cuber_id)
+        except Cuber.DoesNotExist:
+            return None

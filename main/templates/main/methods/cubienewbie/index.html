@@ -18,6 +18,22 @@
         </p>
     </div>
 </div>
+<div class="card mb-5 shadow-sm">
+    <div class="card-body text-center">
+        <h3>Commencer la formation</h3>
+        <p>
+            Suivez la méthode Cubie-Newbie étape par étape sur YouTube.
+        </p>
+
+        <a
+            href="https://www.youtube.com/watch?v=ijyADdRXc7Y&list=PLoVM3iIITPJF6RIc_wIl9NApSuQtmO8Vg"
+            target="_blank"
+            class="btn btn-danger btn-lg">
+            ▶ Voir la playlist complète
+        </a>
+    </div>
+</div>
+
     <div class="row g-4">
 
         {% for step in steps %}
@@ -26,6 +42,20 @@
 
                 <h4>{{ step.name }}</h4>
                 <p class="text-muted">{{ step.desc }}</p>
+
+                {% if step.youtube_id %}
+                <div class="video-thumb mb-3">
+                    <a href="https://www.youtube.com/watch?v={{ step.youtube_id }}"
+                    target="_blank">
+
+                        <img
+                            src="https://img.youtube.com/vi/{{ step.youtube_id }}/hqdefault.jpg"
+                            alt="{{ step.name }}"
+                            class="thumb-img">
+                    </a>
+                </div>
+                {% endif %}
+
 
                 <!-- Cube State Display (if available) - NOW ABOVE BUTTON -->
                 {% if step.cube_state %}
@@ -44,7 +74,7 @@
                 {% endif %}
 
                 {% if step.available %}
-                <a href="{{ step.url }}" class="btn btn-outline-primary">Voir</a>
+                <a href="{{ step.url }}" class="btn btn-outline-primary">Résumé et algorithmes</a>
                 {% else %}
                 <button class="btn btn-secondary" disabled>À venir</button>
                 {% endif %}
@@ -69,6 +99,20 @@
     transition: transform 0.2s, box-shadow 0.2s;
     display: flex;
     flex-direction: column;
+}
+
+.video-thumb {
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    overflow: hidden;
+    border-radius: 10px;
+}
+
+.thumb-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
 }
 
 .cube-card:hover {

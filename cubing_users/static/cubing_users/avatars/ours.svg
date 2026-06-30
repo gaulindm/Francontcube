@@ -1,0 +1,274 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   viewBox="0 0 200 220"
+   width="200"
+   height="220"
+   version="1.1"
+   id="svg30"
+   sodipodi:docname="ours-bleu.svg"
+   inkscape:version="1.4.4 (dcaf3e7d9e, 2026-05-05)"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  
+  
+  <g
+     id="body">
+    <ellipse
+       cx="100"
+       cy="168"
+       rx="38"
+       ry="42"
+       fill="#C8956A"
+       stroke="#3A2010"
+       stroke-width="3"
+       id="ellipse10" />
+  </g>
+  <g
+     id="front-limbs">
+    <ellipse
+       cx="60"
+       cy="170"
+       rx="14"
+       ry="22"
+       fill="#C8956A"
+       stroke="#3A2010"
+       stroke-width="3"
+       transform="rotate(-15 60 170)"
+       id="ellipse11" />
+    <ellipse
+       cx="52"
+       cy="186"
+       rx="11"
+       ry="8"
+       fill="#F0C898"
+       stroke="#3A2010"
+       stroke-width="2.5"
+       id="ellipse12" />
+    <ellipse
+       cx="140"
+       cy="170"
+       rx="14"
+       ry="22"
+       fill="#C8956A"
+       stroke="#3A2010"
+       stroke-width="3"
+       transform="rotate(15 140 170)"
+       id="ellipse13" />
+    <ellipse
+       cx="148"
+       cy="186"
+       rx="11"
+       ry="8"
+       fill="#F0C898"
+       stroke="#3A2010"
+       stroke-width="2.5"
+       id="ellipse14" />
+  </g>
+  <g
+     id="back-limbs">
+    <ellipse
+       cx="84"
+       cy="204"
+       rx="13"
+       ry="10"
+       fill="#C8956A"
+       stroke="#3A2010"
+       stroke-width="3"
+       id="ellipse15" />
+    <ellipse
+       cx="116"
+       cy="204"
+       rx="13"
+       ry="10"
+       fill="#C8956A"
+       stroke="#3A2010"
+       stroke-width="3"
+       id="ellipse16" />
+  </g>
+  <g
+     id="belly">
+    <ellipse
+       cx="100"
+       cy="168"
+       rx="22"
+       ry="28"
+       fill="#F0C898"
+       stroke="none"
+       id="ellipse17" />
+  </g>
+  <g
+     id="bandana"
+     transform="translate(-0.42133888,-2.5034877)"
+     style="display:inline">
+    <!-- Tissu principal du foulard -->
+    <path
+       d="m 62,138 q 38,10 76,0 -18,37 -38,42 -20,-5 -38,-42 z"
+       fill="#0051a2"
+       stroke="#2c1810"
+       stroke-width="2.5"
+       stroke-linejoin="round"
+       id="path16" />
+    <!-- Pli central du foulard (ombre) -->
+    <path
+       d="m 100,148 q 0,17 0,32"
+       fill="none"
+       stroke="#003a7a"
+       stroke-width="1.5"
+       opacity="0.5"
+       id="path17" />
+    <!-- Reflet gauche -->
+    <path
+       d="m 70,142 q 15,13 25,20"
+       fill="none"
+       stroke="#4a90d9"
+       stroke-width="1.5"
+       opacity="0.4"
+       id="path18" />
+    <!-- Nœud du foulard à gauche -->
+    <!-- Brin gauche du nœud -->
+    <!-- Brin droit du nœud -->
+  </g>
+  <!-- FOULARD BLEU -->
+  <g
+     id="head"
+     style="display:inline">
+    <ellipse
+       cx="100"
+       cy="100"
+       rx="52"
+       ry="50"
+       fill="#D4A373"
+       stroke="#3a2010"
+       stroke-width="3.5"
+       id="ellipse18" />
+  </g>
+  <g
+     id="ears"
+     style="display:inline">
+    <circle
+       cx="57"
+       cy="62"
+       r="18"
+       fill="#D4A373"
+       stroke="#3a2010"
+       stroke-width="3.5"
+       id="circle18" />
+    <circle
+       cx="57"
+       cy="62"
+       r="10"
+       fill="#F0A080"
+       stroke="#3a2010"
+       stroke-width="2"
+       id="circle19" />
+    <circle
+       cx="143"
+       cy="62"
+       r="18"
+       fill="#D4A373"
+       stroke="#3a2010"
+       stroke-width="3.5"
+       id="circle20" />
+    <circle
+       cx="143"
+       cy="62"
+       r="10"
+       fill="#F0A080"
+       stroke="#3a2010"
+       stroke-width="2"
+       id="circle21" />
+  </g>
+  <g
+     id="face"
+     style="display:inline">
+    <ellipse
+       cx="100"
+       cy="115"
+       rx="26"
+       ry="20"
+       fill="#F0C898"
+       stroke="#3a2010"
+       stroke-width="2.5"
+       id="ellipse21" />
+    <circle
+       cx="82"
+       cy="96"
+       r="13"
+       fill="#ffffff"
+       stroke="#3a2010"
+       stroke-width="2.5"
+       id="circle22" />
+    <circle
+       cx="84"
+       cy="97"
+       r="7"
+       fill="#1a1a1a"
+       id="circle23" />
+    <circle
+       cx="87"
+       cy="93"
+       r="2.5"
+       fill="#ffffff"
+       id="circle24" />
+    <circle
+       cx="118"
+       cy="96"
+       r="13"
+       fill="#ffffff"
+       stroke="#3a2010"
+       stroke-width="2.5"
+       id="circle25" />
+    <circle
+       cx="120"
+       cy="97"
+       r="7"
+       fill="#1a1a1a"
+       id="circle26" />
+    <circle
+       cx="123"
+       cy="93"
+       r="2.5"
+       fill="#ffffff"
+       id="circle27" />
+    <ellipse
+       cx="100"
+       cy="111"
+       rx="7"
+       ry="5"
+       fill="#3a2010"
+       id="ellipse27" />
+    <ellipse
+       cx="98"
+       cy="109.5"
+       rx="2.5"
+       ry="1.5"
+       fill="#6a4030"
+       opacity="0.6"
+       id="ellipse28" />
+    <path
+       d="m 89,120 q 11,10 22,0"
+       stroke="#3a2010"
+       stroke-width="2.5"
+       fill="none"
+       stroke-linecap="round"
+       id="path28" />
+    <ellipse
+       cx="74"
+       cy="112"
+       rx="9"
+       ry="6"
+       fill="#ff9999"
+       opacity="0.55"
+       id="ellipse29" />
+    <ellipse
+       cx="126"
+       cy="112"
+       rx="9"
+       ry="6"
+       fill="#ff9999"
+       opacity="0.55"
+       id="ellipse30" />
+  </g>
+</svg>

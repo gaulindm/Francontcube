@@ -1,0 +1,401 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   viewBox="0 0 200 220"
+   width="200"
+   height="220"
+   version="1.1"
+   id="svg44"
+   sodipodi:docname="loup.svg"
+   inkscape:version="1.4.4 (dcaf3e7d9e, 2026-05-05)"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  
+  
+  <g
+     id="g54">
+    <path
+       d="M62,178 Q34,168 30,148 Q28,132 42,128 Q54,126 56,142 Q58,158 66,168 Z"
+       fill="#E8E4DC"
+       stroke="#282838"
+       stroke-width="2.5"
+       stroke-linejoin="round"
+       id="path20" />
+    <path
+       d="M62,178 Q38,170 36,152 Q34,138 44,134 Q52,132 54,146 Q56,160 64,170 Z"
+       fill="#9098A8"
+       stroke="none"
+       opacity="0.5"
+       id="path21" />
+    <ellipse
+       cx="34"
+       cy="134"
+       rx="10"
+       ry="8"
+       fill="#E8E4DC"
+       stroke="#282838"
+       stroke-width="2"
+       transform="rotate(-20 34 134)"
+       id="ellipse21" />
+  </g>
+  <!-- =================== CORPS =================== -->
+  <ellipse
+     cx="100"
+     cy="168"
+     rx="40"
+     ry="42"
+     fill="#9098A8"
+     stroke="#282838"
+     stroke-width="3"
+     id="ellipse12" />
+  <!-- Bande dorsale plus foncée -->
+  <ellipse
+     cx="100"
+     cy="155"
+     rx="18"
+     ry="28"
+     fill="#606878"
+     stroke="none"
+     opacity="0.35"
+     id="ellipse13" />
+  <!-- Ventre clair -->
+  <ellipse
+     cx="100"
+     cy="170"
+     rx="24"
+     ry="29"
+     fill="#E8E4DC"
+     stroke="none"
+     id="ellipse14" />
+  <!-- Bras gauche -->
+  <ellipse
+     cx="58"
+     cy="167"
+     rx="14"
+     ry="22"
+     fill="#9098A8"
+     stroke="#282838"
+     stroke-width="3"
+     transform="rotate(-14 58 167)"
+     id="ellipse15" />
+  <!-- Patte gauche -->
+  <ellipse
+     cx="50"
+     cy="184"
+     rx="12"
+     ry="8"
+     fill="#E8E4DC"
+     stroke="#282838"
+     stroke-width="2.5"
+     id="ellipse16" />
+  <!-- Bras droit -->
+  <ellipse
+     cx="142"
+     cy="167"
+     rx="14"
+     ry="22"
+     fill="#9098A8"
+     stroke="#282838"
+     stroke-width="3"
+     transform="rotate(14 142 167)"
+     id="ellipse17" />
+  <!-- Patte droite -->
+  <ellipse
+     cx="150"
+     cy="184"
+     rx="12"
+     ry="8"
+     fill="#E8E4DC"
+     stroke="#282838"
+     stroke-width="2.5"
+     id="ellipse18" />
+  <!-- Jambe gauche -->
+  <ellipse
+     cx="83"
+     cy="203"
+     rx="14"
+     ry="10"
+     fill="#9098A8"
+     stroke="#282838"
+     stroke-width="3"
+     id="ellipse19" />
+  <!-- Jambe droite -->
+  <ellipse
+     cx="117"
+     cy="203"
+     rx="14"
+     ry="10"
+     fill="#9098A8"
+     stroke="#282838"
+     stroke-width="3"
+     id="ellipse20" />
+  <!-- Queue touffue (derrière gauche) -->
+  <!-- Bout de queue blanc -->
+  <!-- =================== FOULARD =================== -->
+  <!-- Triangle pendant -->
+  <!-- =================== TÊTE =================== -->
+  <!-- Oreilles pointues (derrière) -->
+  <!-- Oreille gauche extérieure -->
+  <polygon
+     points="62,76 50,34 84,60"
+     fill="#9098A8"
+     stroke="#282838"
+     stroke-width="3"
+     stroke-linejoin="round"
+     id="polygon23" />
+  <!-- Oreille gauche intérieure -->
+  <polygon
+     points="64,70 55,42 78,62"
+     fill="#F0B8B0"
+     stroke="none"
+     id="polygon24" />
+  <!-- Oreille droite extérieure -->
+  <polygon
+     points="138,76 150,34 116,60"
+     fill="#9098A8"
+     stroke="#282838"
+     stroke-width="3"
+     stroke-linejoin="round"
+     id="polygon25" />
+  <!-- Oreille droite intérieure -->
+  <polygon
+     points="136,70 145,42 122,62"
+     fill="#F0B8B0"
+     stroke="none"
+     id="polygon26" />
+  <g
+     id="bandana"
+     transform="translate(-0.40764025,-1.3254055)"
+     style="display:inline">
+    <!-- Tissu principal du foulard -->
+    <path
+       d="m 62,138 q 38,10 76,0 -18,37 -38,42 -20,-5 -38,-42 z"
+       fill="#0051a2"
+       stroke="#2c1810"
+       stroke-width="2.5"
+       stroke-linejoin="round"
+       id="path16" />
+    <!-- Pli central du foulard (ombre) -->
+    <path
+       d="m 100,148 q 0,17 0,32"
+       fill="none"
+       stroke="#003a7a"
+       stroke-width="1.5"
+       opacity="0.5"
+       id="path17" />
+    <!-- Reflet gauche -->
+    <path
+       d="m 70,142 q 15,13 25,20"
+       fill="none"
+       stroke="#4a90d9"
+       stroke-width="1.5"
+       opacity="0.4"
+       id="path18" />
+    <!-- Nœud du foulard à gauche -->
+    <!-- Brin gauche du nœud -->
+    <!-- Brin droit du nœud -->
+  </g>
+  <!-- Tête -->
+  <ellipse
+     cx="100"
+     cy="101"
+     rx="52"
+     ry="50"
+     fill="#A0A8B8"
+     stroke="#282838"
+     stroke-width="3.5"
+     id="ellipse26" />
+  <!-- Zone claire autour du museau (masque de loup) -->
+  <path
+     d="M66,110 Q74,88 100,86 Q126,88 134,110 Q130,134 100,138 Q70,134 66,110 Z"
+     fill="#E8E4DC"
+     stroke="none"
+     id="path26" />
+  <!-- Marques grises sombres au-dessus des yeux -->
+  <ellipse
+     cx="78"
+     cy="88"
+     rx="12"
+     ry="7"
+     fill="#606878"
+     opacity="0.3"
+     transform="rotate(-15 78 88)"
+     id="ellipse27" />
+  <ellipse
+     cx="122"
+     cy="88"
+     rx="12"
+     ry="7"
+     fill="#606878"
+     opacity="0.3"
+     transform="rotate(15 122 88)"
+     id="ellipse28" />
+  <!-- =================== VISAGE =================== -->
+  <!-- Œil gauche -->
+  <circle
+     cx="81"
+     cy="96"
+     r="14"
+     fill="white"
+     stroke="#282838"
+     stroke-width="2.5"
+     id="circle28" />
+  <!-- Iris jaune-ambre (yeux de loup) -->
+  <circle
+     cx="83"
+     cy="97"
+     r="9"
+     fill="#C8A020"
+     id="circle29" />
+  <!-- Pupille gauche -->
+  <circle
+     cx="83"
+     cy="97"
+     r="5.5"
+     fill="#1A1A1A"
+     id="circle30" />
+  <circle
+     cx="86"
+     cy="93"
+     r="2.5"
+     fill="white"
+     id="circle31" />
+  <circle
+     cx="80"
+     cy="100"
+     r="1.2"
+     fill="white"
+     opacity="0.6"
+     id="circle32" />
+  <!-- Œil droit -->
+  <circle
+     cx="119"
+     cy="96"
+     r="14"
+     fill="white"
+     stroke="#282838"
+     stroke-width="2.5"
+     id="circle33" />
+  <!-- Iris jaune-ambre -->
+  <circle
+     cx="121"
+     cy="97"
+     r="9"
+     fill="#C8A020"
+     id="circle34" />
+  <!-- Pupille droite -->
+  <circle
+     cx="121"
+     cy="97"
+     r="5.5"
+     fill="#1A1A1A"
+     id="circle35" />
+  <circle
+     cx="124"
+     cy="93"
+     r="2.5"
+     fill="white"
+     id="circle36" />
+  <circle
+     cx="118"
+     cy="100"
+     r="1.2"
+     fill="white"
+     opacity="0.6"
+     id="circle37" />
+  <!-- Nez large -->
+  <path
+     d="M92,114 Q100,108 108,114 Q106,122 100,124 Q94,122 92,114 Z"
+     fill="#282838"
+     stroke="none"
+     id="path37" />
+  <ellipse
+     cx="97"
+     cy="112"
+     rx="3"
+     ry="2"
+     fill="#505060"
+     opacity="0.5"
+     id="ellipse37" />
+  <!-- Bouche sourire -->
+  <path
+     d="M100,122 Q100,126 96,130"
+     stroke="#282838"
+     stroke-width="2.2"
+     fill="none"
+     stroke-linecap="round"
+     id="path38" />
+  <path
+     d="M100,122 Q100,126 104,130"
+     stroke="#282838"
+     stroke-width="2.2"
+     fill="none"
+     stroke-linecap="round"
+     id="path39" />
+  <path
+     d="M87,128 Q100,138 113,128"
+     stroke="#282838"
+     stroke-width="2.2"
+     fill="none"
+     stroke-linecap="round"
+     id="path40" />
+  <!-- Moustaches -->
+  <line
+     x1="56"
+     y1="118"
+     x2="86"
+     y2="120"
+     stroke="#282838"
+     stroke-width="1.6"
+     stroke-linecap="round"
+     opacity="0.45"
+     id="line40" />
+  <line
+     x1="58"
+     y1="124"
+     x2="86"
+     y2="125"
+     stroke="#282838"
+     stroke-width="1.6"
+     stroke-linecap="round"
+     opacity="0.45"
+     id="line41" />
+  <line
+     x1="114"
+     y1="120"
+     x2="144"
+     y2="118"
+     stroke="#282838"
+     stroke-width="1.6"
+     stroke-linecap="round"
+     opacity="0.45"
+     id="line42" />
+  <line
+     x1="114"
+     y1="125"
+     x2="142"
+     y2="124"
+     stroke="#282838"
+     stroke-width="1.6"
+     stroke-linecap="round"
+     opacity="0.45"
+     id="line43" />
+  <!-- Joues roses -->
+  <ellipse
+     cx="70"
+     cy="114"
+     rx="10"
+     ry="7"
+     fill="#FF9999"
+     opacity="0.45"
+     id="ellipse43" />
+  <ellipse
+     cx="130"
+     cy="114"
+     rx="10"
+     ry="7"
+     fill="#FF9999"
+     opacity="0.45"
+     id="ellipse44" />
+</svg>

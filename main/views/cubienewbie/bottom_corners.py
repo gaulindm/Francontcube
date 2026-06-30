@@ -19,7 +19,8 @@ class BottomCornersView(StepView):
     template_name = "main/methods/cubienewbie/bottom-corners.html"
     step_name = "Coins inferieurs"
     step_icon = "flower3"
-    
+    youtube_id = "1xNxfuMvrW8"
+
     # Map template context variable names to CubeState slugs
     cube_state_slugs = {
         'goal_state': 'bottom-corners-goal',

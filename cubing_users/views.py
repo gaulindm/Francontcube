@@ -15,7 +15,6 @@ from .forms import (
 )
 from .decorators import cuber_required, leader_required
 from .authentication import CuberAuthenticationBackend
-from .constants import COLOR_EMOJIS
 
 
 # ==========================================
@@ -23,17 +22,15 @@ from .constants import COLOR_EMOJIS
 # ==========================================
 
 def cuber_register(request):
-    """Inscription d'un nouveau cubeur"""
+    """Inscription d'un nouveau cubeur — wizard 3 étapes géré côté template."""
     if request.method == 'POST':
         form = CuberRegistrationForm(request.POST)
         if form.is_valid():
             cuber = form.save()
-
             request.session['cuber_id'] = str(cuber.cuber_id)
-
             messages.success(
                 request,
-                f"Bienvenue {cuber.color} {cuber.adjective} {cuber.superhero}! 🎉"
+                f"Bienvenue {cuber.display_name}! 🎉"
             )
             return redirect('cubing_users:join_group')
     else:
@@ -43,14 +40,15 @@ def cuber_register(request):
 
 
 def cuber_login(request):
-    """Connexion d'un cubeur existant"""
+    """Connexion d'un cubeur existant."""
     if request.method == 'POST':
 
         # ── DEBUG (retirer une fois le login confirmé) ──────────────────
         print("=== cuber_login POST ===")
-        print(f"  color:        {request.POST.get('color')!r}")
-        print(f"  adjective:    {request.POST.get('adjective')!r}")
-        print(f"  superhero:    {request.POST.get('superhero')!r}")
+        print(f"  animal:       {request.POST.get('animal')!r}")
+        print(f"  cube_color:   {request.POST.get('cube_color')!r}")
+        print(f"  quality_1:    {request.POST.get('quality_1')!r}")
+        print(f"  quality_2:    {request.POST.get('quality_2')!r}")
         print(f"  color_code_1: {request.POST.get('color_code_1')!r}")
         print(f"  color_code_6: {request.POST.get('color_code_6')!r}")
         # ────────────────────────────────────────────────────────────────
@@ -63,9 +61,10 @@ def cuber_login(request):
             # ────────────────────────────────────────────────────────────
             messages.error(request, "Formulaire invalide. Vérifie tous les champs.")
         else:
-            color      = form.cleaned_data['color']
-            adjective  = form.cleaned_data['adjective']
-            superhero  = form.cleaned_data['superhero']
+            animal     = form.cleaned_data['animal']
+            cube_color = form.cleaned_data['cube_color']
+            quality_1  = form.cleaned_data['quality_1']
+            quality_2  = form.cleaned_data['quality_2']
             color_code = form.get_color_code()
 
             # ── DEBUG ────────────────────────────────────────────────────
@@ -76,9 +75,10 @@ def cuber_login(request):
             backend = CuberAuthenticationBackend()
             cuber = backend.authenticate(
                 request,
-                color=color,
-                adjective=adjective,
-                superhero=superhero,
+                animal=animal,
+                cube_color=cube_color,
+                quality_1=quality_1,
+                quality_2=quality_2,
                 color_code=','.join(color_code)
             )
 
@@ -97,7 +97,7 @@ def cuber_login(request):
 
                 messages.success(
                     request,
-                    f"Bon retour {cuber.color} {cuber.adjective} {cuber.superhero}! 🎯"
+                    f"Bon retour {cuber.display_name}! 🎯"
                 )
                 return redirect('cubing_users:cuber_dashboard')
             else:
@@ -113,8 +113,8 @@ def cuber_login(request):
 
 @cuber_required
 def cuber_logout(request):
-    """Déconnexion d'un cubeur"""
-    cuber_name = f"{request.cuber.color} {request.cuber.adjective} {request.cuber.superhero}"
+    """Déconnexion d'un cubeur."""
+    cuber_name = request.cuber.display_name
     if 'cuber_id' in request.session:
         del request.session['cuber_id']
     messages.info(request, f"À bientôt {cuber_name}! 👋")
@@ -123,7 +123,7 @@ def cuber_logout(request):
 
 @cuber_required
 def cuber_dashboard(request):
-    """Dashboard principal du cubeur"""
+    """Dashboard principal du cubeur."""
     cuber = request.cuber
 
     memberships = GroupMembership.objects.filter(
@@ -148,7 +148,7 @@ def cuber_dashboard(request):
 
 @cuber_required
 def join_group(request):
-    """Rejoindre un groupe avec un code"""
+    """Rejoindre un groupe avec un code."""
     if request.method == 'POST':
         form = JoinGroupForm(request.POST)
         if form.is_valid():
@@ -178,7 +178,7 @@ def join_group(request):
 
 @cuber_required
 def my_groups(request):
-    """Liste des groupes du cubeur"""
+    """Liste des groupes du cubeur."""
     memberships = GroupMembership.objects.filter(
         cuber=request.cuber,
         status='active'
@@ -189,7 +189,7 @@ def my_groups(request):
 
 @cuber_required
 def group_leaderboard(request, group_id):
-    """Leaderboard d'un groupe spécifique"""
+    """Leaderboard d'un groupe spécifique."""
     group = get_object_or_404(Group, group_id=group_id)
 
     if not GroupMembership.objects.filter(cuber=request.cuber, group=group).exists():
@@ -223,7 +223,7 @@ def group_leaderboard(request, group_id):
 # ==========================================
 
 def leader_register(request):
-    """Inscription d'un nouveau leader"""
+    """Inscription d'un nouveau leader."""
     if request.method == 'POST':
         form = LeaderRegistrationForm(request.POST)
         if form.is_valid():
@@ -241,11 +241,11 @@ def leader_register(request):
 
 
 def leader_login(request):
-    """Connexion d'un leader existant"""
+    """Connexion d'un leader existant."""
     if request.method == 'POST':
         form = LeaderLoginForm(request.POST)
         if form.is_valid():
-            email = form.cleaned_data['email']
+            email    = form.cleaned_data['email']
             password = form.cleaned_data['password']
 
             user = authenticate(request, username=email, password=password)
@@ -265,7 +265,7 @@ def leader_login(request):
 @login_required
 @leader_required
 def leader_logout(request):
-    """Déconnexion d'un leader"""
+    """Déconnexion d'un leader."""
     logout(request)
     messages.info(request, "Déconnexion réussie. À bientôt!")
     return redirect('cubing_users:leader_login')
@@ -274,7 +274,7 @@ def leader_logout(request):
 @login_required
 @leader_required
 def leader_dashboard(request):
-    """Dashboard principal du leader"""
+    """Dashboard principal du leader."""
     leader = request.user.leader_profile
 
     groups = Group.objects.filter(leaders=leader).annotate(
@@ -295,7 +295,7 @@ def leader_dashboard(request):
 @login_required
 @leader_required
 def create_group(request):
-    """Créer un nouveau groupe"""
+    """Créer un nouveau groupe."""
     if request.method == 'POST':
         form = GroupCreationForm(request.POST)
         if form.is_valid():
@@ -315,8 +315,8 @@ def create_group(request):
 @login_required
 @leader_required
 def group_detail(request, group_id):
-    """Détails d'un groupe (pour le leader)"""
-    group = get_object_or_404(Group, group_id=group_id)
+    """Détails d'un groupe (pour le leader)."""
+    group  = get_object_or_404(Group, group_id=group_id)
     leader = request.user.leader_profile
 
     if leader not in group.leaders.all():
@@ -350,7 +350,7 @@ def group_roster(request, group_id):
     Chaque ligne affiche display_name (préfixe TOSM ou identité cubeur)
     pour que le leader puisse identifier chaque élève rapidement.
     """
-    group = get_object_or_404(Group, group_id=group_id)
+    group  = get_object_or_404(Group, group_id=group_id)
     leader = request.user.leader_profile
 
     if leader not in group.leaders.all():
@@ -359,7 +359,10 @@ def group_roster(request, group_id):
 
     memberships = GroupMembership.objects.filter(
         group=group, status='active'
-    ).select_related('cuber').order_by('first_name_prefix', 'last_name_prefix', 'cuber__color', 'cuber__adjective')
+    ).select_related('cuber').order_by(
+        'first_name_prefix', 'last_name_prefix',
+        'cuber__animal', 'cuber__cube_color'
+    )
 
     return render(request, 'cubing_users/group_roster.html', {
         'group': group,
@@ -370,9 +373,9 @@ def group_roster(request, group_id):
 @login_required
 @leader_required
 def student_progress(request, group_id, cuber_id):
-    """Détails du progrès d'un étudiant spécifique"""
-    group = get_object_or_404(Group, group_id=group_id)
-    cuber = get_object_or_404(Cuber, cuber_id=cuber_id)
+    """Détails du progrès d'un étudiant spécifique."""
+    group  = get_object_or_404(Group, group_id=group_id)
+    cuber  = get_object_or_404(Cuber, cuber_id=cuber_id)
     leader = request.user.leader_profile
 
     if leader not in group.leaders.all():
@@ -403,8 +406,8 @@ def student_progress(request, group_id, cuber_id):
 @login_required
 @leader_required
 def group_statistics(request, group_id):
-    """Statistiques globales du groupe"""
-    group = get_object_or_404(Group, group_id=group_id)
+    """Statistiques globales du groupe."""
+    group  = get_object_or_404(Group, group_id=group_id)
     leader = request.user.leader_profile
 
     if leader not in group.leaders.all():
@@ -445,9 +448,9 @@ def print_login_cards(request, group_id):
     Page pour imprimer les cartes de connexion des membres.
     Affiche display_name à côté de l'identité cubeur pour que le leader
     puisse distribuer les bonnes cartes aux bons élèves.
-    Format: "TOSM → 🔴 Rouge Brave Spiderman"
+    Format: "TOSM → Hibou Courageux (foulard bleu)"
     """
-    group = get_object_or_404(Group, group_id=group_id)
+    group  = get_object_or_404(Group, group_id=group_id)
     leader = request.user.leader_profile
 
     if leader not in group.leaders.all():
@@ -456,7 +459,9 @@ def print_login_cards(request, group_id):
 
     memberships = GroupMembership.objects.filter(
         group=group, status='active'
-    ).select_related('cuber').order_by('first_name_prefix', 'last_name_prefix', 'cuber__color')
+    ).select_related('cuber').order_by(
+        'first_name_prefix', 'last_name_prefix', 'cuber__animal'
+    )
 
     # color_codes sont hashés — non récupérables.
     # Si un élève a perdu son code, utiliser leader_reset_color_code.
@@ -464,7 +469,6 @@ def print_login_cards(request, group_id):
     return render(request, 'cubing_users/print_login_cards.html', {
         'group': group,
         'memberships': memberships,
-        'color_emojis': COLOR_EMOJIS,
     })
 
 
@@ -479,7 +483,7 @@ def leader_set_identification(request, group_id, cuber_id):
     Le leader corrige les 2 premières lettres du prénom et du nom d'un élève.
     Ex: "TO" + "SM" → affiche "TOSM" dans la liste du groupe.
     """
-    group = get_object_or_404(Group, group_id=group_id)
+    group  = get_object_or_404(Group, group_id=group_id)
     leader = request.user.leader_profile
 
     if leader not in group.leaders.all():
@@ -492,8 +496,8 @@ def leader_set_identification(request, group_id, cuber_id):
 
     if request.method == 'POST':
         membership.first_name_prefix = request.POST.get('first_name_prefix', '').strip()
-        membership.last_name_prefix = request.POST.get('last_name_prefix', '').strip()
-        membership.save()  # save() normalizes prefixes to uppercase automatically
+        membership.last_name_prefix  = request.POST.get('last_name_prefix', '').strip()
+        membership.save()  # save() normalise les préfixes en majuscules automatiquement
 
         messages.success(
             request,
@@ -514,14 +518,14 @@ def leader_reset_color_code(request, group_id, cuber_id):
     Le leader réinitialise le code couleur d'un élève qui l'a oublié.
 
     Flux :
-      GET  → formulaire de confirmation (affiche l'identité cubeur + display_name)
+      GET  → formulaire de confirmation (affiche display_name du cubeur)
       POST → définit le nouveau code, affiche la valeur en clair UNE SEULE FOIS
              → le leader la note et la remet à l'élève en mains propres
 
     Sécurité : seul un leader du groupe peut faire cette action.
     Le code en clair n'est JAMAIS stocké — uniquement son hash SHA-256.
     """
-    group = get_object_or_404(Group, group_id=group_id)
+    group  = get_object_or_404(Group, group_id=group_id)
     leader = request.user.leader_profile
 
     if leader not in group.leaders.all():
@@ -530,12 +534,11 @@ def leader_reset_color_code(request, group_id, cuber_id):
 
     cuber = get_object_or_404(Cuber, cuber_id=cuber_id)
 
-    # Confirm the cuber is actually an active member of this group
     membership = get_object_or_404(
         GroupMembership, cuber=cuber, group=group, status='active'
     )
 
-    # Only populated after a successful POST — shown once in the template
+    # Seulement rempli après un POST réussi — affiché une seule fois dans le template
     new_code_plain = None
 
     if request.method == 'POST':
@@ -546,11 +549,11 @@ def leader_reset_color_code(request, group_id, cuber_id):
         else:
             cuber.set_color_code(new_code)
             cuber.save()
-            new_code_plain = new_code  # ← shown once in template, then gone
+            new_code_plain = new_code  # ← affiché une fois dans le template, puis perdu
             messages.success(
                 request,
                 f"Code couleur réinitialisé pour {membership.display_name} "
-                f"({cuber}). Note-le maintenant — il ne sera plus affiché!"
+                f"({cuber.display_name}). Note-le maintenant — il ne sera plus affiché!"
             )
 
     return render(request, 'cubing_users/reset_color_code.html', {
@@ -566,7 +569,7 @@ def leader_reset_color_code(request, group_id, cuber_id):
 # ==========================================
 
 def home(request):
-    """Page d'accueil du système cubing"""
+    """Page d'accueil du système cubing."""
     return render(request, 'cubing_users/home.html', {
         'total_cubers': Cuber.objects.count(),
         'total_groups': Group.objects.count(),

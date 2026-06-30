@@ -1,0 +1,357 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   viewBox="0 0 200 220"
+   width="200"
+   height="220"
+   version="1.1"
+   id="svg37"
+   sodipodi:docname="hibou.svg"
+   inkscape:version="1.4.4 (dcaf3e7d9e, 2026-05-05)"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  
+  
+  <!-- =================== CORPS =================== -->
+  <g
+     id="body"
+     style="display:inline">
+    <ellipse
+       cx="100"
+       cy="170"
+       rx="36"
+       ry="40"
+       fill="#A0784A"
+       stroke="#2a1400"
+       stroke-width="3"
+       id="ellipse10" />
+  </g>
+  <!-- Aile gauche -->
+  <!-- Plumes aile gauche (3 traits) -->
+  <!-- Aile droite -->
+  <!-- Plumes aile droite -->
+  <g
+     id="front-limbs"
+     style="display:inline">
+    <path
+       d="m 64,148 q -22,12 -18,42 12,10 26,0 -2,-20 0,-35 z"
+       fill="#A0784A"
+       stroke="#2a1400"
+       stroke-width="3"
+       stroke-linejoin="round"
+       id="path10" />
+    <path
+       d="m 52,172 q 8,-4 16,0"
+       stroke="#2a1400"
+       stroke-width="1.8"
+       fill="none"
+       stroke-linecap="round"
+       opacity="0.5"
+       id="path11" />
+    <path
+       d="m 50,180 q 9,-4 18,0"
+       stroke="#2a1400"
+       stroke-width="1.8"
+       fill="none"
+       stroke-linecap="round"
+       opacity="0.5"
+       id="path12" />
+    <path
+       d="m 50,188 q 9,-4 18,0"
+       stroke="#2a1400"
+       stroke-width="1.8"
+       fill="none"
+       stroke-linecap="round"
+       opacity="0.5"
+       id="path13" />
+    <path
+       d="m 136,148 q 22,12 18,42 -12,10 -26,0 2,-20 0,-35 z"
+       fill="#A0784A"
+       stroke="#2a1400"
+       stroke-width="3"
+       stroke-linejoin="round"
+       id="path14" />
+    <path
+       d="m 148,172 q -8,-4 -16,0"
+       stroke="#2a1400"
+       stroke-width="1.8"
+       fill="none"
+       stroke-linecap="round"
+       opacity="0.5"
+       id="path15" />
+    <path
+       d="m 150,180 q -9,-4 -18,0"
+       stroke="#2a1400"
+       stroke-width="1.8"
+       fill="none"
+       stroke-linecap="round"
+       opacity="0.5"
+       id="path16" />
+    <path
+       d="m 150,188 q -9,-4 -18,0"
+       stroke="#2a1400"
+       stroke-width="1.8"
+       fill="none"
+       stroke-linecap="round"
+       opacity="0.5"
+       id="path17" />
+  </g>
+  <!-- Pattes -->
+  <g
+     id="back-limbs"
+     style="display:inline">
+    <path
+       d="m 86,207 -6,11 m 6,-11 v 11 m 0,-11 6,11"
+       stroke="#c07830"
+       stroke-width="3"
+       stroke-linecap="round"
+       id="path18" />
+    <path
+       d="m 114,207 -6,11 m 6,-11 v 11 m 0,-11 6,11"
+       stroke="#c07830"
+       stroke-width="3"
+       stroke-linecap="round"
+       id="path19" />
+  </g>
+  <!-- Ventre crème -->
+  <!-- Motif plumes ventre (ellipses superposées) -->
+  <g
+     id="belly"
+     style="display:inline">
+    <ellipse
+       cx="100"
+       cy="172"
+       rx="22"
+       ry="28"
+       fill="#F5E8C8"
+       stroke="none"
+       id="ellipse19" />
+    <ellipse
+       cx="100"
+       cy="170"
+       rx="16"
+       ry="9"
+       fill="#E8D5A8"
+       opacity="0.2"
+       stroke="none"
+       id="ellipse21" />
+    <ellipse
+       cx="100"
+       cy="182"
+       rx="15"
+       ry="8"
+       fill="#E8D5A8"
+       opacity="0.2"
+       stroke="none"
+       id="ellipse22" />
+    <ellipse
+       cx="100"
+       cy="158"
+       rx="14"
+       ry="9"
+       fill="#E8D5A8"
+       opacity="0.25"
+       stroke="none"
+       id="ellipse20"
+       style="display:inline" />
+  </g>
+  <!-- =================== FOULARD =================== -->
+  <!-- Triangle pendant -->
+  <!-- =================== TÊTE =================== -->
+  <!-- Aigrettes (touffes de plumes sur le sommet) -->
+  <!-- Aigrette gauche -->
+  <!-- Aigrette droite -->
+  <g
+     id="ears"
+     style="display:inline">
+    <path
+       d="M 74,62 Q 68,44 62,34 q 8,4 12,16 2,-10 -2,-22 8,8 6,24 4,-10 4,-22 4,10 0,24"
+       fill="#A0784A"
+       stroke="#2a1400"
+       stroke-width="2"
+       stroke-linejoin="round"
+       id="path24" />
+    <path
+       d="m 126,62 q 6,-18 12,-28 -8,4 -12,16 -2,-10 2,-22 -8,8 -6,24 -4,-10 -4,-22 -4,10 0,24"
+       fill="#A0784A"
+       stroke="#2a1400"
+       stroke-width="2"
+       stroke-linejoin="round"
+       id="path25" />
+  </g>
+  <g
+     id="bandana"
+     transform="translate(0.1540035,-3.8048575)"
+     style="display:inline">
+    <!-- Tissu principal du foulard -->
+    <path
+       d="m 62,138 q 38,10 76,0 -18,37 -38,42 -20,-5 -38,-42 z"
+       fill="#0051a2"
+       stroke="#2c1810"
+       stroke-width="2.5"
+       stroke-linejoin="round"
+       id="path16-3" />
+    <!-- Pli central du foulard (ombre) -->
+    <path
+       d="m 100,148 q 0,17 0,32"
+       fill="none"
+       stroke="#003a7a"
+       stroke-width="1.5"
+       opacity="0.5"
+       id="path17-6" />
+    <!-- Reflet gauche -->
+    <path
+       d="m 70,142 q 15,13 25,20"
+       fill="none"
+       stroke="#4a90d9"
+       stroke-width="1.5"
+       opacity="0.4"
+       id="path18-7" />
+    <!-- Nœud du foulard à gauche -->
+    <!-- Brin gauche du nœud -->
+    <!-- Brin droit du nœud -->
+  </g>
+  <!-- Tête principale -->
+  <g
+     id="head"
+     style="display:inline">
+    <ellipse
+       cx="100"
+       cy="100"
+       rx="50"
+       ry="48"
+       fill="#B8895A"
+       stroke="#2a1400"
+       stroke-width="3.5"
+       id="ellipse25" />
+  </g>
+  <!-- Disque facial extérieur -->
+  <!-- Disque facial intérieur crème -->
+  <!-- =================== VISAGE =================== -->
+  <!-- Cercles oculaires (grands yeux de hibou) -->
+  <!-- Œil gauche - anneau externe -->
+  <!-- Œil gauche - iris jaune -->
+  <!-- Pupille gauche -->
+  <!-- Reflet gauche -->
+  <!-- Œil droit - anneau externe -->
+  <!-- Œil droit - iris jaune -->
+  <!-- Pupille droite -->
+  <!-- Reflet droit -->
+  <!-- Bec crochu (petit triangle arrondi) -->
+  <!-- Joues roses -->
+  <g
+     id="face"
+     style="display:inline">
+    <ellipse
+       cx="100"
+       cy="104"
+       rx="38"
+       ry="36"
+       fill="#E8D5A8"
+       stroke="#2a1400"
+       stroke-width="2"
+       id="ellipse26" />
+    <ellipse
+       cx="100"
+       cy="106"
+       rx="30"
+       ry="28"
+       fill="#F5E8C8"
+       stroke="none"
+       id="ellipse27" />
+    <circle
+       cx="82"
+       cy="97"
+       r="17"
+       fill="#c8900a"
+       stroke="#2a1400"
+       stroke-width="2.5"
+       id="circle27" />
+    <circle
+       cx="82"
+       cy="97"
+       r="13"
+       fill="#ffd000"
+       stroke="#2a1400"
+       stroke-width="1.5"
+       id="circle28" />
+    <circle
+       cx="82"
+       cy="97"
+       r="7"
+       fill="#1a1a1a"
+       id="circle29" />
+    <circle
+       cx="85"
+       cy="93"
+       r="2.5"
+       fill="#ffffff"
+       id="circle30" />
+    <circle
+       cx="79"
+       cy="100"
+       r="1.2"
+       fill="#ffffff"
+       opacity="0.6"
+       id="circle31" />
+    <circle
+       cx="118"
+       cy="97"
+       r="17"
+       fill="#c8900a"
+       stroke="#2a1400"
+       stroke-width="2.5"
+       id="circle32" />
+    <circle
+       cx="118"
+       cy="97"
+       r="13"
+       fill="#ffd000"
+       stroke="#2a1400"
+       stroke-width="1.5"
+       id="circle33" />
+    <circle
+       cx="118"
+       cy="97"
+       r="7"
+       fill="#1a1a1a"
+       id="circle34" />
+    <circle
+       cx="121"
+       cy="93"
+       r="2.5"
+       fill="#ffffff"
+       id="circle35" />
+    <circle
+       cx="115"
+       cy="100"
+       r="1.2"
+       fill="#ffffff"
+       opacity="0.6"
+       id="circle36" />
+    <path
+       d="m 96,113 q 4,-5 8,0 -2,7 -4,9 -2,-2 -4,-9 z"
+       fill="#d08820"
+       stroke="#2a1400"
+       stroke-width="1.8"
+       stroke-linejoin="round"
+       id="path36" />
+    <ellipse
+       cx="68"
+       cy="112"
+       rx="8"
+       ry="5.5"
+       fill="#ff9999"
+       opacity="0.45"
+       id="ellipse36" />
+    <ellipse
+       cx="132"
+       cy="112"
+       rx="8"
+       ry="5.5"
+       fill="#ff9999"
+       opacity="0.45"
+       id="ellipse37" />
+  </g>
+</svg>

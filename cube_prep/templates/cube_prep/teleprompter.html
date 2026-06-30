@@ -158,7 +158,7 @@
     <button ontouchend="tap(event, increaseSpeed)" onclick="increaseSpeed()">+</button>
   </div>
 
-  <button id="playBtn" ontouchend="tap(event, togglePlay)" onclick="togglePlay()">⏸</button>
+  <button id="playBtn" ontouchend="tap(event, togglePlay)" onclick="togglePlay()">▶</button>
 
   <button id="mirrorBtn" ontouchend="tap(event, toggleMirror)" onclick="toggleMirror()">⇔ Mirror</button>
 
@@ -181,14 +181,11 @@
    📝  YOUR SCRIPT — edit between the backticks
    ═══════════════════════════════════════════════ */
 const SCRIPT_TEXT = `
-                 
- 
- 
 « Félicitations ! Tu as résolu ton Rubik's Cube avec les 8 missions ! » 🎉
 « Tu es officiellement plus un Cubie Newbie ! »
 
 « Mais dis-moi… est-ce que tu trouves que c'est un peu long ? »
-« Est-ce que tu répètes toujours les mêmes mouvements encore… et encore… et encore ? » 
+« Est-ce que tu répètes toujours les mêmes mouvements encore… et encore… et encore ? » 😅
 
 « Bonne nouvelle ! Tu es prêt pour la prochaine étape… »
 « Bienvenue dans Cubie Curieux ! » 🌟
@@ -204,7 +201,7 @@ let speed      = 0.3;
 let targetSpeed= 0.3;
 let fontSize   = 48;
 let mirrored   = true;
-let isPlaying  = true;
+let isPlaying  = false;
 let animId     = null;
 let ctrlHeight = 60;
 
@@ -221,8 +218,9 @@ window.addEventListener('resize', measureControls);
 
 function measureControls() {
   ctrlHeight = document.getElementById('controls').offsetHeight;
-  document.getElementById('content').style.paddingTop =
-    (ctrlHeight + 40) + 'px';
+  // Push first line down to the vertical center of the screen
+  const halfScreen = Math.round(window.innerHeight / 2);
+  document.getElementById('content').style.paddingTop = halfScreen + 'px';
 }
 
 function updateContent() {

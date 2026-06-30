@@ -1,0 +1,430 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   viewBox="0 0 200 220"
+   width="200"
+   height="220"
+   version="1.1"
+   id="svg40"
+   sodipodi:docname="tortue.svg"
+   inkscape:version="1.4.4 (dcaf3e7d9e, 2026-05-05)"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <defs
+     id="defs1" />
+  <sodipodi:namedview
+     id="namedview1"
+     pagecolor="#ffffff"
+     bordercolor="#000000"
+     borderopacity="0.25"
+     inkscape:showpageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1"
+     inkscape:zoom="3.65"
+     inkscape:cx="100"
+     inkscape:cy="110"
+     inkscape:window-width="1862"
+     inkscape:window-height="1011"
+     inkscape:window-x="0"
+     inkscape:window-y="0"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="svg40" />
+  <!-- =================== CARAPACE (corps) =================== -->
+  <!-- Ombre portée carapace -->
+  <!-- Carapace principale -->
+  <g
+     id="body"
+     style="display:inline">
+    <ellipse
+       cx="100"
+       cy="162"
+       rx="54"
+       ry="46"
+       fill="#5A8A3A"
+       stroke="#1a3008"
+       stroke-width="3.5"
+       id="ellipse11" />
+  </g>
+  <!-- Plastron (ventre plat) -->
+  <!-- Motif carapace — plaque centrale hexagonale -->
+  <!-- Plaques latérales gauches -->
+  <!-- Plaques latérales droites -->
+  <!-- Plaques du bas -->
+  <!-- =================== PATTES =================== -->
+  <!-- Patte avant gauche -->
+  <!-- Griffes gauche -->
+  <!-- Patte avant droite -->
+  <!-- Griffes droite -->
+  <g
+     id="front-limbs"
+     style="display:inline">
+    <polygon
+       points="68,148 82,142 86,152 72,158 "
+       fill="#72A84C"
+       stroke="#1a3008"
+       stroke-width="1.8"
+       opacity="0.85"
+       id="polygon14" />
+    <polygon
+       points="132,148 118,142 114,152 128,158 "
+       fill="#72A84C"
+       stroke="#1a3008"
+       stroke-width="1.8"
+       opacity="0.85"
+       id="polygon17" />
+    <ellipse
+       cx="56"
+       cy="162"
+       rx="16"
+       ry="11"
+       fill="#88C060"
+       stroke="#1a3008"
+       stroke-width="2.8"
+       transform="rotate(-20,56,162)"
+       id="ellipse19" />
+    <line
+       x1="44"
+       y1="163"
+       x2="40"
+       y2="168"
+       stroke="#1a3008"
+       stroke-width="2"
+       stroke-linecap="round"
+       id="line19" />
+    <line
+       x1="48"
+       y1="167"
+       x2="45"
+       y2="173"
+       stroke="#1a3008"
+       stroke-width="2"
+       stroke-linecap="round"
+       id="line20" />
+    <line
+       x1="54"
+       y1="169"
+       x2="52"
+       y2="175"
+       stroke="#1a3008"
+       stroke-width="2"
+       stroke-linecap="round"
+       id="line21" />
+    <ellipse
+       cx="144"
+       cy="162"
+       rx="16"
+       ry="11"
+       fill="#88C060"
+       stroke="#1a3008"
+       stroke-width="2.8"
+       transform="rotate(20,144,162)"
+       id="ellipse21" />
+    <line
+       x1="156"
+       y1="163"
+       x2="160"
+       y2="168"
+       stroke="#1a3008"
+       stroke-width="2"
+       stroke-linecap="round"
+       id="line22" />
+    <line
+       x1="152"
+       y1="167"
+       x2="155"
+       y2="173"
+       stroke="#1a3008"
+       stroke-width="2"
+       stroke-linecap="round"
+       id="line23" />
+    <line
+       x1="146"
+       y1="169"
+       x2="148"
+       y2="175"
+       stroke="#1a3008"
+       stroke-width="2"
+       stroke-linecap="round"
+       id="line24" />
+    <polygon
+       points="86,158 86,152 74,158 72,164 "
+       fill="#72A84C"
+       stroke="#1a3008"
+       stroke-width="1.5"
+       opacity="0.7"
+       id="polygon15" />
+    <polygon
+       points="114,158 114,152 126,158 128,164 "
+       fill="#72A84C"
+       stroke="#1a3008"
+       stroke-width="1.5"
+       opacity="0.7"
+       id="polygon18" />
+  </g>
+  <!-- Patte arrière gauche -->
+  <!-- Patte arrière droite -->
+  <g
+     id="back-limbs">
+    <ellipse
+       cx="68"
+       cy="192"
+       rx="14"
+       ry="10"
+       fill="#88C060"
+       stroke="#1A3008"
+       stroke-width="2.8"
+       transform="rotate(15 68 192)"
+       id="ellipse24" />
+    <ellipse
+       cx="132"
+       cy="192"
+       rx="14"
+       ry="10"
+       fill="#88C060"
+       stroke="#1A3008"
+       stroke-width="2.8"
+       transform="rotate(-15 132 192)"
+       id="ellipse25" />
+  </g>
+  <!-- Queue -->
+  <g
+     id="tail">
+    <path
+       d="M100,206 Q106,214 102,218 Q98,214 100,206 Z"
+       fill="#88C060"
+       stroke="#1A3008"
+       stroke-width="2"
+       id="path25" />
+  </g>
+  <!-- =================== COU =================== -->
+  <g
+     id="belly"
+     style="display:inline">
+    <ellipse
+       cx="100"
+       cy="175"
+       rx="38"
+       ry="16"
+       fill="#C8D870"
+       stroke="#1a3008"
+       stroke-width="2.5"
+       id="ellipse12" />
+    <polygon
+       points="78,132 90,128 86,136 74,140 "
+       fill="#72A84C"
+       stroke="#1a3008"
+       stroke-width="1.8"
+       opacity="0.85"
+       id="polygon13" />
+    <polygon
+       points="122,132 110,128 114,136 126,140 "
+       fill="#72A84C"
+       stroke="#1a3008"
+       stroke-width="1.8"
+       opacity="0.85"
+       id="polygon16" />
+    <polygon
+       points="100,174 86,168 86,152 100,160 114,152 114,168 "
+       fill="#72A84C"
+       stroke="#1a3008"
+       stroke-width="1.8"
+       opacity="0.8"
+       id="polygon19" />
+    <ellipse
+       cx="100"
+       cy="132"
+       rx="20"
+       ry="14"
+       fill="#88C060"
+       stroke="#1a3008"
+       stroke-width="3"
+       id="ellipse26" />
+    <polygon
+       points="100,160 86,152 86,136 100,128 114,136 114,152 "
+       fill="#72A84C"
+       stroke="#1a3008"
+       stroke-width="2"
+       opacity="0.9"
+       id="polygon12" />
+  </g>
+  <g
+     id="bandana"
+     transform="translate(0.24989391,-18.750063)"
+     style="display:inline">
+    <!-- Tissu principal du foulard -->
+    <path
+       d="m 62,138 q 38,10 76,0 -18,37 -38,42 -20,-5 -38,-42 z"
+       fill="#0051a2"
+       stroke="#2c1810"
+       stroke-width="2.5"
+       stroke-linejoin="round"
+       id="path16" />
+    <!-- Pli central du foulard (ombre) -->
+    <path
+       d="m 100,148 q 0,17 0,32"
+       fill="none"
+       stroke="#003a7a"
+       stroke-width="1.5"
+       opacity="0.5"
+       id="path17" />
+    <!-- Reflet gauche -->
+    <path
+       d="m 70,142 q 15,13 25,20"
+       fill="none"
+       stroke="#4a90d9"
+       stroke-width="1.5"
+       opacity="0.4"
+       id="path18" />
+    <!-- Nœud du foulard à gauche -->
+    <!-- Brin gauche du nœud -->
+    <!-- Brin droit du nœud -->
+  </g>
+  <!-- =================== FOULARD =================== -->
+  <!-- Triangle pendant -->
+  <!-- =================== TÊTE =================== -->
+  <g
+     id="head"
+     style="display:inline">
+    <ellipse
+       cx="100"
+       cy="92"
+       rx="46"
+       ry="44"
+       fill="#88C060"
+       stroke="#1a3008"
+       stroke-width="3.5"
+       id="ellipse27" />
+  </g>
+  <!-- Motif tête (taches plus sombres, style tortue) -->
+  <!-- =================== VISAGE =================== -->
+  <!-- Œil gauche -->
+  <!-- Œil droit -->
+  <!-- Nez (2 petites narines) -->
+  <!-- Bouche sourire -->
+  <!-- Joues roses -->
+  <g
+     id="face">
+    <ellipse
+       cx="80"
+       cy="80"
+       rx="8"
+       ry="6"
+       fill="#3A6020"
+       opacity="0.25"
+       transform="rotate(-20 80 80)"
+       id="ellipse28" />
+    <ellipse
+       cx="120"
+       cy="80"
+       rx="8"
+       ry="6"
+       fill="#3A6020"
+       opacity="0.25"
+       transform="rotate(20 120 80)"
+       id="ellipse29" />
+    <ellipse
+       cx="100"
+       cy="70"
+       rx="7"
+       ry="5"
+       fill="#3A6020"
+       opacity="0.2"
+       id="ellipse30" />
+    <circle
+       cx="82"
+       cy="88"
+       r="14"
+       fill="white"
+       stroke="#1A3008"
+       stroke-width="2.5"
+       id="circle30" />
+    <circle
+       cx="84"
+       cy="89"
+       r="8"
+       fill="#1A1A1A"
+       id="circle31" />
+    <circle
+       cx="87"
+       cy="85"
+       r="3"
+       fill="white"
+       id="circle32" />
+    <circle
+       cx="81"
+       cy="92"
+       r="1.2"
+       fill="white"
+       opacity="0.6"
+       id="circle33" />
+    <circle
+       cx="118"
+       cy="88"
+       r="14"
+       fill="white"
+       stroke="#1A3008"
+       stroke-width="2.5"
+       id="circle34" />
+    <circle
+       cx="120"
+       cy="89"
+       r="8"
+       fill="#1A1A1A"
+       id="circle35" />
+    <circle
+       cx="123"
+       cy="85"
+       r="3"
+       fill="white"
+       id="circle36" />
+    <circle
+       cx="117"
+       cy="92"
+       r="1.2"
+       fill="white"
+       opacity="0.6"
+       id="circle37" />
+    <ellipse
+       cx="96"
+       cy="103"
+       rx="3"
+       ry="2"
+       fill="#1A3008"
+       opacity="0.7"
+       id="ellipse37" />
+    <ellipse
+       cx="104"
+       cy="103"
+       rx="3"
+       ry="2"
+       fill="#1A3008"
+       opacity="0.7"
+       id="ellipse38" />
+    <path
+       d="M86,110 Q100,122 114,110"
+       stroke="#1A3008"
+       stroke-width="2.5"
+       fill="none"
+       stroke-linecap="round"
+       id="path38" />
+    <ellipse
+       cx="70"
+       cy="104"
+       rx="9"
+       ry="6"
+       fill="#FF9999"
+       opacity="0.5"
+       id="ellipse39" />
+    <ellipse
+       cx="130"
+       cy="104"
+       rx="9"
+       ry="6"
+       fill="#ff9999"
+       opacity="0.5"
+       id="ellipse40"
+       style="display:inline" />
+  </g>
+</svg>

@@ -1,0 +1,468 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   viewBox="0 0 200 220"
+   width="200"
+   height="220"
+   version="1.1"
+   id="svg43"
+   sodipodi:docname="castor.svg"
+   inkscape:version="1.4.4 (dcaf3e7d9e, 2026-05-05)"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  
+  
+  <!-- =================== QUEUE PLATE ÉCAILLEUSE =================== -->
+  <!-- Queue caractéristique du castor : ovale aplati horizontal -->
+  <!-- Motif écailles queue (grille losanges) -->
+  <g
+     id="tail"
+     style="display:inline">
+    <ellipse
+       cx="100"
+       cy="210"
+       rx="38"
+       ry="14"
+       fill="#6A4828"
+       stroke="#2a1008"
+       stroke-width="3"
+       id="ellipse10" />
+    <line
+       x1="72"
+       y1="204"
+       x2="80"
+       y2="218"
+       stroke="#2a1008"
+       stroke-width="1.2"
+       opacity="0.5"
+       id="line10" />
+    <line
+       x1="84"
+       y1="200"
+       x2="90"
+       y2="218"
+       stroke="#2a1008"
+       stroke-width="1.2"
+       opacity="0.5"
+       id="line11" />
+    <line
+       x1="96"
+       y1="198"
+       x2="100"
+       y2="218"
+       stroke="#2a1008"
+       stroke-width="1.2"
+       opacity="0.5"
+       id="line12" />
+    <line
+       x1="108"
+       y1="200"
+       x2="112"
+       y2="218"
+       stroke="#2a1008"
+       stroke-width="1.2"
+       opacity="0.5"
+       id="line13" />
+    <line
+       x1="120"
+       y1="204"
+       x2="126"
+       y2="218"
+       stroke="#2a1008"
+       stroke-width="1.2"
+       opacity="0.5"
+       id="line14" />
+    <line
+       x1="66"
+       y1="210"
+       x2="134"
+       y2="210"
+       stroke="#2a1008"
+       stroke-width="1.2"
+       opacity="0.4"
+       id="line15" />
+    <line
+       x1="68"
+       y1="206"
+       x2="132"
+       y2="206"
+       stroke="#2a1008"
+       stroke-width="1"
+       opacity="0.3"
+       id="line16" />
+    <line
+       x1="68"
+       y1="214"
+       x2="132"
+       y2="214"
+       stroke="#2a1008"
+       stroke-width="1"
+       opacity="0.3"
+       id="line17" />
+  </g>
+  <!-- =================== CORPS =================== -->
+  <g
+     id="body">
+    <ellipse
+       cx="100"
+       cy="166"
+       rx="40"
+       ry="40"
+       fill="#A07848"
+       stroke="#2A1008"
+       stroke-width="3"
+       id="ellipse17" />
+  </g>
+  <!-- Ventre clair -->
+  <g
+     id="belly">
+    <ellipse
+       cx="100"
+       cy="168"
+       rx="25"
+       ry="28"
+       fill="#F0D8A8"
+       stroke="none"
+       id="ellipse18" />
+  </g>
+  <!-- Bras gauche -->
+  <!-- Patte gauche -->
+  <!-- Bras droit -->
+  <!-- Patte droite -->
+  <g
+     id="front-limbs">
+    <ellipse
+       cx="58"
+       cy="166"
+       rx="14"
+       ry="21"
+       fill="#A07848"
+       stroke="#2A1008"
+       stroke-width="3"
+       transform="rotate(-14 58 166)"
+       id="ellipse19" />
+    <ellipse
+       cx="50"
+       cy="182"
+       rx="12"
+       ry="8"
+       fill="#A07848"
+       stroke="#2A1008"
+       stroke-width="2.5"
+       id="ellipse20" />
+    <ellipse
+       cx="142"
+       cy="166"
+       rx="14"
+       ry="21"
+       fill="#A07848"
+       stroke="#2A1008"
+       stroke-width="3"
+       transform="rotate(14 142 166)"
+       id="ellipse21" />
+    <ellipse
+       cx="150"
+       cy="182"
+       rx="12"
+       ry="8"
+       fill="#A07848"
+       stroke="#2A1008"
+       stroke-width="2.5"
+       id="ellipse22" />
+  </g>
+  <!-- Jambe gauche -->
+  <!-- Jambe droite -->
+  <!-- =================== FOULARD =================== -->
+  <!-- Triangle pendant -->
+  <!-- =================== TÊTE =================== -->
+  <!-- Oreilles petites et rondes -->
+  <g
+     id="ears"
+     style="display:inline">
+    <circle
+       cx="66"
+       cy="65"
+       r="16"
+       fill="#A07848"
+       stroke="#2a1008"
+       stroke-width="3"
+       id="circle25" />
+    <circle
+       cx="66"
+       cy="65"
+       r="9"
+       fill="#F0D8A8"
+       stroke="#2a1008"
+       stroke-width="1.5"
+       id="circle26" />
+    <circle
+       cx="134"
+       cy="65"
+       r="16"
+       fill="#A07848"
+       stroke="#2a1008"
+       stroke-width="3"
+       id="circle27" />
+    <circle
+       cx="134"
+       cy="65"
+       r="9"
+       fill="#F0D8A8"
+       stroke="#2a1008"
+       stroke-width="1.5"
+       id="circle28" />
+  </g>
+  <g
+     id="bandana"
+     transform="translate(-0.58904109,-2.369863)"
+     style="display:inline">
+    <!-- Tissu principal du foulard -->
+    <path
+       d="m 62,138 q 38,10 76,0 -18,37 -38,42 -20,-5 -38,-42 z"
+       fill="#0051a2"
+       stroke="#2c1810"
+       stroke-width="2.5"
+       stroke-linejoin="round"
+       id="path16" />
+    <!-- Pli central du foulard (ombre) -->
+    <path
+       d="m 100,148 q 0,17 0,32"
+       fill="none"
+       stroke="#003a7a"
+       stroke-width="1.5"
+       opacity="0.5"
+       id="path17" />
+    <!-- Reflet gauche -->
+    <path
+       d="m 70,142 q 15,13 25,20"
+       fill="none"
+       stroke="#4a90d9"
+       stroke-width="1.5"
+       opacity="0.4"
+       id="path18" />
+    <!-- Nœud du foulard à gauche -->
+    <!-- Brin gauche du nœud -->
+    <!-- Brin droit du nœud -->
+  </g>
+  <!-- Tête -->
+  <g
+     id="head">
+    <ellipse
+       cx="100"
+       cy="102"
+       rx="50"
+       ry="48"
+       fill="#B88850"
+       stroke="#2a1008"
+       stroke-width="3.5"
+       id="ellipse28"
+       style="display:inline" />
+  </g>
+  <!-- Museau proéminent -->
+  <!-- =================== VISAGE =================== -->
+  <!-- Œil gauche -->
+  <!-- Œil droit -->
+  <!-- Nez large -->
+  <!-- Bouche sourire -->
+  <!-- Dents de castor (deux grandes incisives) -->
+  <!-- Ligne séparation dents -->
+  <!-- Moustaches -->
+  <!-- Joues roses -->
+  <g
+     id="face"
+     style="display:inline">
+    <ellipse
+       cx="100"
+       cy="120"
+       rx="30"
+       ry="22"
+       fill="#F0D8A8"
+       stroke="#2a1008"
+       stroke-width="2.2"
+       id="ellipse29" />
+    <circle
+       cx="80"
+       cy="96"
+       r="14"
+       fill="#ffffff"
+       stroke="#2a1008"
+       stroke-width="2.5"
+       id="circle29" />
+    <circle
+       cx="82"
+       cy="97"
+       r="8"
+       fill="#1a1a1a"
+       id="circle30" />
+    <circle
+       cx="86"
+       cy="93"
+       r="3"
+       fill="#ffffff"
+       id="circle31" />
+    <circle
+       cx="79"
+       cy="100"
+       r="1.3"
+       fill="#ffffff"
+       opacity="0.6"
+       id="circle32" />
+    <circle
+       cx="120"
+       cy="96"
+       r="14"
+       fill="#ffffff"
+       stroke="#2a1008"
+       stroke-width="2.5"
+       id="circle33" />
+    <circle
+       cx="122"
+       cy="97"
+       r="8"
+       fill="#1a1a1a"
+       id="circle34" />
+    <circle
+       cx="126"
+       cy="93"
+       r="3"
+       fill="#ffffff"
+       id="circle35" />
+    <circle
+       cx="119"
+       cy="100"
+       r="1.3"
+       fill="#ffffff"
+       opacity="0.6"
+       id="circle36" />
+    <ellipse
+       cx="97"
+       cy="112"
+       rx="3"
+       ry="2"
+       fill="#5a3020"
+       opacity="0.55"
+       id="ellipse37" />
+    <path
+       d="m 88,122 q 12,11 24,0"
+       stroke="#2a1008"
+       stroke-width="2.5"
+       fill="none"
+       stroke-linecap="round"
+       id="path37" />
+    <rect
+       x="93"
+       y="126"
+       width="7"
+       height="10"
+       rx="2"
+       fill="#fffde8"
+       stroke="#2a1008"
+       stroke-width="1.8"
+       id="rect37" />
+    <rect
+       x="102"
+       y="126"
+       width="7"
+       height="10"
+       rx="2"
+       fill="#fffde8"
+       stroke="#2a1008"
+       stroke-width="1.8"
+       id="rect38" />
+    <line
+       x1="58"
+       y1="116"
+       x2="86"
+       y2="119"
+       stroke="#2a1008"
+       stroke-width="1.5"
+       stroke-linecap="round"
+       opacity="0.5"
+       id="line39" />
+    <line
+       x1="60"
+       y1="122"
+       x2="86"
+       y2="123"
+       stroke="#2a1008"
+       stroke-width="1.5"
+       stroke-linecap="round"
+       opacity="0.5"
+       id="line40" />
+    <line
+       x1="114"
+       y1="119"
+       x2="142"
+       y2="116"
+       stroke="#2a1008"
+       stroke-width="1.5"
+       stroke-linecap="round"
+       opacity="0.5"
+       id="line41" />
+    <line
+       x1="114"
+       y1="123"
+       x2="140"
+       y2="122"
+       stroke="#2a1008"
+       stroke-width="1.5"
+       stroke-linecap="round"
+       opacity="0.5"
+       id="line42" />
+    <ellipse
+       cx="70"
+       cy="116"
+       rx="10"
+       ry="7"
+       fill="#ff9999"
+       opacity="0.48"
+       id="ellipse42" />
+    <ellipse
+       cx="130"
+       cy="116"
+       rx="10"
+       ry="7"
+       fill="#ff9999"
+       opacity="0.48"
+       id="ellipse43" />
+    <ellipse
+       cx="100"
+       cy="114"
+       rx="8"
+       ry="6"
+       fill="#2a1008"
+       id="ellipse36" />
+    <line
+       x1="100"
+       y1="126"
+       x2="100"
+       y2="136"
+       stroke="#2a1008"
+       stroke-width="1.5"
+       id="line38" />
+  </g>
+  <g
+     id="layer2"
+     inkscape:label="back-limbs"
+     style="display:inline">
+    <ellipse
+       cx="84"
+       cy="200"
+       rx="14"
+       ry="10"
+       fill="#A07848"
+       stroke="#2a1008"
+       stroke-width="3"
+       id="ellipse23" />
+    <ellipse
+       cx="116"
+       cy="200"
+       rx="14"
+       ry="10"
+       fill="#A07848"
+       stroke="#2a1008"
+       stroke-width="3"
+       id="ellipse24" />
+  </g>
+</svg>

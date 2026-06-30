@@ -1,0 +1,453 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   viewBox="0 0 200 220"
+   width="200"
+   height="220"
+   version="1.1"
+   id="svg53"
+   sodipodi:docname="perroquet.svg"
+   inkscape:version="1.4.4 (dcaf3e7d9e, 2026-05-05)"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  
+  
+  <!-- =================== QUEUE LONGUE =================== -->
+  <!-- Plumes de queue (3 plumes étagées) -->
+  <g
+     id="tail"
+     style="display:inline">
+    <path
+       d="m 92,202 q -10,18 -14,16 2,-12 10,-20 z"
+       fill="#28A8E0"
+       stroke="#043818"
+       stroke-width="2"
+       stroke-linejoin="round"
+       id="path16" />
+    <path
+       d="m 100,206 q -2,16 -6,14 0,-12 4,-20 z"
+       fill="#38D058"
+       stroke="#043818"
+       stroke-width="2"
+       stroke-linejoin="round"
+       id="path17" />
+    <path
+       d="m 108,202 q 10,18 14,16 -2,-12 -10,-20 z"
+       fill="#28A8E0"
+       stroke="#043818"
+       stroke-width="2"
+       stroke-linejoin="round"
+       id="path18" />
+  </g>
+  <!-- =================== CORPS =================== -->
+  <g
+     id="body"
+     style="display:inline">
+    <ellipse
+       cx="100"
+       cy="166"
+       rx="38"
+       ry="42"
+       fill="#38D058"
+       stroke="#043818"
+       stroke-width="3"
+       id="ellipse18" />
+  </g>
+  <!-- Ventre jaune-vert -->
+  <g
+     id="belly"
+     style="display:inline">
+    <ellipse
+       cx="100"
+       cy="168"
+       rx="24"
+       ry="30"
+       fill="#FFE030"
+       stroke="none"
+       id="ellipse19" />
+  </g>
+  <!-- Aile gauche (bleue sur le bord) -->
+  <!-- Bord bleu aile gauche -->
+  <!-- Plumes aile gauche -->
+  <!-- Aile droite (bleue sur le bord) -->
+  <!-- Bord bleu aile droite -->
+  <!-- Plumes aile droite -->
+  <g
+     id="front-limbs"
+     style="display:inline"
+     sodipodi:insensitive="true">
+    <path
+       d="m 64,130 q -28,18 -30,52 2,20 20,24 10,-8 8,-30 0,-22 4,-40 z"
+       fill="#38D058"
+       stroke="#043818"
+       stroke-width="3"
+       stroke-linejoin="round"
+       id="path19" />
+    <path
+       d="m 42,172 q -6,16 0,28 10,4 14,-4 -8,-8 -10,-20 z"
+       fill="#28A8E0"
+       stroke="#043818"
+       stroke-width="2"
+       stroke-linejoin="round"
+       id="path20" />
+    <path
+       d="m 44,168 q 10,-6 18,0"
+       stroke="#043818"
+       stroke-width="1.6"
+       fill="none"
+       stroke-linecap="round"
+       opacity="0.45"
+       id="path21" />
+    <path
+       d="m 42,178 q 10,-6 20,0"
+       stroke="#043818"
+       stroke-width="1.6"
+       fill="none"
+       stroke-linecap="round"
+       opacity="0.45"
+       id="path22" />
+    <path
+       d="m 42,188 q 10,-6 18,0"
+       stroke="#043818"
+       stroke-width="1.6"
+       fill="none"
+       stroke-linecap="round"
+       opacity="0.45"
+       id="path23" />
+    <path
+       d="m 136,130 q 28,18 30,52 -2,20 -20,24 -10,-8 -8,-30 0,-22 -4,-40 z"
+       fill="#38D058"
+       stroke="#043818"
+       stroke-width="3"
+       stroke-linejoin="round"
+       id="path24" />
+    <path
+       d="m 158,172 q 6,16 0,28 -10,4 -14,-4 8,-8 10,-20 z"
+       fill="#28A8E0"
+       stroke="#043818"
+       stroke-width="2"
+       stroke-linejoin="round"
+       id="path25" />
+    <path
+       d="m 156,168 q -10,-6 -18,0"
+       stroke="#043818"
+       stroke-width="1.6"
+       fill="none"
+       stroke-linecap="round"
+       opacity="0.45"
+       id="path26" />
+    <path
+       d="m 158,178 q -10,-6 -20,0"
+       stroke="#043818"
+       stroke-width="1.6"
+       fill="none"
+       stroke-linecap="round"
+       opacity="0.45"
+       id="path27" />
+    <path
+       d="m 158,188 q -10,-6 -18,0"
+       stroke="#043818"
+       stroke-width="1.6"
+       fill="none"
+       stroke-linecap="round"
+       opacity="0.45"
+       id="path28" />
+  </g>
+  <!-- Pattes (perchées) -->
+  <!-- Patte gauche -->
+  <!-- Patte droite -->
+  <g
+     id="back-limbs"
+     style="display:inline">
+    <line
+       x1="86"
+       y1="204"
+       x2="80"
+       y2="216"
+       stroke="#D08820"
+       stroke-width="3.5"
+       stroke-linecap="round"
+       id="line28" />
+    <line
+       x1="80"
+       y1="216"
+       x2="70"
+       y2="218"
+       stroke="#D08820"
+       stroke-width="3"
+       stroke-linecap="round"
+       id="line29" />
+    <line
+       x1="80"
+       y1="216"
+       x2="78"
+       y2="220"
+       stroke="#D08820"
+       stroke-width="3"
+       stroke-linecap="round"
+       id="line30" />
+    <line
+       x1="80"
+       y1="216"
+       x2="86"
+       y2="220"
+       stroke="#D08820"
+       stroke-width="3"
+       stroke-linecap="round"
+       id="line31" />
+    <line
+       x1="114"
+       y1="204"
+       x2="120"
+       y2="216"
+       stroke="#D08820"
+       stroke-width="3.5"
+       stroke-linecap="round"
+       id="line32" />
+    <line
+       x1="120"
+       y1="216"
+       x2="130"
+       y2="218"
+       stroke="#D08820"
+       stroke-width="3"
+       stroke-linecap="round"
+       id="line33" />
+    <line
+       x1="120"
+       y1="216"
+       x2="122"
+       y2="220"
+       stroke="#D08820"
+       stroke-width="3"
+       stroke-linecap="round"
+       id="line34" />
+    <line
+       x1="120"
+       y1="216"
+       x2="114"
+       y2="220"
+       stroke="#D08820"
+       stroke-width="3"
+       stroke-linecap="round"
+       id="line35" />
+  </g>
+  <!-- =================== FOULARD =================== -->
+  <!-- Triangle pendant -->
+  <!-- =================== TÊTE =================== -->
+  <!-- Huppe (plumes sur le sommet) -->
+  <g
+     id="ears"
+     style="display:inline">
+    <path
+       d="m 88,58 q -4,-18 0,-30 4,14 2,28 z"
+       fill="#38D058"
+       stroke="#043818"
+       stroke-width="2"
+       stroke-linejoin="round"
+       id="path37" />
+    <path
+       d="m 100,54 q -2,-20 2,-32 2,14 0,30 z"
+       fill="#28A8E0"
+       stroke="#043818"
+       stroke-width="2"
+       stroke-linejoin="round"
+       id="path38" />
+    <path
+       d="m 112,58 q 4,-18 0,-30 -4,14 -2,28 z"
+       fill="#38D058"
+       stroke="#043818"
+       stroke-width="2"
+       stroke-linejoin="round"
+       id="path39" />
+  </g>
+  <g
+     id="bandana"
+     transform="translate(1.1814009,-7.3391053)"
+     style="display:inline">
+    <!-- Tissu principal du foulard -->
+    <path
+       d="m 62,138 q 38,10 76,0 -18,37 -38,42 -20,-5 -38,-42 z"
+       fill="#0051a2"
+       stroke="#2c1810"
+       stroke-width="2.5"
+       stroke-linejoin="round"
+       id="path16-6" />
+    <!-- Pli central du foulard (ombre) -->
+    <path
+       d="m 100,148 q 0,17 0,32"
+       fill="none"
+       stroke="#003a7a"
+       stroke-width="1.5"
+       opacity="0.5"
+       id="path17-2" />
+    <!-- Reflet gauche -->
+    <path
+       d="m 70,142 q 15,13 25,20"
+       fill="none"
+       stroke="#4a90d9"
+       stroke-width="1.5"
+       opacity="0.4"
+       id="path18-9" />
+    <!-- Nœud du foulard à gauche -->
+    <!-- Brin gauche du nœud -->
+    <!-- Brin droit du nœud -->
+  </g>
+  <!-- Tête -->
+  <g
+     id="head"
+     style="display:inline">
+    <ellipse
+       cx="100"
+       cy="98"
+       rx="50"
+       ry="48"
+       fill="#30C050"
+       stroke="#043818"
+       stroke-width="3.5"
+       id="ellipse39" />
+  </g>
+  <!-- Masque facial jaune (caractéristique perroquet) -->
+  <!-- Tache rouge sur la joue (certains perroquets) -->
+  <!-- =================== VISAGE =================== -->
+  <!-- Œil gauche -->
+  <!-- Iris jaune (œil de perroquet) -->
+  <!-- Pupille -->
+  <!-- Œil droit -->
+  <!-- Iris jaune -->
+  <!-- Pupille -->
+  <!-- Bec crochu (typique perroquet) -->
+  <!-- Mandibule supérieure -->
+  <!-- Mandibule inférieure -->
+  <!-- Narine bec -->
+  <g
+     id="face"
+     style="display:inline">
+    <ellipse
+       cx="100"
+       cy="110"
+       rx="30"
+       ry="24"
+       fill="#E0F040"
+       stroke="#043818"
+       stroke-width="2"
+       id="ellipse40" />
+    <ellipse
+       cx="72"
+       cy="108"
+       rx="9"
+       ry="7"
+       fill="#ff4020"
+       stroke="#043818"
+       stroke-width="1.5"
+       opacity="0.85"
+       id="ellipse41" />
+    <ellipse
+       cx="128"
+       cy="108"
+       rx="9"
+       ry="7"
+       fill="#ff4020"
+       stroke="#043818"
+       stroke-width="1.5"
+       opacity="0.85"
+       id="ellipse42" />
+    <circle
+       cx="80"
+       cy="92"
+       r="14"
+       fill="#ffffff"
+       stroke="#043818"
+       stroke-width="2.5"
+       id="circle42" />
+    <circle
+       cx="82"
+       cy="93"
+       r="9"
+       fill="#ffd020"
+       id="circle43" />
+    <circle
+       cx="82"
+       cy="93"
+       r="5.5"
+       fill="#1a1a1a"
+       id="circle44" />
+    <circle
+       cx="85"
+       cy="89"
+       r="2.5"
+       fill="#ffffff"
+       id="circle45" />
+    <circle
+       cx="79"
+       cy="96"
+       r="1.2"
+       fill="#ffffff"
+       opacity="0.6"
+       id="circle46" />
+    <circle
+       cx="120"
+       cy="92"
+       r="14"
+       fill="#ffffff"
+       stroke="#043818"
+       stroke-width="2.5"
+       id="circle47" />
+    <circle
+       cx="122"
+       cy="93"
+       r="9"
+       fill="#ffd020"
+       id="circle48" />
+    <circle
+       cx="122"
+       cy="93"
+       r="5.5"
+       fill="#1a1a1a"
+       id="circle49" />
+    <circle
+       cx="125"
+       cy="89"
+       r="2.5"
+       fill="#ffffff"
+       id="circle50" />
+    <circle
+       cx="119"
+       cy="96"
+       r="1.2"
+       fill="#ffffff"
+       opacity="0.6"
+       id="circle51" />
+    <path
+       d="m 88,108 q 12,-6 24,0 -4,8 -12,12 -8,-4 -12,-12 z"
+       fill="#F0A820"
+       stroke="#043818"
+       stroke-width="2"
+       stroke-linejoin="round"
+       id="path51" />
+    <path
+       d="m 92,114 q 8,6 16,0 -2,6 -8,8 -6,-2 -8,-8 z"
+       fill="#c07000"
+       stroke="#043818"
+       stroke-width="1.5"
+       stroke-linejoin="round"
+       id="path52" />
+    <ellipse
+       cx="97"
+       cy="107"
+       rx="2.5"
+       ry="2"
+       fill="#7a4800"
+       opacity="0.6"
+       id="ellipse52" />
+    <ellipse
+       cx="103"
+       cy="107"
+       rx="2.5"
+       ry="2"
+       fill="#7a4800"
+       opacity="0.6"
+       id="ellipse53" />
+  </g>
+</svg>
