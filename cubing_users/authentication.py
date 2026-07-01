@@ -88,6 +88,6 @@ class CuberAuthenticationBackend:
     def get_user(self, cuber_id):
         """Récupère un cubeur par son ID — utilisé par Django pour la session."""
         try:
-            return Cuber.objects.get(pk=cuber_id)
+            return Cuber.objects.get(cuber_id=cuber_id)
         except Cuber.DoesNotExist:
             return None

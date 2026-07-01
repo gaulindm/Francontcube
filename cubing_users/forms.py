@@ -4,7 +4,7 @@ from django.contrib.auth import get_user_model
 from django.core.exceptions import ValidationError
 
 from .models import (
-    Cuber, Leader, Group,
+    Cuber, Leader, LeaderRequest, Group,
     ANIMAL_CHOICES, CUBE_COLOR_CHOICES, QUALITY_CHOICES,
 )
 from .authentication import hash_color_code
@@ -231,6 +231,8 @@ class LeaderRegistrationForm(forms.ModelForm):
         email = self.cleaned_data.get('email')
         if User.objects.filter(email=email).exists():
             raise ValidationError("Cette adresse courriel est déjà utilisée.")
+        if LeaderRequest.objects.filter(email=email, is_approved=False).exists():
+            raise ValidationError("Une demande avec cette adresse courriel est déjà en attente d'approbation.")
         return email
 
     def clean(self):
@@ -244,19 +246,22 @@ class LeaderRegistrationForm(forms.ModelForm):
         return cleaned_data
 
     def save(self, commit=True):
-        user = User.objects.create_user(
-            username=self.cleaned_data['email'],
-            email=self.cleaned_data['email'],
-            password=self.cleaned_data['password1'],
-            first_name=self.cleaned_data['first_name'],
-            last_name=self.cleaned_data['last_name'],
+        """Crée une demande en attente — pas de compte créé tant que non approuvée."""
+        import hashlib
+        cd = self.cleaned_data
+        # On hache le mot de passe avec Django pour le stocker temporairement
+        from django.contrib.auth.hashers import make_password
+        request = LeaderRequest(
+            first_name=cd['first_name'],
+            last_name=cd['last_name'],
+            email=cd['email'],
+            role=cd['role'],
+            organization=cd.get('organization', ''),
+            password_hash=make_password(cd['password1']),
         )
-        leader = Leader.objects.create(
-            user=user,
-            role=self.cleaned_data['role'],
-            organization=self.cleaned_data.get('organization', '')
-        )
-        return leader
+        if commit:
+            request.save()
+        return request
 
 
 class LeaderLoginForm(forms.Form):

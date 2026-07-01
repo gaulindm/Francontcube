@@ -257,6 +257,41 @@ class Cuber(models.Model):
         ]
 
 
+class LeaderRequest(models.Model):
+    """
+    Demande d'accès Leader soumise via le formulaire public.
+    En attente d'approbation manuelle par l'administrateur.
+    Une fois approuvée, un compte User + Leader est créé automatiquement.
+    """
+
+    ROLE_CHOICES = [
+        ('teacher',      'Enseignant'),
+        ('coach',        'Entraîneur'),
+        ('club_leader',  'Animateur de Club'),
+        ('parent',       'Parent Responsable'),
+    ]
+
+    first_name    = models.CharField(max_length=150, verbose_name='Prénom')
+    last_name     = models.CharField(max_length=150, verbose_name='Nom de famille')
+    email         = models.EmailField(unique=True, verbose_name='Adresse courriel')
+    role          = models.CharField(max_length=20, choices=ROLE_CHOICES, verbose_name='Rôle')
+    organization  = models.CharField(max_length=200, blank=True, verbose_name='Organisation')
+    # Mot de passe haché — stocké temporairement jusqu'à l'approbation
+    password_hash = models.CharField(max_length=256)
+    submitted_date = models.DateTimeField(auto_now_add=True, verbose_name='Date de demande')
+    is_approved   = models.BooleanField(default=False, verbose_name='Approuvée')
+    approved_date = models.DateTimeField(null=True, blank=True, verbose_name="Date d'approbation")
+
+    class Meta:
+        verbose_name = 'Demande Leader'
+        verbose_name_plural = 'Demandes Leader'
+        ordering = ['-submitted_date']
+
+    def __str__(self):
+        status = '✅' if self.is_approved else '⏳'
+        return f"{status} {self.first_name} {self.last_name} ({self.email})"
+
+
 class Leader(models.Model):
     """Leader (prof/coach) — utilise l'auth traditionnelle Django."""
 

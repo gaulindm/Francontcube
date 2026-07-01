@@ -222,23 +222,31 @@ def group_leaderboard(request, group_id):
 # VIEWS LEADERS (Enseignants/Coachs)
 # ==========================================
 
+# À intégrer dans cubing_users/views.py
+# (remplace ou complète ta vue leader_register existante)
+
+from django.shortcuts import render
+from .forms import LeaderRegistrationForm
+
+
 def leader_register(request):
-    """Inscription d'un nouveau leader."""
+    """
+    Formulaire de demande de compte Leader.
+    Crée une LeaderRequest en attente — pas de compte actif tant que non approuvée.
+    """
     if request.method == 'POST':
         form = LeaderRegistrationForm(request.POST)
         if form.is_valid():
-            leader = form.save()
-            login(request, leader.user)
-            messages.success(
-                request,
-                f"Bienvenue {leader.user.get_full_name()}! Ton compte leader est créé. 🎓"
-            )
-            return redirect('cubing_users:leader_dashboard')
+            leader_request = form.save()
+            return render(request, 'cubing_users/leader_register.html', {
+                'form': form,
+                'request_submitted': True,
+                'submitted_name': f"{leader_request.first_name} {leader_request.last_name}",
+            })
     else:
         form = LeaderRegistrationForm()
 
     return render(request, 'cubing_users/leader_register.html', {'form': form})
-
 
 def leader_login(request):
     """Connexion d'un leader existant."""
@@ -248,7 +256,21 @@ def leader_login(request):
             email    = form.cleaned_data['email']
             password = form.cleaned_data['password']
 
+            # DEBUG
+            from django.contrib.auth import get_user_model
+            User = get_user_model()
+            try:
+                u = User.objects.get(username=email)
+                print(f"User trouvé: {u}")
+                print(f"is_active: {u.is_active}")
+                print(f"password hash début: {u.password[:30]}")
+                print(f"check_password: {u.check_password(password)}")
+                print(f"has leader_profile: {hasattr(u, 'leader_profile')}")
+            except User.DoesNotExist:
+                print(f"❌ Aucun User avec username={email!r}")
+
             user = authenticate(request, username=email, password=password)
+            print(f"authenticate() retourne: {user}")
 
             if user and hasattr(user, 'leader_profile'):
                 login(request, user)
@@ -260,7 +282,6 @@ def leader_login(request):
         form = LeaderLoginForm()
 
     return render(request, 'cubing_users/leader_login.html', {'form': form})
-
 
 @login_required
 @leader_required

@@ -1,21 +1,45 @@
 <!-- cubing_users/templates/cubing_users/leader_register.html -->
 {% extends "main/partials/base.html" %}
 
-{% block title %}Inscription Leader - CubingHub{% endblock %}
+{% block title %}Inscription Leader - FranContCube{% endblock %}
 
 {% block content %}
 <div class="row justify-content-center">
     <div class="col-lg-7">
+
+        {% if request_submitted %}
+        <!-- ✅ Message de confirmation -->
+        <div class="card border-success">
+            <div class="card-body p-5 text-center">
+                <div style="font-size: 4rem;">📬</div>
+                <h1 class="card-title mt-3 mb-3">Demande reçue!</h1>
+                <p class="text-muted mb-4">
+                    Merci <strong>{{ submitted_name }}</strong>! Ta demande de compte Leader a bien été soumise.
+                </p>
+                <div class="alert alert-info text-start">
+                    <strong>Prochaine étape :</strong><br>
+                    Ton compte sera activé manuellement par l'équipe FranContCube.
+                    Tu pourras te connecter dès que tu recevras une confirmation.
+                </div>
+                <a href="{% url 'main:home' %}" class="btn btn-outline-secondary btn-cube mt-2">
+                    Retour à l'accueil
+                </a>
+            </div>
+        </div>
+
+        {% else %}
+        <!-- 📋 Formulaire de demande -->
         <div class="card">
             <div class="card-body p-5">
-                <h1 class="card-title text-center mb-4">👨‍🏫 Créer un Compte Leader</h1>
+                <h1 class="card-title text-center mb-2">👨‍🏫 Demande de Compte Leader</h1>
                 <p class="text-center text-muted mb-4">
-                    Pour enseignants, coachs et animateurs de clubs
+                    Pour enseignants, coachs et animateurs de clubs.<br>
+                    <small>Ton compte sera activé après vérification.</small>
                 </p>
 
                 <form method="post">
                     {% csrf_token %}
-                    
+
                     <div class="row g-3">
                         <!-- Prénom -->
                         <div class="col-md-6">
@@ -86,7 +110,7 @@
                     <!-- Boutons -->
                     <div class="d-grid gap-2 mt-4">
                         <button type="submit" class="btn btn-success btn-cube btn-lg">
-                            Créer mon Compte 🎓
+                            Envoyer ma demande 🎓
                         </button>
                         <a href="{% url 'cubing_users:leader_login' %}" class="btn btn-outline-secondary btn-cube">
                             J'ai déjà un compte
@@ -95,6 +119,8 @@
                 </form>
             </div>
         </div>
+        {% endif %}
+
     </div>
 </div>
 {% endblock %}

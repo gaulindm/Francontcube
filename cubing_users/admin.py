@@ -1,6 +1,76 @@
 # cubing_users/admin.py
 from django.contrib import admin
-from .models import Cuber, Leader, Group, GroupMembership, ANIMAL_CHOICES, CUBE_COLOR_CHOICES
+from django.utils import timezone
+from django.contrib.auth import get_user_model
+from django.contrib import messages
+from .models import Cuber, Leader, LeaderRequest, Group, GroupMembership, ANIMAL_CHOICES, CUBE_COLOR_CHOICES
+
+User = get_user_model()
+
+
+@admin.register(LeaderRequest)
+class LeaderRequestAdmin(admin.ModelAdmin):
+    list_display  = ['get_name', 'email', 'role', 'organization', 'submitted_date', 'is_approved']
+    list_filter   = ['is_approved', 'role', 'submitted_date']
+    search_fields = ['first_name', 'last_name', 'email', 'organization']
+    readonly_fields = ['submitted_date', 'approved_date', 'password_hash']
+    actions = ['approve_requests']
+
+    def get_name(self, obj):
+        return f"{obj.first_name} {obj.last_name}"
+    get_name.short_description = 'Nom'
+
+    @admin.action(description='✅ Approuver les demandes sélectionnées')
+    def approve_requests(self, request, queryset):
+        approved = 0
+        skipped  = 0
+        for req in queryset.filter(is_approved=False):
+            # Vérifie que l'email n'existe pas déjà
+            if User.objects.filter(email=req.email).exists():
+                skipped += 1
+                continue
+            # Crée le compte User avec le mot de passe déjà haché
+            user = User(
+                username=req.email,
+                email=req.email,
+                first_name=req.first_name,
+                last_name=req.last_name,
+                is_active=True,
+            )
+            user.password = req.password_hash  # déjà haché via make_password
+            user.save()
+            # Crée le profil Leader
+            Leader.objects.create(
+                user=user,
+                role=req.role,
+                organization=req.organization,
+            )
+            # Marque la demande comme approuvée
+            req.is_approved = True
+            req.approved_date = timezone.now()
+            req.save()
+            approved += 1
+
+        if approved:
+            self.message_user(request, f"{approved} compte(s) Leader créé(s) avec succès.", messages.SUCCESS)
+        if skipped:
+            self.message_user(request, f"{skipped} demande(s) ignorée(s) — adresse courriel déjà utilisée.", messages.WARNING)
+
+    fieldsets = (
+        ('Demandeur', {
+            'fields': ('first_name', 'last_name', 'email', 'role', 'organization'),
+        }),
+        ('Statut', {
+            'fields': ('is_approved', 'submitted_date', 'approved_date'),
+        }),
+        ('Sécurité', {
+            'fields': ('password_hash',),
+            'classes': ('collapse',),
+            'description': 'Mot de passe haché — ne jamais modifier manuellement.',
+        }),
+    )
+
+
 
 
 @admin.register(Cuber)

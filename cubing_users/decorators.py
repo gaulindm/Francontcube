@@ -18,10 +18,6 @@ def cuber_required(view_func):
 
 
 def leader_required(view_func):
-    """
-    Décorateur qui vérifie qu'un leader est connecté.
-    Redirige vers la page de login leader sinon.
-    """
     @wraps(view_func)
     def wrapped_view(request, *args, **kwargs):
         if not request.user.is_authenticated:
@@ -29,8 +25,8 @@ def leader_required(view_func):
             return redirect('cubing_users:leader_login')
         
         if not hasattr(request.user, 'leader_profile'):
-            messages.error(request, "Vous devez créer un profil de leader.")
-            return redirect('cubing_users:leader_register')
+            messages.error(request, "Votre compte leader n'est pas encore activé. Contactez l'administrateur.")
+            return redirect('cubing_users:leader_login')  # ✅ login, pas register
         
         return view_func(request, *args, **kwargs)
     return wrapped_view
