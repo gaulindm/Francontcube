@@ -11,7 +11,7 @@ urlpatterns = [
     path('cube_prep/', include(('cube_prep.urls', 'cube_prep'), namespace='cube_prep')),
     path('training/', include(('training.urls', 'training'), namespace='training')),
     path('cube/', include(('cube.urls', 'cube'), namespace='cube')),
-
+    path('badges/', include('badges.urls')),
     # Root URL → redirect to main home
     path('', lambda request: redirect('main:home')),
     

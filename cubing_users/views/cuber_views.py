@@ -8,6 +8,20 @@ from ..forms import CuberRegistrationForm, CuberLoginForm, JoinGroupForm
 from ..decorators import cuber_required
 from ..authentication import CuberAuthenticationBackend
 
+from badges.models import Badge, CuberBadge
+
+# Ordre d'affichage des familles d'écussons sur le tableau de bord.
+# Les brevets sont gérés séparément (case à trophées, pas dans cette liste).
+BADGE_FAMILY_ORDER = [
+    ('cubie-newbie', '🌱 Cubie-Newbie'),
+    ('curieux', '🔷 Cubie-Curieux'),
+    ('f2l', '🟩 F2L'),
+    ('oll', '☀️ OLL'),
+    ('pll', '🔁 PLL'),
+    ('avance', '🚀 Avancé'),
+    ('meta', '🏅 Méta'),
+]
+
 
 # ==========================================
 # VIEWS CUBEURS (Étudiants)
@@ -115,7 +129,7 @@ def cuber_logout(request):
 
 @cuber_required
 def cuber_dashboard(request):
-    """Dashboard principal du cubeur."""
+    """Dashboard principal du cubeur — foulard, écussons, et groupes."""
     cuber = request.cuber
 
     memberships = GroupMembership.objects.filter(
@@ -123,18 +137,37 @@ def cuber_dashboard(request):
         status='active'
     ).select_related('group')
 
-    # TODO: Intégrer avec cube.models quand prêt
-    f2l_stats = {
-        'cases_completed': 0,
-        'total_cases': 41,
-        'average_time': 0,
-        'recent_practice': []
+    all_badges = Badge.objects.filter(active=True)
+    cuber_progress = {
+        cb.badge_id: cb
+        for cb in CuberBadge.objects.filter(cuber=cuber).select_related('badge')
     }
+
+    def badge_item(badge):
+        cb = cuber_progress.get(badge.badge_id)
+        return {'badge': badge, 'status': cb.status if cb else 'disponible'}
+
+    brevets = [badge_item(b) for b in all_badges.filter(is_brevet=True)]
+
+    badge_families = []
+    for key, label in BADGE_FAMILY_ORDER:
+        family_badges = [badge_item(b) for b in all_badges.filter(family=key)]
+        if family_badges:
+            badge_families.append({'key': key, 'label': label, 'badges': family_badges})
+
+    badges_total_count = all_badges.exclude(is_brevet=True).count()
+    badges_unlocked_count = sum(
+        1 for fam in badge_families for item in fam['badges']
+        if item['status'] == 'debloque'
+    )
 
     return render(request, 'cubing_users/cuber_dashboard.html', {
         'cuber': cuber,
         'memberships': memberships,
-        'f2l_stats': f2l_stats,
+        'brevets': brevets,
+        'badge_families': badge_families,
+        'badges_unlocked_count': badges_unlocked_count,
+        'badges_total_count': badges_total_count,
     })
 
 

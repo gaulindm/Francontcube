@@ -12,7 +12,7 @@
             🌼 Étape 1 : <span class="brand-green">Fais une marguerite!</span>
         </h1>
         <p class="lead">
-            Mets 4 pétales blancs autour du centre jaune
+            Mets 4 pétales jaunes autour du centre blanc pour former une jolie fleur sur ton cube!
         </p>
     </div>
 
@@ -38,8 +38,8 @@
         <div class="card-body text-center p-3">
             <h2 class="mb-3">🎯 C'est quoi le but?</h2>
             <div id="cube-goal" class="mb-2"></div>
-            <h4 class="brand-green">Faire une fleur avec 4 pétales blancs!</h4>
-            <p class="lead mb-0">Les pétales blancs doivent entourer le centre jaune ☀️</p>
+            <h4 class="brand-green">Faire une fleur avec 4 pétales jaunes!</h4>
+            <p class="lead mb-0">Les pétales jaunes doivent entourer le centre blanc ☀️</p>
         </div>
     </div>
 
@@ -48,9 +48,9 @@
         <h3 class="brand-green">🧩 Comment faire ?</h3>
 
         <ol class="mt-2">
-            <li>Trouve une arête blanche n'importe où sur le cube.</li>
-            <li>Amène l'arête blanche sur la <strong>face jaune</strong>.</li>
-            <li>Répète pour les 4 arêtes blanches.</li>
+            <li>Trouve une arête jaune n'importe où sur le cube.</li>
+            <li>Amène l'arête jaune sur la <strong>face blanche</strong>.</li>
+            <li>Répète pour les 4 arêtes jaunes.</li>
         </ol>
 
         <p class="mt-2">
@@ -83,7 +83,7 @@
             <div class="col-md-6 text-center mb-2">
                 <h5 class="brand-green">Avant</h5>
                 <div id="cube-before" class="cube-small"></div>
-                <p><small class="text-muted">Arêtes blanches dispersées sur le cube</small></p>
+                <p><small class="text-muted">Arêtes jaunes dispersées sur le cube</small></p>
             </div>
             <div class="col-md-6 text-center mb-2">
                 <h5 class="brand-green">Après</h5>
@@ -97,11 +97,45 @@
     <div class="card p-3 mb-3">
         <h3 class="brand-green">💡 Conseils utiles</h3>
         <ul class="mt-2">
-            <li>Tourne le cube dans tes mains pour repérer les arêtes blanches.</li>
-            <li>Si une arête blanche est « coincée » en bas, utilise <code>R U R'</code> pour la libérer.</li>
+            <li>Tourne le cube dans tes mains pour repérer les arêtes jaunes.</li>
+            <li>Si une arête jaune est « coincée » en bas, utilise <code>R U R'</code> pour la libérer.</li>
             <li>Ne t'en fais pas pour les couleurs autour – ce sera important à l'étape suivante !</li>
-            <li><strong>Astuce :</strong> Commence par trouver UNE arête blanche, puis concentre-toi sur celle-là avant de chercher les autres.</li>
+            <li><strong>Astuce :</strong> Commence par trouver UNE arête jaune, puis concentre-toi sur celle-là avant de chercher les autres.</li>
         </ul>
+    </div>
+
+    <!-- Bouton de confirmation d'écusson -->
+    <div class="text-center mb-3">
+        <form id="csrf-form" class="d-none">{% csrf_token %}</form>
+        <button type="button" class="btn btn-warning btn-lg btn-cube"
+                data-bs-toggle="modal" data-bs-target="#confirmDaisyModal">
+            🌼 J'ai fini ma marguerite!
+        </button>
+    </div>
+
+    <!-- Modale de confirmation honnête -->
+    <div class="modal fade" id="confirmDaisyModal" tabindex="-1"
+         aria-labelledby="confirmDaisyModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="confirmDaisyModalLabel">🌼 Vérifie avant de continuer!</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body text-center">
+            <p class="lead mb-2">As-tu vraiment 4 pétales jaunes autour du centre blanc?</p>
+            <p class="text-muted small mb-0">Sois honnête avec toi-même — un vrai cubeur ne triche pas! 🤝</p>
+          </div>
+          <div class="modal-footer justify-content-center">
+            <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">
+              Pas encore...
+            </button>
+            <button type="button" class="btn btn-success" id="confirmDaisyYes">
+              Oui, vraiment! 🌼
+            </button>
+          </div>
+        </div>
+      </div>
     </div>
 
     <!-- Boutons de navigation -->
@@ -174,6 +208,41 @@
     mountCube("cube-before", {{ before_state|safe }});
     mountCube("cube-after", {{ after_state|safe }});
   });
+</script>
+
+<!-- Confirmation honnête de l'écusson (non-module, s'exécute après le DOM) -->
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+    const confirmBtn = document.getElementById('confirmDaisyYes');
+    const csrfToken = document.querySelector('#csrf-form [name=csrfmiddlewaretoken]').value;
+
+    confirmBtn.addEventListener('click', function () {
+        confirmBtn.disabled = true;
+
+        fetch("{% url 'badges:confirm_badge' slug='fondation-daisy' %}", {
+            method: 'POST',
+            headers: { 'X-CSRFToken': csrfToken },
+        })
+        .then(r => r.json())
+        .then(data => {
+            const modalEl = document.getElementById('confirmDaisyModal');
+            bootstrap.Modal.getInstance(modalEl).hide();
+
+            if (data.ok) {
+                // TODO: remplacer par une animation d'écusson sur le foulard
+                alert(`Bravo! Écusson "${data.badge_name}" débloqué ${data.badge_icon}`);
+            } else {
+                alert(data.error || "Une erreur est survenue.");
+            }
+        })
+        .catch(() => {
+            alert("Impossible de confirmer l'écusson — vérifie ta connexion.");
+        })
+        .finally(() => {
+            confirmBtn.disabled = false;
+        });
+    });
+});
 </script>
 
 {% endblock %}

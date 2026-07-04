@@ -4,6 +4,8 @@ import hashlib
 from django.db import models
 from django.conf import settings
 
+from .gender_agreement import agree_quality
+
 
 # ─────────────────────────────────────────────────────────────────────────────
 # CONSTANTES D'IDENTITÉ
@@ -191,12 +193,19 @@ class Cuber(models.Model):
     @property
     def display_name(self):
         """
-        Nom affiché à l'élève, ex: « Hibou Courageux ».
-        Toujours basé sur l'animal et la première qualité.
+        Nom affiché à l'élève, ex: « Grenouille Curieuse Persévérante — Foulard Vert ».
+
+        Les deux qualités s'accordent au genre grammatical de l'animal
+        (une grenouille est féminine en français, peu importe le cubeur
+        derrière l'identité — voir gender_agreement.py). La couleur est
+        rattachée au mot "Foulard", toujours masculin, donc jamais un
+        problème d'accord à gérer.
         """
-        animal_label   = dict(ANIMAL_CHOICES).get(self.animal, self.animal).capitalize()
-        quality_label  = dict(QUALITY_CHOICES).get(self.quality_1, self.quality_1).capitalize()
-        return f"{animal_label} {quality_label}"
+        animal_label  = dict(ANIMAL_CHOICES).get(self.animal, self.animal).capitalize()
+        color_label   = dict(CUBE_COLOR_CHOICES).get(self.cube_color, self.cube_color)
+        quality_1_agree = agree_quality(self.quality_1, self.animal)
+        quality_2_agree = agree_quality(self.quality_2, self.animal)
+        return f"{animal_label} {quality_1_agree} {quality_2_agree} — Foulard {color_label}"
 
     @property
     def bandana_hex(self):

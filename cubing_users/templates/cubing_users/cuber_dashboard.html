@@ -1,4 +1,5 @@
 {% extends "main/partials/base.html" %}
+{% load static %}
 {% block title %}Mon Tableau de Bord{% endblock %}
 
 {% block extra_css %}
@@ -6,65 +7,53 @@
     .dashboard-hero {
         background: linear-gradient(135deg, rgba(102, 126, 234, 0.9) 0%, rgba(118, 75, 162, 0.9) 100%);
         border-radius: 20px;
-        padding: 3rem 2rem;
+        padding: 2.5rem 2rem;
         margin-bottom: 2rem;
         box-shadow: 0 10px 30px rgba(0,0,0,0.15);
     }
-    
+
     .dashboard-card {
         border: none;
         border-radius: 15px;
         box-shadow: 0 5px 20px rgba(0,0,0,0.08);
         transition: transform 0.3s ease, box-shadow 0.3s ease;
-        height: 100%;
     }
-    
+
     .dashboard-card:hover {
         transform: translateY(-5px);
         box-shadow: 0 10px 30px rgba(0,0,0,0.15);
     }
-    
+
     .card-title {
         font-size: 1.5rem;
         font-weight: 600;
         margin-bottom: 1.5rem;
     }
-    
+
     .list-group-item {
         border-left: 4px solid #667eea;
         margin-bottom: 0.75rem;
         border-radius: 8px;
         transition: all 0.2s ease;
     }
-    
+
     .list-group-item:hover {
         background-color: #f8f9fa;
         transform: translateX(5px);
     }
-    
+
     .btn-cube {
         border-radius: 10px;
         padding: 0.75rem 1.5rem;
         font-weight: 600;
         transition: all 0.3s ease;
     }
-    
+
     .btn-cube:hover {
         transform: translateY(-2px);
         box-shadow: 0 5px 15px rgba(0,0,0,0.2);
     }
-    
-    .method-btn {
-        border-radius: 10px;
-        padding: 0.75rem;
-        font-weight: 600;
-        transition: all 0.3s ease;
-    }
-    
-    .method-btn:hover {
-        transform: translateX(5px);
-    }
-    
+
     .empty-state {
         text-align: center;
         padding: 2rem 1rem;
@@ -72,12 +61,152 @@
         border-radius: 12px;
         margin-bottom: 1rem;
     }
-    
-    .progress-display {
-        background: linear-gradient(135deg, rgba(102, 126, 234, 0.1) 0%, rgba(118, 75, 162, 0.1) 100%);
+
+    /* --- Foulard --- */
+    .foulard-banner {
+        background: linear-gradient(135deg, rgba(102, 126, 234, 0.95) 0%, rgba(118, 75, 162, 0.95) 100%);
         border-radius: 15px;
-        padding: 2rem;
-        margin: 1.5rem 0;
+        padding: 1.75rem;
+        margin-bottom: 2rem;
+    }
+
+    /* --- Brevets (case à trophées) --- */
+    .brevet-case {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 1rem;
+        justify-content: center;
+        margin-bottom: 2.5rem;
+    }
+
+    .brevet-tile {
+        position: relative;
+        width: 110px;
+        text-align: center;
+    }
+
+    .brevet-tile .badge-icon {
+        font-size: 2.75rem;
+        display: block;
+    }
+
+    .brevet-tile .badge-icon-img {
+        width: 6rem;
+        height: 6rem;
+        object-fit: contain;
+        display: block;
+        margin: 0 auto;
+        transition: transform 0.15s ease;
+    }
+
+    .brevet-tile:hover .badge-icon-img {
+        transform: scale(1.06);
+    }
+
+    /* --- Grille d'écussons --- */
+    .badge-family-block {
+        margin-bottom: 2rem;
+    }
+
+    .badge-family-title {
+        font-weight: 700;
+        margin-bottom: 1rem;
+    }
+
+    .badge-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(110px, 1fr));
+        gap: 0.75rem;
+    }
+
+    /* Distribue les écussons également sur toute la largeur —
+       utilisé pour les familles à effectif fixe/limité (ex: Fondations) */
+    .badge-grid-even {
+        display: grid;
+        gap: 0.75rem;
+    }
+
+    @media (max-width: 700px) {
+        .badge-grid-even {
+            grid-template-columns: repeat(auto-fill, minmax(90px, 1fr)) !important;
+        }
+    }
+
+    .badge-tile {
+        position: relative;
+        text-align: center;
+    }
+
+    .badge-tile .badge-icon {
+        font-size: 2.25rem;
+        display: block;
+    }
+
+    .badge-tile .badge-icon-img {
+        width: 4.5rem;
+        height: 4.5rem;
+        object-fit: contain;
+        display: block;
+        margin: 0 auto;
+        transition: transform 0.15s ease;
+    }
+
+    .badge-tile:hover .badge-icon-img {
+        transform: scale(1.08);
+    }
+
+    .badge-tile.locked .badge-icon,
+    .badge-tile.locked .badge-icon-img,
+    .brevet-tile.locked .badge-icon,
+    .brevet-tile.locked .badge-icon-img {
+        filter: grayscale(1);
+        opacity: 0.5;
+    }
+
+    /* Petit repère "en attente" — un point plutôt qu'un contour,
+       pour ne pas casser la silhouette du bouclier */
+    .badge-tile.pending::before {
+        content: "⏳";
+        position: absolute;
+        top: -0.1rem;
+        right: 0.4rem;
+        font-size: 0.9rem;
+        z-index: 2;
+    }
+
+    /* --- Tooltip au survol : nom + statut --- */
+    .badge-tooltip {
+        position: absolute;
+        bottom: 100%;
+        left: 50%;
+        transform: translateX(-50%) translateY(6px);
+        background: rgba(30, 30, 30, 0.92);
+        color: #fff;
+        padding: 0.4rem 0.65rem;
+        border-radius: 8px;
+        font-size: 0.75rem;
+        white-space: nowrap;
+        opacity: 0;
+        pointer-events: none;
+        transition: opacity 0.15s ease, transform 0.15s ease;
+        z-index: 10;
+    }
+
+    .badge-tile:hover .badge-tooltip,
+    .brevet-tile:hover .badge-tooltip {
+        opacity: 1;
+        transform: translateX(-50%) translateY(-2px);
+    }
+
+    .badge-tooltip-name {
+        font-weight: 600;
+    }
+
+    .badge-tooltip-status {
+        font-size: 0.65rem;
+        text-transform: uppercase;
+        letter-spacing: 0.03em;
+        opacity: 0.85;
     }
 </style>
 {% endblock %}
@@ -85,35 +214,96 @@
 {% block content %}
 <!-- Hero Header -->
 <div class="dashboard-hero text-white text-center">
-    <h1 class="display-4 fw-bold mb-0">
-        Salut {{ cuber.color }} {{ cuber.adjective }} {{ cuber.superhero }}! 👋
+    <div id="cuber-avatar-container" class="mb-3 mx-auto" style="max-width: 200px;"></div>
+    <h1 class="display-5 fw-bold mb-0">
+        Salut {{ cuber.display_name }}! 👋
     </h1>
 </div>
 
-<!-- Main Cards Grid -->
-<div class="row g-4">
-    
-    <!-- Carte 1: Mes Groupes -->
-    <div class="col-lg-4 col-md-6">
+<!-- Foulard -->
+<div class="foulard-banner text-white text-center">
+    <h2 class="mb-1">🧣 Mon Foulard</h2>
+    <p class="mb-0 fs-5">
+        {{ badges_unlocked_count }} écusson{{ badges_unlocked_count|pluralize }} débloqué{{ badges_unlocked_count|pluralize }}
+        sur {{ badges_total_count }}
+    </p>
+</div>
+
+<!-- Brevets -->
+{% if brevets %}
+<h3 class="text-center mb-3">🏆 Mes Brevets</h3>
+<div class="brevet-case">
+    {% for item in brevets %}
+    <div class="brevet-tile {% if item.status != 'debloque' %}locked{% endif %}">
+        {% if item.badge.has_custom_icon %}
+            <img src="{% static item.badge.icon_static_path %}" class="badge-icon-img" alt="{{ item.badge.name }}">
+        {% else %}
+            <span class="badge-icon">{{ item.badge.icon|default:"🏆" }}</span>
+        {% endif %}
+        <div class="badge-tooltip">
+            <div class="badge-tooltip-name">{{ item.badge.name }}</div>
+            <div class="badge-tooltip-status">
+                {% if item.status == 'debloque' %}Débloqué
+                {% else %}À découvrir{% endif %}
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+{% endif %}
+
+<!-- Collection d'écussons par famille -->
+{% for family in badge_families %}
+<div class="badge-family-block">
+    <h4 class="badge-family-title">{{ family.label }}</h4>
+    <div class="badge-grid{% if family.key == 'cubie-newbie' %} badge-grid-even{% endif %}"
+         {% if family.key == 'cubie-newbie' %}style="grid-template-columns: repeat({{ family.badges|length }}, 1fr);"{% endif %}>
+        {% for item in family.badges %}
+        <div class="badge-tile
+            {% if item.status == 'debloque' %}unlocked
+            {% elif item.status == 'en_attente' %}pending
+            {% else %}locked{% endif %}">
+            {% if item.badge.has_custom_icon %}
+                <img src="{% static item.badge.icon_static_path %}" class="badge-icon-img" alt="{{ item.badge.name }}">
+            {% else %}
+                <span class="badge-icon">{{ item.badge.icon|default:"🏅" }}</span>
+            {% endif %}
+            <div class="badge-tooltip">
+                <div class="badge-tooltip-name">{{ item.badge.name }}</div>
+                <div class="badge-tooltip-status">
+                    {% if item.status == 'debloque' %}Débloqué
+                    {% elif item.status == 'en_attente' %}En attente
+                    {% else %}À découvrir{% endif %}
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endfor %}
+
+<!-- Mes Groupes -->
+<div class="row g-4 mt-2">
+    <div class="col-lg-6 mx-auto">
         <div class="card dashboard-card">
             <div class="card-body">
                 <h3 class="card-title">
                     🏫 Mes Groupes
                 </h3>
-                
+
                 {% if memberships %}
                     <div class="list-group list-group-flush">
                         {% for membership in memberships %}
                         <div class="list-group-item">
                             <h5 class="mb-1">{{ membership.group.group_name }}</h5>
                             <small class="text-muted">
-                                <i class="bi bi-tag-fill"></i> 
+                                <i class="bi bi-tag-fill"></i>
                                 {{ membership.group.get_group_type_display }}
                             </small>
                         </div>
                         {% endfor %}
                     </div>
-                    
+
                     <div class="mt-3">
                         <a href="{% url 'cubing_users:my_groups' %}" class="btn btn-outline-primary w-100">
                             <i class="bi bi-eye"></i> Voir Tous les Groupes
@@ -133,91 +323,18 @@
             </div>
         </div>
     </div>
-
-    <!-- Carte 2: Mon Progrès F2L -->
-    <div class="col-lg-4 col-md-6">
-        <div class="card dashboard-card">
-            <div class="card-body">
-                <h3 class="card-title">
-                    📊 Mon Progrès F2L
-                </h3>
-                
-                <div class="progress-display text-center">
-                    <div class="display-3 fw-bold" style="color: #667eea;">
-                        0/41
-                    </div>
-                    <p class="text-muted mb-0">Cas complétés</p>
-                </div>
-                
-                <div class="d-grid gap-2">
-                    <a href="{% url 'training:hub' %}" class="btn btn-success btn-cube">
-                        <i class="bi bi-play-circle-fill"></i> Commencer l'Apprentissage
-                    </a>
-                    <a href="#" class="btn btn-outline-secondary">
-                        <i class="bi bi-graph-up"></i> Voir mes Statistiques
-                    </a>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Carte 3: Méthodes & Tutoriels -->
-    <div class="col-lg-4 col-md-12">
-        <div class="card dashboard-card">
-            <div class="card-body">
-                <h3 class="card-title">
-                    <i class="bi bi-book-fill"></i> Méthodes & Tutoriels
-                </h3>
-                
-                <p class="text-muted mb-4">
-                    Apprendre avec nos guides pas-à-pas
-                </p>
-                
-                <div class="d-grid gap-3">
-                    <a href="{% url 'main:method_cubienewbie' %}" 
-                       class="btn btn-outline-info method-btn text-start">
-                        <div class="d-flex align-items-center">
-                            <span style="font-size: 1.5rem; margin-right: 0.75rem;">🟢</span>
-                            <div>
-                                <strong>Cubie Newbie</strong>
-                                <br>
-                                <small class="text-muted">Pour vrais débutants</small>
-                            </div>
-                        </div>
-                    </a>
-                    
-                    <a href="{% url 'main:method_beginner' %}" 
-                       class="btn btn-outline-warning method-btn text-start">
-                        <div class="d-flex align-items-center">
-                            <span style="font-size: 1.5rem; margin-right: 0.75rem;">🟡</span>
-                            <div>
-                                <strong>Beginner Method</strong>
-                                <br>
-                                <small class="text-muted">Méthode par couches</small>
-                            </div>
-                        </div>
-                    </a>
-                    
-                    <a href="{% url 'main:method_cfop' %}" 
-                       class="btn btn-outline-danger method-btn text-start">
-                        <div class="d-flex align-items-center">
-                            <span style="font-size: 1.5rem; margin-right: 0.75rem;">🔴</span>
-                            <div>
-                                <strong>CFOP</strong>
-                                <br>
-                                <small class="text-muted">Méthode avancée</small>
-                            </div>
-                        </div>
-                    </a>
-                </div>
-                
-                <div class="alert alert-info mt-4 mb-0">
-                    <i class="bi bi-lightbulb-fill"></i>
-                    <small>Commence par Cubie Newbie si tu débutes !</small>
-                </div>
-            </div>
-        </div>
-    </div>
-    
 </div>
+
+<script src="{% static 'cubing_users/js/avatar.js' %}"></script>
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    AvatarLoader.render(
+        '{{ cuber.animal }}',
+        '{{ cuber.cube_color }}',
+        160,
+        document.getElementById('cuber-avatar-container'),
+        "{% static 'cubing_users/avatars/' %}"
+    );
+});
+</script>
 {% endblock %}

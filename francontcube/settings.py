@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'training',
     'main',
     'users',
+    'badges',
 
 
     'django_extensions',
