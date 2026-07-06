@@ -104,39 +104,47 @@
         </ul>
     </div>
 
-    <!-- Bouton de confirmation d'écusson -->
-    <div class="text-center mb-3">
-        <form id="csrf-form" class="d-none">{% csrf_token %}</form>
-        <button type="button" class="btn btn-warning btn-lg btn-cube"
-                data-bs-toggle="modal" data-bs-target="#confirmDaisyModal">
-            🌼 J'ai fini ma marguerite!
-        </button>
-    </div>
+ <!-- Bouton de confirmation d'écusson -->
+<div class="text-center mb-3">
+    <form id="csrf-form" class="d-none">{% csrf_token %}</form>
+    <button type="button" class="btn btn-warning btn-lg btn-cube"
+            data-bs-toggle="modal" data-bs-target="#confirmDaisyModal">
+        🌼 J'ai fini ma marguerite!
+    </button>
 
-    <!-- Modale de confirmation honnête -->
-    <div class="modal fade" id="confirmDaisyModal" tabindex="-1"
-         aria-labelledby="confirmDaisyModalLabel" aria-hidden="true">
-      <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title" id="confirmDaisyModalLabel">🌼 Vérifie avant de continuer!</h5>
-            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-          </div>
-          <div class="modal-body text-center">
-            <p class="lead mb-2">As-tu vraiment 4 pétales jaunes autour du centre blanc?</p>
-            <p class="text-muted small mb-0">Sois honnête avec toi-même — un vrai cubeur ne triche pas! 🤝</p>
-          </div>
-          <div class="modal-footer justify-content-center">
-            <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">
-              Pas encore...
-            </button>
-            <button type="button" class="btn btn-success" id="confirmDaisyYes">
-              Oui, vraiment! 🌼
-            </button>
-          </div>
-        </div>
+    <!-- Cadre d'invitation, caché par défaut -->
+    <div id="daisy-auth-invite" class="alert alert-info text-center mt-3 d-none">
+        <p class="mb-2">🌟 Pour garder ton écusson, crée ton identité Francontcube!</p>
+        <a href="{% url 'cubing_users:cuber_register' %}?next={{ request.path }}" class="btn btn-primary">
+            Créer mon identité
+        </a>
+    </div>
+</div>
+
+<!-- Modale de confirmation honnête -->
+<div class="modal fade" id="confirmDaisyModal" tabindex="-1"
+     aria-labelledby="confirmDaisyModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="confirmDaisyModalLabel">🌼 Vérifie avant de continuer!</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body text-center">
+        <p class="lead mb-2">As-tu vraiment 4 pétales jaunes autour du centre blanc?</p>
+        <p class="text-muted small mb-0">Sois honnête avec toi-même — un vrai cubeur ne triche pas! 🤝</p>
+      </div>
+      <div class="modal-footer justify-content-center">
+        <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">
+          Pas encore...
+        </button>
+        <button type="button" class="btn btn-success" id="confirmDaisyYes">
+          Oui, vraiment! 🌼
+        </button>
       </div>
     </div>
+  </div>
+</div>
 
     <!-- Boutons de navigation -->
     <div class="text-center mb-3">
@@ -215,6 +223,7 @@
 document.addEventListener("DOMContentLoaded", function () {
     const confirmBtn = document.getElementById('confirmDaisyYes');
     const csrfToken = document.querySelector('#csrf-form [name=csrfmiddlewaretoken]').value;
+    const authInvite = document.getElementById('daisy-auth-invite');
 
     confirmBtn.addEventListener('click', function () {
         confirmBtn.disabled = true;
@@ -231,6 +240,8 @@ document.addEventListener("DOMContentLoaded", function () {
             if (data.ok) {
                 // TODO: remplacer par une animation d'écusson sur le foulard
                 alert(`Bravo! Écusson "${data.badge_name}" débloqué ${data.badge_icon}`);
+            } else if (data.auth_required) {
+                authInvite.classList.remove('d-none');
             } else {
                 alert(data.error || "Une erreur est survenue.");
             }

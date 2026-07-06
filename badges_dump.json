@@ -1,0 +1,184 @@
+[
+{
+  "model": "badges.badge",
+  "pk": "151a92e3-8812-4b6e-81da-6bb4a6fae0a9",
+  "fields": {
+    "slug": "cubie-newbie-daisy",
+    "name": "cubie-newbie-daisy",
+    "icon": "🌼",
+    "has_custom_icon": true,
+    "family": "cubie-newbie",
+    "description": "4 pétales jaunes qui touche le centre blanc",
+    "criteria_description": "4 pétales jaunes qui touche le centre blanc",
+    "requires_auto_track": false,
+    "requires_quiz": true,
+    "requires_leader_validation": false,
+    "criteria": {},
+    "is_brevet": false,
+    "display_order": 1,
+    "active": true,
+    "requires_badges": []
+  }
+},
+{
+  "model": "badges.badge",
+  "pk": "306a2a67-d5c8-4259-ae39-e113517fdd6a",
+  "fields": {
+    "slug": "cubie-newbie-les-phares",
+    "name": "cubie-newbie-les-phares",
+    "icon": "",
+    "has_custom_icon": true,
+    "family": "cubie-newbie",
+    "description": "fondation-les-phares",
+    "criteria_description": "",
+    "requires_auto_track": false,
+    "requires_quiz": true,
+    "requires_leader_validation": false,
+    "criteria": {},
+    "is_brevet": false,
+    "display_order": 7,
+    "active": true,
+    "requires_badges": [
+      "524a1929-0f59-4b6e-b852-c6367239c59c"
+    ]
+  }
+},
+{
+  "model": "badges.badge",
+  "pk": "524a1929-0f59-4b6e-b852-c6367239c59c",
+  "fields": {
+    "slug": "cubie-newbie-la-chasse-au-poisson",
+    "name": "cubie-newbie-la-chasse-au-poisson",
+    "icon": "",
+    "has_custom_icon": true,
+    "family": "cubie-newbie",
+    "description": "fondation-la-chasse-au-poisson",
+    "criteria_description": "",
+    "requires_auto_track": false,
+    "requires_quiz": true,
+    "requires_leader_validation": false,
+    "criteria": {},
+    "is_brevet": false,
+    "display_order": 6,
+    "active": true,
+    "requires_badges": [
+      "d9bc044f-a138-4726-963d-789def663bbc"
+    ]
+  }
+},
+{
+  "model": "badges.badge",
+  "pk": "86db90e4-01dc-4ccc-af9f-f01ee45a9535",
+  "fields": {
+    "slug": "cubie-newbie-alignement-final",
+    "name": "cubie-newbie-alignement-final",
+    "icon": "",
+    "has_custom_icon": true,
+    "family": "cubie-newbie",
+    "description": "fondation-alignement-final",
+    "criteria_description": "",
+    "requires_auto_track": false,
+    "requires_quiz": true,
+    "requires_leader_validation": false,
+    "criteria": {},
+    "is_brevet": false,
+    "display_order": 8,
+    "active": true,
+    "requires_badges": [
+      "306a2a67-d5c8-4259-ae39-e113517fdd6a"
+    ]
+  }
+},
+{
+  "model": "badges.badge",
+  "pk": "c78a56df-35d2-4bc5-87ce-8da07f393ce9",
+  "fields": {
+    "slug": "cubie-newbie-croix-jaune-parfaite",
+    "name": "cubie-newbie-croix-jaune-parfaite",
+    "icon": "🟨",
+    "has_custom_icon": true,
+    "family": "cubie-newbie",
+    "description": "Croix jaune parfaite avec des arêtes alignés avec les autres centres",
+    "criteria_description": "",
+    "requires_auto_track": false,
+    "requires_quiz": true,
+    "requires_leader_validation": false,
+    "criteria": {},
+    "is_brevet": false,
+    "display_order": 2,
+    "active": true,
+    "requires_badges": [
+      "151a92e3-8812-4b6e-81da-6bb4a6fae0a9"
+    ]
+  }
+},
+{
+  "model": "badges.badge",
+  "pk": "d9bc044f-a138-4726-963d-789def663bbc",
+  "fields": {
+    "slug": "cubie-newbie-la-vraie-croix-blanche",
+    "name": "cubie-newbie-la-vraie-croix-blanche",
+    "icon": "",
+    "has_custom_icon": true,
+    "family": "cubie-newbie",
+    "description": "la-vraie-croix-blanche",
+    "criteria_description": "",
+    "requires_auto_track": false,
+    "requires_quiz": true,
+    "requires_leader_validation": false,
+    "criteria": {},
+    "is_brevet": false,
+    "display_order": 5,
+    "active": true,
+    "requires_badges": [
+      "dafe659a-1e8e-4156-8464-55f5438f83fc"
+    ]
+  }
+},
+{
+  "model": "badges.badge",
+  "pk": "dafe659a-1e8e-4156-8464-55f5438f83fc",
+  "fields": {
+    "slug": "cubie-newbie-aretes-voyageuses",
+    "name": "cubie-newbie-aretes-voyageuses",
+    "icon": "",
+    "has_custom_icon": true,
+    "family": "cubie-newbie",
+    "description": "",
+    "criteria_description": "",
+    "requires_auto_track": false,
+    "requires_quiz": true,
+    "requires_leader_validation": false,
+    "criteria": {},
+    "is_brevet": false,
+    "display_order": 4,
+    "active": true,
+    "requires_badges": [
+      "f99e1e9b-ff36-4a59-9529-4ee03d00f5a8"
+    ]
+  }
+},
+{
+  "model": "badges.badge",
+  "pk": "f99e1e9b-ff36-4a59-9529-4ee03d00f5a8",
+  "fields": {
+    "slug": "cubie-newbie-coins-magiques",
+    "name": "cubie-newbie-coins-magiques",
+    "icon": "",
+    "has_custom_icon": true,
+    "family": "cubie-newbie",
+    "description": "Insertion des coins inférieurs en utilisant seulement RUR'U'",
+    "criteria_description": "Toutes la surface du bas est jaune et la première rangé",
+    "requires_auto_track": false,
+    "requires_quiz": true,
+    "requires_leader_validation": false,
+    "criteria": {},
+    "is_brevet": false,
+    "display_order": 3,
+    "active": true,
+    "requires_badges": [
+      "c78a56df-35d2-4bc5-87ce-8da07f393ce9"
+    ]
+  }
+}
+]

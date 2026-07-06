@@ -1,0 +1,26 @@
+{% load static %}
+{% with learn_url=item.badge.get_learn_url %}
+{% if learn_url %}<a href="{{ learn_url }}" class="badge-tile-link">{% endif %}
+<div class="{{ tile_class }}
+    {% if item.status == 'debloque' %}unlocked
+    {% elif item.status == 'en_attente' %}pending
+    {% else %}locked{% endif %}">
+    {% if item.badge.has_custom_icon %}
+        <img src="{% static item.badge.icon_static_path %}" class="badge-icon-img" alt="{{ item.badge.name }}">
+    {% else %}
+        <span class="badge-icon">{{ item.badge.icon|default:"🏅" }}</span>
+    {% endif %}
+    <div class="badge-tooltip">
+        <div class="badge-tooltip-name">{{ item.badge.name }}</div>
+        <div class="badge-tooltip-status">
+            {% if item.status == 'debloque' %}Débloqué
+            {% elif item.status == 'en_attente' %}En attente
+            {% else %}À découvrir{% endif %}
+        </div>
+        {% if learn_url %}
+        <div class="badge-tooltip-hint">👉 Voir la mission</div>
+        {% endif %}
+    </div>
+</div>
+{% if learn_url %}</a>{% endif %}
+{% endwith %}

@@ -208,6 +208,18 @@
         letter-spacing: 0.03em;
         opacity: 0.85;
     }
+
+    .badge-tooltip-hint {
+        font-size: 0.65rem;
+        margin-top: 0.2rem;
+        opacity: 0.85;
+    }
+
+    .badge-tile-link {
+        display: block;
+        text-decoration: none;
+        color: inherit;
+    }
 </style>
 {% endblock %}
 
@@ -234,20 +246,7 @@
 <h3 class="text-center mb-3">🏆 Mes Brevets</h3>
 <div class="brevet-case">
     {% for item in brevets %}
-    <div class="brevet-tile {% if item.status != 'debloque' %}locked{% endif %}">
-        {% if item.badge.has_custom_icon %}
-            <img src="{% static item.badge.icon_static_path %}" class="badge-icon-img" alt="{{ item.badge.name }}">
-        {% else %}
-            <span class="badge-icon">{{ item.badge.icon|default:"🏆" }}</span>
-        {% endif %}
-        <div class="badge-tooltip">
-            <div class="badge-tooltip-name">{{ item.badge.name }}</div>
-            <div class="badge-tooltip-status">
-                {% if item.status == 'debloque' %}Débloqué
-                {% else %}À découvrir{% endif %}
-            </div>
-        </div>
-    </div>
+        {% include "badges/_badge_tile.html" with item=item tile_class="brevet-tile" %}
     {% endfor %}
 </div>
 {% endif %}
@@ -259,24 +258,7 @@
     <div class="badge-grid{% if family.key == 'cubie-newbie' %} badge-grid-even{% endif %}"
          {% if family.key == 'cubie-newbie' %}style="grid-template-columns: repeat({{ family.badges|length }}, 1fr);"{% endif %}>
         {% for item in family.badges %}
-        <div class="badge-tile
-            {% if item.status == 'debloque' %}unlocked
-            {% elif item.status == 'en_attente' %}pending
-            {% else %}locked{% endif %}">
-            {% if item.badge.has_custom_icon %}
-                <img src="{% static item.badge.icon_static_path %}" class="badge-icon-img" alt="{{ item.badge.name }}">
-            {% else %}
-                <span class="badge-icon">{{ item.badge.icon|default:"🏅" }}</span>
-            {% endif %}
-            <div class="badge-tooltip">
-                <div class="badge-tooltip-name">{{ item.badge.name }}</div>
-                <div class="badge-tooltip-status">
-                    {% if item.status == 'debloque' %}Débloqué
-                    {% elif item.status == 'en_attente' %}En attente
-                    {% else %}À découvrir{% endif %}
-                </div>
-            </div>
-        </div>
+            {% include "badges/_badge_tile.html" with item=item tile_class="badge-tile" %}
         {% endfor %}
     </div>
 </div>

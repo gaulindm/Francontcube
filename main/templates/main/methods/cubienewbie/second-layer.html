@@ -203,6 +203,85 @@
         </div>
     </div>
 
+<!-- Bouton de confirmation d'écusson -->
+<div class="text-center mb-3">
+    <form id="csrf-form" class="d-none">{% csrf_token %}</form>
+    <button type="button" class="btn btn-warning btn-lg btn-cube"
+            data-bs-toggle="modal" data-bs-target="#confirmCrossModal">
+        ✨ J'ai fini avec les 4 arêtes de la deuxième couche!
+    </button>
+
+    <!-- Cadre d'invitation, caché par défaut -->
+    <div id="cross-auth-invite" class="alert alert-info text-center mt-3 d-none">
+        <p class="mb-2">🌟 Pour garder ton écusson, crée ton identité Francontcube!</p>
+        <a href="{% url 'cubing_users:cuber_register' %}?next={{ request.path }}" class="btn btn-primary">
+            Créer mon identité
+        </a>
+    </div>
+</div>
+
+<!-- Modale de confirmation honnête -->
+<div class="modal fade" id="confirmCrossModal" tabindex="-1"
+     aria-labelledby="confirmCrossModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="confirmCrossModalLabel">✨ Vérifie avant de continuer!</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body text-center">
+        <p class="lead mb-2">As-tu vraiment les deux couches du bas de complétes?</p>
+        <p class="text-muted small mb-0">Sois honnête avec toi-même — un vrai cubeur ne triche pas! 🤝</p>
+      </div>
+      <div class="modal-footer justify-content-center">
+        <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">
+          Pas encore...
+        </button>
+        <button type="button" class="btn btn-success" id="confirmCrossYes">
+          Oui, vraiment! ✨
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Confirmation honnête de l'écusson -->
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+    const confirmBtn = document.getElementById('confirmCrossYes');
+    const csrfToken = document.querySelector('#csrf-form [name=csrfmiddlewaretoken]').value;
+    const authInvite = document.getElementById('cross-auth-invite');
+
+    confirmBtn.addEventListener('click', function () {
+        confirmBtn.disabled = true;
+
+        fetch("{% url 'badges:confirm_badge' slug='cubie-newbie-aretes-voyageuses' %}", {
+            method: 'POST',
+            headers: { 'X-CSRFToken': csrfToken },
+        })
+        .then(r => r.json())
+        .then(data => {
+            const modalEl = document.getElementById('confirmCrossModal');
+            bootstrap.Modal.getInstance(modalEl).hide();
+
+            if (data.ok) {
+                alert(`Bravo! Écusson "${data.badge_name}" débloqué ${data.badge_icon}`);
+            } else if (data.auth_required) {
+                authInvite.classList.remove('d-none');
+            } else {
+                alert(data.error || "Une erreur est survenue.");
+            }
+        })
+        .catch(() => {
+            alert("Impossible de confirmer l'écusson — vérifie ta connexion.");
+        })
+        .finally(() => {
+            confirmBtn.disabled = false;
+        });
+    });
+});
+</script>
+
     <!-- Navigation -->
     <div class="d-flex justify-content-between flex-wrap gap-2">
         <a href="{% url 'main:cubienewbie_bottom_corners' %}" class="btn btn-outline-primary btn-lg">

@@ -3,11 +3,9 @@ from django.http import JsonResponse
 from django.shortcuts import get_object_or_404
 from django.views.decorators.http import require_POST
 
-from cubing_users.decorators import cuber_required
 from .models import Badge, CuberBadge
 
 
-@cuber_required
 @require_POST
 def confirm_badge(request, slug):
     """
@@ -18,6 +16,12 @@ def confirm_badge(request, slug):
     leader — sinon retourne une erreur, pour empêcher de contourner un
     écusson qui a besoin d'une vraie vérification.
     """
+    if request.cuber is None:
+        return JsonResponse(
+            {'ok': False, 'auth_required': True},
+            status=200,
+        )
+
     badge = get_object_or_404(Badge, slug=slug, active=True)
 
     if badge.requires_auto_track or badge.requires_leader_validation:

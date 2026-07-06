@@ -2,6 +2,7 @@
 import uuid
 from django.db import models
 from django.core.exceptions import ValidationError
+from django.urls import reverse, NoReverseMatch
 from django.utils import timezone
 
 from cubing_users.models import Cuber, Leader
@@ -86,6 +87,22 @@ class Badge(models.Model):
         help_text="Décoche pour cacher temporairement un écusson en construction"
     )
 
+    # Lien vers la page qui explique la mission/l'algorithme pour cet écusson.
+    # Utilise reverse() plutôt qu'un chemin codé en dur, pour rester valide
+    # même si les URLs bougent plus tard.
+    learn_url_name = models.CharField(
+        max_length=100, blank=True,
+        help_text=(
+            "Nom de l'URL Django vers la page qui explique cette mission/cet "
+            "algorithme (ex: 'main:cubienewbie_daisy'). Laisser vide si "
+            "aucune page dédiée n'existe encore."
+        )
+    )
+    learn_url_kwargs = models.JSONField(
+        default=dict, blank=True,
+        help_text="Kwargs pour reverse(), si l'URL en a besoin (ex: {'slug': 'f2l-05'})."
+    )
+
     class Meta:
         ordering = ['family', 'display_order', 'name']
 
@@ -96,6 +113,19 @@ class Badge(models.Model):
     def icon_static_path(self):
         """Chemin statique attendu si has_custom_icon est coché."""
         return f"badges/icons/{self.slug}.png" if self.has_custom_icon else None
+
+    def get_learn_url(self):
+        """
+        Retourne l'URL de la page qui explique la mission/l'algorithme,
+        ou None si learn_url_name est vide ou invalide — pour ne jamais
+        casser un template à cause d'une faute de frappe dans l'admin.
+        """
+        if not self.learn_url_name:
+            return None
+        try:
+            return reverse(self.learn_url_name, kwargs=self.learn_url_kwargs or None)
+        except NoReverseMatch:
+            return None
 
     def clean(self):
         if self.is_brevet and (self.requires_auto_track or self.requires_quiz):

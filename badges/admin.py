@@ -5,11 +5,46 @@ from .models import Badge, CuberBadge
 
 @admin.register(Badge)
 class BadgeAdmin(admin.ModelAdmin):
-    list_display = ('icon', 'name', 'family', 'has_custom_icon', 'is_brevet', 'active', 'display_order')
+    list_display = (
+        'icon', 'name', 'family', 'has_custom_icon',
+        'learn_link_display', 'is_brevet', 'active', 'display_order',
+    )
     list_filter = ('family', 'is_brevet', 'active')
     search_fields = ('name', 'slug', 'description')
     prepopulated_fields = {'slug': ('name',)}
     filter_horizontal = ('requires_badges',)
+
+    fieldsets = (
+        ('Identité', {
+            'fields': ('slug', 'name', 'family', 'icon', 'has_custom_icon')
+        }),
+        ('Contenu affiché', {
+            'fields': ('description', 'criteria_description')
+        }),
+        ('Déblocage', {
+            'fields': (
+                'requires_auto_track', 'requires_quiz',
+                'requires_leader_validation', 'criteria',
+            )
+        }),
+        ('Page d\'apprentissage', {
+            'fields': ('learn_url_name', 'learn_url_kwargs'),
+            'description': (
+                "Nom de l'URL Django vers la mission/l'algorithme "
+                "(ex: 'main:cubienewbie_daisy'). Laisser vide si pas encore prêt."
+            ),
+        }),
+        ('Brevet', {
+            'fields': ('is_brevet', 'requires_badges'),
+        }),
+        ('Affichage', {
+            'fields': ('display_order', 'active'),
+        }),
+    )
+
+    def learn_link_display(self, obj):
+        return "✅" if obj.get_learn_url() else "—"
+    learn_link_display.short_description = "Lien mission"
 
 
 @admin.register(CuberBadge)
