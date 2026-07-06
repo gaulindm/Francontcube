@@ -8,7 +8,7 @@ This is the first step in solving the Rubik's Cube using the Cubie Newbie method
 from ..base import StepView
 
 
-class TopCrossView(StepView):
+class BottomCornersView(StepView):
     """
     Step 1a: Build the daisy around yellow center.
     
@@ -16,20 +16,20 @@ class TopCrossView(StepView):
     Just define the configuration and you're done!
     """
     
-    template_name = "main/methods/beginner/top-cross.html"
-    method_name = "Débutant"
-    step_name = "Croix du haut"
+    template_name = "main/methods/cubiecurieux/bottom-corners.html"
+    method_name = "Cubie-Curieux"
+    step_name = "Coins inferieurs"
     step_icon = "flower3"
     
     # Map template context variable names to CubeState slugs
     cube_state_slugs = {
-        'goal_state': 'top-cross-goal',
-        #'before_state': 'yellow-cross-before',
-        'pattern_dot_state': 'top-cross-pattern-dot',
-        'pattern_l_state': 'top-cross-pattern-l',
-        'pattern_line_state': 'top-cross-pattern-line',
+        'goal_state': 'bottom-corners-goal',
+       # 'before_state': 'bottom-corners-before',
+        'case_1_state': 'bottom-corners-case_1',
+        'case_2_state': 'bottom-corners-case_2',
+        'case_3_state': 'bottom-corners-case_3',
     }
 
 
 # Export the view function for URL routing
-top_cross = TopCrossView.as_view()
+bottom_corners = BottomCornersView.as_view()

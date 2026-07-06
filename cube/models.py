@@ -7,7 +7,7 @@ import re
 class CubeState(models.Model):
     METHOD_CHOICES = [
         ("cubienewbie",    "CubieNewbie"),
-        ("beginner",       "Beginner"),
+        ("cubiecurieux",   "CubieCurieux"),
         ("cfop",           "CFOP"),
         ("roux",           "Roux"),
         ("zz",             "ZZ"),

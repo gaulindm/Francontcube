@@ -75,17 +75,17 @@ urlpatterns = [
     path('methods/cubienewbie/edge-permutation/', views.cubienewbie_edge_permutation, name='cubienewbie_edge_permutation'),
 
     # ============================================================
-    # BEGINNER METHOD
+    # CUBIE CURIEUX METHOD
     # ============================================================
-    path('methods/beginner/', views.beginner_method, name='method_beginner'),
-    path('methods/beginner/about/', views.beginner_about, name='beginner_about'),
-    path('methods/beginner/bottom-cross/', views.beginner_bottom_cross, name='beginner_bottom_cross'),
-    path('methods/beginner/bottom-corners/', views.beginner_bottom_corners, name='beginner_bottom_corners'),
-    path('methods/beginner/second-layer/', views.beginner_second_layer, name='beginner_second_layer'),
-    path('methods/beginner/top-cross/', views.beginner_top_cross, name='beginner_top_cross'),
-    path('methods/beginner/top-face/', views.beginner_top_face, name='beginner_top_face'),
-    path('methods/beginner/corner-permutation/', views.beginner_corner_permutation, name='beginner_corner_permutation'),
-    path('methods/beginner/edge-permutation/', views.beginner_edge_permutation, name='beginner_edge_permutation'),
+    path('methods/cubiecurieux/', views.cubiecurieux_method, name='method_cubiecurieux'),
+    path('methods/cubiecurieux/about/', views.cubiecurieux_about, name='cubiecurieux_about'),
+    path('methods/cubiecurieux/bottom-cross/', views.cubiecurieux_bottom_cross, name='cubiecurieux_bottom_cross'),
+    path('methods/cubiecurieux/bottom-corners/', views.cubiecurieux_bottom_corners, name='cubiecurieux_bottom_corners'),
+    path('methods/cubiecurieux/second-layer/', views.cubiecurieux_second_layer, name='cubiecurieux_second_layer'),
+    path('methods/cubiecurieux/top-cross/', views.cubiecurieux_top_cross, name='cubiecurieux_top_cross'),
+    path('methods/cubiecurieux/top-face/', views.cubiecurieux_top_face, name='cubiecurieux_top_face'),
+    path('methods/cubiecurieux/corner-permutation/', views.cubiecurieux_corner_permutation, name='cubiecurieux_corner_permutation'),
+    path('methods/cubiecurieux/edge-permutation/', views.cubiecurieux_edge_permutation, name='cubiecurieux_edge_permutation'),
 
     # ============================================================
     # CFOP METHOD

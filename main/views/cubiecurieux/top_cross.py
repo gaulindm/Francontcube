@@ -8,7 +8,7 @@ This is the first step in solving the Rubik's Cube using the Cubie Newbie method
 from ..base import StepView
 
 
-class EdgePermutationView(StepView):
+class TopCrossView(StepView):
     """
     Step 1a: Build the daisy around yellow center.
     
@@ -16,20 +16,20 @@ class EdgePermutationView(StepView):
     Just define the configuration and you're done!
     """
     
-    template_name = "main/methods/beginner/edge-permutation.html"
-    method_name = "Débutant"
-    step_name = "Permutation des aretes"
+    template_name = "main/methods/cubiecurieux/top-cross.html"
+    method_name = "Cubie-Curieux"
+    step_name = "Croix du haut"
     step_icon = "flower3"
     
     # Map template context variable names to CubeState slugs
     cube_state_slugs = {
-        'goal_state': 'edge-perm-goal',
-        'goal_needsu_state': 'edge-perm-goal-needsu',
-        'no_good_edge_state': 'edge-perm-no-good-edge',
-        'one_good_edge_state': 'edge-perm-one-good-edge',
-    
+        'goal_state': 'top-cross-goal',
+        #'before_state': 'yellow-cross-before',
+        'pattern_dot_state': 'top-cross-pattern-dot',
+        'pattern_l_state': 'top-cross-pattern-l',
+        'pattern_line_state': 'top-cross-pattern-line',
     }
 
 
 # Export the view function for URL routing
-edge_permutation = EdgePermutationView.as_view()
+top_cross = TopCrossView.as_view()

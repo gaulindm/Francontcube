@@ -16,8 +16,8 @@ class SecondLayerView(StepView):
     using two mirror algorithms.
     """
     
-    template_name = "main/methods/beginner/second-layer.html"
-    method_name = "Débutant"
+    template_name = "main/methods/cubiecurieux/second-layer.html"
+    method_name = "Cubie-Curieux"
 
     step_name = "Couche du milieu"
     step_icon = "flower3"

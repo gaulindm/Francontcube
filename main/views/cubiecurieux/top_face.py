@@ -16,8 +16,8 @@ class TopFaceView(StepView):
     Just define the configuration and you're done!
     """
     
-    template_name = "main/methods/beginner/top-face.html"
-    method_name = "Débutant"
+    template_name = "main/methods/cubiecurieux/top-face.html"
+    method_name = "Cubie-Curieux"
     step_name = "La face du haut"
     step_icon = "flower3"   
     

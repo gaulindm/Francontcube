@@ -28,7 +28,7 @@ def home(request):
             'available': True,
         },
         {
-            'name': 'Méthode Cubie Newbie',
+            'name': 'Méthode Cubie-Newbie',
             'desc': 'Apprenez à résoudre votre premier cube 3×3 avec la méthode couche par couche super simple',
             'icon': 'bi-book',
             'logo': None,
@@ -36,11 +36,11 @@ def home(request):
             'available': True,
         },
         {
-            'name': 'Méthode Apprenti Cubi',
+            'name': 'Méthode Cubie-Curieux',
             'desc': 'Apprenez des nouvelles tec pour résoudre le cube 3×3 avec la méthode couche par couche',
             'icon': 'bi-book',
             'logo': None,
-            'url': '/main/methods/beginner/',
+            'url': '/main/methods/cubiecurieux/',
             'available': True,
         },
         {
@@ -117,13 +117,13 @@ def mosaic(request):
 # METHODS 
 # ============================================================
 
-def method_beginner(request):
+def method_cubiecurieux(request):
     """
     Beginner method page (CFOP intro).
     
     TODO: Implement full CFOP method when ready.
     """
-    return render(request, 'main/methods/beginner/index.html')
+    return render(request, 'main/methods/cubiecurieux/index.html')
 
 
 def method_f2l(request):

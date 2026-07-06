@@ -91,42 +91,13 @@
         <h3 class="brand-green">🔄 Étape 2 : Insère l'arête avec l'algorithme</h3>
         <p>Il y a deux cas selon l'orientation de l'arête. Les deux algorithmes sont similaires!</p>
 
-        <!-- Cas 1: Arête va en ARRIERE -->
-        <div class="border rounded p-3 mb-3 bg-light">
-            <h5 class="text-success">✅ Cas 1 : L'arête va vers la gauche</h5>
-            <p>La couleur qui correspond au centre de devant est <strong>sur la face avant</strong>.</p>
-            
-            <div class="row align-items-center">
-                <div class="col-md-4 text-center">
-                    <div id="cube-case-front" class="cube-case"></div>
-                    <p class="mt-2"><small>Position de départ</small></p>
-                    </div>
-                    <div class="col-md-8">
-                        <div class="text-center p-3 bg-white rounded border border-success border-2">
-                            <div class="d-flex justify-content-center align-items-center gap-2 my-2 flex-wrap">
-                                <svg class="move-icon"><use href="#U-prime"/></svg>
-                                <svg class="move-icon"><use href="#F-prime"/></svg>
-                                <svg class="move-icon"><use href="#U"/></svg>
-                                <svg class="move-icon"><use href="#F"/></svg>
-                                <svg class="move-icon"><use href="#U"/></svg>
-                                <svg class="move-icon"><use href="#R"/></svg>
-                                <svg class="move-icon"><use href="#U-prime"/></svg>
-                                <svg class="move-icon"><use href="#R-prime"/></svg>
-                        </div>
-                            <p class="mt-2 mb-0"><small>Tenir le cube avec le pouce droit sur la face de droite pour les 4 premiers mouvements ensuite reprendre la position orignale pour les 4 derniers</small></p>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Cas 2: Arête va en arriere -->
+        <!-- Cas 1: Arête va à la droite -->
         <div class="border rounded p-3 bg-light">
-            <h5 class="text-primary">✅ Cas 2 : L'arête va vers la droite</h5>
-            <p>La couleur qui correspond au centre de devant est <strong>sur la face de droite</strong>.</p>
+            <h5 class="text-primary">✅ Cas 1 : L'arête va vers la droite</h5>
             
             <div class="row align-items-center">
                 <div class="col-md-4 text-center">
-                    <div id="cube-case-back" class="cube-case"></div>
+                    <div id="cube-case-right" class="cube-case"></div>
                     <p class="mt-2"><small>Position de départ</small></p>
                 </div>
                 <div class="col-md-8">
@@ -144,11 +115,39 @@
                             
                         </div>
                         
-                        <p class="mt-2 mb-0"><small>L'arête descend dans le slot de gauche</small></p>
+                        
                     </div>
                 </div>
             </div>
         </div>
+        <!-- Cas 2: Arête va vers la gauche -->
+
+        <div class="border rounded p-3 mb-3 bg-light">
+            <h5 class="text-success">✅ Cas 2 : L'arête va vers la gauche</h5>
+            
+            <div class="row align-items-center">
+                <div class="col-md-4 text-center">
+                    <div id="cube-case-left" class="cube-case"></div>
+                    <p class="mt-2"><small>Position de départ</small></p>
+                    </div>
+                    <div class="col-md-8">
+                        <div class="text-center p-3 bg-white rounded border border-success border-2">
+                            <div class="d-flex justify-content-center align-items-center gap-2 my-2 flex-wrap">
+                                <svg class="move-icon"><use href="#U-prime"/></svg>
+                                <svg class="move-icon"><use href="#L-prime"/></svg>
+                                <svg class="move-icon"><use href="#U"/></svg>
+                                <svg class="move-icon"><use href="#L"/></svg>
+                                <svg class="move-icon"><use href="#U"/></svg>
+                                <svg class="move-icon"><use href="#F"/></svg>
+                                <svg class="move-icon"><use href="#U-prime"/></svg>
+                                <svg class="move-icon"><use href="#F-prime"/></svg>
+                        </div>
+                            
+                    </div>
+                </div>
+            </div>
+        </div>
+
     </div>
 
     <!-- Section Cas spécial -->
@@ -262,13 +261,13 @@
 
     <!-- Bouton de navigation -->
     <div class="text-center">
-        <a href="{% url 'main:beginner_bottom_corners' %}" class="btn btn-outline-primary">
+        <a href="{% url 'main:cubiecurieux_bottom_corners' %}" class="btn btn-outline-primary">
             ← Retour : Les coins inférieurs
         </a>
-        <a href="{% url 'main:method_beginner' %}" class="btn btn-outline-secondary ms-2">
+        <a href="{% url 'main:method_cubiecurieux' %}" class="btn btn-outline-secondary ms-2">
             Vue d'ensemble
         </a>
-        <a href="{% url 'main:beginner_top_cross' %}" class="btn btn-success ms-2">
+        <a href="{% url 'main:cubiecurieux_top_cross' %}" class="btn btn-success ms-2">
             Étape suivante : La croix du haut (en blanc) →
         </a>
     </div>
@@ -336,8 +335,8 @@
     mountCube("cube-goal", {{ goal_state|safe }});
     
     // Algorithm cases
-    mountCube("cube-case-back", {{ case_back_state|safe }});
-    mountCube("cube-case-front", {{ case_front_state|safe }});
+    mountCube("cube-case-right", {{ case_right_state|safe }});
+    mountCube("cube-case-left", {{ case_left_state|safe }});
     
     // Special cases
     mountCube("cube-edge-yellow", {{ edge_yellow_state|safe }});

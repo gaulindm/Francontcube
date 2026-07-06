@@ -16,8 +16,8 @@ class BottomCrossView(StepView):
     to add custom logic (in this case, loading progress states as an array).
     """
     
-    template_name = "main/methods/beginner/bottom-cross.html"
-    method_name = "Débutant"
+    template_name = "main/methods/cubiecurieux/bottom-cross.html"
+    method_name = "Cubie-Curieux"
     step_number = 1
     step_name = "Croix Blanche"
     step_icon = "plus-circle"

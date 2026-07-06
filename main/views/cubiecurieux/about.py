@@ -19,14 +19,14 @@ class AboutView(StepView):
     - Basic vocabulary
     """
     
-    template_name = "main/methods/beginner/about.html"
-    method_name = "Débutant"
+    template_name = "main/methods/cubiecurieux/about.html"
+    method_name = "Cubie-Curieux"
     step_number = 1
     step_name = "Le Cube"
     step_icon = "cube"
     
     # Navigation
-    next_step = "francontcube:beginner_white_cross"
+    next_step = "francontcube:cubiecurieux_white_cross"
     prev_step = None
 
     cube_state_slugs = {
