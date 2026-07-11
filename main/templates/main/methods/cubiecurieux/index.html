@@ -1,103 +1,175 @@
-{% extends "main/partials/base.html" %}
+{% extends "main/partials/base_cubiecurieux.html" %}
 {% load static %}
 
-{% block title %}Méthode débutante – Francontcube{% endblock %}
+{% block title %}Méthode Cubie-C – Francontcube{% endblock %}
 
 {% block content %}
 <div class="container py-5">
 
-    <!-- Load the SVG template -->
     {% include "cube/partials/_cube_svg.html" %}
 
-    <h1 class="text-center mb-4">Trucs Cubie Curieux</h1>
-    <p class="lead text-center mb-5">
-        Presque les mêmes étapes que la méthode Cubie-Newbie, mais avec des algorithmes un peu plus avancés.
-    </p>
+    <div class="cc-hero text-center mb-5">
+        <span class="cc-eyebrow">Méthode</span>
+        <h1 class="cc-title mb-3">Cubie-Curieux</h1>
+        <p class="cc-lead">
+            Presque les mêmes étapes que la méthode Cubie-Newbie, mais avec des algorithmes un peu plus avancés.
+        </p>
+    </div>
 
     <div class="row g-4">
-
         {% for step in steps %}
         <div class="col-md-4">
-            <div class="card cube-card h-100 p-4 text-center">
-
-                <h4>{{ step.name }}</h4>
+            <div class="card cube-card h-100 p-4 text-center {% if not step.available %}cube-card--locked{% endif %}">
+                <h4 class="cc-step-name">{{ step.name }}</h4>
                 <p class="text-muted">{{ step.desc }}</p>
 
-                <!-- Cube State Display (if available) - above button -->
                 {% if step.cube_state %}
                 <div class="mb-3 mt-auto">
-                    <div id="cube-step-{{ forloop.counter }}" class="cube-display"></div>
+                    <div class="cube-display-wrap">
+                        <div id="cube-step-{{ forloop.counter }}" class="cube-display"></div>
+                    </div>
                 </div>
                 {% else %}
-                <!-- Icon fallback for intro pages -->
                 <div class="mb-3 mt-auto">
                     {% if step.logo %}
                         <img src="{% static step.logo %}" class="brand-logo">
                     {% elif step.icon %}
-                        <i class="bi {{ step.icon }} fs-1 brand-green"></i>
+                        <i class="bi {{ step.icon }} fs-1 cc-icon"></i>
                     {% endif %}
                 </div>
                 {% endif %}
 
                 {% if step.available %}
-                <a href="{{ step.url }}" class="btn btn-outline-primary">Voir</a>
+                <a href="{{ step.url }}" class="btn cc-btn-primary">Voir</a>
                 {% else %}
-                <button class="btn btn-secondary" disabled>À venir</button>
+                <button class="btn cc-btn-locked" disabled>
+                    <i class="bi bi-lock-fill me-1"></i>À venir
+                </button>
                 {% endif %}
-
             </div>
         </div>
         {% endfor %}
-
     </div>
 
 </div>
 
-<!-- Styles CSS -->
+<!-- Styles CSS spécifiques à cette page (PAS de :root ici — hérité de base_cubiecurieux.html) -->
 <style>
-.cube-display svg {
-    max-width: 180px;
-    height: auto;
+.cc-eyebrow {
+    display: inline-block;
+    font-size: 0.85rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--cc-primary);
+    background: var(--cc-white);
+    padding: 4px 14px;
+    border-radius: 999px;
+    margin-bottom: 12px;
+}
+
+.cc-title {
+    font-weight: 800;
+    font-size: 3rem;
+    background: linear-gradient(90deg, var(--cc-accent-green), var(--cc-primary) 45%, var(--cc-accent-red) 80%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    display: inline-block;
+}
+
+.cc-lead {
+    color: var(--cc-text-muted);
+    font-size: 1.15rem;
+    max-width: 560px;
     margin: 0 auto;
 }
 
 .cube-card {
-    transition: transform 0.2s, box-shadow 0.2s;
+    background: var(--cc-white);
+    border: none;
+    border-top: 5px solid var(--cc-primary);
+    border-radius: 18px;
+    box-shadow: 0 4px 14px rgba(31, 111, 214, 0.1);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
     display: flex;
     flex-direction: column;
 }
 
 .cube-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+    transform: translateY(-6px);
+    box-shadow: 0 12px 24px rgba(31, 111, 214, 0.22);
 }
 
-/* Push cube/icon to bottom, above button */
-.mt-auto {
-    margin-top: auto !important;
+.cube-card--locked {
+    border-top-color: #c3cfdc;
+    opacity: 0.85;
+}
+
+.cc-step-name {
+    color: var(--cc-text);
+    font-weight: 700;
+}
+
+.cc-icon {
+    color: var(--cc-primary);
+}
+
+.cube-display-wrap {
+    background: radial-gradient(circle, var(--cc-primary-soft) 0%, transparent 72%);
+    border-radius: 50%;
+    padding: 10px;
+    display: inline-block;
+}
+
+.cube-display svg {
+    max-width: 180px;
+    height: auto;
+    margin: 0 auto;
+    display: block;
+}
+
+.cc-btn-primary {
+    background: var(--cc-primary);
+    color: var(--cc-white);
+    border-radius: 999px;
+    font-weight: 600;
+    padding: 8px 24px;
+    border: none;
+    transition: background 0.2s ease, transform 0.15s ease;
+}
+
+.cc-btn-primary:hover {
+    background: var(--cc-primary-dark);
+    color: var(--cc-white);
+    transform: translateY(-1px);
+}
+
+.cc-btn-locked {
+    background: #eef2f6;
+    color: var(--cc-text-muted);
+    border-radius: 999px;
+    font-weight: 600;
+    padding: 8px 24px;
+    border: 1px dashed #c3cfdc;
 }
 
 @media (max-width: 768px) {
-    .cube-display svg {
-        max-width: 150px;
-    }
+    .cc-title { font-size: 2.2rem; }
+    .cube-display svg { max-width: 150px; }
 }
 </style>
 
-<!-- Script JavaScript -->
 <script type="module">
   import { renderCube } from "{% static 'cube/js/cube_renderer.js' %}";
 
   function mountCube(containerId, state) {
     const container = document.getElementById(containerId);
     if (!container || !state) return;
-
     container.innerHTML = '';
-
     const template = document.getElementById("cube-template");
     const clone = template.content.cloneNode(true);
     container.appendChild(clone);
-
     const svg = container.querySelector("svg");
     renderCube(svg, state);
   }

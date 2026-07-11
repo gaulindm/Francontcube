@@ -3,10 +3,6 @@
 
 {% block title %}2-Look OLL – Cubie-Curieux{% endblock %}
 
-{% block extra_head %}
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
-{% endblock %}
-
 {% block content %}
 <div class="container py-5">
 
@@ -14,10 +10,8 @@
     <div class="cc-hero text-center mb-5">
         <span class="cc-eyebrow">Cubie-Curieux</span>
         <h1 class="cc-title mb-3">2-Look OLL</h1>
-        <p class="cc-lead">
-            Oriente la face du dessus en seulement 10 algorithmes,
-            répartis en 4 étapes d'apprentissage.
-        </p>
+        <p class="cc-lead">{{ page_description }}</p>
+        <p class="text-muted small">{{ total_algorithms }} algorithmes à maîtriser</p>
     </div>
 
     <!-- ── Progress overview ── -->
@@ -56,17 +50,25 @@
                              data-alg="{{ case.algorithm }}"
                              data-setup="{{ case.setup_alg }}"
                              data-stickering="OLL"
+                             data-visualization="experimental-2D-LL"
                              data-lon="30"
                              data-lat="25"></div>
                     </div>
 
                     <div class="cc-algo-box" onclick="copyAlgo(this)" title="Cliquer pour copier">
-                        {{ case.algorithm }}
+                        {{ case.display_algorithm|default:case.algorithm }}
                     </div>
 
                     <div class="cc-recognition">
                         <i class="bi bi-eye"></i> {{ case.recognition }}
                     </div>
+                    {% if case.left_hand_tip %}
+                    <div class="cc-lefthand-tip">
+                        <i class="bi bi-hand-index-thumb"></i>
+                        Astuce : c'est Sune en miroir, main gauche —
+                        <span class="cc-algo-mini" onclick="copyAlgo(this)">{{ case.left_hand_tip }}</span>
+                    </div>
+                    {% endif %}
                 </div>
             </div>
             {% endfor %}
@@ -213,7 +215,7 @@
 }
 .cc-case-player .twisty-container twisty-player {
     width: 100%;
-    height: 180px;
+    height: 220px;
     display: block;
 }
 .cc-algo-box {
@@ -231,6 +233,21 @@
     color: var(--cc-text-muted);
     text-align: left;
 }
+
+.cc-lefthand-tip {
+    font-size: 0.8rem;
+    color: var(--cc-text-muted);
+    margin-top: 8px;
+    text-align: left;
+}
+.cc-algo-mini {
+    font-family: 'Courier New', monospace;
+    font-weight: 700;
+    color: var(--cc-primary);
+    cursor: pointer;
+}
+
+
 
 /* ── Badge claim ── */
 .cc-badge-claim {

@@ -82,6 +82,8 @@ urlpatterns = [
     path('methods/cubiecurieux/bottom-cross/', views.cubiecurieux_bottom_cross, name='cubiecurieux_bottom_cross'),
     path('methods/cubiecurieux/bottom-corners/', views.cubiecurieux_bottom_corners, name='cubiecurieux_bottom_corners'),
     path('methods/cubiecurieux/second-layer/', views.cubiecurieux_second_layer, name='cubiecurieux_second_layer'),
+    path('methods/cubiecurieux/2-look-oll/', views.cubiecurieux_two_look_oll, name='cubiecurieux_two_look_oll'),
+
     path('methods/cubiecurieux/top-cross/', views.cubiecurieux_top_cross, name='cubiecurieux_top_cross'),
     path('methods/cubiecurieux/top-face/', views.cubiecurieux_top_face, name='cubiecurieux_top_face'),
     path('methods/cubiecurieux/corner-permutation/', views.cubiecurieux_corner_permutation, name='cubiecurieux_corner_permutation'),

@@ -17,7 +17,7 @@ def method_cubiecurieux(request):
         {'name': 'Méthodes', 'url': reverse('main:home'), 'icon': 'book'},
         {'name': 'Cubie Curieux', 'url': '', 'icon': 'star-fill'},  # Page actuelle, URL vide
     ]
-    
+
     # Helper function to get cube state safely
     def get_cube_state(slug):
         try:
@@ -68,53 +68,33 @@ def method_cubiecurieux(request):
 
         },
         {
-            "name": "Étape 4 : La croix superieur",
-            "desc": "Former la croix blanche sur la face supérieure.",
-            "icon": "bi-plus-circle",
-            "url": reverse('main:cubiecurieux_top_cross'),
+            "name": "Étape 4 : 2-Look OLL",
+            "desc": "Orienter la face du dessus en 10 algorithmes — croix blanche, puis Sune, H, Pi, T, U, L.",
+            "icon": "bi-brightness-high",
+            "url": reverse('main:cubiecurieux_two_look_oll'),
             "available": True,
             "step_number": 4,
-            "cube_state": get_cube_state('top-cross-goal')
-
-        },
-        {
-            "name": "Étape 5 : La face jaune",
-            "desc": "Orienter tous les coins pour compléter la face blanche (la chasse au poisson).",
-            "icon": "bi-brightness-high",
-            "url": reverse('main:cubiecurieux_top_face'),
-            "available": True,
-            "step_number": 5,
             "cube_state": get_cube_state('top-face-goal')
 
         },
         {
-            "name": "Étape 6 : La permutation des coins",
-            "desc": "Placer les coins blancs à leur bon emplacement.",
-            "icon": "bi-arrow-repeat",
-            "url": reverse('main:cubiecurieux_corner_permutation'),
-            "available": True,
-            "step_number": 6,
-            "cube_state": get_cube_state('corner-perm-goal')
-
-        },
-        {
-            "name": "Étape 7 : La permutation des arêtes",    
-            "desc": "Permuter les arêtes de la couche du haut pour finir le cube.",
+            "name": "Étape 5 : 2-Look PLL",
+            "desc": "Permuter les coins puis les arêtes de la dernière couche pour terminer le cube.",
             "icon": "bi-check-circle",
-            "url": reverse('main:cubiecurieux_edge_permutation'),
-            "available": True,
-            "step_number": 7,
-            "cube_state": get_cube_state('edge-perm-goal-needsu')  # Final solved cube
+            "url": "",
+            "available": False,
+            "step_number": 5,
+            "icon": "bi-arrow-repeat",
 
         },
     ]
-    
+
     context = {
         "steps": steps,
         "breadcrumbs": breadcrumbs,
         "method_name": "Truc Cubie Curieux",
-        "method_description": "Une méthode efficace en 7 étapes pour résoudre le Rubik's Cube 3x3",
-        "total_steps": 7,
+        "method_description": "Une méthode efficace en 5 étapes pour résoudre le Rubik's Cube 3x3",
+        "total_steps": 5,
         "difficulty": "Débutant",
         "estimated_time": "3-4 heures d'apprentissage",
     }

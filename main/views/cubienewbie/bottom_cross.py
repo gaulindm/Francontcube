@@ -19,24 +19,5 @@ class BottomCrossView(StepView):
         'after_state': 'bottom-cross-after',
     }
 
-def get_context_data(self):
-    context = super().get_context_data()
-
-    # Load progress states (0-4 edges placed)
-    progress_slugs = {f'progress_{i}': f'bottom-cross-progress-{i}' for i in range(5)}
-    progress_states, progress_missing = CubeStateLoader.get_multiple(progress_slugs)
-
-    context['progress_states'] = [progress_states[f'progress_{i}'] for i in range(5)]
-    context['missing_slugs'].extend(progress_missing)
-
-    # ── Roofpig config (NEW) ───────────────────────────────
-    goal_state_obj = context.get("goal_state")
-    if goal_state_obj and isinstance(goal_state_obj, CubeState):
-        context["roofpig_config"] = goal_state_obj.get_roofpig_config()
-    else:
-        context["roofpig_config"] = None
-
-    return context
-
 
 bottom_cross = BottomCrossView.as_view()

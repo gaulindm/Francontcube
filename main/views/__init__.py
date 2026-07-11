@@ -61,6 +61,8 @@ from .cubiecurieux.main import method_cubiecurieux as cubiecurieux_method
 from .cubiecurieux.bottom_cross import bottom_cross as cubiecurieux_bottom_cross
 from .cubiecurieux.bottom_corners import bottom_corners as cubiecurieux_bottom_corners
 from .cubiecurieux.second_layer import second_layer as cubiecurieux_second_layer
+from .cubiecurieux.two_look_oll import two_look_oll_view as cubiecurieux_two_look_oll
+
 from .cubiecurieux.top_cross import top_cross as cubiecurieux_top_cross
 from .cubiecurieux.top_face import top_face as cubiecurieux_top_face
 from .cubiecurieux.corner_permutation import corner_permutation as cubiecurieux_corner_permutation
@@ -156,8 +158,10 @@ __all__ = [
     'cubiecurieux_bottom_cross',
     'cubiecurieux_bottom_corners',
     'cubiecurieux_second_layer',
-    'cubiecurieux_top_cross',
-    'cubiecurieux_top_face',
+#    'cubiecurieux_top_cross',
+#    'cubiecurieux_top_face',
+    'cubiecurieux_two_look_oll',     
+
     'cubiecurieux_corner_permutation',
     'cubiecurieux_edge_permutation',
 
@@ -179,7 +183,7 @@ __all__ = [
     'cfop_pll_view',
     'oll_case_detail',
     'pll_case_detail',
-    'two_look_oll_view',
+    'cfop_two_look_oll_legacy',  
 
     # Other puzzles
     'puzzles_home',

@@ -1,0 +1,55 @@
+{% extends "main/partials/base.html" %}
+{% load static %}
+
+{% block extra_css %}
+<style>
+:root {
+    --cc-bg-light: #ecf8e8;
+    --cc-bg-deep: #a0f9a4;
+
+    --cc-primary: #1f6fd6;
+    --cc-primary-dark: #14509e;
+    --cc-primary-soft: #e5f0fc;
+
+    --cc-accent-red: #e0362f;
+    --cc-accent-green: #2fa84f;
+    --cc-accent-yellow: #f5c518;
+    --cc-accent-orange: #f28c1c;
+
+    --cc-white: #ffffff;
+    --cc-text: #1a2b3c;
+    --cc-text-muted: #5b7089;
+}
+
+body {
+    background: linear-gradient(135deg, var(--cc-bg-light) 0%, var(--cc-bg-deep) 100%) no-repeat fixed;
+    background-size: cover;
+}
+
+/* ── Boutons communs Cubie-Curieux ── */
+.cc-btn-primary {
+    background: var(--cc-primary);
+    color: var(--cc-white);
+    border-radius: 999px;
+    font-weight: 600;
+    padding: 8px 24px;
+    border: none;
+    transition: background 0.2s ease, transform 0.15s ease;
+}
+.cc-btn-primary:hover {
+    background: var(--cc-primary-dark);
+    color: var(--cc-white);
+    transform: translateY(-1px);
+}
+.cc-btn-locked {
+    background: #eef2f6;
+    color: var(--cc-text-muted);
+    border-radius: 999px;
+    font-weight: 600;
+    padding: 8px 24px;
+    border: 1px dashed #c3cfdc;
+}
+
+{% block cc_extra_css %}{% endblock %}
+</style>
+{% endblock %}

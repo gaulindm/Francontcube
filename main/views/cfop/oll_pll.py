@@ -296,7 +296,6 @@ def oll_case_detail(request, slug):
     context = {
         'cube_state': cube_state,
         'page_title': cube_state.name,
-        'roofpig_config': cube_state.get_roofpig_config(),
         'next_case': next_case,
         'prev_case': prev_case,
         'category_info': OLL_CATEGORIES.get(cube_state.category, {}),
@@ -328,7 +327,6 @@ def pll_case_detail(request, slug):
     context = {
         'cube_state': cube_state,
         'page_title': cube_state.name,
-        'roofpig_config': cube_state.get_roofpig_config(),
         'next_case': next_case,
         'prev_case': prev_case,
         'category_info': PLL_CATEGORIES.get(cube_state.category, {}),

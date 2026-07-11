@@ -37,14 +37,6 @@ class CubeState(models.Model):
     category   = models.CharField(max_length=50, blank=True)
     difficulty = models.CharField(max_length=20, blank=True, choices=DIFFICULTY_CHOICES)
 
-    # ── Formerly roofpig_* — renamed to generic names ─────────────────────
-    # setup   : algorithm to reach the starting position (was roofpig_setup)
-    # colored : pieces/faces to highlight (was roofpig_colored)
-    # flags   : display options e.g. "showalg speed:1" (was roofpig_flags)
-    setup   = models.TextField(blank=True)
-    colored = models.TextField(blank=True)
-    flags   = models.CharField(max_length=200, blank=True, default='showalg')
-
     # ── cubing.js camera ──────────────────────────────────────────────────
     camera_longitude = models.FloatField(
         default=-25.0,
@@ -76,10 +68,91 @@ class CubeState(models.Model):
     def get_clean_algorithm(self):
         """
         Return algorithm as a plain list of moves, grouping notation stripped.
-        No hand substitution — used by get_roofpig_config() so animation is correct.
         "(R U' R') [F' U F]" → ['R', "U'", "R'", "F'", 'U', 'F']
         """
         return re.sub(r'[(){}\[\]]', '', self.algorithm).split()
+
+    def render_algorithm_svg(algorithm, hand_orientation='right'):
+        """
+        Génère les icônes SVG d'un algorithme à partir d'une simple chaîne,
+        sans nécessiter d'instance CubeState. Utilisée par CubeState.get_algorithm_svg()
+        et par les pages qui affichent des algorithmes statiques (ex: 2-Look OLL).
+        """
+        if not algorithm or algorithm.strip() == '':
+            return ''
+
+        def move_to_svg(move, extra_class=''):
+            if hand_orientation == 'left':
+                display_move = CubeState.LEFT_HAND_MAP.get(move, move)
+            else:
+                display_move = move
+            svg_id = display_move.replace("'", "-prime")
+            css = f'move-icon {extra_class}'.strip()
+            return (
+                f'<svg class="{css}" aria-label="{display_move}" '
+                f'width="52" height="52" style="width:52px;height:52px;min-width:0">'
+                f'<use href="#{svg_id}"/></svg>'
+            )
+
+        alg = algorithm.strip()
+        tokens = []
+        i = 0
+        while i < len(alg):
+            ch = alg[i]
+            if ch == '(':
+                depth, j = 1, i + 1
+                while j < len(alg) and depth:
+                    if alg[j] == '(':   depth += 1
+                    elif alg[j] == ')': depth -= 1
+                    j += 1
+                inner = alg[i+1:j-1].strip()
+                tokens.append({'type': 'group-paren', 'moves': [m for m in inner.split() if m]})
+                i = j
+            elif ch == '[':
+                depth, j = 1, i + 1
+                while j < len(alg) and depth:
+                    if alg[j] == '[':   depth += 1
+                    elif alg[j] == ']': depth -= 1
+                    j += 1
+                inner = alg[i+1:j-1].strip()
+                tokens.append({'type': 'group-bracket', 'moves': [m for m in inner.split() if m]})
+                i = j
+            elif ch == ' ':
+                i += 1
+            else:
+                j = i
+                while j < len(alg) and alg[j] not in (' ', '(', ')', '[', ']'):
+                    j += 1
+                move = alg[i:j].strip()
+                if move:
+                    tokens.append({'type': 'move', 'moves': [move]})
+                i = j
+
+        parts = []
+        for token in tokens:
+            ttype = token['type']
+            moves = token['moves']
+            if ttype == 'group-paren':
+                icons = ''.join(move_to_svg(m, 'group-paren') for m in moves)
+                parts.append(
+                    f'<span class="move-group move-group--paren">'
+                    f'<span class="move-bracket">(</span>{icons}'
+                    f'<span class="move-bracket">)</span></span>'
+                )
+            elif ttype == 'group-bracket':
+                icons = ''.join(move_to_svg(m, 'group-bracket') for m in moves)
+                parts.append(
+                    f'<span class="move-group move-group--bracket">'
+                    f'<span class="move-bracket">[</span>{icons}'
+                    f'<span class="move-bracket">]</span></span>'
+                )
+            else:
+                parts.append(move_to_svg(moves[0]))
+
+        return mark_safe('\n'.join(parts))
+
+
+
 
     def get_algorithm_svg(self):
         """
@@ -159,29 +232,6 @@ class CubeState(models.Model):
 
         return mark_safe('\n'.join(parts))
 
-    def get_roofpig_config(self):
-        """
-        Generate Roofpig configuration string.
-        Uses the renamed fields (setup, colored, flags).
-        Brackets stripped — Roofpig cannot parse them.
-        No hand substitution — animation shows correct face.
-        """
-        config_parts = []
-
-        clean_moves = self.get_clean_algorithm()
-        if clean_moves:
-            config_parts.append(f"alg={' '.join(clean_moves)}")
-
-        if self.setup:
-            config_parts.append(f"setup={self.setup}")
-        if self.colored:
-            config_parts.append(f"colored={self.colored}")
-
-        config_parts.append(f"flags={self.flags or 'showalg'}")
-        config_parts.append("hover=2")
-
-        return " | ".join(config_parts)
-
     @staticmethod
     def invert_alg(alg):
         """
@@ -215,6 +265,9 @@ class CubeState(models.Model):
         if self.setup and self.setup.strip():
             return self.setup
         return self.invert_alg(self.algorithm)
+
+    setup   = models.TextField(blank=True)
+    colored = models.TextField(blank=True)
 
     def save(self, *args, **kwargs):
         if not self.slug:

@@ -76,6 +76,7 @@
     
 <script type="module">
  
+import { TwistyPlayer } from "https://cdn.cubing.net/v0/js/cubing/twisty";
 
   document.addEventListener("DOMContentLoaded", () => {
     document.querySelectorAll(".twisty-container").forEach(el => {
@@ -90,17 +91,17 @@
         return;
       }
 
-      const player = new TwistyPlayer({
-        puzzle: puzzle,
-        alg: alg,
-        experimentalSetupAlg: setup,
-        visualization: "3D",
-        background: "none",
-        controlPanel: "bottom-row",
-        cameraLongitude: lon,
-        cameraLatitude: lat,
-        experimentalStickering: "centers-only",
-      });
+        const player = new TwistyPlayer({
+                puzzle: puzzle,
+                alg: alg,
+                experimentalSetupAlg: setup,
+                visualization: el.dataset.visualization || "PG3D",
+                background: "none",
+                controlPanel: "bottom-row",
+                cameraLongitude: lon,
+                cameraLatitude: lat,
+                experimentalStickering: el.dataset.stickering || "centers-only",
+            });
 
       el.appendChild(player);
     });
