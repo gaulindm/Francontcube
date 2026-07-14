@@ -83,11 +83,7 @@ urlpatterns = [
     path('methods/cubiecurieux/bottom-corners/', views.cubiecurieux_bottom_corners, name='cubiecurieux_bottom_corners'),
     path('methods/cubiecurieux/second-layer/', views.cubiecurieux_second_layer, name='cubiecurieux_second_layer'),
     path('methods/cubiecurieux/2-look-oll/', views.cubiecurieux_two_look_oll, name='cubiecurieux_two_look_oll'),
-
-    path('methods/cubiecurieux/top-cross/', views.cubiecurieux_top_cross, name='cubiecurieux_top_cross'),
-    path('methods/cubiecurieux/top-face/', views.cubiecurieux_top_face, name='cubiecurieux_top_face'),
-    path('methods/cubiecurieux/corner-permutation/', views.cubiecurieux_corner_permutation, name='cubiecurieux_corner_permutation'),
-    path('methods/cubiecurieux/edge-permutation/', views.cubiecurieux_edge_permutation, name='cubiecurieux_edge_permutation'),
+    path('methods/cubiecurieux/2-look-pll/', views.cubiecurieux_two_look_pll, name='cubiecurieux_two_look_pll'),
 
     # ============================================================
     # CFOP METHOD

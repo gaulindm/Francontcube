@@ -1,7 +1,7 @@
 {% extends "main/partials/base_cubiecurieux.html" %}
 {% load static %}
 
-{% block title %}2-Look OLL – Cubie-Curieux{% endblock %}
+{% block title %}2-Look PLL – Cubie-Curieux{% endblock %}
 
 {% block content %}
 <div class="container py-5">
@@ -9,7 +9,7 @@
     <!-- ── Hero ── -->
     <div class="cc-hero text-center mb-5">
         <span class="cc-eyebrow">Cubie-Curieux</span>
-        <h1 class="cc-title mb-3">2-Look OLL</h1>
+        <h1 class="cc-title mb-3">2-Look PLL</h1>
         <p class="cc-lead">{{ page_description }}</p>
         <p class="text-muted small">{{ total_algorithms }} algorithmes à maîtriser</p>
     </div>
@@ -49,7 +49,7 @@
                              data-puzzle="3x3x3"
                              data-alg="{{ case.algorithm }}"
                              data-setup="{{ case.setup_alg }}"
-                             data-stickering="OLL"
+                             data-stickering="PLL"
                              data-visualization="experimental-2D-LL"
                              data-lon="30"
                              data-lat="25"></div>
@@ -65,7 +65,7 @@
                     {% if case.left_hand_tip %}
                     <div class="cc-lefthand-tip">
                         <i class="bi bi-hand-index-thumb"></i>
-                        Astuce : c'est Sune en miroir, main gauche —
+                        Astuce main gauche —
                         <span class="cc-algo-mini" onclick="copyAlgo(this)">{{ case.left_hand_tip }}</span>
                     </div>
                     {% endif %}
@@ -124,172 +124,58 @@
 
 <style>
 /* ── Progress bar ── */
-.cc-progress-bar {
-    display: flex;
-    justify-content: center;
-    gap: 8px;
-    flex-wrap: wrap;
-}
+.cc-progress-bar { display: flex; justify-content: center; gap: 8px; flex-wrap: wrap; }
 .cc-progress-step {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    background: var(--cc-white);
-    border-radius: 999px;
-    padding: 8px 18px;
-    font-weight: 600;
-    color: var(--cc-text-muted);
+    display: flex; align-items: center; gap: 8px;
+    background: var(--cc-white); border-radius: 999px; padding: 8px 18px;
+    font-weight: 600; color: var(--cc-text-muted);
     box-shadow: 0 2px 8px rgba(31,111,214,0.08);
 }
 .cc-progress-icon {
-    width: 26px;
-    height: 26px;
-    border-radius: 50%;
-    background: var(--cc-primary-soft);
-    color: var(--cc-primary);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 0.85rem;
+    width: 26px; height: 26px; border-radius: 50%;
+    background: var(--cc-primary-soft); color: var(--cc-primary);
+    display: flex; align-items: center; justify-content: center; font-size: 0.85rem;
 }
-.cc-progress-step--done {
-    color: var(--cc-primary-dark);
-}
-.cc-progress-step--done .cc-progress-icon {
-    background: var(--cc-accent-green);
-    color: var(--cc-white);
-}
+.cc-progress-step--done { color: var(--cc-primary-dark); }
+.cc-progress-step--done .cc-progress-icon { background: var(--cc-accent-green); color: var(--cc-white); }
 
 /* ── Group card ── */
-.cc-group-card {
-    background: var(--cc-white);
-    border-radius: 20px;
-    padding: 35px;
-    box-shadow: 0 6px 20px rgba(31,111,214,0.1);
-}
-.cc-group-header {
-    display: flex;
-    align-items: center;
-    border-bottom: 3px solid var(--cc-primary-soft);
-    padding-bottom: 20px;
-    margin-bottom: 30px;
-}
+.cc-group-card { background: var(--cc-white); border-radius: 20px; padding: 35px; box-shadow: 0 6px 20px rgba(31,111,214,0.1); }
+.cc-group-header { display: flex; align-items: center; border-bottom: 3px solid var(--cc-primary-soft); padding-bottom: 20px; margin-bottom: 30px; }
 .cc-group-number {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    width: 48px;
-    height: 48px;
-    background: var(--cc-primary);
-    color: var(--cc-white);
-    border-radius: 50%;
-    font-size: 22px;
-    font-weight: 800;
-    margin-right: 18px;
-    flex-shrink: 0;
+    display: inline-flex; align-items: center; justify-content: center;
+    width: 48px; height: 48px; background: var(--cc-primary); color: var(--cc-white);
+    border-radius: 50%; font-size: 22px; font-weight: 800; margin-right: 18px; flex-shrink: 0;
 }
-.cc-group-title {
-    color: var(--cc-text);
-    font-weight: 700;
-    margin-bottom: 4px;
-}
-.cc-group-desc {
-    color: var(--cc-text-muted);
-    margin-bottom: 0;
-}
+.cc-group-title { color: var(--cc-text); font-weight: 700; margin-bottom: 4px; }
+.cc-group-desc { color: var(--cc-text-muted); margin-bottom: 0; }
 
 /* ── Case card ── */
-.cc-case-card {
-    background: var(--cc-primary-soft);
-    border-radius: 14px;
-    padding: 20px;
-    height: 100%;
-    text-align: center;
-}
-.cc-case-name {
-    color: var(--cc-text);
-    font-weight: 700;
-    margin-bottom: 12px;
-}
-.cc-case-player {
-    background: var(--cc-white);
-    border-radius: 10px;
-    overflow: hidden;
-    margin-bottom: 14px;
-}
-.cc-case-player .twisty-container twisty-player {
-    width: 100%;
-    height: 220px;
-    display: block;
-}
+.cc-case-card { background: var(--cc-primary-soft); border-radius: 14px; padding: 20px; height: 100%; text-align: center; }
+.cc-case-name { color: var(--cc-text); font-weight: 700; margin-bottom: 12px; }
+.cc-case-player { background: var(--cc-white); border-radius: 10px; overflow: hidden; margin-bottom: 14px; }
+.cc-case-player .twisty-container twisty-player { width: 100%; height: 220px; display: block; }
 .cc-algo-box {
-    background: var(--cc-white);
-    border-left: 4px solid var(--cc-primary);
-    border-radius: 6px;
-    padding: 10px;
-    font-family: 'Courier New', monospace;
-    font-weight: 700;
-    cursor: pointer;
-    margin-bottom: 12px;
+    background: var(--cc-white); border-left: 4px solid var(--cc-primary); border-radius: 6px;
+    padding: 10px; font-family: 'Courier New', monospace; font-weight: 700; cursor: pointer; margin-bottom: 12px;
 }
-.cc-recognition {
-    font-size: 0.85rem;
-    color: var(--cc-text-muted);
-    text-align: left;
-}
-
-.cc-lefthand-tip {
-    font-size: 0.8rem;
-    color: var(--cc-text-muted);
-    margin-top: 8px;
-    text-align: left;
-}
-.cc-algo-mini {
-    font-family: 'Courier New', monospace;
-    font-weight: 700;
-    color: var(--cc-primary);
-    cursor: pointer;
-}
-
-
+.cc-recognition { font-size: 0.85rem; color: var(--cc-text-muted); text-align: left; }
+.cc-lefthand-tip { font-size: 0.8rem; color: var(--cc-text-muted); margin-top: 8px; text-align: left; }
+.cc-algo-mini { font-family: 'Courier New', monospace; font-weight: 700; color: var(--cc-primary); cursor: pointer; }
 
 /* ── Badge claim ── */
 .cc-badge-claim {
-    display: flex;
-    align-items: center;
-    gap: 18px;
-    margin-top: 30px;
-    padding: 20px 24px;
+    display: flex; align-items: center; gap: 18px; margin-top: 30px; padding: 20px 24px;
     background: linear-gradient(90deg, var(--cc-primary-soft), var(--cc-white));
-    border: 2px dashed var(--cc-primary);
-    border-radius: 14px;
+    border: 2px dashed var(--cc-primary); border-radius: 14px;
 }
-.cc-badge-claim--earned {
-    border-style: solid;
-    border-color: var(--cc-accent-green);
-    background: linear-gradient(90deg, #eafaf0, var(--cc-white));
-}
-.cc-badge-icon {
-    font-size: 2.2rem;
-    color: var(--cc-primary);
-    flex-shrink: 0;
-}
-.cc-badge-claim--earned .cc-badge-icon {
-    color: var(--cc-accent-green);
-}
-.cc-badge-text {
-    flex: 1;
-}
-.cc-badge-auth-invite,
-.cc-badge-error {
-    font-size: 0.85rem;
-    color: var(--cc-accent-orange);
-    font-weight: 600;
-}
+.cc-badge-claim--earned { border-style: solid; border-color: var(--cc-accent-green); background: linear-gradient(90deg, #eafaf0, var(--cc-white)); }
+.cc-badge-icon { font-size: 2.2rem; color: var(--cc-primary); flex-shrink: 0; }
+.cc-badge-claim--earned .cc-badge-icon { color: var(--cc-accent-green); }
+.cc-badge-text { flex: 1; }
+.cc-badge-auth-invite, .cc-badge-error { font-size: 0.85rem; color: var(--cc-accent-orange); font-weight: 600; }
 
-@media (max-width: 768px) {
-    .cc-badge-claim { flex-wrap: wrap; text-align: center; }
-}
+@media (max-width: 768px) { .cc-badge-claim { flex-wrap: wrap; text-align: center; } }
 </style>
 
 <script>

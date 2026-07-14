@@ -14,7 +14,7 @@ TWO_LOOK_OLL_GROUPS = [
         'name': 'Croix Blanche',
         'icon': 'bi-plus-lg',
         'description': "Orienter les arêtes pour former une croix blanche sur le dessus.",
-        'badge_slug': 'cubie-curieux-oll-croix',
+        'badge_slug': 'cubie-curieux-2loll-edges',
         'badge_name': 'Croix Blanche',
         'cases': [
             {'name': 'Point → Croix', 'algorithm': "F R U R' U' F' f R U R' U' f'",

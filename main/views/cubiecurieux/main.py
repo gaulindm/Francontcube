@@ -81,8 +81,8 @@ def method_cubiecurieux(request):
             "name": "Étape 5 : 2-Look PLL",
             "desc": "Permuter les coins puis les arêtes de la dernière couche pour terminer le cube.",
             "icon": "bi-check-circle",
-            "url": "",
-            "available": False,
+            "url": reverse('main:cubiecurieux_two_look_pll'),
+            "available": True,
             "step_number": 5,
             "icon": "bi-arrow-repeat",
 

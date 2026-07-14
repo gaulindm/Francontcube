@@ -62,11 +62,12 @@ from .cubiecurieux.bottom_cross import bottom_cross as cubiecurieux_bottom_cross
 from .cubiecurieux.bottom_corners import bottom_corners as cubiecurieux_bottom_corners
 from .cubiecurieux.second_layer import second_layer as cubiecurieux_second_layer
 from .cubiecurieux.two_look_oll import two_look_oll_view as cubiecurieux_two_look_oll
+from .cubiecurieux.two_look_pll import two_look_pll_view as cubiecurieux_two_look_pll   
 
-from .cubiecurieux.top_cross import top_cross as cubiecurieux_top_cross
-from .cubiecurieux.top_face import top_face as cubiecurieux_top_face
-from .cubiecurieux.corner_permutation import corner_permutation as cubiecurieux_corner_permutation
-from .cubiecurieux.edge_permutation import edge_permutation as cubiecurieux_edge_permutation
+#from .cubiecurieux.top_cross import top_cross as cubiecurieux_top_cross
+#from .cubiecurieux.top_face import top_face as cubiecurieux_top_face
+#from .cubiecurieux.corner_permutation import corner_permutation as cubiecurieux_corner_permutation
+#from .cubiecurieux.edge_permutation import edge_permutation as cubiecurieux_edge_permutation
 from .cubiecurieux.about import about as cubiecurieux_about
 
 # ============================================================
