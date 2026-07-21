@@ -44,31 +44,18 @@
                 <div class="cc-case-card">
                     <h5 class="cc-case-name">{{ case.name }}</h5>
 
-                    <div class="cc-case-player">
-                        <div class="twisty-container"
-                             data-puzzle="3x3x3"
-                             data-alg="{{ case.algorithm }}"
-                             data-setup="{{ case.setup_alg }}"
-                             data-stickering="PLL"
-                             data-visualization="experimental-2D-LL"
-                             data-lon="30"
-                             data-lat="25"></div>
+                    <!-- ── Reconnaissance (statique, générée par simulation) ── -->
+                    <div class="cc-recognition-img">
+                        <img src="{{ case.recognition_svg_url }}" alt="Reconnaissance : {{ case.name }}" loading="lazy">
                     </div>
-
-                    <div class="cc-algo-box" onclick="copyAlgo(this)" title="Cliquer pour copier">
-                        {{ case.display_algorithm|default:case.algorithm }}
-                    </div>
-
                     <div class="cc-recognition">
                         <i class="bi bi-eye"></i> {{ case.recognition }}
                     </div>
-                    {% if case.left_hand_tip %}
-                    <div class="cc-lefthand-tip">
-                        <i class="bi bi-hand-index-thumb"></i>
-                        Astuce main gauche —
-                        <span class="cc-algo-mini" onclick="copyAlgo(this)">{{ case.left_hand_tip }}</span>
+
+                    <!-- ── Algorithme en icônes de mouvement ── -->
+                    <div class="cc-algo-icons" data-algo="{{ case.algorithm }}" onclick="copyAlgo(this)" title="Cliquer pour copier">
+                        {{ case.algorithm_svg }}
                     </div>
-                    {% endif %}
                 </div>
             </div>
             {% endfor %}
@@ -153,15 +140,53 @@
 /* ── Case card ── */
 .cc-case-card { background: var(--cc-primary-soft); border-radius: 14px; padding: 20px; height: 100%; text-align: center; }
 .cc-case-name { color: var(--cc-text); font-weight: 700; margin-bottom: 12px; }
-.cc-case-player { background: var(--cc-white); border-radius: 10px; overflow: hidden; margin-bottom: 14px; }
-.cc-case-player .twisty-container twisty-player { width: 100%; height: 220px; display: block; }
-.cc-algo-box {
-    background: var(--cc-white); border-left: 4px solid var(--cc-primary); border-radius: 6px;
-    padding: 10px; font-family: 'Courier New', monospace; font-weight: 700; cursor: pointer; margin-bottom: 12px;
+
+/* ── Recognition diagram ── */
+.cc-recognition-img {
+    background: var(--cc-white);
+    border-radius: 10px;
+    padding: 8px;
+    margin-bottom: 8px;
 }
-.cc-recognition { font-size: 0.85rem; color: var(--cc-text-muted); text-align: left; }
-.cc-lefthand-tip { font-size: 0.8rem; color: var(--cc-text-muted); margin-top: 8px; text-align: left; }
-.cc-algo-mini { font-family: 'Courier New', monospace; font-weight: 700; color: var(--cc-primary); cursor: pointer; }
+.cc-recognition-img img { width: 100%; height: auto; max-width: 220px; display: block; margin: 0 auto; }
+.cc-recognition { font-size: 0.85rem; color: var(--cc-text-muted); text-align: left; margin-bottom: 14px; }
+
+/* ── Algorithm move-icons ── */
+.cc-algo-icons {
+    background: var(--cc-white);
+    border-left: 4px solid var(--cc-primary);
+    border-radius: 6px;
+    padding: 10px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 2px;
+    cursor: pointer;
+    margin-bottom: 12px;
+}
+
+/* Icons within a (...) or [...] group sit flush against each other */
+.cc-algo-icons .move-group {
+    display: inline-flex;
+    align-items: center;
+    gap: 0;
+}
+
+/* Kill default inline-SVG baseline whitespace so nothing sneaks in between icons */
+.cc-algo-icons .move-icon {
+    display: block;
+}
+
+/* Give the bracket glyphs themselves a little breathing room so they
+   don't crush directly against the adjacent icon */
+.cc-algo-icons .move-bracket {
+    padding: 0 2px;
+    font-weight: 700;
+    font-size: 1.1em;
+    display: inline-flex;
+    align-items: center;
+}
 
 /* ── Badge claim ── */
 .cc-badge-claim {
@@ -180,7 +205,8 @@
 
 <script>
 function copyAlgo(el) {
-    navigator.clipboard.writeText(el.textContent.trim());
+    const text = el.dataset.algo || el.textContent.trim();
+    navigator.clipboard.writeText(text);
     const orig = el.style.background;
     el.style.background = '#d4edda';
     setTimeout(() => { el.style.background = orig; }, 500);

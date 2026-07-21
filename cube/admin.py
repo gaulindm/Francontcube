@@ -76,7 +76,7 @@ class CubeStateAdmin(admin.ModelAdmin):
             'fields': ('algorithm', 'description'),
         }),
         ('Display Options', {
-            'fields': ('setup', 'colored', 'flags'),
+            'fields': ('setup', 'colored'),
             'classes': ('collapse',),
             'description': 'Formerly roofpig_* fields. Used for algorithm animation config.',
         }),

@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 512 512">
+<style>
+.sticker{stroke:#263238;stroke-width:4;rx:10;ry:10}
+.yellow{fill:#FFD84D}.neutral{fill:#AAB7C4}
+.green{fill:#39B54A}.red{fill:#D62828}.blue{fill:#2A7FFF}.orange{fill:#FF8C00}.white{fill:#FFF}
+</style>
+<g id="top">
+<rect id="u00" class="sticker white" x="136" y="80" width="80" height="80" rx="10" ry="10"/>
+<rect id="u01" class="sticker white" x="224" y="80" width="80" height="80" rx="10" ry="10"/>
+<rect id="u02" class="sticker white" x="312" y="80" width="80" height="80" rx="10" ry="10"/>
+<rect id="u10" class="sticker white" x="136" y="168" width="80" height="80" rx="10" ry="10"/>
+<rect id="u11" class="sticker white" x="224" y="168" width="80" height="80" rx="10" ry="10"/>
+<rect id="u12" class="sticker white" x="312" y="168" width="80" height="80" rx="10" ry="10"/>
+<rect id="u20" class="sticker white" x="136" y="256" width="80" height="80" rx="10" ry="10"/>
+<rect id="u21" class="sticker white" x="224" y="256" width="80" height="80" rx="10" ry="10"/>
+<rect id="u22" class="sticker white" x="312" y="256" width="80" height="80" rx="10" ry="10"/>
+</g>
+<g id="front">
+<polygon id="f0" class="sticker green" points="136,336 216,336 208,376 144,376"/>
+<polygon id="f1" class="sticker green" points="224,336 304,336 296,376 232,376"/>
+<polygon id="f2" class="sticker red" points="312,336 392,336 384,376 320,376"/>
+</g><g id="left">
+<polygon id="l0" class="sticker red" points="136,80 136,160 96,152 96,88"/>
+<polygon id="l1" class="sticker orange" points="136,168 136,248 96,240 96,176"/>
+<polygon id="l2" class="sticker orange" points="136,256 136,336 96,328 96,264"/>
+</g><g id="right">
+<polygon id="r0" class="sticker blue" points="392,80 392,160 432,152 432,88"/>
+<polygon id="r1" class="sticker red" points="392,168 392,248 432,240 432,176"/>
+<polygon id="r2" class="sticker blue" points="392,256 392,336 432,328 432,264"/>
+</g><g id="back">
+<polygon id="b0" class="sticker green" points="136,80 216,80 208,40 144,40"/>
+<polygon id="b1" class="sticker blue" points="224,80 304,80 296,40 232,40"/>
+<polygon id="b2" class="sticker orange" points="312,80 392,80 384,40 320,40"/>
+</g><defs><marker id="arrowhead" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto"><path d="M0,0 L0,6 L9,3 z" fill="#1a1a1a"/></marker></defs><path d="M 352 296 Q 382.8 208.0 352 120" fill="none" stroke="#1a1a1a" stroke-width="5" marker-end="url(#arrowhead)" opacity="0.85"/><path d="M 352 120 Q 264.0 89.2 176 120" fill="none" stroke="#1a1a1a" stroke-width="5" marker-end="url(#arrowhead)" opacity="0.85"/><path d="M 176 120 Q 264.0 208.0 352 296" fill="none" stroke="#1a1a1a" stroke-width="5" marker-end="url(#arrowhead)" opacity="0.85"/></svg>

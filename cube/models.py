@@ -72,6 +72,7 @@ class CubeState(models.Model):
         """
         return re.sub(r'[(){}\[\]]', '', self.algorithm).split()
 
+    @staticmethod
     def render_algorithm_svg(algorithm, hand_orientation='right'):
         """
         Génère les icônes SVG d'un algorithme à partir d'une simple chaîne,
@@ -88,9 +89,15 @@ class CubeState(models.Model):
                 display_move = move
             svg_id = display_move.replace("'", "-prime")
             css = f'move-icon {extra_class}'.strip()
+            # viewBox matches the sprite symbols' own viewBox ("15 0 70 100",
+            # aspect ratio 0.7) exactly, and width is recalculated to that
+            # same aspect (52 * 70/100 = 36.4) instead of forcing a square --
+            # a square wrapper letterboxes the non-square content, which is
+            # what was creating the visible gap between adjacent icons.
             return (
                 f'<svg class="{css}" aria-label="{display_move}" '
-                f'width="52" height="52" style="width:52px;height:52px;min-width:0">'
+                f'viewBox="15 0 70 100" '
+                f'width="36.4" height="52" style="width:36.4px;height:52px;min-width:0">'
                 f'<use href="#{svg_id}"/></svg>'
             )
 
@@ -151,9 +158,6 @@ class CubeState(models.Model):
 
         return mark_safe('\n'.join(parts))
 
-
-
-
     def get_algorithm_svg(self):
         """
         Generate SVG icons from algorithm string.
@@ -167,9 +171,12 @@ class CubeState(models.Model):
             display_move = self._apply_hand_substitution([move])[0]
             svg_id = display_move.replace("'", "-prime")
             css = f'move-icon {extra_class}'.strip()
+            # Same fix as render_algorithm_svg() above: viewBox matches the
+            # sprite symbols' own viewBox exactly, width recalculated to the
+            # matching aspect ratio instead of a letterboxing square.
             return (
                 f'<svg class="{css}" aria-label="{display_move}" '
-                f'width="52" height="52" style="width:52px;height:52px;min-width:0">'
+                f'width="36.4" height="52" style="width:36.4px;height:52px;min-width:0">'
                 f'<use href="#{svg_id}"/></svg>'
             )
 
